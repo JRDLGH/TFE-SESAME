@@ -22,6 +22,8 @@ security:
                 csrf_token_generator: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
             logout:       true
             anonymous:    true
+            remember_me:
+                secret: '%kernel.secret%'
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
