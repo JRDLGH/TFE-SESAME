@@ -11,7 +11,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     {% block stylesheets %}{% endblock %}
-    <script src="{{ asset('build/js/menu.js') }}"></script>
 </head>
 
 <body>
@@ -60,7 +59,9 @@
                     </h1>
                 </div>
             {% endblock %}
-            {% block content %}{% endblock %}
+            <div class="container">
+                {% block content %}{% endblock %}
+            </div>
         </div>
     </main>
     
@@ -71,6 +72,7 @@
     </footer>
 
     {% block javascripts %}{% endblock %}
+    <script src="{{ asset('build/js/menu.js') }}"></script>
 </body>
 
 </html>

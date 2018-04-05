@@ -2,6 +2,7 @@
 http://thesassway.com/intermediate/responsive-web-design-in-sass-using-media-queries-in-sass-32
 */
 header {
+  z-index: 10;
   position: fixed;
   background: #b1c368;
   width: 100%;
@@ -98,7 +99,7 @@ header nav .nav-menu .nav-links .nav-item .nav-link {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  font-size: 2vh;
+  font-size: 1.1rem;
   color: #272727;
   font-weight: 500;
   transition: color 0.5s ease-in-out;
@@ -229,7 +230,7 @@ header nav .nav-menu .opened:hover span::after {
 
 * {
   font-family: 'Raleway', sans-serif;
-  font-size: 1em;
+  font-size: 18px;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -238,6 +239,11 @@ header nav .nav-menu .opened:hover span::after {
 body {
   height: 100%;
   background-color: #fcfcfc;
+  font-size: 1rem;
+}
+
+main {
+  min-height: 92vh;
 }
 
 main section {
@@ -246,14 +252,18 @@ main section {
 }
 
 main h1 {
-  font-size: 3.5vh;
+  font-size: 2rem;
   margin: 1% 0% 2% 0%;
   text-transform: uppercase;
 }
 
 main h2 {
-  background-color: rgba(221, 221, 221, 0.432);
-  padding: 0.5% 0.2%;
+  background-color: rgba(236, 236, 236, 0.747);
+  padding: 0.5rem 0.2rem;
+  border-radius: .5rem;
+  font-weight: 300;
+  color: #848484;
+  text-align: center;
 }
 
 main p {
@@ -278,17 +288,32 @@ main div#content {
 }
 
 footer {
+  width: 100%;
+  bottom: 0;
+  height: 50px;
   padding: 2%;
-  background-color: #949494;
+  background-color: #6b6b6b;
   -webkit-box-shadow: 0px 1px 5px #2c2c2c;
   -moz-box-shadow: 0px 1px 5px #2c2c2c;
   -ms-box-shadow: 0px 1px 5px #2c2c2c;
   -o-box-shadow: 0px 1px 5px #2c2c2c;
   box-shadow: 0px 1px 5px #2c2c2c;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  align-items: center;
+}
+
+@media only screen and (min-width: 1024px) {
+  footer {
+    height: 80px;
+  }
 }
 
 footer p {
-  font-size: 1.8vh;
+  width: 100%;
   color: white;
   text-align-last: center;
 }
@@ -298,17 +323,40 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h2 {
-  font-size: 3vh;
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.2rem;
 }
 
 a {
   text-decoration: none;
 }
 
+a:visited {
+  text-decoration: none;
+  background-color: none;
+}
+
 ul,
 li {
   list-style: none;
   list-style-type: none;
+}
+
+p {
+  font-size: 0.9rem;
+}
+
+p.info {
+  padding: .5rem;
+  background-color: #c3e4ff;
+  background-color: rgba(198, 229, 255, 0.322);
+  border: 1px solid #b9dfff;
+  border-radius: 5px;
+  margin: .5rem .2rem;
+  cursor: default;
 }
 
 .banner {
@@ -318,6 +366,7 @@ li {
   display: -o-flex;
   display: flex;
   justify-content: center;
+  align-items: center;
   background-image: url("../img/bg-forest.jpg");
   background-attachment: fixed;
   background-position: center;
@@ -326,13 +375,22 @@ li {
   width: 100%;
   min-height: 35vh;
   max-height: 50vh;
-  margin-bottom: 1%;
+  margin-bottom: .5rem;
 }
 
 .banner h1 {
+  background-color: #83a265;
+  background-color: rgba(131, 162, 101, 0.651);
+  -webkit-box-shadow: 0px 0px 5px #474747;
+  -moz-box-shadow: 0px 0px 5px #474747;
+  -ms-box-shadow: 0px 0px 5px #474747;
+  -o-box-shadow: 0px 0px 5px #474747;
+  box-shadow: 0px 0px 5px #474747;
+  padding: .2rem 1rem;
   text-align: center;
-  color: white;
+  color: #f1f1f1;
   font-weight: 500;
+  height: 20%;
 }
 
 .display-block {
@@ -383,5 +441,150 @@ li {
 
 .bold {
   font-weight: 700;
+}
+
+/**
+FORM --
+**/
+form {
+  padding: 0.5%;
+}
+
+form.form-container {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+
+@media only screen and (min-width: 1024px) {
+  form.form-container {
+    flex-direction: row;
+  }
+}
+
+form.form-container div {
+  padding: 1.5%;
+}
+
+form.form-container div.small-input {
+  width: 100%;
+}
+
+@media only screen and (min-width: 1024px) {
+  form.form-container div.small-input {
+    width: 50%;
+  }
+}
+
+form.form-container div.full-input {
+  width: 100%;
+}
+
+form.form-container div label {
+  display: none;
+}
+
+@media only screen and (min-width: 1024px) {
+  form.form-container div label {
+    display: block;
+    padding: .5rem 0;
+  }
+}
+
+form.form-container div input {
+  width: 100%;
+  border: 1px solid #818181;
+  border: 1px solid rgba(129, 129, 129, 0.432);
+  height: 2rem;
+  border-radius: 3px;
+  outline-color: none;
+  padding: 0.3em;
+  transition: border 0.3s;
+}
+
+form.form-container div input:focus {
+  outline-color: transparent;
+  border: 1px solid #b5e083;
+  border-radius: 4px;
+}
+
+form.form-container div input:focus::placeholder {
+  color: transparent;
+}
+
+form.form-container div input::placeholder {
+  font-size: 1rem;
+  color: #bbbbbb;
+  transition: color 0.5s;
+}
+
+@media only screen and (min-width: 1024px) {
+  form.form-container div input::placeholder {
+    color: transparent;
+    transition: none;
+  }
+}
+
+form.form-container .form-buttons {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+@media only screen and (min-width: 1024px) {
+  form.form-container .form-buttons {
+    flex-direction: row;
+  }
+}
+
+form.form-container .form-buttons .btn {
+  line-height: 1.25;
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: .25rem;
+  padding: .5rem 1rem;
+  font-size: 1rem;
+  margin-top: 1rem;
+  transition: background-color 0.3s;
+  border: none;
+}
+
+@media only screen and (min-width: 1024px) {
+  form.form-container .form-buttons .btn {
+    margin: 0 1rem 1rem 0;
+  }
+}
+
+form.form-container .form-buttons .btn.btn-submit {
+  background-color: #8fce3d;
+  color: white;
+}
+
+form.form-container .form-buttons .btn.btn-submit:hover {
+  background-color: #ace75e;
+}
+
+form.form-container .form-buttons .btn.btn-reset {
+  background-color: #dd695a;
+  color: white;
+}
+
+form.form-container .form-buttons .btn.btn-reset:hover {
+  background-color: #e78080;
+}
+
+.full {
+  width: 100%;
 }
 /*# sourceMappingURL=style.css.map */

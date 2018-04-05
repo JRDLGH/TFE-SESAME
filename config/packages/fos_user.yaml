@@ -4,4 +4,4 @@ fos_user:
     user_class: App\Entity\User
     from_email:
         address: "ipes.lagache@gmail.com"
-        sender_name: "ipes.lagache@gmail.com"
+        sender_name: "sesame"
