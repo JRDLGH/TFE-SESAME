@@ -19,40 +19,19 @@ class User extends BaseUser
      */
     protected $id;
 
-    // /**
-    //  * @var string
-    //  * 
-    //  * @ORM\Column(type="string", length=255)
-    //  */
-    // protected $firstname;
+    /**
+     * @var string
+     * 
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $firstname;
 
-    // /**
-    //  * @var string
-    //  * 
-    //  * @ORM\Column(type="string", length=255)
-    //  */
-    // protected $lastname;
-
-    // /**
-    //  * @var string
-    //  * 
-    //  * @ORM\Column(type="string", length=255)
-    //  */
-    // protected $email;
-
-    // /**
-    //  * @var string
-    //  * 
-    //  * @ORM\Column(type="string", length=255)
-    //  */
-    // protected $password;
-
-    // /**
-    //  * @var boolean
-    //  * 
-    //  * @ORM\Column(type="boolean")
-    //  */
-    // protected $isActive;
+    /**
+     * @var string
+     * 
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $lastname;
 
     public function __construct()
     {
@@ -65,63 +44,27 @@ class User extends BaseUser
         return $this->id;
     }
 
-    // public function getFirstname(): ?string
-    // {
-    //     return $this->firstname;
-    // }
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
 
-    // public function setFirstname(string $firstname): self
-    // {
-    //     $this->firstname = $firstname;
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function getLastname(): ?string
-    // {
-    //     return $this->lastname;
-    // }
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
 
-    // public function setLastname(string $lastname): self
-    // {
-    //     $this->lastname = $lastname;
+    public function setLastname(string $lastname): self
+    {
+        $this->lastname = $lastname;
 
-    //     return $this;
-    // }
-
-    // public function getMail(): ?string
-    // {
-    //     return $this->mail;
-    // }
-
-    // public function setMail(string $mail): self
-    // {
-    //     $this->mail = $mail;
-
-    //     return $this;
-    // }
-
-    // public function getPassword(): ?string
-    // {
-    //     return $this->password;
-    // }
-
-    // public function setPassword(string $password): self
-    // {
-    //     $this->password = $password;
-
-    //     return $this;
-    // }
-
-    // public function getIsActive(): ?bool
-    // {
-    //     return $this->isActive;
-    // }
-
-    // public function setIsActive(bool $isActive): self
-    // {
-    //     $this->isActive = $isActive;
-
-    //     return $this;
-    // }
+        return $this;
+    }
 }
