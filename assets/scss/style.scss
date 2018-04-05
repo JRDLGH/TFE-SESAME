@@ -190,15 +190,16 @@ form{
         div{
             padding: 1.5%;
             // overflow: hidden;
+            width: 100%;
             &.small-input{
-                width: 100%;
+                width: inherit;
                 @include responsive(wide-screens){
                     width: 50%;
                 }
             }
-            &.full-input{
-                width: 100%;
-            }
+            // &.full-input{
+            //     width: 100%;
+            // }
             label{
                 display: none;
                 @include responsive(wide-screens){
@@ -235,6 +236,7 @@ form{
             }
         }
         .form-buttons{
+            width: auto;
             @include flex();
             flex-direction: column;            
             justify-content: flex-start;

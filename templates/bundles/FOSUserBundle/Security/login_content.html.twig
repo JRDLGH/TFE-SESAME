@@ -8,17 +8,17 @@
 
 <form action="{{ path("fos_user_security_check") }}" method="post" class="full form-container">
     {% if csrf_token %}
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" class="form-input"/>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
     {% endif %}
 
     <div class="full-input">
         <label for="username">{{ 'security.login.username'|trans }}</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" class="form-input" placeholder="{{ 'security.login.username'|trans }}"/>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" placeholder="{{ 'security.login.username'|trans }}"/>
     </div>
 
     <div class="full-input">
         <label for="password">{{ 'security.login.password'|trans }}</label>
-        <input type="password" id="password" name="_password" required="required" autocomplete="current-password" class="form-input" placeholder="{{ 'security.login.password'|trans }}"/>
+        <input type="password" id="password" name="_password" required="required" autocomplete="current-password" placeholder="{{ 'security.login.password'|trans }}"/>
     </div>
 
     <div class="full-input">

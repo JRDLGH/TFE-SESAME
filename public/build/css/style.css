@@ -470,20 +470,17 @@ form.form-container {
 
 form.form-container div {
   padding: 1.5%;
+  width: 100%;
 }
 
 form.form-container div.small-input {
-  width: 100%;
+  width: inherit;
 }
 
 @media only screen and (min-width: 1024px) {
   form.form-container div.small-input {
     width: 50%;
   }
-}
-
-form.form-container div.full-input {
-  width: 100%;
 }
 
 form.form-container div label {
@@ -532,6 +529,7 @@ form.form-container div input::placeholder {
 }
 
 form.form-container .form-buttons {
+  width: auto;
   display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flex;
