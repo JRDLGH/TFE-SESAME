@@ -2,11 +2,9 @@
 
 <h2>S'enregistrer</h2>
 
-{{ form.email.vars.label }}
-
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'full form-container'}}) }}
-    {{ form_row(form.firstname, { 'attr': {'placeholder': form.email.vars.label|trans} }) }}
-    {{ form_row(form.lastname, { 'attr': {'placeholder': form.email.vars.label|trans} }) }}
+    {{ form_row(form.firstname, { 'attr': {'placeholder': 'form.firstname'|trans} }) }}
+    {{ form_row(form.lastname, { 'attr': {'placeholder': 'form.lastname'|trans} }) }}
     {{ form_row(form.email, { 'attr': {'placeholder': form.email.vars.label|trans} }) }}
     {{ form_row(form.username, { 'attr': {'placeholder': form.username.vars.label|trans} }) }}
     {{ form_row(form.plainPassword.first, { 'attr': {'placeholder': form.plainPassword.first.vars.label|trans} }) }}
