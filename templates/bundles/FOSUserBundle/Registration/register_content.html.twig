@@ -3,12 +3,37 @@
 <h2>S'enregistrer</h2>
 
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'full form-container'}}) }}
-    {{ form_row(form.firstname, { 'attr': {'placeholder': 'form.firstname'|trans} }) }}
-    {{ form_row(form.lastname, { 'attr': {'placeholder': 'form.lastname'|trans} }) }}
+
+    {{ form_label(form.firstname) }}
+    {{ form_errors(form.firstname) }}
+    {{ form_widget(form.firstname, { 'attr': {'placeholder': 'form.firstname'|trans} }) }}
+
+    {{ form_label(form.lastname) }}
+    {{ form_errors(form.lastname) }}
+    {{ form_widget(form.lastname, { 'attr': {'placeholder': 'form.lastname'|trans} }) }}
+
+    {{ form_label(form.email) }}
+    {{ form_errors(form.email) }}
+    {{ form_widget(form.email, { 'attr': {'placeholder': form.email.vars.label|trans} }) }}
+
+    {{ form_label(form.plainPassword.first) }}
+    {{ form_errors(form.plainPassword.first) }}
+    {{ form_widget(form.plainPassword.first, { 'attr': {'placeholder': form.plainPassword.first.vars.label|trans} }) }}
+
+    {{ form_label(form.plainPassword.second) }}
+    {{ form_errors(form.plainPassword.second) }}
+    {{ form_widget(form.plainPassword.second, { 'attr': {'placeholder': form.plainPassword.second.vars.label|trans} }) }}
+
+    {# {{ form_row(form.lastname, { 'attr': {'placeholder': 'form.lastname'|trans},'label': 'form.lastname'|trans } ) }}
+
     {{ form_row(form.email, { 'attr': {'placeholder': form.email.vars.label|trans} }) }}
+
     {{ form_row(form.username, { 'attr': {'placeholder': form.username.vars.label|trans} }) }}
+
     {{ form_row(form.plainPassword.first, { 'attr': {'placeholder': form.plainPassword.first.vars.label|trans} }) }}
-    {{ form_row(form.plainPassword.second, { 'attr': {'placeholder': form.plainPassword.second.vars.label|trans} }) }}
+
+    {{ form_row(form.plainPassword.second, { 'attr': {'placeholder': form.plainPassword.second.vars.label|trans} }) }} #}
+
     <div class="form-buttons">
         <input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-submit"/>
     </div>
