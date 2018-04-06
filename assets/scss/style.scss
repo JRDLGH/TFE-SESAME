@@ -208,29 +208,31 @@ form{
                 }
             }
             input{
-                width: 100%;
-                border: 1px solid rgb(129, 129, 129);
-                border: 1px solid rgba(129, 129, 129, 0.432);
-                height: 2rem;
-                border-radius: 3px;
-                outline-color: none;
-                padding: 0.3em;
-                transition: border 0.3s;
-                &:focus{
-                    outline-color: transparent;
-                    border: 1px solid $input-focusborder-color;
-                    border-radius: 4px;
-                    &::placeholder{
-                        color: transparent;
+                &[type="text"],&[type="email"],&[type="password"]{
+                    width: 100%;
+                    border: 1px solid rgb(129, 129, 129);
+                    border: 1px solid rgba(129, 129, 129, 0.432);
+                    height: 2rem;
+                    border-radius: 3px;
+                    outline-color: none;
+                    padding: 0.3em;
+                    transition: border 0.3s;
+                    &:focus{
+                        outline-color: transparent;
+                        border: 1px solid $input-focusborder-color;
+                        border-radius: 4px;
+                        &::placeholder{
+                            color: transparent;
+                        }
                     }
-                }
-                &::placeholder{
-                    font-size: 1rem;
-                    color:rgb(187, 187, 187);
-                    transition: color 0.5s;
-                    @include responsive(wide-screens){
-                        color: transparent;
-                        transition: none;
+                    &::placeholder{
+                        font-size: 1rem;
+                        color:rgb(187, 187, 187);
+                        transition: color 0.5s;
+                        @include responsive(wide-screens){
+                            color: transparent;
+                            transition: none;
+                        }
                     }
                 }
             }
