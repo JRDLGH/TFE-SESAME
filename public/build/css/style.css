@@ -494,7 +494,7 @@ form.form-container div label {
   }
 }
 
-form.form-container div input {
+form.form-container div input[type="text"], form.form-container div input[type="email"], form.form-container div input[type="password"] {
   width: 100%;
   border: 1px solid #818181;
   border: 1px solid rgba(129, 129, 129, 0.432);
@@ -505,24 +505,24 @@ form.form-container div input {
   transition: border 0.3s;
 }
 
-form.form-container div input:focus {
+form.form-container div input[type="text"]:focus, form.form-container div input[type="email"]:focus, form.form-container div input[type="password"]:focus {
   outline-color: transparent;
   border: 1px solid #b5e083;
   border-radius: 4px;
 }
 
-form.form-container div input:focus::placeholder {
+form.form-container div input[type="text"]:focus::placeholder, form.form-container div input[type="email"]:focus::placeholder, form.form-container div input[type="password"]:focus::placeholder {
   color: transparent;
 }
 
-form.form-container div input::placeholder {
+form.form-container div input[type="text"]::placeholder, form.form-container div input[type="email"]::placeholder, form.form-container div input[type="password"]::placeholder {
   font-size: 1rem;
   color: #bbbbbb;
   transition: color 0.5s;
 }
 
 @media only screen and (min-width: 1024px) {
-  form.form-container div input::placeholder {
+  form.form-container div input[type="text"]::placeholder, form.form-container div input[type="email"]::placeholder, form.form-container div input[type="password"]::placeholder {
     color: transparent;
     transition: none;
   }
