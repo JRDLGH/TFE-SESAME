@@ -1,7 +1,7 @@
 {% macro input(value, textholder) %}
 
 {{ form_label(value) }}
-{{ form_errors(value) }}
 {{ form_widget(value, { 'attr': {'placeholder': textholder} }) }}
+{{ form_errors(value, {'attr': { 'class': 'alert'} }) }}
 
 {% endmacro %}

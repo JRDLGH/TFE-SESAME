@@ -114,6 +114,13 @@ p{
         cursor: default;
     }
 }
+.alert{
+    background-color: $red;
+    background-color: rgba($color: $red, $alpha: 0.5);
+    padding: .5rem;
+    margin: .2rem;
+    color: white;
+}
 .banner{
     @include flex();
     justify-content: center;

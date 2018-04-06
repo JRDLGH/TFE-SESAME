@@ -359,6 +359,14 @@ p.info {
   cursor: default;
 }
 
+.alert {
+  background-color: #dd695a;
+  background-color: rgba(221, 105, 90, 0.5);
+  padding: .5rem;
+  margin: .2rem;
+  color: white;
+}
+
 .banner {
   display: -webkit-flex;
   display: -moz-flex;
