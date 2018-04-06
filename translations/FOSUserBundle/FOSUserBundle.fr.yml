@@ -1,3 +1,6 @@
+security:
+    login:
+        username_email: 'Nom d''utilisateur ou adresse e-mail'
 form:
     username: 'Nom d''utilisateur'
     email: 'Adresse e-mail'
