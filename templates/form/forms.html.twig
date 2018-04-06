@@ -1,7 +1,7 @@
-{% macro input(value, placeholder) %}
+{% macro input(value, textholder) %}
 
 {{ form_label(value) }}
 {{ form_errors(value) }}
-{{ form_widget(value, { 'attr': {'placeholder': '{{ placeholder }}'|trans} }) }}
+{{ form_widget(value, { 'attr': {'placeholder': textholder} }) }}
 
 {% endmacro %}
