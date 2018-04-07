@@ -3,8 +3,8 @@
 
 $footer-bg-color:#6b6b6b;
 $footer-p-color: white;
-$red:rgb(221, 105, 90);
-$red-hover:rgb(231, 128, 128);
+$red:rgb(223, 116, 102);
+$red-hover:rgb(247, 157, 146);
 $green:rgb(143, 206, 61);
 $green-hover:rgb(172, 231, 94);
 
@@ -117,9 +117,10 @@ p{
 .alert{
     background-color: $red;
     background-color: rgba($color: $red, $alpha: 0.5);
-    padding: .5rem;
-    margin: .2rem;
+    padding: .3rem;
+    margin: .2rem 0px;
     color: white;
+    border-radius: 5px;
 }
 .banner{
     @include flex();

@@ -360,11 +360,12 @@ p.info {
 }
 
 .alert {
-  background-color: #dd695a;
-  background-color: rgba(221, 105, 90, 0.5);
-  padding: .5rem;
-  margin: .2rem;
+  background-color: #df7466;
+  background-color: rgba(223, 116, 102, 0.5);
+  padding: .3rem;
+  margin: .2rem 0px;
   color: white;
+  border-radius: 5px;
 }
 
 .banner {
@@ -617,12 +618,12 @@ form.form-container .form-buttons .btn.btn-submit:hover {
 }
 
 form.form-container .form-buttons .btn.btn-reset {
-  background-color: #dd695a;
+  background-color: #df7466;
   color: white;
 }
 
 form.form-container .form-buttons .btn.btn-reset:hover {
-  background-color: #e78080;
+  background-color: #f79d92;
 }
 
 .full {
