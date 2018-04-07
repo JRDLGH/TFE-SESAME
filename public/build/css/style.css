@@ -352,8 +352,18 @@ p {
 p.info {
   padding: .5rem;
   background-color: #c3e4ff;
-  background-color: rgba(198, 229, 255, 0.322);
-  border: 1px solid #b9dfff;
+  background-color: rgba(195, 228, 255, 0.5);
+  border: 1px solid #c3e4ff;
+  border-radius: 5px;
+  margin: .5rem .2rem;
+  cursor: default;
+}
+
+p.success {
+  padding: .5rem;
+  background-color: #c3e4ff;
+  background-color: rgba(224, 255, 195, 0.5);
+  border: 1px solid #e0ffc3;
   border-radius: 5px;
   margin: .5rem .2rem;
   cursor: default;
@@ -450,6 +460,45 @@ p.info {
 
 .bold {
   font-weight: 700;
+}
+
+/**
+LOGBOX
+**/
+.log-box {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  background-color: #cecece;
+  width: 100%;
+  height: 3rem;
+  justify-content: center;
+  flex-direction: row;
+  margin: .5rem 0px;
+}
+
+.log-box a {
+  position: relative;
+  height: 100%;
+  line-height: 3rem;
+  width: 100%;
+  text-align: center;
+  background-color: rgba(143, 206, 61, 0.75);
+  color: white;
+}
+
+.log-box a:hover {
+  background-color: #8fce3d;
+}
+
+.log-box a.active {
+  background-color: transparent;
+}
+
+.log-box a.active:hover {
+  background-color: transparent;
 }
 
 /**

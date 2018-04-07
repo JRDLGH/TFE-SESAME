@@ -2,11 +2,15 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block title %}
+    {{ 'layout.resetting'|trans }}
+{% endblock %}
+
 {% block fos_user_content %}
 
 <h2>{{ 'layout.resetting'|trans }}</h2>
 
-<p class="info">
+<p class="success">
 {{ 'resetting.title'|trans }}
 </p>
 
