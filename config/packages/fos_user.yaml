@@ -3,8 +3,12 @@ fos_user:
     firewall_name: main
     user_class: App\Entity\User
     from_email:
-        address: "ipes.lagache@gmail.com"
-        sender_name: "sesame"
+        address: ipes.lagache@gmail.com
+        sender_name: SESAME
     registration:
         form:
             type: App\Form\RegistrationFormType
+        confirmation:
+            from_email: 
+                address: registred@sesame.be
+                sender_name: Sesame Register
