@@ -49,6 +49,7 @@ registration:
             L'équipe
 
 resetting:
+    title: Réinitialisation complètée
     check_email: |
         Un e-mail a été envoyé. Il contient un lien sur lequel il vous faudra cliquer pour réinitialiser votre mot de passe.
         Remarque : Vous ne pouvez demander un nouveau mot de passe que toutes les %tokenLifetime% heures.
@@ -57,6 +58,7 @@ resetting:
 
     request:
         username: 'Nom d''utilisateur ou adresse e-mail'
+        info: Si vous avez perdu votre mot de passe, veuillez remplir le champs suivant.
         submit: 'Réinitialiser le mot de passe'
     reset:
         submit: 'Modifier le mot de passe'
@@ -77,6 +79,7 @@ layout:
     login: Connexion
     register: Inscription
     logged_in_as: 'Connecté en tant que %username%'
+    resetting: Récupération mot de passe 
 form:
     group_name: 'Nom du groupe'
     username: 'Nom d''utilisateur'
