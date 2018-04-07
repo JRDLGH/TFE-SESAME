@@ -185,9 +185,10 @@ FORM --
 
 form{
     padding: 0.5%;
+    margin: 1rem 0;
     &.form-container{
         @include flex();
-        flex-direction: column;        
+        // flex-direction: column;    // Causes bug with margin and footer    
         @include responsive(wide-screens){
             flex-direction: row;
         }
@@ -196,7 +197,6 @@ form{
         flex-grow: 1;
         div{
             padding: 1.5%;
-            // overflow: hidden;
             width: 100%;
             &.small-input{
                 width: inherit;
@@ -204,43 +204,60 @@ form{
                     width: 50%;
                 }
             }
-            // &.full-input{
-            //     width: 100%;
-            // }
-            label{
-                display: none;
-                @include responsive(wide-screens){
-                    display: block;
-                    padding: .5rem 0;
+            input{
+                border: 1px solid rgb(129, 129, 129);
+                border: 1px solid rgba(129, 129, 129, 0.432);
+                border-radius: 3px;
+                outline-color: none;
+                padding: 0.3em;
+                transition: border 0.3s;
+                &:focus{
+                    outline-color: transparent;
+                    border: 1px solid $input-focusborder-color;
+                    border-radius: 4px;
+                    &::placeholder{
+                        color: transparent;
+                    }
                 }
             }
-            input{
-                &[type="text"],&[type="email"],&[type="password"]{
-                    width: 100%;
-                    border: 1px solid rgb(129, 129, 129);
-                    border: 1px solid rgba(129, 129, 129, 0.432);
-                    height: 2rem;
-                    border-radius: 3px;
-                    outline-color: none;
-                    padding: 0.3em;
-                    transition: border 0.3s;
-                    &:focus{
-                        outline-color: transparent;
-                        border: 1px solid $input-focusborder-color;
-                        border-radius: 4px;
+            &.small-input,&.full-input{
+                input{
+                    &[type="text"],&[type="email"],&[type="password"]{
+                        width: 100%;
+                        height: 2rem;
                         &::placeholder{
-                            color: transparent;
+                            font-size: 1rem;
+                            color:rgb(187, 187, 187);
+                            transition: color 0.5s;
+                            @include responsive(wide-screens){
+                                color: transparent;
+                                transition: none;
+                            }
                         }
                     }
-                    &::placeholder{
-                        font-size: 1rem;
-                        color:rgb(187, 187, 187);
-                        transition: color 0.5s;
-                        @include responsive(wide-screens){
-                            color: transparent;
-                            transition: none;
-                        }
+                }
+                label{
+                    display: none;
+                    @include responsive(wide-screens){
+                        display: block;
+                        padding: .5rem 0;
                     }
+                }
+            }
+            &.checkbox-input{
+                @include flex();
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                input{
+                    @include flex();
+                    justify-content: flex-start;
+                    width: 4%;
+                    height: 1.5rem;
+                    margin-right: .2rem;
+                }
+                label{
+                    display: block;
                 }
             }
         }
@@ -249,8 +266,12 @@ form{
             @include flex();
             flex-direction: column;            
             justify-content: flex-start;
+            flex-grow: 1;
             @include responsive(wide-screens){
                 flex-direction: row;
+            }
+            input{
+                display: block;
             }
             .btn{
                 line-height: 1.25;
