@@ -332,6 +332,7 @@ h3 {
 
 a {
   text-decoration: none;
+  color: black;
 }
 
 a:visited {
@@ -362,8 +363,8 @@ p.info {
 p.success {
   padding: .5rem;
   background-color: #c3e4ff;
-  background-color: rgba(224, 255, 195, 0.5);
-  border: 1px solid #e0ffc3;
+  background-color: rgba(173, 228, 121, 0.5);
+  border: 1px solid #ade479;
   border-radius: 5px;
   margin: .5rem .2rem;
   cursor: default;
@@ -631,6 +632,17 @@ form.form-container .form-buttons {
 @media only screen and (min-width: 1024px) {
   form.form-container .form-buttons {
     flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+form.form-container .form-buttons a {
+  margin: .5rem 0;
+}
+
+@media only screen and (min-width: 1024px) {
+  form.form-container .form-buttons a {
+    margin: 0;
   }
 }
 

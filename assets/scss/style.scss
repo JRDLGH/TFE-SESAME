@@ -9,7 +9,7 @@ $green:rgb(143, 206, 61);
 $green-hover:rgb(172, 231, 94);
 
 $info: rgb(195, 228, 255);
-$success: rgb(224, 255, 195);
+$success: rgb(173, 228, 121);
 $alert: rgb(255, 199, 195);
 $warning: rgb(255, 239, 195);
 
@@ -96,6 +96,7 @@ h3{
 }
 a {
     text-decoration: none;
+    color:black;
 }
 a:visited{
     text-decoration: none;
@@ -318,6 +319,13 @@ form{
             flex-grow: 1;
             @include responsive(wide-screens){
                 flex-direction: row;
+                justify-content: space-between;
+            }
+            a{
+                margin:.5rem 0;
+                @include responsive(wide-screens){
+                    margin: 0;
+                }
             }
             input{
                 display: block;
