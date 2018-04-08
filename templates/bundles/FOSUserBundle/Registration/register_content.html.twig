@@ -5,7 +5,7 @@
  
 <h2>{{ 'layout.register'|trans }}</h2>
 
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'full form-container'}}) }}
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register')}) }}
 
     <div class="small-input">
         {{ forms.input(form.firstname,'form.firstname'|trans) }}

@@ -1,8 +1,24 @@
 {% trans_default_domain 'FOSUserBundle' %}
+{% import 'form/forms.html.twig' as forms %}
 
-{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+<h2>{{ 'layout.profile.edit'|trans }}</h2>
+
+{{ form_start(form, { 'action': path('fos_user_profile_edit')}) }}
+    {# {{ form_widget(form, {'attr': {'class': 'small-input'} } ) }} #}
+
+    <div class="small-input">
+        {{ forms.input(form.username,'form.username'|trans) }}
+    </div>
+
+    <div class="small-input">
+        {{ forms.input(form.email,'form.email'|trans) }}
+    </div>
+
+    <div class="full-input">
+        {{ forms.input(form.current_password,'form.firstname'|trans) }}
+    </div>
+
+    <div class="form-buttons">
+        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" class="btn btn-submit"/>
     </div>
 {{ form_end(form) }}
