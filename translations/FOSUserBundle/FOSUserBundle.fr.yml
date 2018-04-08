@@ -49,6 +49,7 @@ registration:
             L'équipe
 
 resetting:
+    link: Mot de passe oublié?
     title: Réinitialisation complètée
     check_email: |
         Un e-mail a été envoyé. Il contient un lien sur lequel il vous faudra cliquer pour réinitialiser votre mot de passe.
@@ -58,7 +59,7 @@ resetting:
 
     request:
         username: 'Nom d''utilisateur ou adresse e-mail'
-        info: Si vous avez perdu votre mot de passe, veuillez remplir le champs suivant.
+        info: Si vous avez perdu votre mot de passe, veuillez remplir le champ suivant.
         submit: 'Réinitialiser le mot de passe'
     reset:
         submit: 'Modifier le mot de passe'
@@ -78,6 +79,7 @@ layout:
     logout: Déconnexion
     login: Connexion
     register: Inscription
+    register_success: Inscription terminée
     logged_in_as: 'Connecté en tant que %username%'
     resetting: Récupération mot de passe 
 form:
