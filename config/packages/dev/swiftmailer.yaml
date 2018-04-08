@@ -1,4 +1,9 @@
 # See https://symfony.com/doc/current/email/dev_environment.html
 swiftmailer:
+    # spool: false
+    delivery_addresses: [ipes.lagache@gmail.com]
     # send all emails to a specific address
     #delivery_addresses: ['me@example.com']
+
+web_profiler:
+    intercept_redirects: true

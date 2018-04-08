@@ -9,6 +9,13 @@ fos_user:
         form:
             type: App\Form\RegistrationFormType
         confirmation:
+            enabled: true #To modify if not needed, default to false
             from_email: 
-                address: registred@sesame.be
-                sender_name: Sesame Register
+                address: ipes.lagache@gmail.com
+                sender_name: test
+    resetting:
+        email:
+            from_email:
+                address: ipes.lagache@gmail.com
+                sender_name: test
+
