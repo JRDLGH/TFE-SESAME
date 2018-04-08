@@ -25,14 +25,23 @@ class User extends BaseUser
      * 
      * @ORM\Column(type="string", length=255)
      * 
-     *  @Assert\NotBlank(message="Please enter your firstname.", groups={"Registration", "Profile"})
+     * @Assert\NotBlank(message="fos_user.firstname.blank",
+     * groups={"Registration","Profile"})
+     * 
      * @Assert\Length(
-     *     min=3,
-     *     max=255,
-     *     minMessage="The name is too short.",
-     *     maxMessage="The name is too long.",
-     *     groups={"Registration", "Profile"}
+     *  min=3,
+     *  max=255,
+     *  minMessage="fos_user.firstname.short",
+     *  maxMessage="fos_user.firstname.long",
+     *  groups={"Registration", "Profile"}
      * )
+     * 
+     * @Assert\Type(type="string",
+     *  message="fos_user.firstname.invalid")
+     * 
+     * @Assert\Regex(pattern="/\d/",
+     *  match=false,
+     *  message="fos_user.firstname.invalid_type")
      */
     protected $firstname;
 
@@ -41,14 +50,21 @@ class User extends BaseUser
      * 
      * @ORM\Column(type="string", length=255)
      * 
-     *  @Assert\NotBlank(message="Please enter your lastname.", groups={"Registration", "Profile"})
+     *  @Assert\NotBlank(message="fos_user.lastname.blank", groups={"Registration", "Profile"})
      * @Assert\Length(
      *     min=3,
      *     max=255,
-     *     minMessage="The name is too short.",
-     *     maxMessage="The name is too long.",
+     *     minMessage="fos_user.lastname.short",
+     *     maxMessage="fos_user.lastname.long",
      *     groups={"Registration", "Profile"}
      * )
+     * 
+     * @Assert\Type(type="string",
+     *  message="fos_user.lastname.invalid")
+     * 
+     *  @Assert\Regex(pattern="/\d/",
+     *  match=false,
+     *  message="fos_user.lastname.invalid_type")
      */
     protected $lastname;
 
