@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ controller_name }}!{% endblock %}
+
+{% block content %}
+    <section id="thesaurus">
+            <div class="container">
+                <h2>Dictionnaire</h2>
+                <p class="content-text">
+                    Si vous recherchez un geste, alors vous êtes tombez au bon endroit!
+                </p>
+                <form action="#" class="full form-container">
+                    <div class="full-input">
+                        <label for="search_gesture">Rechercher un geste ici</label>
+                        <div class="search-input">
+                            <span class="search-logo"></span>
+                            <input type="text" name="search_gesture" id="search" placeholder="Rechercher un geste ici...">
+                        </div>
+                    </div>
+                </form>
+                <div class="gestures-container">
+                    <article class="gesture">
+                        <img src="img/bg-forest.jpg" alt="gesture-cover" class="cover">
+                        <div class="content">
+                            <h3 class="title">Geste X</h3>
+                            <p class="descritption">
+                                Lorem ipsum dolor sit amet, vis possim mentitum fab
+                        </div>
+                    </article>
+                    <article class="gesture">
+                        <img src="img/bg-forest.jpg" alt="gesture-cover" class="cover">
+                        <div class="content">
+                            <h3 class="title">Geste X</h3>
+                            <p class="descritption">
+                                Lorem ipsum dolor sit amet, vis possim mentitum fabellas ad. Ex vis saepe mucius.
+                            </p>
+                        </div>
+                    </article>
+                    <article class="gesture">
+                        <img src="img/bg-forest.jpg" alt="gesture-cover" class="cover">
+                        <div class="content">
+                            <h3 class="title">Geste X</h3>
+                            <p class="descritption">
+                                Lorem ipsum dolor sit amet, vis possim mentitum fabellas ad. Ex vis saepe mucius.
+                            </p>
+                        </div>
+                    </article>
+                    <article class="gesture">
+                        <img src="img/bg-forest.jpg" alt="gesture-cover" class="cover">
+                        <div class="content">
+                            <h3 class="title">Geste X</h3>
+                            <p class="descritption">
+                                Lorem ipsum dolor sit amet, vis possim mentitum fabellas ad. Ex vis saepe mucius.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/css/thesaurus.css') }}">
+{% endblock %}
+
