@@ -19,8 +19,11 @@
                         </div>
                     </div>
                 </form>
+                {# {{ dump(gesture) }} #}
                 <div class="gestures-container">
-                    {{ thes.gesture('Bonjour', 'bg-forest.jpg' ,'Saluer quelqu\'un') }}
+                    {% for gesture in gestures %}
+                        {{ thes.gesture(gesture.name, gesture.cover ,gesture.description) }}
+                    {% endfor %}
                 </div>
             </div>
         </section>
