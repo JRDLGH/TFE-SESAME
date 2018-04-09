@@ -1,0 +1,15 @@
+{% macro gesture(title, image, description) %}
+
+{% set img_dir = "build/img/thesaurus/gestures/" %}
+
+<article class="gesture">
+    <img src="{{ asset(img_dir ~ image|default('default.jpg')) }}" alt="gesture-cover" class="cover">
+    <div class="content">
+        <h3 class="title">{{ title }}</h3>
+        <p class="description">
+            {{ description }}
+        </p>
+    </div>
+</article>
+
+{% endmacro %}
