@@ -1,8 +1,10 @@
 framework:
     secret: '%env(APP_SECRET)%'
-    #default_locale: en
-    #csrf_protection: true
+    translator: ~
+    csrf_protection: true
     #http_method_override: true
+
+    validation: { enable_annotations: true }
 
     # Enables session support. Note that the session will ONLY be started if you read or write from it.
     # Remove or comment this section to explicitly disable session support.
@@ -28,3 +30,6 @@ framework:
 
         # APCu (not recommended with heavy random-write workloads as memory fragmentation can cause perf issues)
         #app: cache.adapter.apcu
+    templating:
+        engines: ['twig']
+        # problem solved thanks to: https://ourcodeworld.com/articles/read/649/how-to-solve-fosuserbundle-exception-the-service-fos-user-mailer-has-a-dependency-on-a-non-existent-service-templating

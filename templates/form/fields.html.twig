@@ -1,0 +1,35 @@
+
+{# Form theme based on vendor/symfony/twig-bridge/Resources/views/Form #}
+{% use "form_div_layout.html.twig" %}
+
+{# FORM CUSTOMIZATION #}
+
+{# ERRORS #}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+    <ul class="alert">
+        {%- for error in errors -%}
+            <li>{{ error.message }}</li>
+        {%- endfor -%}
+    </ul>
+    {%- endif -%}
+{%- endblock form_errors -%}
+
+{% block form_start -%}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' full form-container')|trim}) %}
+    {{- parent() -}}
+{%- endblock form_start %}
+
+{% block attributes -%}
+    {%- for attrname, attrvalue in attr -%}
+        {{- " " -}}
+        {%- if attrname in ['placeholder', 'title'] -%}
+            {{- attrname }}="{{ translation_domain is same as(false) ? attrvalue : attrvalue|trans({}, translation_domain) }}"
+        {%- elseif attrvalue is same as(true) -%}
+            {{- attrname }}="{{ attrname }}"
+        {%- elseif attrvalue is not same as(false) -%}
+            {{- attrname }}="{{ attrvalue }}"
+        {%- endif -%}
+    {%- endfor -%}
+{%- endblock attributes -%}

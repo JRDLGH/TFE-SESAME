@@ -1,0 +1,20 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}
+    {{ 'layout.register'|trans }}
+{% endblock %}
+
+{% block fos_user_content %}
+
+<h2>{{ 'layout.register_success'|trans }}</h2>
+
+<p class="success">
+    {{ 'registration.flash.user_created'|trans }}
+</p>
+
+<p>
+    {{ 'registration.check_email'|trans({'%email%': user.email}) }}
+</p>
+{% endblock fos_user_content %}

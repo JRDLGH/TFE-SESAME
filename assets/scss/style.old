@@ -1,0 +1,205 @@
+@import "mixins/mixins.scss";
+$menu_height-small: 50px;
+$menu_height-large: 100px;
+$menu-icon-bg: #333333;
+$menu-icon-color: #ffffff;
+$menu-icon-duration: 0.5s;
+$link-color: #2e2e2e;
+* {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+}
+
+header {
+    position: fixed;
+    background: rgb(173, 173, 173);
+    width: 100%;
+    height: 75px;
+    @include responsive(mobile) {
+        height: $menu_height-small;
+    }
+    @include responsive(wide-screens) {
+        height: $menu_height-large;
+    }
+    @include box-shadow(0px 0px 10px #949494);
+    nav {
+        height: 100%;
+        width: inherit;
+        height: 100%;
+        @include flex();
+        .nav-brand {
+            @include flex();
+            justify-content: left;
+            width: 15%;
+            height: inherit;
+            height: 100%;
+            a {
+                @include flex();
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                .nav-brand-logo {
+                    max-width: 230px;
+                    max-height: 75px;
+                    padding: 1%;
+                    height: auto;
+                    width: auto;
+                    @include responsive(wide-screens) {
+                        max-height: $menu_height-large;
+                    }
+                    @include responsive(mobile) {
+                        max-height: $menu_height-small;
+                    }
+                }
+            }
+        }
+        .nav-menu {
+            width: 85%;
+            @include flex();
+            justify-content: space-around;
+            overflow: hidden;
+            @include responsive(mobile) {
+                align-items: center;
+                .menu-icon {
+                    background-color: $menu-icon-bg;
+                    background-color: rgba($color: $menu-icon-bg, $alpha: 0.2);
+                    position: relative;
+                    margin-left: auto;
+                    margin-right: 5px;
+                    width: $menu_height-small - 5px;
+                    height: $menu_height-small - 5px;
+                    border-radius: 50%;
+                    transition: transform $menu-icon-duration;
+                    span {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        display: block;
+                        width: 22px;
+                        height: 2px;
+                        background-color: $menu-icon-color;
+                        transition: background-color $menu-icon-duration, transform $menu-icon-duration;
+                        transform: translate(-50%) translateY(-50%);
+                        &::before,
+                        &::after {
+                            content: "";
+                            transform-origin: 50% 50%;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            display: block;
+                            width: 22px;
+                            height: 2px;
+                            background-color: $menu-icon-color;
+                            transform: translateY(-6px);
+                            transition: transform $menu-icon-duration;
+                        }
+                        &::after {
+                            transform: translateY(6px);
+                        }
+                    }
+                }
+                &:hover {
+                    span::before {
+                        transform: translateY(-10px)
+                    }
+                    span::after {
+                        transform: translateY(10px);
+                    }
+                }
+                .opened {
+                    transform: rotate(180deg);
+                    span {
+                        background-color: transparent;
+                    }
+                    span::before {
+                        transform: translateY(0) rotate(45deg);
+                    }
+                    span::after {
+                        transform: translateY(0) rotate(-45deg);
+                    }
+                }
+            }
+            .nav-links{
+                display: flex;
+                width:100%;
+                @include responsive(mobile){
+                    display: none;
+                }
+                .nav-item {
+                    width: 100%;
+                    @include responsive(mobile) {
+                        display: none;
+                    }
+                    .nav-link {
+                        width: 100%;
+                        position: relative;
+                        height: 100%;
+                        overflow: hidden;
+                        font-size: 1.1rem;
+                        color: $link-color;
+                        font-weight: 500;
+                        transition: color 0.5s ease-in-out;
+                        &:hover {
+                            color: #ffffff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+main {
+    h1 {
+        font-size: 1.8rem;
+    }
+    section {
+        &#content {
+            padding-top: 90px;
+            @media screen and (max-width: $break-medium) {
+                padding-top: $menu_height-small+10px;
+            }
+            @media screen and (min-width: $break-large) {
+                padding-top: $menu_height-large+20px;
+            }
+        }
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+ul,
+li {
+    list-style: none;
+    list-style-type: none;
+}
+
+.container {
+    @include flex();
+    flex-direction: row;
+}
+
+.center {
+    @include flex();
+    align-items: center;
+    justify-content: center;
+}
+
+// .nav-right{
+//     @include flex();
+//     justify-content: flex-end;
+//     width:15%;
+//     a:hover{
+//         color:$green;
+//     }
+// }
