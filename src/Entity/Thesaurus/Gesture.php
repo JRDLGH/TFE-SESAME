@@ -45,12 +45,12 @@ class Gesture
     private $description;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime",options={"default"="CURRENT_TIMESTAMP"},nullable=true)
      */
     private $creationDate;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Thesaurus\Gesture\Tag", mappedBy="gestures")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Thesaurus\Gesture\Tag", inversedBy="gestures")
      */
     private $tags;
 
@@ -148,7 +148,6 @@ class Gesture
     {
         if (!$this->tags->contains($tag)) {
             $this->tags[] = $tag;
-            $tag->setGestures($this);
         }
 
         return $this;
@@ -158,10 +157,6 @@ class Gesture
     {
         if ($this->tags->contains($tag)) {
             $this->tags->removeElement($tag);
-            // set the owning side to null (unless already changed)
-            if ($tag->getGestures() === $this) {
-                $tag->setGestures(null);
-            }
         }
 
         return $this;

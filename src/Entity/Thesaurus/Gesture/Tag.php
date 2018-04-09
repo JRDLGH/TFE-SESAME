@@ -3,6 +3,8 @@
 namespace App\Entity\Thesaurus\Gesture;
 
 use App\Entity\Thesaurus\Gesture;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,38 +22,59 @@ class Tag
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $name;
+    private $keyword;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Thesaurus\Gesture", inversedBy="tags")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Thesaurus\Gesture", mappedBy="tags")
      */
     private $gestures;
+
+    public function __construct()
+    {
+        $this->gestures = new ArrayCollection();
+    }
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getKeyword(): ?string
     {
-        return $this->name;
+        return $this->keyword;
     }
 
-    public function setName(string $name): self
+    public function setKeyword(string $keyword): self
     {
-        $this->name = $name;
+        $this->keyword = $keyword;
 
         return $this;
     }
 
-    public function getGestures(): ?Gesture
+    /**
+     * @return Collection|Gesture[]
+     */
+    public function getGestures(): Collection
     {
         return $this->gestures;
     }
 
-    public function setGestures(?Gesture $gestures): self
+    public function addGesture(Gesture $gesture): self
     {
-        $this->gestures = $gestures;
+        if (!$this->gestures->contains($gesture)) {
+            $this->gestures[] = $gesture;
+            $gesture->addTag($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGesture(Gesture $gesture): self
+    {
+        if ($this->gestures->contains($gesture)) {
+            $this->gestures->removeElement($gesture);
+            $gesture->removeTag($this);
+        }
 
         return $this;
     }
