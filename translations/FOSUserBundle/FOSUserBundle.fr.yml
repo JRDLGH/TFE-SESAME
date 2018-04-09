@@ -25,6 +25,7 @@ profile:
     flash:
         updated: 'Le profil a été mis à jour.'
 change_password:
+    title: 'Modifier votre mot de passe'
     submit: 'Modifier le mot de passe'
     flash:
         success: 'Le mot de passe a été modifié.'
