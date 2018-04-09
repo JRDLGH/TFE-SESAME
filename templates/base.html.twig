@@ -34,7 +34,7 @@
                         <a class="nav-link center" href="#">À propos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link center" href="#">Dictionnaire</a>
+                        <a class="nav-link center" href="{{ path('thesaurus_index') }}">Dictionnaire</a>
                     </li>
                     <li class="nav-item">
                     {% if is_granted('ROLE_USER') %}
