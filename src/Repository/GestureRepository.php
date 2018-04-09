@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository\Thesaurus;
+namespace App\Repository;
 
 use App\Entity\Thesaurus\Gesture;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
