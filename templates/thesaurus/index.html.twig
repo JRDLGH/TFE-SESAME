@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
+{% import 'thesaurus/gesture/gesture.html.twig' as thes %}
 
 {% block title %}Hello {{ controller_name }}!{% endblock %}
 
 {% block content %}
     <section id="thesaurus">
-            <div class="container">
-                <h2>Dictionnaire</h2>
+            <div>
+                <h2>Rechercher un geste sésame</h2>
                 <p class="content-text">
                     Si vous recherchez un geste, alors vous êtes tombez au bon endroit!
                 </p>
@@ -19,41 +20,7 @@
                     </div>
                 </form>
                 <div class="gestures-container">
-                    <article class="gesture">
-                        <img src="img/bg-forest.jpg" alt="gesture-cover" class="cover">
-                        <div class="content">
-                            <h3 class="title">Geste X</h3>
-                            <p class="descritption">
-                                Lorem ipsum dolor sit amet, vis possim mentitum fab
-                        </div>
-                    </article>
-                    <article class="gesture">
-                        <img src="img/bg-forest.jpg" alt="gesture-cover" class="cover">
-                        <div class="content">
-                            <h3 class="title">Geste X</h3>
-                            <p class="descritption">
-                                Lorem ipsum dolor sit amet, vis possim mentitum fabellas ad. Ex vis saepe mucius.
-                            </p>
-                        </div>
-                    </article>
-                    <article class="gesture">
-                        <img src="img/bg-forest.jpg" alt="gesture-cover" class="cover">
-                        <div class="content">
-                            <h3 class="title">Geste X</h3>
-                            <p class="descritption">
-                                Lorem ipsum dolor sit amet, vis possim mentitum fabellas ad. Ex vis saepe mucius.
-                            </p>
-                        </div>
-                    </article>
-                    <article class="gesture">
-                        <img src="img/bg-forest.jpg" alt="gesture-cover" class="cover">
-                        <div class="content">
-                            <h3 class="title">Geste X</h3>
-                            <p class="descritption">
-                                Lorem ipsum dolor sit amet, vis possim mentitum fabellas ad. Ex vis saepe mucius.
-                            </p>
-                        </div>
-                    </article>
+                    {{ thes.gesture('Bonjour', 'bg-forest.jpg' ,'Saluer quelqu\'un') }}
                 </div>
             </div>
         </section>
