@@ -15,7 +15,7 @@ class AppFixtures extends Fixture
 
         //Each gesture will be linked to one tag
         //Gesture1 linked to tag1, ...
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             //Creating tags
             $tag = new Tag();
             $tag->setKeyword('tag'.$i);
@@ -24,6 +24,9 @@ class AppFixtures extends Fixture
             $gesture = new Gesture();
             $gesture->setName('gesture '.$i);
             $gesture->setDescription('This is the description of gesture number '.$i);
+            $gesture->setIsPublished('no');
+
+            //persist
             $gesture->addTag($tag);
             $manager->persist($gesture);
         }

@@ -54,6 +54,16 @@ class Gesture
      */
     private $tags;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPublished;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $publicationDate;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -158,6 +168,30 @@ class Gesture
         if ($this->tags->contains($tag)) {
             $this->tags->removeElement($tag);
         }
+
+        return $this;
+    }
+
+    public function getIsPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished(bool $isPublished): self
+    {
+        $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    public function getPublicationDate(): ?\DateTimeInterface
+    {
+        return $this->publicationDate;
+    }
+
+    public function setPublicationDate(?\DateTimeInterface $publicationDate): self
+    {
+        $this->publicationDate = $publicationDate;
 
         return $this;
     }
