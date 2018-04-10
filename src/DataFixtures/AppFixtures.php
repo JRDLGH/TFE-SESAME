@@ -24,7 +24,7 @@ class AppFixtures extends Fixture
             $gesture = new Gesture();
             $gesture->setName('gesture '.$i);
             $gesture->setDescription('This is the description of gesture number '.$i);
-            $gesture->setIsPublished('no');
+            $gesture->setIsPublished(false);
 
             //persist
             $gesture->addTag($tag);
