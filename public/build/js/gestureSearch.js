@@ -3,11 +3,13 @@ $(document).ready(function(){
         //evt == event
         //this.value is the value
         var value = this.value;
-        if(/\w/.test(value) && !/[0-9`~,.<>;':"/[\]|{}()=_+-]/.test(value))
+
+        //MAKE A STRONG REGEX HERE!
+        if(/\w/.test(value) && !/[0-9]/.test(value))
         {
             console.log(value + " is a string!");
         }else{
-            console.log("Format invalide");
+            console.log("invalid format");
         }
     });
 });
