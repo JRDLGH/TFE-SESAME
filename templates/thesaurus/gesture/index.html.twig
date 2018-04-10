@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gesture index{% endblock %}
+
+{% block content %}
+    <h1>Gesture index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>ProfileVideo</th>
+                <th>Video</th>
+                <th>Cover</th>
+                <th>Description</th>
+                <th>CreationDate</th>
+                <th>IsPublished</th>
+                <th>PublicationDate</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for gesture in gestures %}
+            <tr>
+                <td>{{ gesture.id }}</td>
+                <td>{{ gesture.name }}</td>
+                <td>{{ gesture.profileVideo }}</td>
+                <td>{{ gesture.video }}</td>
+                <td>{{ gesture.cover }}</td>
+                <td>{{ gesture.description }}</td>
+                <td>{{ gesture.creationDate ? gesture.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ gesture.isPublished ? 'Yes' : 'No' }}</td>
+                <td>{{ gesture.publicationDate ? gesture.publicationDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('thesaurus_gesture_show', {'id': gesture.id}) }}">show</a>
+                    <a href="{{ path('thesaurus_gesture_edit', {'id': gesture.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('thesaurus_gesture_new') }}">Create new</a>
+{% endblock %}
