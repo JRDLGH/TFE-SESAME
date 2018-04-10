@@ -50,7 +50,7 @@ class Gesture
     private $creationDate;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Thesaurus\Gesture\Tag", inversedBy="gestures")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Thesaurus\Gesture\Tag", inversedBy="gestures", cascade={"persist"})
      */
     private $tags;
 
