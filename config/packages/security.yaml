@@ -32,7 +32,8 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/home, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/thesaurus, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /home, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /thesaurus, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, role: ROLE_USER }
         #Add more routes here in order to prevent access to unauthorized.
