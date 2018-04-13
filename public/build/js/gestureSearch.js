@@ -8,6 +8,10 @@ $(document).ready(function(){
         if(/\w/.test(value) && !/[0-9]/.test(value))
         {
             console.log(value + " is a string!");
+            $.get( "http://127.0.0.1:8000/thesaurus/test", function( data ) {
+                $( ".result" ).html( data );
+                console.log(data);
+              });
         }else{
             console.log("invalid format");
         }
