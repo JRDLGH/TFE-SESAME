@@ -7,8 +7,11 @@ Encore
     // the public path used by the web server to access the previous directory
     .setPublicPath('/build')
 
-    // will create public/build/app.js and public/build/app.css
-    .addEntry('app', './assets/js/app.js')
+    // allow to load jQuery once in order to don't load for each files that require this module
+    .createSharedEntry('layout','./assets/js/layout.js')
+
+    // will create public/build/app.js and public/build/thesaurus.css
+    .addEntry('thesaurus', './assets/js/thesaurus.js')
 
     // allow sass/scss files to be processed
     .enableSassLoader()
