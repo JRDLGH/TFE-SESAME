@@ -33,3 +33,5 @@ framework:
     templating:
         engines: ['twig']
         # problem solved thanks to: https://ourcodeworld.com/articles/read/649/how-to-solve-fosuserbundle-exception-the-service-fos-user-mailer-has-a-dependency-on-a-non-existent-service-templating
+    serializer:
+        enabled: true
