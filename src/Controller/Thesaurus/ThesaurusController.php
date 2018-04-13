@@ -8,6 +8,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+
+use App\Entity\Thesaurus\Gesture\Tag;
 use App\Entity\Thesaurus\Gesture;
 /**
  * @Route("/thesaurus")
@@ -39,8 +45,20 @@ class ThesaurusController extends AbstractController
         //If request from AJAX
         if($request->isXMLHttpRequest()){
             $tag_id = $request->get('id');
-            var_dump($tag_id);
-            die();
+
+            $gestures = $this->getDoctrine()->getRepository(Gesture::class)->find(50); #use serializer?
+
+            $encoder = array(new JsonEncoder());
+            $normalizer = new ObjectNormalizer();
+
+            $normalizer->setCircularReferenceHandler(function ($object) {
+                return $object->getName();
+            });
+
+            $serializer = new Serializer(array($normalizer), $encoder);
+            $formatted = $serializer->serialize($gestures, 'json');
+
+            return new JsonResponse($formatted);
         }
         return new JsonResponse('Error: This request is not valid.',400);
     }
