@@ -1,4 +1,5 @@
 var Encore = require('@symfony/webpack-encore');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 Encore
     // the project directory where all compiled assets will be stored
@@ -29,6 +30,10 @@ Encore
 
     // create hashed filenames (e.g. app.abc123.css)
     // .enableVersioning()
+
+    .addPlugin(new CopyWebpackPlugin([
+        {from: './assets/static', to: 'static'}
+    ]))
 ;
 
 // export the final configuration
