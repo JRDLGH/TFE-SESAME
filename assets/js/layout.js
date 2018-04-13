@@ -3,7 +3,7 @@
 
 import $ from 'jquery'; // load jQuery module
 // import Routing from '';
-// import menu from 'Components/menu.js';
+
 import '../scss/style.scss';
 
 $(document).ready(function(){
