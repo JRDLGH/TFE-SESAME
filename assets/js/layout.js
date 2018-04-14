@@ -7,6 +7,7 @@ import $ from 'jquery'; // load jQuery module
 import '../scss/style.scss';
 
 $(document).ready(function(){
+    //MENU
     $('.menu-icon').click(function(evt){
         evt.preventDefault();
         //if screens are smaller than x px
@@ -40,4 +41,5 @@ $(document).ready(function(){
             }
         }
     });
+    //END MENU
 });
