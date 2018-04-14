@@ -16,8 +16,8 @@ $warning: rgb(255, 239, 195);
 $input-focusborder-color: rgb(181, 224, 131);
 
 * {
-    font-family: 'Raleway', sans-serif;
-    font-size: 16px;
+    font-family: get('typography.font');
+    font-size: get('typography.size');
     margin: 0;
     padding: 0;
     box-sizing: border-box;
