@@ -1,5 +1,8 @@
 var Encore = require('@symfony/webpack-encore');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const sassVars = require('./assets/js/Components/theme');
+const sass = require('node-sass');
+const sassUtils = require('node-sass-utils')(sass);
 
 Encore
     // the project directory where all compiled assets will be stored
@@ -14,8 +17,24 @@ Encore
     // will create public/build/app.js and public/build/thesaurus.css
     .addEntry('thesaurus', './assets/js/thesaurus.js')
 
+    // .addPlugin(new sassUtils())
     // allow sass/scss files to be processed
-    .enableSassLoader()
+    //Code of get function from https://itnext.io/sharing-variables-between-js-and-sass-using-webpack-sass-loader-713f51fa7fa0
+    .enableSassLoader(function(loaderOptions){
+            loaderOptions.functions = {
+                "get($keys)": function(keys) {
+                    keys = keys.getValue().split(".");
+                    let result = sassVars;
+                    let i;
+                    for (i = 0; i < keys.length; i++) {
+                        result = result[keys[i]];
+                    }
+                    result = sassUtils.castToSass(result);
+                    return result;
+                }
+            }
+        }
+    )
 
     // allow legacy applications to use $/jQuery as a global variable
     .autoProvidejQuery()
@@ -29,7 +48,7 @@ Encore
     .enableBuildNotifications()
 
     // create hashed filenames (e.g. app.abc123.css)
-    // .enableVersioning()
+    .enableVersioning()
 
     .addPlugin(new CopyWebpackPlugin([
         {from: './assets/static', to: 'static'}
