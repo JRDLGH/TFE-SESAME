@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% trans_default_domain 'admin' %}
+
 {% block title %}Gesture{% endblock %}
 
 {% block content %}
-    <h1>Gesture</h1>
+    <h1>{{ 'admin.gesture.title'|trans }}</h1>
 
     <table class="table">
         <tbody>
@@ -12,43 +14,43 @@
                 <td>{{ gesture.id }}</td>
             </tr>
             <tr>
-                <th>Name</th>
+                <th>{{ 'admin.gesture.name'|trans }}</th>
                 <td>{{ gesture.name }}</td>
             </tr>
             <tr>
-                <th>ProfileVideo</th>
+                <th>{{ 'admin.gesture.profileVideo'|trans }}</th>
                 <td>{{ gesture.profileVideo }}</td>
             </tr>
             <tr>
-                <th>Video</th>
+                <th>{{ 'admin.gesture.video'|trans }}</th>
                 <td>{{ gesture.video }}</td>
             </tr>
             <tr>
-                <th>Cover</th>
+                <th>{{ 'admin.gesture.cover'|trans }}</th>
                 <td>{{ gesture.cover }}</td>
             </tr>
             <tr>
-                <th>Description</th>
+                <th>{{ 'admin.gesture.description'|trans }}</th>
                 <td>{{ gesture.description }}</td>
             </tr>
             <tr>
-                <th>CreationDate</th>
+                <th>{{ 'admin.gesture.creationDate'|trans }}</th>
                 <td>{{ gesture.creationDate ? gesture.creationDate|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>IsPublished</th>
-                <td>{{ gesture.isPublished ? 'Yes' : 'No' }}</td>
+                <th>{{ 'admin.gesture.isPublished'|trans }}</th>
+                <td>{{ gesture.isPublished ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
             </tr>
             <tr>
-                <th>PublicationDate</th>
+                <th>{{ 'admin.gesture.publicationDate'|trans }}</th>
                 <td>{{ gesture.publicationDate ? gesture.publicationDate|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('thesaurus_gesture_index') }}">back to list</a>
+    <a href="{{ path('thesaurus_gesture_index') }}">{{ 'admin.control.back_to_list'|trans }}</a>
 
-    <a href="{{ path('thesaurus_gesture_edit', {'id': gesture.id}) }}">edit</a>
+    <a href="{{ path('thesaurus_gesture_edit', {'id': gesture.id}) }}">{{ 'admin.control.modify'|trans }}</a>
 
     {{ include('thesaurus/gesture/_delete_form.html.twig') }}
 {% endblock %}
