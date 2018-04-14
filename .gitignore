@@ -12,3 +12,6 @@
 
 ### NODE JS
 /node_modules/*
+
+### WEBPACK
+/public/build/*

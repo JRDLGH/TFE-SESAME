@@ -1,4 +1,6 @@
-$(document).ready(function(){
+import $ from 'jquery';
+
+module.export = function (){
     $('.menu-icon').click(function(evt){
         evt.preventDefault();
         //if screens are smaller than x px
@@ -32,4 +34,4 @@ $(document).ready(function(){
             }
         }
     });
-});
+}

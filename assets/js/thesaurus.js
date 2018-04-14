@@ -1,3 +1,7 @@
+'use strict';
+
+import "../scss/thesaurus.scss";
+
 $(document).ready(function(){
     $('#search').keyup(function(evt){
         //evt == event

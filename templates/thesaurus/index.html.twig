@@ -30,11 +30,11 @@
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/css/thesaurus.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/thesaurus.css') }}">
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }} {# In order to add after parent's content #}
-    <script src="{{ asset('build/js/gestureSearch.js') }}"></script>
+    <script src="{{ asset('build/thesaurus.js') }}"></script>
 {% endblock %}
 
