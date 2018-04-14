@@ -38,7 +38,7 @@ class ThesaurusController extends AbstractController
     }
 
     /**
-     * @Route("/test",name="thesaurus_test")
+     * @Route("/test",name="thesaurus_test",options={"expose"=true})
      */
     public function test(Request $request)
     {
