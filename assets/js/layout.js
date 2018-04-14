@@ -2,8 +2,10 @@
 //This file will be used in every other js files
 
 import $ from 'jquery'; // load jQuery module
-// import Routing from '';
-
+//import Routing from '';
+//import fontawesome?
+//Import sweetalert module
+//import swal from 'sweetalert';
 import '../scss/style.scss';
 
 $(document).ready(function(){
