@@ -1,10 +1,14 @@
 'use strict';
 
 import "../scss/thesaurus.scss";
-const routes = require('../../web/js/fos_js_routes.json');
+const routes = require( './Components/Routing/fos_js_routes.json');
 import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
 
-Routing.setRoutingData('routes');
+
+// php bin/console fos:js-routing:dump --format=json --target=assets/js/Components/Routing/fos_js_routes.
+// json
+console.log(routes);
+Routing.setRoutingData(routes);
 
 $(document).ready(function(){
     $('#search').keyup(function(evt){
