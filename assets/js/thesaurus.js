@@ -1,6 +1,10 @@
 'use strict';
 
 import "../scss/thesaurus.scss";
+const routes = require('../../web/js/fos_js_routes.json');
+import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
+
+Routing.setRoutingData('routes');
 
 $(document).ready(function(){
     $('#search').keyup(function(evt){
@@ -8,11 +12,11 @@ $(document).ready(function(){
         //this.value is the value
         var value = this.value;
 
-        //MAKE A STRONG REGEX HERE!
+        console.log(Routing.generate('thesaurus_test'));
+        //REGEX -- ALLOW ONLY LETTERS
         if(/\w/.test(value) && !/[0-9]/.test(value))
         {
-            console.log(value + " is a string!");
-            $.get( "http://127.0.0.1:8000/thesaurus/test", function( data ) {
+            $.get( Routing.generate('thesaurus_test'), function( data ) {
                 $( ".result" ).html( data );
                 console.log(data);
               });

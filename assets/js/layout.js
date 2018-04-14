@@ -7,13 +7,14 @@ import $ from 'jquery'; // load jQuery module
 //Import sweetalert module
 //import swal from 'sweetalert';
 import '../scss/style.scss';
+import theme from './Components/theme';
 
 $(document).ready(function(){
     //MENU
     $('.menu-icon').click(function(evt){
         evt.preventDefault();
         //if screens are smaller than x px
-        if($(window).width() < 1024 ){
+        if($(window).width() < theme.breakpoints.lg ){
             //if already open
             if($(this).hasClass('opened')){
                 //close
@@ -35,7 +36,7 @@ $(document).ready(function(){
         }
     });
     $(window).resize(function(){
-        if($(this).width() >= 1024)
+        if($(this).width() >= theme.breakpoints.lg)
         {
             if($('.nav-links').css('display') == 'none' || $('.nav-links').css('display') == 'block'){
                 $('.nav-links').removeAttr('style');
