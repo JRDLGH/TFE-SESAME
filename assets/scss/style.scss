@@ -1,6 +1,10 @@
+@import "shared/variables";
 @import "mixins/mixins.scss";
 @import "structure/menu.scss";
 
+/**
+    VARIABLES
+ */
 $footer-bg-color:#6b6b6b;
 $footer-p-color: white;
 $red:rgb(223, 116, 102);
@@ -15,12 +19,16 @@ $warning: rgb(255, 239, 195);
 
 $input-focusborder-color: rgb(181, 224, 131);
 
+/*
+    CODE
+ */
 * {
-    font-family: get('typography.font');
-    font-size: get('typography.size');
+    font-family: $font;
+    font-size: $text-size;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
 }
 
 body {

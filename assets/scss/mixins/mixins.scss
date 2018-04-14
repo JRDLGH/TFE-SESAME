@@ -1,6 +1,3 @@
-$break-medium: 800px;
-$break-large: 1024px;
-
 @mixin linear-gradient($startcolor,$secondcolor,$bgcolor){
     background: $bgcolor;
     background: -webkit-linear-gradient($startcolor,$secondcolor);
