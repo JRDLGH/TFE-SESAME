@@ -9,6 +9,7 @@ import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/pu
 // json
 console.log(routes);
 Routing.setRoutingData(routes);
+console.log(gesture);
 
 $(document).ready(function(){
     $('#search').keyup(function(evt){
