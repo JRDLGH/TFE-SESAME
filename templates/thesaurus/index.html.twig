@@ -3,6 +3,10 @@
 
 {% block title %}Hello {{ controller_name }}!{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/thesaurus.css') }}">
+{% endblock %}
+
 {% block content %}
     <section id="thesaurus">
             <div>
@@ -21,17 +25,20 @@
                 </form>
                 {# {{ dump(gesture) }} #}
                 <div class="gestures-container">
-                    {#{% for gesture in gestures %}#}
+                    <div class="status">
+                        <i></i>
+                    </div>
+                    <div id="gesture">
+                        {#{% for gesture in gestures %}#}
                         {#{{ thes.gesture(gesture.name, gesture.cover ,gesture.description) }}#}
-                    {#{% endfor %}#}
+                        {#{% endfor %}#}
+                    </div>
                 </div>
             </div>
         </section>
 {% endblock %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/thesaurus.css') }}">
-{% endblock %}
+
 
 {% block javascripts %}
     {{ parent() }} {# In order to add after parent's content #}
