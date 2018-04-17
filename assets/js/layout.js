@@ -3,11 +3,11 @@
 
 import $ from 'jquery'; // load jQuery module
 //import Routing from '';
-//import fontawesome?
 //Import sweetalert module
 //import swal from 'sweetalert';
 import '../scss/style.scss';
 import theme from './Components/theme';
+import 'font-awesome/css/font-awesome.min.css';
 
 $(document).ready(function(){
     //MENU
