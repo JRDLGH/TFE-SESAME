@@ -19,6 +19,18 @@ class GestureRepository extends ServiceEntityRepository
         parent::__construct($registry, Gesture::class);
     }
 
+    public function findAllPublished()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT g.id, g.name, t.keyword
+                  FROM gesture as g natural join tag as t 
+                  WHERE g.is_published is true';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+
+    }
+
 //    /**
 //     * @return Gesture[] Returns an array of Gesture objects
 //     */
