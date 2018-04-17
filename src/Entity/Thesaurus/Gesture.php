@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="App\Repository\GestureRepository")
  */
 class Gesture
@@ -45,7 +46,7 @@ class Gesture
     private $description;
 
     /**
-     * @ORM\Column(type="datetime",options={"default"="CURRENT_TIMESTAMP"},nullable=true)
+     * @ORM\Column(type="datetime",options={"default":"CURRENT_TIMESTAMP"},nullable=true)
      */
     private $creationDate;
 
@@ -195,4 +196,13 @@ class Gesture
 
         return $this;
     }
+    /**
+     * Triggered on insert
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->creationDate = new \DateTime("now");
+    }
+
 }
