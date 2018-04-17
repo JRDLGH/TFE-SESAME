@@ -24,19 +24,14 @@ let gestures = '';
 
 $(document).ready(function(){
     loadGestures();
-    $('#search').keyup(function(evt){
+    $('#search').keypress(function(evt){
         var value = this.value;
 
         //REGEX -- ALLOW ONLY LETTERS
         if(/\w/.test(value) && !/[0-9]/.test(value))
         {
-            $('.gestures-container .status i').addClass('fa fa-spinner fa-3x')
-                .addClass('fa-spin');
+            clearStatus();
             findGestureByName(value);
-            // $.get( Routing.generate('thesaurus_gesture_list'), function( data ) {
-            //     // $( ".result" ).html( data );
-            //     console.log(data);
-            //   });
         }else{
             console.log("invalid format");
         }
@@ -58,27 +53,121 @@ function loadGestures(){
 function findGestureByName(name){
     if(gestures){
         var gestureMatched = [];
-        for(var i = 0; i < gestures.length; i++){
-            //Look if the name matches name of gesture
-            if(gestures[i].name == name){
-                //Top of the list
-                //if gesture name match, then, it must be the first to appear
-                console.log('It\'s a match with: ');
-                console.log(gestures[i]);
-                gestureMatched.unshift(gesture[i].id);
-                //ressortir tous les gestes ayant un rapport avec le mot clé utilisé
-                //faire un find
-                //ensuite un sort pour prendre du plus pertinent au moins pertinent
-                //ensuite faire un push et rajouter après
+        gestureMatched = gestures.filter(function(gesture){
+            // console.log(gesture);
+            if(gesture.name == name){
+                return true;
+            }else if(gesture.keyword == name){
+                return true;
+            }else{
+                return false;
             }
-
-            //Otherwise, if the name match a tag, it must be on top on the list but not always first
-            //And last case, if the name hit partially a tag or a gesture name, display him
-            if(i == 2){
-                break;
-            }
+        });
+        if(gestureMatched.length > 0){
+            console.log(gestureMatched);
+            //format gestures
+            $('#gesture').html(formatGestures(gestureMatched));
+            setStatus('success');
+        }else{
+            console.log('Not found');
+            setStatus();
         }
     }else{
-        console.log('No gesture found.');
+        console.log('ERROR: No gesture loaded.');
+        setStatus();
     }
+}
+
+function formatGestures(gestures){
+    var content = null;
+    if(gestures){
+        //Array
+        if($.isArray(gestures)){
+            //then loop on format
+            gestures.forEach(function(gesture){
+               content = formatGesture(gesture);
+            });
+        //Not array
+        }else{
+            content = formatGesture(gestures);
+        }
+    }
+    return content;
+}
+
+function formatGesture(gesture){
+    var html = '<article class="gesture">\n' +
+        '    <img src="" alt="gesture-cover" class="cover">\n' +
+        '    <div class="content">\n' +
+        '        <h3 class="title">'+ gesture.name +'</h3>\n' +
+        '        <p class="description">\n' +
+        '            '+ gesture.id +'\n' +
+        '        </p>\n' +
+        '    </div>\n' +
+        '</article>';
+    return html;
+}
+
+// success, waiting, not found, error
+function setStatus(status){
+    if(!status){
+        status = '';
+    }
+    switch(status){
+        case 'waiting':
+            loadStatus();
+            break;
+        case 'success':
+            successStatus();
+            break;
+        default:
+                gestureNotFound();
+            ; //not found
+    }
+}
+
+function isLoading(){
+    console.log('Is loading?' + $('.gestures-container .status i').hasClass('fa-spinner'));
+    if($('.gestures-container .status i').hasClass('fa-spinner')){
+        return true;
+    }
+    return false;
+}
+
+function loadStatus(){
+    if(!isLoading()){
+        $('.gestures-container .status i').addClass('fa fa-spinner fa-3x')
+            .addClass('fa-spin');
+    }
+}
+
+function removeLoadStatus(){
+    if(isLoading()) {
+        $('.gestures-container .status i').removeClass('fa fa-spinner fa-3x')
+            .removeClass('fa-spin');
+    }
+}
+
+function successStatus(){
+    removeLoadStatus();
+    if(!$('.gestures-container .status .status-message').hasClass('alert-success')){
+        $('.gestures-container .status .status-message').addClass('alert-success').append('x geste(s) trouvés pour <b>'
+            + $('#search').val() + '</b>' );
+    }
+}
+
+
+
+function gestureNotFound(){
+    console.log('going into nfound');
+    if(!$('.gestures-container .status .status-message').hasClass('alert-not-found')){
+        console.log('NOT FKING FOUND');
+        $('.gestures-container .status .status-message').addClass('alert-not-found').append('Aucun geste trouvé pour <b>'
+            + $('#search').val() + '</b>' );
+    }
+}
+
+function clearStatus(){
+    $('.gestures-container .status .status-message').html('');
+    $('.gestures-container .status .status-message').attr('class','status-message');
 }
