@@ -38,6 +38,29 @@ class ThesaurusController extends AbstractController
     }
 
     /**
+     * @Route("/gesture/list",name="thesaurus_gesture_list",options={"expose"="true"})
+     */
+    public function getPublishedGesture(Request $request){
+        if($request->isXMLHttpRequest()){
+            $gestures = $this->getDoctrine()->getRepository(Gesture::class)->findAllPublished();
+//            //need to do a lighter version of it! only return important things
+//
+            $encoder = array(new JsonEncoder());
+            $normalizer = new ObjectNormalizer();
+
+            $normalizer->setCircularReferenceHandler(function ($object){
+                return $object->getName();
+            });
+
+            $serializer = new Serializer(array($normalizer), $encoder);
+            $formatted = $serializer->serialize($gestures, 'json');
+//            $formatted = 'hello';
+
+            return new JsonResponse($formatted);
+        }
+        return new JsonResponse('Error: This request is not valid.',400);
+    }
+    /**
      * @Route("/test",name="thesaurus_test",options={"expose"=true})
      */
     public function test(Request $request)
