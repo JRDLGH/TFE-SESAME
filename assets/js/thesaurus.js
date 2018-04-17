@@ -13,7 +13,6 @@ Routing.setRoutingData(routes);
  * DEBUGGING SECTION
  */
 console.log(routes);
-console.log(Routing.generate('thesaurus_gesture_list'));
 /**
  * DEBUGGING END
  */
@@ -30,6 +29,7 @@ $(document).ready(function(){
         if(/\w/.test(value) && !/[0-9]/.test(value))
         {
             console.log(value);
+            //send a request to get gestures matching the word - value
         }else{
             console.log("invalid format");
         }
