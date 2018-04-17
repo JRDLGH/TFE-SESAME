@@ -43,10 +43,11 @@ class ThesaurusController extends AbstractController
     public function test(Request $request)
     {
         //If request from AJAX
-        if($request->isXMLHttpRequest()){
+        //Temporary disabling this if in order to test with postman
+//        if($request->isXMLHttpRequest()){
             $tag_id = $request->get('id');
 
-            $gestures = $this->getDoctrine()->getRepository(Gesture::class)->find(50); #use serializer?
+            $gestures = $this->getDoctrine()->getRepository(Gesture::class)->find(50);
 
             $encoder = array(new JsonEncoder());
             $normalizer = new ObjectNormalizer();
@@ -59,7 +60,7 @@ class ThesaurusController extends AbstractController
             $formatted = $serializer->serialize($gestures, 'json');
 
             return new JsonResponse($formatted);
-        }
-        return new JsonResponse('Error: This request is not valid.',400);
+//        }
+//        return new JsonResponse('Error: This request is not valid.',400);
     }
 }
