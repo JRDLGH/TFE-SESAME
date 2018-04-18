@@ -206,7 +206,7 @@ class AppFixtures extends Fixture
         $gesture->addTag($estomacTag);
 
         $manager->persist($gesture);
-        
+
         //Creating 'AVION' gesture
         $gesture = new Gesture();
         $gesture->setName('Avion');
@@ -217,6 +217,15 @@ class AppFixtures extends Fixture
         $gesture->addTag($piloterTag);
         $gesture->addTag($avionTag);
 
+        $manager->persist($gesture);
+
+        //Create 'Avoir' gesture
+        $gesture = new Gesture();
+        $gesture->setName('Avoir tout');
+        $gesture->setDescription('Verbe auxilière avoir.');
+        $gesture->setIsPublished(true);
+
+        //not tagged
         $manager->persist($gesture);
 
         //Creating 'AVOIR PERDU' gesture
