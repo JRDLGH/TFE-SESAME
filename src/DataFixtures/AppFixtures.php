@@ -159,8 +159,6 @@ class AppFixtures extends Fixture
         $gesture->setDescription('Verbe auxilière avoir.');
         $gesture->setIsPublished(true);
 
-        $gesture->addTag($avoirTag);
-
         $manager->persist($gesture);
 
         //Creating 'AVOIR MAL' gesture
@@ -219,10 +217,10 @@ class AppFixtures extends Fixture
 
         $manager->persist($gesture);
 
-        //Create 'Avoir' gesture
+        //Create 'Avoir tout' gesture
         $gesture = new Gesture();
         $gesture->setName('Avoir tout');
-        $gesture->setDescription('Verbe auxilière avoir.');
+        $gesture->setDescription('tout avoir ehehee.');
         $gesture->setIsPublished(true);
 
         //not tagged

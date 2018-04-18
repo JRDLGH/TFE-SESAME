@@ -2,11 +2,13 @@
 
 namespace App\Controller\Thesaurus;
 
+use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
@@ -38,26 +40,27 @@ class ThesaurusController extends AbstractController
     }
 
     /**
-     * @Route("/test",name="thesaurus_test",options={"expose"=true})
+     * @Route("/search/{tag}",name="thesaurus_search_tag",options={"expose"=true})
      */
-    public function test(Request $request)
+    public function searchByTag(TranslatorInterface $translator, $tag)
     {
         //If request from AJAX
         //Temporary disabling this if in order to test with postman
 //        if($request->isXMLHttpRequest()){
-            $tag_id = $request->get('id');
+            $tag_name = $tag;
 
-            $gestures = $this->getDoctrine()->getRepository(Gesture::class)->find(50);
+            //if tag exist then search, either, search for gesture that match the name
 
-            $encoder = array(new JsonEncoder());
-            $normalizer = new ObjectNormalizer();
+            $gestures = $this->getDoctrine()->getRepository(Gesture::class)->find(421);
 
-            $normalizer->setCircularReferenceHandler(function ($object) {
-                return $object->getName();
-            });
+            $status = ["status"=>["message"=> $translator->trans('status.gesture.error') ]];
 
-            $serializer = new Serializer(array($normalizer), $encoder);
-            $formatted = $serializer->serialize($gestures, 'json');
+            $formatted = [$status];
+
+            if($gestures){
+                var_dump($gestures);
+                die();
+            }
 
             return new JsonResponse($formatted);
 //        }
