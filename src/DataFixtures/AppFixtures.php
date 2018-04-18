@@ -37,8 +37,114 @@ class AppFixtures extends Fixture
         $user->setEnabled(true);
         $manager->persist($user);
         /**
+         * TAGS
+         */
+        //conduire
+        $conduireTag = new Tag();
+        $conduireTag->setKeyword('Conduire');
+        $manager->persist($conduireTag);
+
+        //vehicule
+        $vehiculeTag = new Tag();
+        $vehiculeTag->setKeyword('Vehicule');
+        $manager->persist($vehiculeTag);
+
+        //automobile
+        $automobileTag = new Tag();
+        $automobileTag->setKeyword('Automobile');
+        $manager->persist($automobileTag);
+
+        //voiture
+        $voitureTag = new Tag();
+        $voitureTag->setKeyword('Voiture');
+        $manager->persist($voitureTag);
+
+        //piloter
+        $piloterTag = new Tag();
+        $piloterTag->setKeyword('piloter');
+        $manager->persist($piloterTag);
+
+        //Avion
+        $avionTag = new Tag();
+        $avionTag->setKeyword('Avion');
+        $manager->persist($avionTag);
+
+        //blessé
+        $blesseTag = new Tag();
+        $blesseTag->setKeyword('blessé');
+        $manager->persist($blesseTag);
+
+        //avoir
+        $avoirTag = new Tag();
+        $avoirTag->setKeyword('avoir');
+        $manager->persist($avoirTag);
+
+        //mal
+        $malTag = new Tag();
+        $malTag->setKeyword('mal');
+        $manager->persist($malTag);
+
+        //maux
+        $mauxTag = new Tag();
+        $mauxTag->setKeyword('maux');
+        $manager->persist($mauxTag);
+
+        //tete
+        $teteTag = new Tag();
+        $teteTag->setKeyword('tête');
+        $manager->persist($teteTag);
+
+        //malade
+        $maladeTag = new Tag();
+        $maladeTag->setKeyword('malade');
+        $manager->persist($maladeTag);
+
+        //douleur
+        $douleurTag = new Tag();
+        $douleurTag->setKeyword('douleur');
+        $manager->persist($douleurTag);
+
+        //ventre
+        $ventreTag = new Tag();
+        $ventreTag->setKeyword('ventre');
+        $manager->persist($ventreTag);
+
+        //estomac
+        $estomacTag = new Tag();
+        $estomacTag->setKeyword('estomac');
+        $manager->persist($estomacTag);
+
+        //perdre
+        $perdreTag = new Tag();
+        $perdreTag->setKeyword('perdre');
+        $manager->persist($perdreTag);
+
+        //jeu
+        $jeuTag = new Tag();
+        $jeuTag->setKeyword('jeu');
+        $manager->persist($jeuTag);
+        /**
          * GESTURES
          */
+        //TODO Add 'Avoir', 'Avoir une voiture' et 'mal'
+        //Create 'Avoir' gesture
+        $gesture = new Gesture();
+        $gesture->setName('Avoir');
+        $gesture->setDescription('Verbe auxilière avoir.');
+        $gesture->setIsPublished(true);
+
+        $gesture->addTag($avoirTag);
+
+        //Create 'Avoir une voiture' gesture
+        $gesture = new Gesture();
+        $gesture->setName('Avoir une voiture');
+        $gesture->setDescription('Posséder une voiture.');
+        $gesture->setIsPublished(true);
+
+        $gesture->addTag($avoirTag);
+        $gesture->addTag($vehiculeTag);
+        $gesture->addTag($voitureTag);
+        $gesture->addTag($conduireTag);
 
         //Creating 'AUTO' gesture
         $gesture = new Gesture();
@@ -46,23 +152,10 @@ class AppFixtures extends Fixture
         $gesture->setDescription('Moyen de locomotion.');
         $gesture->setIsPublished(true);
 
-        $tag = new Tag();
-        $tag->setKeyword('Conduire');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
-
-        $tag = new Tag();
-        $tag->setKeyword('Vehicule');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
-
-        $tag->setKeyword('Automobile');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
-
-        $tag->setKeyword('Voiture');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
+        $gesture->addTag($conduireTag);
+        $gesture->addTag($vehiculeTag);
+        $gesture->addTag($automobileTag);
+        $gesture->addTag($voitureTag);
 
         $manager->persist($gesture);
 
@@ -72,20 +165,9 @@ class AppFixtures extends Fixture
         $gesture->setDescription('Permet de voler.');
         $gesture->setIsPublished(true);
 
-        $tag = new Tag();
-        $tag->setKeyword('Conduire');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
-
-        $tag = new Tag();
-        $tag->setKeyword('piloter');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
-
-        $tag = new Tag();
-        $tag->setKeyword('Avion');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
+        $gesture->addTag($conduireTag);
+        $gesture->addTag($piloterTag);
+        $gesture->addTag($avionTag);
 
         $manager->persist($gesture);
 
@@ -95,20 +177,10 @@ class AppFixtures extends Fixture
         $gesture->setDescription('S\'être fait mal, blessé.');
         $gesture->setIsPublished(true);
 
-        $tag = new Tag();
-        $tag->setKeyword('blessé');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
 
-        $tag = new Tag();
-        $tag->setKeyword('avoir');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
-
-        $tag = new Tag();
-        $tag->setKeyword('mal');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
+        $gesture->addTag($blesseTag);
+        $gesture->addTag($avoirTag);
+        $gesture->addTag($malTag);
 
         $manager->persist($gesture);
 
@@ -118,30 +190,11 @@ class AppFixtures extends Fixture
         $gesture->setDescription('S\'être fait mal à la tête, blessé.');
         $gesture->setIsPublished(true);
 
-        $tag = new Tag();
-        $tag->setKeyword('blessé');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
-
-        $tag = new Tag();
-        $tag->setKeyword('avoir');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
-
-        $tag = new Tag();
-        $tag->setKeyword('mal');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
-
-        $tag = new Tag();
-        $tag->setKeyword('maux');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
-
-        $tag = new Tag();
-        $tag->setKeyword('tête');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
+        $gesture->addTag($blesseTag);
+        $gesture->addTag($avoirTag);
+        $gesture->addTag($malTag);
+        $gesture->addTag($mauxTag);
+        $gesture->addTag($teteTag);
 
         $manager->persist($gesture);
 
@@ -151,40 +204,14 @@ class AppFixtures extends Fixture
         $gesture->setDescription('Avoir des douleurs au ventre.');
         $gesture->setIsPublished(true);
 
-        $tag = new Tag();
-        $tag->setKeyword('malade');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
 
-        $tag = new Tag();
-        $tag->setKeyword('avoir');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
-
-        $tag = new Tag();
-        $tag->setKeyword('douleur');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
-
-        $tag = new Tag();
-        $tag->setKeyword('mal');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
-
-        $tag = new Tag();
-        $tag->setKeyword('ventre');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
-
-        $tag = new Tag();
-        $tag->setKeyword('maux');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
-
-        $tag = new Tag();
-        $tag->setKeyword('estomac');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
+        $gesture->addTag($maladeTag);
+        $gesture->addTag($avoirTag);
+        $gesture->addTag($douleurTag);
+        $gesture->addTag($malTag);
+        $gesture->addTag($ventreTag);
+        $gesture->addTag($mauxTag);
+        $gesture->addTag($estomacTag);
 
         $manager->persist($gesture);
 
@@ -194,23 +221,14 @@ class AppFixtures extends Fixture
         $gesture->setDescription('S\'être battre par quelqu\'un d\'autre mal à un jeu.');
         $gesture->setIsPublished(true);
 
-        $tag = new Tag();
-        $tag->setKeyword('perdre');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
 
-        $tag = new Tag();
-        $tag->setKeyword('avoir');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
-
-        $tag = new Tag();
-        $tag->setKeyword('jeu');
-        $manager->persist($tag);
-        $gesture->addTag($tag);
+        $gesture->addTag($jeuTag);
+        $gesture->addTag($avoirTag);
+        $gesture->addTag($perdreTag);
 
         $manager->persist($gesture);
 
+        //SEND TO DB
         $manager->flush();
 
     }
