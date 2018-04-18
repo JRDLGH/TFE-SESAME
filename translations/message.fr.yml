@@ -1,0 +1,5 @@
+status:
+  gesture:
+    error: 'Une erreur est survenue, veuillez réessayer. Si cela se reproduit, veuillez prendre contact avec l''administrateur.'
+    found: '%x% geste(s) ont été trouvé pour %tag%'
+    not_found: 'Aucun geste ne correspond à votre recherche.'
