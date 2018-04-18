@@ -126,14 +126,6 @@ class AppFixtures extends Fixture
         /**
          * GESTURES
          */
-        //TODO Add 'Avoir', 'Avoir une voiture' et 'mal'
-        //Create 'Avoir' gesture
-        $gesture = new Gesture();
-        $gesture->setName('Avoir');
-        $gesture->setDescription('Verbe auxilière avoir.');
-        $gesture->setIsPublished(true);
-
-        $gesture->addTag($avoirTag);
 
         //Create 'Avoir une voiture' gesture
         $gesture = new Gesture();
@@ -145,6 +137,8 @@ class AppFixtures extends Fixture
         $gesture->addTag($vehiculeTag);
         $gesture->addTag($voitureTag);
         $gesture->addTag($conduireTag);
+
+        $manager->persist($gesture);
 
         //Creating 'AUTO' gesture
         $gesture = new Gesture();
@@ -159,15 +153,13 @@ class AppFixtures extends Fixture
 
         $manager->persist($gesture);
 
-        //Creating 'AVION' gesture
+        //Create 'Avoir' gesture
         $gesture = new Gesture();
-        $gesture->setName('Avion');
-        $gesture->setDescription('Permet de voler.');
+        $gesture->setName('Avoir');
+        $gesture->setDescription('Verbe auxilière avoir.');
         $gesture->setIsPublished(true);
 
-        $gesture->addTag($conduireTag);
-        $gesture->addTag($piloterTag);
-        $gesture->addTag($avionTag);
+        $gesture->addTag($avoirTag);
 
         $manager->persist($gesture);
 
@@ -212,6 +204,18 @@ class AppFixtures extends Fixture
         $gesture->addTag($ventreTag);
         $gesture->addTag($mauxTag);
         $gesture->addTag($estomacTag);
+
+        $manager->persist($gesture);
+        
+        //Creating 'AVION' gesture
+        $gesture = new Gesture();
+        $gesture->setName('Avion');
+        $gesture->setDescription('Permet de voler.');
+        $gesture->setIsPublished(true);
+
+        $gesture->addTag($conduireTag);
+        $gesture->addTag($piloterTag);
+        $gesture->addTag($avionTag);
 
         $manager->persist($gesture);
 
