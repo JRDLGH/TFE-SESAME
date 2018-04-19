@@ -1,0 +1,32 @@
+p{
+    font-size: 0.9rem;
+    &.info{
+        padding: .5rem;
+        background-color: $info;
+        background-color: rgba($color: $info, $alpha: 0.5);
+        border: 1px solid $info;
+        border-radius: 5px;
+        margin: .5rem .2rem;
+        cursor: default;
+    }
+
+    &.success{
+        padding: .5rem;
+        background-color: $info;
+        background-color: rgba($color: $success, $alpha: 0.5);
+        border: 1px solid $success;
+        border-radius: 5px;
+        margin: .5rem .2rem;
+        cursor: default;
+    }
+
+    &.alert{
+        background-color: $red;
+        background-color: rgba($color: $red, $alpha: 0.5);
+        padding: .3rem;
+        margin: .2rem 0px;
+        color: white;
+        border-radius: 5px;
+    }
+
+}

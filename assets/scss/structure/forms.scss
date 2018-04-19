@@ -1,0 +1,133 @@
+/**
+FORM --
+**/
+
+form{
+    padding: 0.5%;
+    margin: 1rem 0;
+    &.form-container{
+        @include flex();
+        // flex-direction: column;    // Causes bug with margin and footer    
+        @include responsive(wide-screens){
+            flex-direction: row;
+        }
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        flex-grow: 1;
+        div{
+            padding: 1.5%;
+            width: 100%;
+            &.small-input{
+                width: inherit;
+                @include responsive(wide-screens){
+                    width: 50%;
+                }
+            }
+            input{
+                border: 1px solid rgb(129, 129, 129);
+                border: 1px solid rgba(129, 129, 129, 0.432);
+                border-radius: 3px;
+                outline-color: none;
+                padding: 0.3em;
+                transition: border 0.3s;
+                &:focus{
+                    outline-color: transparent;
+                    border: 1px solid $input-focusborder-color;
+                    border-radius: 4px;
+                    &::placeholder{
+                        color: transparent;
+                    }
+                }
+            }
+            &.small-input,&.full-input{
+                input{
+                    &[type="text"],&[type="email"],&[type="password"]{
+                        width: 100%;
+                        height: 2rem;
+                        &::placeholder{
+                            font-size: 1rem;
+                            color:rgb(187, 187, 187);
+                            transition: color 0.5s;
+                            @include responsive(wide-screens){
+                                color: transparent;
+                                transition: none;
+                            }
+                        }
+                    }
+                }
+                label{
+                    display: none;
+                    @include responsive(wide-screens){
+                        display: block;
+                        padding: .5rem 0;
+                    }
+                }
+            }
+            &.checkbox-input{
+                @include flex();
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                input{
+                    @include flex();
+                    justify-content: flex-start;
+                    width: 4%;
+                    height: 1.5rem;
+                    margin-right: .2rem;
+                }
+                label{
+                    display: block;
+                }
+            }
+        }
+        .form-buttons{
+            width: auto;
+            @include flex();
+            flex-direction: column;            
+            justify-content: flex-start;
+            flex-grow: 1;
+            @include responsive(wide-screens){
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            a{
+                margin:.5rem 0;
+                @include responsive(wide-screens){
+                    margin: 0;
+                }
+            }
+            input{
+                display: block;
+            }
+            .btn{
+                line-height: 1.25;
+                white-space: nowrap;
+                text-align: center;
+                vertical-align: middle;
+                border-radius: .25rem;
+                padding: .5rem 1rem;
+                font-size: 1rem;
+                margin-top: 1rem;          
+                @include responsive(wide-screens){
+                    margin: 0 1rem 1rem 0;
+                }
+                transition: background-color 0.3s;
+                border:none;
+                &.btn-submit{
+                    background-color: $green;
+                    color: white;
+                    &:hover{
+                        background-color: $green-hover;
+                    }
+                }
+                &.btn-reset{
+                    background-color: $red;
+                    color: white;                    
+                    &:hover{
+                        background-color: $red-hover;
+                    }
+                }
+            }
+        }
+    }
+}
