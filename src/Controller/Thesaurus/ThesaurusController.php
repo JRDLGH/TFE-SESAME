@@ -4,6 +4,7 @@ namespace App\Controller\Thesaurus;
 
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,33 +41,53 @@ class ThesaurusController extends AbstractController
     }
 
     /**
-     * @Route("/search/{tag}",name="thesaurus_search_tag",options={"expose"=true})
+     * @Route("/search",name="thesaurus_search_tag",options={"expose"=true})
      */
-    public function searchByTag(TranslatorInterface $translator, $tag)
+    public function searchByTagName(TranslatorInterface $translator, Request $request)
     {
         //If request from AJAX
         //Temporary disabling this if in order to test with postman
 //        if($request->isXMLHttpRequest()){
-            $tag_name = $tag;
 
-            //if tag exist then search, either, search for gesture that match the name
+            $tag = $request->get('tag');
 
-            $gestures = $this->getDoctrine()->getRepository(Gesture::class)->findByTagName($tag_name);
+            //second
+            $gesturesTagMatched = $this->getDoctrine()->getRepository(Gesture::class)->findByTagName($tag);
 
-            $status = ["status"=>["message"=> $translator->trans('status.gesture.error') ]];
+            //first
+            $gesturesNameMatched = $this->getDoctrine()->getRepository(Gesture::class)->findByName($tag);
 
-            $formatted = [$status];
+            $response = [];
+            $status = ['status' => ['error' => 'this status should never be reached']];
 
-            if($gestures){
-                var_dump($gestures);
-                die();
+            if(!empty($gesturesNameMatched))
+            {
+                array_unshift($response,$gesturesNameMatched);
+                if(!empty($gesturesTagMatched)){
+                    foreach ($gesturesTagMatched as $gesture){
+                        $found = false;
+                        foreach($gesturesNameMatched as $namedMatched)
+                        {
+                            if($gesture['id'] === $namedMatched['id']){
+                                $found = true;
+                                break;
+                            }
+                        }
+                        if(!$found){
+                            array_push($response,$gesture);
+                        }
+                    }
+                }
+                $status = ['status' => ['success' => count($response).' gestures found']];
+            }else if(!empty($gesturesTagMatched)){
+                $response = $gesturesTagMatched;
+                $status = ['status' => ['success' => count($response).' gestures found']];
             }else{
-                //empty -- no response
-                var_dump($gestures);
-                $status = ["status"=>["message"=> $translator->trans('status.gesture.not_found') ]];
+                $response = ['status' => 'No gesture found.'];
+                //No gesture found
             }
-
-            return new JsonResponse($formatted);
+            array_unshift($status,$response);
+            return new JsonResponse($response);
 //        }
 //        return new JsonResponse('Error: This request is not valid.',400);
     }
