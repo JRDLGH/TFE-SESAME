@@ -34,20 +34,23 @@ class GestureRepository extends ServiceEntityRepository
 
     public function findByTagName($tag){
 
-        $dql = "SELECT g.id 
+        $dql = "SELECT g.id, g.name
                   FROM App\Entity\Thesaurus\Gesture g 
                     JOIN g.tags as t
                       
-                    WHERE t.keyword like '%avoir%'";
+                    WHERE t.keyword like :tag";
 
         $query = $this->getEntityManager()->createQuery($dql);
+        $query->setParameters([
+            'tag' => '%'.$tag.'%'
+        ]);
 
         return $query->execute();
 
     }
 
     public function findByName($name){
-        $dql = "SELECT g.id
+        $dql = "SELECT g.id, g.name
                   FROM App\Entity\Thesaurus\Gesture g
                 WHERE g.name like :nname";
 
