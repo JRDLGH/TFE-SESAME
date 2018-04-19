@@ -21,33 +21,42 @@ class GestureRepository extends ServiceEntityRepository
 
     public function findAllPublished()
     {
-        $conn = $this->getEntityManager()->getConnection();
-        $sql = 'SELECT g.id, g.name, t.keyword
-                  FROM gesture as g natural join tag as t 
-                  WHERE g.is_published is true';
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll();
+        $dql = "SELECT g 
+                  FROM App\Entity\Thesaurus\Gesture g
+                WHERE g.isPublished = 1
+                ORDER BY g.id";
+
+        $query = $this->getEntityManager()->createQuery($dql);
+
+        return $query->execute();
 
     }
 
     public function findByTagName($tag){
-        $conn = $this->getEntityManager()->getConnection();
-        if(is_array($tag)){
-            //request for severals
-        }else{
-            $sql = "SELECT gt.gesture_id, gt.tag_id, t.keyword, g.name, g.description, g.cover
-                        FROM gesture_tag as gt
-                            JOIN tag as t
-                                ON gt.tag_id = t.id
-                            JOIN gesture as g
-                                ON g.id = gt.gesture_id
-                    WHERE t.keyword like :tag
-                    ORDER BY t.id";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([':tag' => '%'.$tag.'%']);
-            return $stmt->fetchAll();
-        }
+
+        $dql = "SELECT g.id 
+                  FROM App\Entity\Thesaurus\Gesture g 
+                    JOIN g.tags as t
+                      
+                    WHERE t.keyword like '%avoir%'";
+
+        $query = $this->getEntityManager()->createQuery($dql);
+
+        return $query->execute();
+
+    }
+
+    public function findByName($name){
+        $dql = "SELECT g.id
+                  FROM App\Entity\Thesaurus\Gesture g
+                WHERE g.name like :nname";
+
+        $query = $this->getEntityManager()->createQuery($dql);
+        $query->setParameters([
+            'nname' => '%'.$name.'%',
+        ]);
+
+         return $query->execute();
 
     }
 //    /**
