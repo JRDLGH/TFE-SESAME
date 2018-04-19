@@ -5,22 +5,13 @@
 /**
     VARIABLES
  */
-$footer-bg-color:#6b6b6b;
-$footer-p-color: white;
-$red:rgb(223, 116, 102);
-$red-hover:rgb(247, 157, 146);
-$green:rgb(143, 206, 61);
-$green-hover:rgb(172, 231, 94);
 
-$info: rgb(195, 228, 255);
-$success: rgb(173, 228, 121);
-$alert: rgb(255, 199, 195);
-$warning: rgb(255, 239, 195);
+//imported by variables
+// IS PART OF THIS SCRIPT ONLY
 
-$input-focusborder-color: rgb(181, 224, 131);
 
 /*
-    CODE
+    global styling file
  */
 * {
     font-family: $font;
@@ -35,80 +26,93 @@ body {
     height: 100%;
     background-color: rgb(252, 252, 252);
     font-size: 1rem;
-}
-
-main {
-    min-height: 92vh;
-    section{
-        margin:1.5% 0%;
+    main {
+        min-height: 92vh;
+    
+        section{
+            margin:1.5% 0%;
+            width: 100%;
+        }
+    
+        h1 {
+            font-size: 2rem;
+            margin: 1% 0% 2% 0%;
+            text-transform: uppercase;
+        }
+    
+        h2{
+            background-color: rgba(236, 236, 236, 0.747);
+            padding: 0.5rem 0.2rem;
+            border-radius: .5rem;
+            font-weight: 300;
+            color: #848484;
+            text-align: center;
+        }
+    
+        p{
+            padding: 1%;
+            text-align: justify;
+        }
+    
+        div {
+    
+            &#content {
+                padding-top: 50px;
+                @include responsive(medium-screens){
+                    padding-top: $menu_height-small;
+                }
+                @include responsive(wide-screens){
+                    padding-top: $menu_height-large;
+                }
+    
+            }
+    
+        }
+    
+    }
+    footer{
         width: 100%;
-    }
-    h1 {
-        font-size: 2rem;
-        margin: 1% 0% 2% 0%;
-        text-transform: uppercase;
-    }
-    h2{
-        background-color: rgba(236, 236, 236, 0.747);
-        padding: 0.5rem 0.2rem;
-        border-radius: .5rem;
-        font-weight: 300;
-        color: #848484;
-        text-align: center;
-    }
-    p{
-        padding: 1%;
-        text-align: justify;
-    }
-    div {
-        &#content {
-            padding-top: 50px;
-            @include responsive(medium-screens){
-                padding-top: $menu_height-small;
-            }
-            @include responsive(wide-screens){
-                padding-top: $menu_height-large;
-            }
+        bottom:0;
+    
+        height: 50px;
+        @include responsive(wide-screens){
+            height: $menu_height-large;
+        }
+        padding: 2%;
+        background-color: $footer-bg-color;
+        @include box-shadow(0px 1px 5px #2c2c2c);
+        @include flex();
+        align-items: center;
+        p{
+            width: 100%;
+            color: $footer-p-color;
+            text-align-last: center;
         }
     }
 }
 
-footer{
-    width: 100%;
-    bottom:0;
 
-    height: 50px;
-    @include responsive(wide-screens){
-        height: $menu_height-large;
-    }
-    padding: 2%;
-    background-color: $footer-bg-color;
-    @include box-shadow(0px 1px 5px #2c2c2c);
-    @include flex();
-    align-items: center;
-    p{
-        width: 100%;
-        color: $footer-p-color;
-        text-align-last: center;
-    }
-}
+// GLOBAL DEFINITIONS
 
 h1,h2,h3,h4,h5,h6{
     font-weight: 500;
 }
+
 h2{
     font-size: 2rem;
 }
+
 h3{
     font-size: 1.2rem;
 }
+
 a {
     text-decoration: none;
     color:black;
-}
-a:visited{
-    text-decoration: none;
-    background-color: none;
+    &:visited{
+        text-decoration: none;
+        background-color: none;
+    }
 }
 
 ul,
@@ -116,6 +120,8 @@ li {
     list-style: none;
     list-style-type: none;
 }
+
+// PARAGRAPH STYLING
 p{
     font-size: 0.9rem;
     &.info{
@@ -127,6 +133,7 @@ p{
         margin: .5rem .2rem;
         cursor: default;
     }
+
     &.success{
         padding: .5rem;
         background-color: $info;
@@ -136,15 +143,19 @@ p{
         margin: .5rem .2rem;
         cursor: default;
     }
+
+    &.alert{
+        background-color: $red;
+        background-color: rgba($color: $red, $alpha: 0.5);
+        padding: .3rem;
+        margin: .2rem 0px;
+        color: white;
+        border-radius: 5px;
+    }
+
 }
-.alert{
-    background-color: $red;
-    background-color: rgba($color: $red, $alpha: 0.5);
-    padding: .3rem;
-    margin: .2rem 0px;
-    color: white;
-    border-radius: 5px;
-}
+
+//BANNER
 .banner{
     @include flex();
     justify-content: center;
