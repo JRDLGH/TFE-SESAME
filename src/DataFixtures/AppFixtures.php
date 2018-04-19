@@ -161,6 +161,16 @@ class AppFixtures extends Fixture
 
         $manager->persist($gesture);
 
+        //Create 'Hors contexte' gesture
+        $gesture = new Gesture();
+        $gesture->setName('Intru');
+        $gesture->setDescription('Verbe auxilière avoir.');
+        $gesture->setIsPublished(true);
+
+        $gesture->addTag($avoirTag);
+
+        $manager->persist($gesture);
+
         //Creating 'AVOIR MAL' gesture
         $gesture = new Gesture();
         $gesture->setName('Avoir mal');
