@@ -31,6 +31,25 @@ class GestureRepository extends ServiceEntityRepository
 
     }
 
+    public function findByTagName($tag){
+        $conn = $this->getEntityManager()->getConnection();
+        if(is_array($tag)){
+            //request for severals
+        }else{
+            $sql = "SELECT gt.gesture_id, gt.tag_id, t.keyword, g.name, g.description, g.cover
+                        FROM gesture_tag as gt
+                            JOIN tag as t
+                                ON gt.tag_id = t.id
+                            JOIN gesture as g
+                                ON g.id = gt.gesture_id
+                    WHERE t.keyword like :tag
+                    ORDER BY t.id";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([':tag' => '%'.$tag.'%']);
+            return $stmt->fetchAll();
+        }
+
+    }
 //    /**
 //     * @return Gesture[] Returns an array of Gesture objects
 //     */
