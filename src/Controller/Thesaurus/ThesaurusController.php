@@ -51,7 +51,7 @@ class ThesaurusController extends AbstractController
 
             //if tag exist then search, either, search for gesture that match the name
 
-            $gestures = $this->getDoctrine()->getRepository(Gesture::class)->find(421);
+            $gestures = $this->getDoctrine()->getRepository(Gesture::class)->findByTagName($tag_name);
 
             $status = ["status"=>["message"=> $translator->trans('status.gesture.error') ]];
 
@@ -60,6 +60,10 @@ class ThesaurusController extends AbstractController
             if($gestures){
                 var_dump($gestures);
                 die();
+            }else{
+                //empty -- no response
+                var_dump($gestures);
+                $status = ["status"=>["message"=> $translator->trans('status.gesture.not_found') ]];
             }
 
             return new JsonResponse($formatted);
