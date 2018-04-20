@@ -57,12 +57,11 @@ class ThesaurusController extends AbstractController
             //first
             $gesturesNameMatched = $this->getDoctrine()->getRepository(Gesture::class)->findByName($tag);
 
-            $response = [];
-            $status = ['status' => ['error' => 'this status should never be reached']];
-
+            $response = ['matched' => ['byName' => [], 'byTag' => []], 'status' => []];
+            $status = ['error' => 'this status should never be reached'];
             if(!empty($gesturesNameMatched))
             {
-                array_unshift($response,$gesturesNameMatched);
+                $response['matched']['byName'] = $gesturesNameMatched;
                 if(!empty($gesturesTagMatched)){
                     foreach ($gesturesTagMatched as $gesture){
                         $found = false;
@@ -74,19 +73,20 @@ class ThesaurusController extends AbstractController
                             }
                         }
                         if(!$found){
-                            array_push($response,$gesture);
+                            array_push($response['matched']['byTag'],$gesture);
                         }
                     }
                 }
-                $status = ['status' => ['success' => count($response).' gestures found']];
+                $status = ['success' => count($response['matched']['byTag']).' gesture(s) found by tag, '
+                    .count($response['matched']['byName']).' by name'];
             }else if(!empty($gesturesTagMatched)){
-                $response = $gesturesTagMatched;
-                $status = ['status' => ['success' => count($response).' gestures found']];
+                $response['matched']['byTag'] = $gesturesTagMatched;
+                $status = ['success' => count($response).' gestures found'];
             }else{
-                $response = ['status' => 'No gesture found.'];
+                $response = ['not_found' => 'No gesture found.'];
                 //No gesture found
             }
-            array_unshift($status,$response);
+            $response['status'] = $status;
             return new JsonResponse($response);
 //        }
 //        return new JsonResponse('Error: This request is not valid.',400);
