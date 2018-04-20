@@ -4,11 +4,12 @@
     justify-content: center;
     align-items: center;
 
-    background-image: url('../img/banner.jpg');
+    background-image: url($banner-img);
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    opacity: $banner-opacity; 
 
     width: 100%;
     min-height: 35vh;
@@ -18,8 +19,9 @@
     h1{
         padding: .2rem 1rem;
         text-align: center;
-        color: rgb(241, 241, 241);
-        font-weight: 500;
+        color: $banner-title-color;
+        font-weight: $banner-title-weight;
+        letter-spacing: $banner-title-letter-spacing;
         height: 20%;
     }
 }

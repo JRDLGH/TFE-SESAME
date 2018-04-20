@@ -17,6 +17,7 @@ $red-hover:rgb(247, 157, 146);
 $green:rgb(143, 206, 61);
 $green-hover:rgb(172, 231, 94);
 $yellow:#f9dda3;
+$light-blue:rgb(97, 221, 243);
 
 /* DISPLAYS PARAMS */
 $warning:       $yellow;
@@ -29,13 +30,26 @@ $alert:       rgb(255, 199, 195);
 $menu_height-small: 45px;
 $menu_height-large: 58px;
 
-$nav-color: $light; // OR #afe0f7
+$nav-color: #61c5f3; // OR #afe0f7
 $nav-color-dark: darken($nav-color,20%);
 
 $burger-bg-color:#333333;
 $burger-color:#ffffff;
+$burger-size: 40px;
 
 $link-color: #272727;
+$link-hover-color:white;
+$link-weight:300;
+$link-size:1.1rem;
+
+/* BANNER */
+$banner-opacity:0.95;
+$banner-img:'../img/banner.jpg';
+
+$banner-title-color:white;
+$banner-title-weight:300;
+$banner-title-letter-spacing:.5rem;
+// New banner?
 
 /* ANIMATIONS */
 $short-duration:0.5s;

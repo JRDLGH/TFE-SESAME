@@ -56,11 +56,13 @@ body {
         div {
     
             &#content {
-                padding-top: 50px;
-                @include responsive(medium-screens){
-                    padding-top: $menu_height-small;
-                }
-                @include responsive(wide-screens){
+                // TO MODIFY?
+                padding-top: $menu_height-small;
+
+                // @include media-breakpoint-up(md) {
+                //     padding-top: $menu_height-small;
+                // }
+                @include media-breakpoint-up(md) {
                     padding-top: $menu_height-large;
                 }
     
