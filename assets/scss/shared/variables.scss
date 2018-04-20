@@ -7,19 +7,11 @@ $text-size:get('typography.size');
 $break-medium: get('breakpoints.md');
 $break-large: get('breakpoints.lg');
 
-/* MENU */
-$menu_height-small: 50px;
-$menu_height-large: 80px;
-
 $body:#f8f9fa;
 
-/* FOOTER */
-$footer-bg-color:#dddddd;
-$footer-p-color: darken($body,80%);
-$footer-shadow: darken($body,45%);
-
 /* THEME COLOR */
-$blue:#3d9fce;
+$blue:#c9e7f5;
+$light-blue:#61c5f3;
 $red:rgb(223, 116, 102);
 $red-hover:rgb(247, 157, 146);
 $green:rgb(143, 206, 61);
@@ -32,6 +24,19 @@ $danger:        $red;
 $info:        rgb(195, 228, 255);
 $success:     rgb(173, 228, 121);
 $alert:       rgb(255, 199, 195);
+
+/* MENU */
+$menu_height-small: 45px;
+$menu_height-large: 58px;
+
+$nav-color: $light-blue;
+$nav-color-dark: darken($nav-color,20%);
+
+
+/* FOOTER */
+$footer-bg-color:#dddddd;
+$footer-p-color: darken($body,80%);
+$footer-shadow: darken($body,45%);
 
 /* IMPORTANT COLORS */
 $main: $blue;

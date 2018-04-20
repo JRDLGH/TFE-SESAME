@@ -1,11 +1,8 @@
 // MENU - 23-24/03
+// REFRACTORED 20/04
 
 // MENU VARS
-$menu_height-small: 50px;
-$menu_height-large: 80px;
 
-$header-color:#b1c368;
-$header-color-darker:#c0d665;
 
 $menu-icon-bg: #333333;
 $menu-icon-color: #ffffff;
@@ -19,7 +16,7 @@ $link-color: #272727;
 header {
     z-index: 10;
     position: fixed;
-    background: $header-color;
+    background: $nav-color;
     width: 100%;
     height: $menu_height-small;
     @include responsive(wide-screens) {
@@ -73,7 +70,7 @@ header {
                 width:100%;
                 top:50px;
                 position: absolute;
-                background-color: rgba($color: $header-color, $alpha: 0.95);
+                background-color: rgba($color: $nav-color, $alpha: 0.95);
                 margin-bottom: 0;
 
                 .nav-item {
@@ -97,7 +94,7 @@ header {
                     }
 
                     &:hover{
-                        background-color: rgba($color: $header-color-darker, $alpha: 0.5);
+                        background-color: rgba($color: $nav-color-dark, $alpha: 0.5);
                     }
                 }
             }
