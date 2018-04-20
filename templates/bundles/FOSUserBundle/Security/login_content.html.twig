@@ -1,11 +1,11 @@
-{% include 'logbox.html.twig' %}
+{# {% include 'logbox.html.twig' %} #}
 {% trans_default_domain 'FOSUserBundle' %}
 
 
 <h2>{{ 'layout.login'|trans }}</h2>
 
 {% if error %}
-    <div class="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    <div class="alert alert-warning">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 
 <form action="{{ path("fos_user_security_check") }}" method="post" class="form-group">
@@ -33,6 +33,7 @@
         </div>
         <div class="w-100"></div>
         <div class="row help-links col-md-12 col-lg-6 order-12 justify-content-end">
+            <a href="{{ path('fos_user_registration_register') }}" class="help-link">{{ 'security.login.not_member'|trans }}</a>
             <a href="{{ path('fos_user_resetting_request') }}" class="help-link">{{ 'resetting.link'|trans }}</a>
         </div>
     </div>

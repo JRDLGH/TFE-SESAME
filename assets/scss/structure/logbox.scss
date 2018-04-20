@@ -12,10 +12,10 @@ LOGBOX
         line-height: 3rem;
         width: 100%;
         text-align: center;
-        background-color: lighten($color: $blue, $amount: 10%);
+        background-color: lighten($color: $main, $amount: 10%);
         color: white;
         &:hover{
-            background-color: $blue;
+            background-color: $main;
         }
         &.active{
             background-color: transparent;

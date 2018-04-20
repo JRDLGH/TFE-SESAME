@@ -30,7 +30,7 @@ form {
             transition: border 0.3s;
             &:focus {
                 outline-color: transparent;
-                border: 1px solid $input-focusborder-color;
+                border: 1px solid lighten($color: $main, $amount: 35%);
                 border-radius: 4px;
                 box-shadow: none;
                 &::placeholder {
@@ -61,11 +61,7 @@ form {
         transition: background-color 0.3s;
         border:none;
         &.btn-submit {
-            // background-color: $green;
             color: white;
-            &:hover {
-                // background-color: $green-hover;
-            }
         }
         &.btn-reset {
             background-color: $red;
@@ -74,9 +70,5 @@ form {
                 background-color: $red-hover;
             }
         }
-    }
-    .help-links{
-        padding: .5rem;
-        border-radius: .5rem;
     }
 }
