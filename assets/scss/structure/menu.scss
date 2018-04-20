@@ -53,7 +53,7 @@ header {
             width: 58%;
             height: 100%;
             .nav-links{
-                // display: none;
+                display: none;
                 left:0;
                 width:100%;
                 top:$menu_height-small;
@@ -72,8 +72,14 @@ header {
 
                     .nav-link {
                         width: 100%;
-                        line-height: $menu_height-small;
-                        vertical-align: middle;
+                        height: 6vh;
+                        padding: 0;
+                        @include media-breakpoint-up(lg){
+                            height: auto;
+                            line-height: $menu_height-small;
+                            vertical-align: middle;
+                        }
+
                         overflow: hidden;
                         font-size: $link-size;
                         color: $link-color;

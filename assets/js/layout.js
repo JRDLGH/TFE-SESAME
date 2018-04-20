@@ -15,10 +15,14 @@ $(document).ready(function(){
         evt.preventDefault();
         console.log(this);
         //if screens are smaller than x px
+        console.log($(window).width());
+        console.log(theme.breakpoints.lg);
+        console.log('Pass ? ' + $(window).width() < theme.breakpoints.lg);
         if($(window).width() < theme.breakpoints.lg ){
+            console.log('pass ');
             //if already open
             if($(this).hasClass('opened')){
-                console.log()
+                console.log('opened');
                 //close
                 $(this).removeClass('opened');
                 $('.nav-links').animate({
@@ -27,6 +31,7 @@ $(document).ready(function(){
                     easing: 'swing'
                 });
             }else{
+                console.log('open');                
                 //open
                 $(this).addClass('opened');
                 $('.nav-links').animate({
