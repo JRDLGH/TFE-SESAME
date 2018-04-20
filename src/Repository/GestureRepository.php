@@ -37,12 +37,12 @@ class GestureRepository extends ServiceEntityRepository
         $dql = "SELECT g.id, g.name
                   FROM App\Entity\Thesaurus\Gesture g 
                     JOIN g.tags as t
-                      
-                    WHERE t.keyword like :tag";
+                WHERE t.keyword like :tag
+                GROUP BY g.id";
 
         $query = $this->getEntityManager()->createQuery($dql);
         $query->setParameters([
-            'tag' => '%'.$tag.'%'
+            'tag' => $tag.'%'
         ]);
 
         return $query->execute();
@@ -56,7 +56,7 @@ class GestureRepository extends ServiceEntityRepository
 
         $query = $this->getEntityManager()->createQuery($dql);
         $query->setParameters([
-            'nname' => '%'.$name.'%',
+            'nname' => $name.'%',
         ]);
 
          return $query->execute();
