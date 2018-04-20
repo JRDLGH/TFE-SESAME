@@ -70,10 +70,10 @@ $theme-colors: (
 );
 
 /* GRID */
-$grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px
-);
+// $grid-breakpoints: (
+//   xs: get('breakpoints.xs'),
+//   sm: get('breakpoints.sm'),
+//   md: get('breakpoints.md'),
+//   lg: get('breakpoints.lg'),
+//   xl: get('breakpoints.xl')
+// );

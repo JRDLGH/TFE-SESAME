@@ -13,10 +13,12 @@ $(document).ready(function(){
     //MENU
     $('.menu-icon').click(function(evt){
         evt.preventDefault();
+        console.log(this);
         //if screens are smaller than x px
         if($(window).width() < theme.breakpoints.lg ){
             //if already open
             if($(this).hasClass('opened')){
+                console.log()
                 //close
                 $(this).removeClass('opened');
                 $('.nav-links').animate({
