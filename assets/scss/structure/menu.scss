@@ -1,57 +1,47 @@
 // MENU - 23-24/03
 // REFRACTORED 20/04
 
-// MENU VARS
-
-
-$menu-icon-bg: #333333;
-$menu-icon-color: #ffffff;
-$menu-icon-duration: 0.5s;
-
-$link-color: #272727;
-
 //HEADER -- NAV -- LINKS
 //**********************
 
 header {
-    z-index: 10;
+    z-index: 30;
     position: fixed;
     background: $nav-color;
     width: 100%;
     height: $menu_height-small;
-    @include responsive(wide-screens) {
+    @include media-breakpoint-up(md) {
         height: $menu_height-large;
     }
     @include box-shadow(0px 0px 10px #000000);
 
+    .navbar{
+
+        padding: 0;
+
+    }
+
     nav {
+
         height: 100%;
-        width: inherit;
-        height: 100%;
-        @include flex();
 
         .nav-brand {
-            @include flex();
-            justify-content: left;
+            padding-right:.5rem; 
             width: 15%;
-            height: inherit;
             height: 100%;
 
             a {
-                @include flex();
-                align-items: center;
-                justify-content: center;
                 height: 100%;
-
                 .nav-brand-logo {
-                    max-width: 230px;
                     max-height: $menu_height-small;
-                    padding: 1%;
+
                     height: auto;
                     width: auto;
+
                     @include responsive(wide-screens) {
                         max-height: $menu_height-large;
                     }
+
                 }
 
             }
@@ -60,12 +50,9 @@ header {
 
         .nav-menu {
             width: 85%;
-            @include flex();
-            justify-content: space-around;
-            align-items: center;
-
+            height: 100%;
             .nav-links{
-                display: none;
+                // display: none;
                 left:0;
                 width:100%;
                 top:50px;
@@ -81,7 +68,8 @@ header {
 
                     .nav-link {
                         width: 100%;
-                        height: 100%;
+                        line-height: $menu_height-small;
+                        vertical-align: middle;
                         overflow: hidden;
                         font-size: 1.1rem;
                         color: $link-color;
@@ -100,8 +88,8 @@ header {
             }
 
             .menu-icon {
-                background-color: $menu-icon-bg;
-                background-color: rgba($color: $menu-icon-bg, $alpha: 0.2);
+                background-color: $burger-bg-color;
+                background-color: rgba($color: $burger-bg-color, $alpha: 0.2);
 
                 position: relative;
                 margin-left: auto;
@@ -112,7 +100,7 @@ header {
 
                 border-radius: 50%;
 
-                transition: transform $menu-icon-duration;
+                transition: transform $short-duration;
 
                 span {
                     position: absolute;
@@ -123,8 +111,8 @@ header {
                     width: 22px;
                     height: 2px;
 
-                    background-color: $menu-icon-color;
-                    transition: background-color $menu-icon-duration, transform $menu-icon-duration;
+                    background-color: $burger-color;
+                    transition: background-color $short-duration, transform $short-duration;
                     transform: translate(-50%) translateY(-50%);
 
                     &::before,
@@ -139,9 +127,9 @@ header {
                         width: 22px;
                         height: 2px;
 
-                        background-color: $menu-icon-color;
+                        background-color: $burger-color;
                         transform: translateY(-6px);
-                        transition: transform $menu-icon-duration;
+                        transition: transform $short-duration;
                     }
 
                     &::after {
@@ -159,9 +147,9 @@ header {
                 }
             }
             .opened {
-                background-color: rgba($color: $menu-icon-bg, $alpha: 0.5);
+                background-color: rgba($color: $burger-bg-color, $alpha: 0.5);
                 transform: rotate(180deg);
-                transition: transform $menu-icon-duration;
+                transition: transform $short-duration;
                 span {
                     background-color: transparent;
                 }
@@ -188,17 +176,15 @@ header {
                 }
                 .nav-links{
                     background-color:transparent;
-                    @include flex();
+                    // @include flex();
+                    display: flex;
                     top:0px;
                     width:100%;
                     position: relative;
                     height: 100%;
                     .nav-item {
-                        @include flex();
                         height: 100%;
-                        padding: 0px;
                         .nav-link {
-                            @include flex();
                             position: relative;
                         }
                     }

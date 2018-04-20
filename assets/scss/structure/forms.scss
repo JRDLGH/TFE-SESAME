@@ -30,9 +30,10 @@ form {
             transition: border 0.3s;
             &:focus {
                 outline-color: transparent;
-                border: 1px solid lighten($color: $main, $amount: 35%);
-                border-radius: 4px;
                 box-shadow: none;
+                border:0;
+                border: 1px solid $light-main;
+                border-radius: 4px;
                 &::placeholder {
                     color: transparent;
                 }

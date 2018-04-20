@@ -11,33 +11,34 @@
 </head>
 
 <body>
-    <header>
-        <nav role="nav">
-            <div class="nav-brand">
-                <a href="#">
-                    <img class="nav-brand-logo" src="{{ asset('build/static/Dolby-Vision-brand-logo.png') }}" alt="nav-brand-logo">
-                </a>
-            </div>
+    <header class="fluid-container">
+        <nav class="navbar navbar-expand-lg" role="nav">
+        <div class="nav-brand navbar-brand">
+            <a href="#" class="navbar-brand">
+                <img class="nav-brand-logo" src="{{ asset('build/static/Dolby-Vision-brand-logo.png') }}" alt="nav-brand-logo">
+            </a>
+        </div>
             <div class="nav-menu">
                 <div class="menu-icon">
                     <span></span>
                 </div>
-                <ul class="nav-links">
+                <ul class="navbar-nav nav-links nav-fill">
+                {# nav-links #}
                     {% block navlinks %}
                     <li class="nav-item">
-                        <a class="nav-link center" href="{{ path('app_home') }}">Accueil</a>
+                        <a class="nav-item nav-link" href="{{ path('app_home') }}">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link center" href="#">À propos</a>
+                        <a class="nav-item nav-link" href="#">À propos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link center" href="{{ path('thesaurus_index') }}">Dictionnaire</a>
+                        <a class="nav-item nav-link" href="{{ path('thesaurus_index') }}">Dictionnaire</a>
                     </li>
                     <li class="nav-item">
                         {% if is_granted('ROLE_USER') %}
-                        <a class="nav-link center" href="{{ path('fos_user_security_logout') }}">Se déconnecter</a>
+                        <a class="nav-item nav-link" href="{{ path('fos_user_security_logout') }}">Se déconnecter</a>
                         {% else %}
-                        <a class="nav-link center" href="{{ path('fos_user_security_login') }}">Se connecter</a>
+                        <a class="nav-item nav-link" href="{{ path('fos_user_security_login') }}">Se connecter/S'enregistrer</a>
                         {% endif %}
                     </li>
 

@@ -4,14 +4,14 @@ GLOBAL VARIABLES
 
 $font:get('typography.font');
 $text-size:get('typography.size');
-$break-medium: get('breakpoints.md');
-$break-large: get('breakpoints.lg');
+$break-medium: get('breakpoints.md'); //TO CHANGE 
+$break-large: get('breakpoints.lg'); //TO CHANGE
 
 $body:#f8f9fa;
 
 /* THEME COLOR */
-$blue:#c9e7f5;
-$light-blue:#61c5f3;
+$blue:#61c5f3;
+$light:#e9f8ff;
 $red:rgb(223, 116, 102);
 $red-hover:rgb(247, 157, 146);
 $green:rgb(143, 206, 61);
@@ -22,16 +22,25 @@ $yellow:#f9dda3;
 $warning:       $yellow;
 $danger:        $red;
 $info:        rgb(195, 228, 255);
-$success:     rgb(173, 228, 121);
+$success:     $green;
 $alert:       rgb(255, 199, 195);
 
 /* MENU */
 $menu_height-small: 45px;
 $menu_height-large: 58px;
 
-$nav-color: $light-blue;
+$nav-color: $light; // OR #afe0f7
 $nav-color-dark: darken($nav-color,20%);
 
+$burger-bg-color:#333333;
+$burger-color:#ffffff;
+
+$link-color: #272727;
+
+/* ANIMATIONS */
+$short-duration:0.5s;
+$medium-duration:0.75s;
+$long-duration:1s;
 
 /* FOOTER */
 $footer-bg-color:#dddddd;
@@ -40,7 +49,13 @@ $footer-shadow: darken($body,45%);
 
 /* IMPORTANT COLORS */
 $main: $blue;
+$light-main: lighten($main, 10%);
 
+$theme-colors: (
+  "primary": $main,
+);
+
+/* GRID */
 $grid-breakpoints: (
   xs: 0,
   sm: 576px,
@@ -48,12 +63,3 @@ $grid-breakpoints: (
   lg: 992px,
   xl: 1200px
 );
-
-$theme-colors: (
-  "primary": $main,
-);
-// $container-max-widths: (
-//   sm: 420px,
-//   md: 720px,
-//   lg: 960px
-// );

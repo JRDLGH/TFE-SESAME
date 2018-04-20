@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
 
-    background-image: url('../img/bg-forest.jpg');
+    background-image: url('../img/banner.jpg');
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -16,9 +16,6 @@
 
     margin-bottom:.5rem;
     h1{
-        background-color: #83a265;
-        background-color: rgba(131, 162, 101, 0.651);
-        @include box-shadow(0px 0px 5px rgb(71, 71, 71));
         padding: .2rem 1rem;
         text-align: center;
         color: rgb(241, 241, 241);
