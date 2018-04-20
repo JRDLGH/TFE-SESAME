@@ -10,8 +10,11 @@ $break-large: get('breakpoints.lg');
 $menu_height-small: 50px;
 $menu_height-large: 80px;
 
-$footer-bg-color:#6b6b6b;
-$footer-p-color: white;
+$body:#f8f9fa;
+
+$footer-bg-color:#dddddd;
+$footer-p-color: darken($body,80%);
+$footer-shadow: darken($body,20%);
 $red:rgb(223, 116, 102);
 $red-hover:rgb(247, 157, 146);
 $green:rgb(143, 206, 61);
@@ -23,6 +26,8 @@ $alert: rgb(255, 199, 195);
 $warning: rgb(255, 239, 195);
 $input-focusborder-color: rgb(181, 224, 131);
 
+$blue: #3d9fce;
+
 $grid-breakpoints: (
   xs: 0,
   sm: 576px,
@@ -32,7 +37,7 @@ $grid-breakpoints: (
 );
 
 $theme-colors: (
-  "primary": rgb(143, 206, 61),
+  "primary": $blue,
 );
 // $container-max-widths: (
 //   sm: 420px,

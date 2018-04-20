@@ -18,9 +18,9 @@ form {
         width: 100%;
         label{
             display: block;
-            @include media-breakpoint-down(md){
-                display: none;
-            }
+            // @include media-breakpoint-down(md){
+            //     display: none; NOT SUPPORTED IE9
+            // }
         }
         .form-control {
             border: 1px solid $border-color;
