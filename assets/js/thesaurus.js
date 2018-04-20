@@ -66,17 +66,22 @@ function askGestures(value){
         if(keywords.length == 1)
         {
             console.log('Request accepted');
+            setStatusMessage('waiting');
             $.ajax({
                 url:Routing.generate('thesaurus_search_tag', {tag: keywords[0]}),
                 type: 'GET',
                 statusCode: {
-                    404: function(){
-                        alert('Route non trouvée...');
+                    404: function(data){
+                        //RESOURCE NOT FOUND
+                        console.log(data.responseJSON);
+                        setStatus(data.responseJSON);
                     }
                 }
             }).done(function(data){
+                //MATCH HTTP_OK -- 200
                 console.log('** RESPONSE :');
                 previousData = data;
+                setStatus(data.status);
                 orderByPertinence(data);
             });
         }
@@ -84,4 +89,45 @@ function askGestures(value){
     }else{
         console.log("invalid format");
     }
+}
+
+//success, waiting, not_found
+//Must recieve an array
+function setStatus(status){
+    var state =  Object.keys(status)[0];
+    console.log(state);
+    switch(state){
+        case 'success':setStatusMessage(state,status[state]);
+            break;
+        case 'waiting':setStatusMessage(state,status[state]);
+            break;
+        case 'not_found':setStatusMessage(state,status[state]);
+            break;
+    }
+}
+
+function setStatusMessage(state,message){
+    clearStatus();
+    var $statusElement = $('.status');
+    if(message){
+        $statusElement.children('.status-message').html(message);
+    }
+    switch (state){
+        case 'success': $statusElement.children('i').addClass('fa fa-check');
+            break;
+        case 'waiting': $statusElement.children('i').addClass('fa fa-spinner fa-spin');
+            break;
+        case 'not_found': $statusElement.children('i').addClass('fa fa-times');
+            break;
+        default: $statusElement.children('i').addClass('fa fa-exclamation-triangle');
+    }
+}
+
+//Removes everything inside status elem
+function clearStatus(){
+    var $statusElement = $('.status');
+    // clear message
+    $statusElement.children('.status-message').html('');
+    //clear icon
+    $statusElement.children('i').attr('class','');
 }
