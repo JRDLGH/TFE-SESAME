@@ -5,27 +5,6 @@
 .display-none{
     display: none;
 }
-.full-container {
-    @include flex();
-    flex-direction: column;
-    flex-wrap: wrap;
-    @include responsive(wide-screens){
-        align-items: center;
-    }
-    width: 100%;
-}
-.container{
-    min-width: 60%;
-    margin: 0 5%;
-    @include responsive(wide-screens){
-        margin: 0 15%;
-    }
-}
-.center {
-    @include flex();
-    align-items: center;
-    justify-content: center;
-}
 .bold{
     font-weight: 700;
 }
