@@ -22,3 +22,20 @@ $success: rgb(173, 228, 121);
 $alert: rgb(255, 199, 195);
 $warning: rgb(255, 239, 195);
 $input-focusborder-color: rgb(181, 224, 131);
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+
+$theme-colors: (
+  "primary": rgb(143, 206, 61),
+);
+// $container-max-widths: (
+//   sm: 420px,
+//   md: 720px,
+//   lg: 960px
+// );

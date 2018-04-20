@@ -2,6 +2,8 @@
 FORM --
 **/
 
+$border-color:rgb(129, 129, 129);
+
 form {
     padding: 0.5%;
     margin: 1rem 0;
@@ -11,18 +13,18 @@ form {
     justify-content: flex-start;
     flex-wrap: wrap;
     flex-grow: 1;
-    div {
+    .form-group {
         padding:1rem 0rem;
         width: 100%;
-        &.small-input {
-            width: inherit;
-            @include responsive(wide-screens) {
-                width: 50%;
+        label{
+            display: block;
+            @include media-breakpoint-down(md){
+                display: none;
             }
         }
-        input {
-            border: 1px solid rgb(129, 129, 129);
-            border: 1px solid rgba(129, 129, 129, 0.432);
+        .form-control {
+            border: 1px solid $border-color;
+            border: 1px solid rgba($color: $border-color, $alpha: 0.4);
             border-radius: 3px;
             outline-color: none;
             transition: border 0.3s;
@@ -30,10 +32,18 @@ form {
                 outline-color: transparent;
                 border: 1px solid $input-focusborder-color;
                 border-radius: 4px;
+                box-shadow: none;
                 &::placeholder {
                     color: transparent;
                 }
             }
+            &::placeholder {
+                color: transparent;
+                @include media-breakpoint-down(md){
+                    color:$border-color;
+                }
+            }
+            
         }
     }
     .btn {
@@ -42,20 +52,19 @@ form {
         text-align: center;
         vertical-align: middle;
         border-radius: .25rem;
-        background-color: $green;
-        padding: .5rem 1rem;
+        padding: .75rem 1rem;
         font-size: 1rem;
-        margin-top: 1rem;
-        @include responsive(wide-screens) {
+        @include media-breakpoint-down(md){
             margin: 0 1rem 1rem 0;
+            width: 100%;
         }
         transition: background-color 0.3s;
         border:none;
         &.btn-submit {
-            background-color: $green;
+            // background-color: $green;
             color: white;
             &:hover {
-                background-color: $green-hover;
+                // background-color: $green-hover;
             }
         }
         &.btn-reset {
@@ -65,5 +74,9 @@ form {
                 background-color: $red-hover;
             }
         }
+    }
+    .help-links{
+        padding: .5rem;
+        border-radius: .5rem;
     }
 }

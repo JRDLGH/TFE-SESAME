@@ -1,6 +1,7 @@
+@import "shared/variables";
+
 @import "node_modules/bootstrap/scss/bootstrap";
 
-@import "shared/variables";
 @import "mixins/mixins.scss";
 @import "structure/menu.scss";
 @import "structure/paragraphs.scss";
@@ -109,7 +110,10 @@ a {
     color:black;
     &:visited{
         text-decoration: none;
-        background-color: none;
+        background-color: transparent;
+    }
+    &:hover{
+        text-decoration: none;
     }
 }
 
@@ -121,4 +125,19 @@ li {
 
 .full{
     width: 100%;
+}
+.green{
+    color:$green;
+}
+
+.help-links{
+    a{
+        background-color: rgba($color: $gray-400, $alpha:0.2);
+        border-radius: .5rem;
+        color: lighten($color: $black, $amount: 50%);        
+        padding: .5rem;
+        &:hover{
+            color: $black;
+        }
+    }
 }
