@@ -51,14 +51,12 @@ class ThesaurusController extends AbstractController
 
             $tag = $request->get('tag');
 
-            //second
             $gesturesTagMatched = $this->getDoctrine()->getRepository(Gesture::class)->findByTagName($tag);
 
-            //first
             $gesturesNameMatched = $this->getDoctrine()->getRepository(Gesture::class)->findByName($tag);
 
             $response = ['matched' => ['byName' => [], 'byTag' => []], 'status' => []];
-            $status = ['error' => 'this status should never be reached'];
+
             if(!empty($gesturesNameMatched))
             {
                 $response['matched']['byName'] = $gesturesNameMatched;
@@ -81,14 +79,14 @@ class ThesaurusController extends AbstractController
                     .count($response['matched']['byName']).' by name'];
             }else if(!empty($gesturesTagMatched)){
                 $response['matched']['byTag'] = $gesturesTagMatched;
-                $status = ['success' => count($response).' gestures found'];
+                $status = ['success' => count($response['matced']['byTag']).' gestures found'];
             }else{
                 $response = ['not_found' => 'No gesture found.'];
-                //No gesture found
+                return new JsonResponse($response,Response::HTTP_NOT_FOUND);
             }
             $response['status'] = $status;
-            return new JsonResponse($response);
+            return new JsonResponse($response,Response::HTTP_OK);
 //        }
-//        return new JsonResponse('Error: This request is not valid.',400);
+//        return new JsonResponse('Error: This request is not valid.',Response::HTTP_BAD_REQUEST);
     }
 }

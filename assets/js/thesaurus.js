@@ -47,28 +47,25 @@ function splitIntoTags(tags){
     return tags;
 }
 
-// function orderByPertinence(){
-//
-// }
+function orderByPertinence(data){
+    console.log('Data recieved');
+    console.log(data);
+}
 
 function askGestures(value){
     //REGEX -- ALLOW ONLY LETTERS
     if(/\w/.test(value) && !/[0-9]/.test(value))
     {
-
-
         //IMPROVE
         //PAS PRENDRE LE DELETE
         //NI L'ESPACE
         //
-
 
         var keywords = splitIntoTags(value);
         console.log(keywords.length +' MOT: '+keywords[0] + ' Route: '+Routing.generate('thesaurus_search_tag', {tag: keywords[0]}));
         if(keywords.length == 1)
         {
             console.log('Request accepted');
-            console.log(previousData);
             $.ajax({
                 url:Routing.generate('thesaurus_search_tag', {tag: keywords[0]}),
                 type: 'GET',
@@ -79,8 +76,8 @@ function askGestures(value){
                 }
             }).done(function(data){
                 console.log('** RESPONSE :');
-                console.log(data);
                 previousData = data;
+                orderByPertinence(data);
             });
         }
         //send a request to get gestures matching the word - value
