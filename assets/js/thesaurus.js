@@ -18,7 +18,8 @@ console.log(routes);
  */
 
 var previousValue = [];
-var previousData;
+var gestures;
+var currentStatus = 'waiting'; //ex: {'success':"x gestures found"}
 
 $(document).ready(function(){
     /**
@@ -29,16 +30,51 @@ $(document).ready(function(){
         var value = this.value;
         var valuePosition = value.indexOf(previousValue['value']);
 
+        //If new value, request database call
         if(valuePosition == -1 || previousValue['value'] == '' || valuePosition != previousValue['position']){
-            //If new value, request database call
             previousValue['value'] = value;
             previousValue['position'] = value.indexOf(previousValue['value']);
             askGestures(value);
+        }else{
+            //Search for correspondance depending on search type
+            //By default: trie sur l'ordre de pertinence, les mots commençant par la sélection
+            console.log('Not a new value');
+            console.log(gestures);
+            if(gestures){
+                console.log('Filtering...');
+                orderByPertinence(gestures,value);
+                // if(isValid(value) && getStatus() != 'waiting'){
+                //     setStatus({'not_found':'No gesture found for: '+value});
+                // }
+                return false;
+            }
         }
 
 
     });
 });
+
+//1: Select all gestures matched by name, sort them by name corresponding to the entire value in alphabetical order
+//2: Select all the gesture matched by Tag:
+/**
+ * Filter the data depending on their match nature (by name or by tag).
+ * @param data
+ * @param value
+ */
+function orderByPertinence(data,value){
+    console.log('*** FILTERING ***')
+    // console.log(data);
+    // console.log('ON   '+ value);
+    // console.log('GESTURE MATCHED ON NAME: ' + data.matched.byName.length);
+    // console.log('GESTURE MATCHED ON TAG: ' + data.matched.byTag.length);
+    var nameMatched = data.matched.byName;
+    //If matched on name
+    if(Array.isArray(nameMatched) && nameMatched.length > 0){
+        console.log(nameMatched);
+        console.log('FILTERING ON NAME');
+        // var matched = nameMatched
+    }
+}
 
 function splitIntoTags(tags){
     var nospace_regex = /\s\s+/g;
@@ -47,48 +83,73 @@ function splitIntoTags(tags){
     return tags;
 }
 
-function orderByPertinence(data){
-    console.log('Data recieved');
-    console.log(data);
-}
-
 function askGestures(value){
     //REGEX -- ALLOW ONLY LETTERS
-    if(/\w/.test(value) && !/[0-9]/.test(value))
+    if(isValid(value))
     {
-        //IMPROVE
-        //PAS PRENDRE LE DELETE
-        //NI L'ESPACE
-        //
-
         var keywords = splitIntoTags(value);
         console.log(keywords.length +' MOT: '+keywords[0] + ' Route: '+Routing.generate('thesaurus_search_tag', {tag: keywords[0]}));
+
+        //contains one word
         if(keywords.length == 1)
         {
-            console.log('Request accepted');
+            console.log('REQUEST ACCEPTED: QUERYING DATABASE FOR: '+value);
+            clear();
             setStatusMessage('waiting');
+
+            //your code to be executed after 1 second
             $.ajax({
-                url:Routing.generate('thesaurus_search_tag', {tag: keywords[0]}),
+                url: Routing.generate('thesaurus_search_tag', {tag: keywords[0]}),
                 type: 'GET',
                 statusCode: {
                     404: function(data){
                         //RESOURCE NOT FOUND
                         console.log(data.responseJSON);
                         setStatus(data.responseJSON);
+                    },
+                    500: function(){
+                        setStatusMessage('error','Une erreur est survenue, veuillez contacter l\'administrateur, si cela se reproduit.');
                     }
                 }
             }).done(function(data){
                 //MATCH HTTP_OK -- 200
-                console.log('** RESPONSE :');
-                previousData = data;
+                setGestures(data);
                 setStatus(data.status);
-                orderByPertinence(data);
             });
+
         }
         //send a request to get gestures matching the word - value
-    }else{
-        console.log("invalid format");
     }
+}
+
+function setGestures(data){
+    if(data){
+        gestures = data;
+    }
+}
+
+// function getStatus(){
+//     if(currentStatus){
+//         return currentStatus;
+//     }
+//     return null;
+// }
+
+function isValid(value){
+    var isValid= false;
+    if(/\w/.test(value) && !/[0-9]/.test(value))
+    {
+        isValid = true;
+    }else if(value != ''){
+        setStatusMessage('invalid','Format invalide');
+    }else{
+        clearStatus();
+    }
+    return isValid;
+}
+
+function clear(){
+    gestures = null;
 }
 
 //success, waiting, not_found
@@ -108,18 +169,23 @@ function setStatus(status){
 
 function setStatusMessage(state,message){
     clearStatus();
+    currentStatus = state;
+
     var $statusElement = $('.status');
     if(message){
         $statusElement.children('.status-message').html(message);
     }
     switch (state){
-        case 'success': $statusElement.children('i').addClass('fa fa-check');
+        case 'success': $statusElement.children('i').addClass('fa fa-check fa-2x');
             break;
-        case 'waiting': $statusElement.children('i').addClass('fa fa-spinner fa-spin');
+        case 'waiting': $statusElement.children('i').addClass('fa fa-spinner fa-spin fa-2x');
             break;
-        case 'not_found': $statusElement.children('i').addClass('fa fa-times');
+        case 'not_found': $statusElement.children('i').addClass('fa fa-times fa-2x');
             break;
-        default: $statusElement.children('i').addClass('fa fa-exclamation-triangle');
+        case 'error': $statusElement.children('i').addClass('fa fa-exclamation-triangle fa-2x');
+            break;
+        case 'invalid': $statusElement.children('i').addClass('fa fa-ban fa-2x');
+            break;
     }
 }
 
