@@ -76,23 +76,29 @@ function orderByPertinence(data,value){
 function matchNames(value,nameMatched){
     var matched = [];
     if(Array.isArray(nameMatched) && nameMatched.length > 0 && name.length > 0){
-        console.log(nameMatched);
-        console.log('FILTERING ON NAME');
 
         matched = getGesturesByName(value,nameMatched);
+
         if(matched.length > 0){
+
             matched.sort(sortByName);
-            console.log(matched);
             //x gestures matched by name
             setStatus({'success':matched.length+' geste(s) correspondant à <i>"'+value+'"</i>.'});
+
         }else{
             //No gesture matched
-            setStatus({'not_found':'Aucun geste correspondant à "<i>'+value+'</i>".'});
+            setStatus({'not_found':'Aucun geste ne correspond à "<i>'+value+'</i>".'});
+
         }
     }else{
         setStatus({'not_found':'Aucun nom correspondant à "<i>'+value+'</i>".'});
     }
+
     return matched;
+}
+
+function matchTag(value,nameMatched,tagMatched){
+
 }
 
 function getGesturesByName(name,data){
