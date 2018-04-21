@@ -32,12 +32,12 @@ class GestureRepository extends ServiceEntityRepository
 
     }
 
-    public function findByTagName($tag){
+    public function findByTagNameExcludeName($tag){
 
-        $dql = "SELECT g.id, g.name
+        $dql = "SELECT g
                   FROM App\Entity\Thesaurus\Gesture g 
                     JOIN g.tags as t
-                WHERE t.keyword like :tag
+                WHERE t.keyword like :tag AND g.name not like :tag
                 GROUP BY g.id";
 
         $query = $this->getEntityManager()->createQuery($dql);
@@ -48,9 +48,9 @@ class GestureRepository extends ServiceEntityRepository
         return $query->execute();
 
     }
-
+    
     public function findByName($name){
-        $dql = "SELECT g.id, g.name
+        $dql = "SELECT g
                   FROM App\Entity\Thesaurus\Gesture g
                 WHERE g.name like :nname";
 

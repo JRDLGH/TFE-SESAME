@@ -6,6 +6,7 @@ use App\Entity\Thesaurus\Gesture\Tag;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\HasLifecycleCallbacks
@@ -17,11 +18,13 @@ class Gesture
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"list"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"list"})
      */
     private $name;
 
@@ -37,11 +40,13 @@ class Gesture
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"list"})
      */
     private $cover;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"list"})
      */
     private $description;
 
@@ -52,6 +57,7 @@ class Gesture
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Thesaurus\Gesture\Tag", inversedBy="gestures", cascade={"persist"})
+     * @Groups({"list"})
      */
     private $tags;
 

@@ -41,7 +41,6 @@ $(document).ready(function(){
             console.log('Not a new value');
             console.log(gestures);
             if(gestures){
-                console.log('Filtering...');
                 orderByPertinence(gestures,value);
                 // if(isValid(value) && getStatus() != 'waiting'){
                 //     setStatus({'not_found':'No gesture found for: '+value});
@@ -68,12 +67,49 @@ function orderByPertinence(data,value){
     // console.log('GESTURE MATCHED ON NAME: ' + data.matched.byName.length);
     // console.log('GESTURE MATCHED ON TAG: ' + data.matched.byTag.length);
     var nameMatched = data.matched.byName;
+    nameMatched = matchNames(value,nameMatched);
     //If matched on name
-    if(Array.isArray(nameMatched) && nameMatched.length > 0){
+
+
+}
+
+function matchNames(value,nameMatched){
+    var matched = [];
+    if(Array.isArray(nameMatched) && nameMatched.length > 0 && name.length > 0){
         console.log(nameMatched);
         console.log('FILTERING ON NAME');
-        // var matched = nameMatched
+
+        matched = getGesturesByName(value,nameMatched);
+        if(matched.length > 0){
+            matched.sort(sortByName);
+            console.log(matched);
+            //x gestures matched by name
+            setStatus({'success':matched.length+' geste(s) correspondant à <i>"'+value+'"</i>.'});
+        }else{
+            //No gesture matched
+            setStatus({'not_found':'Aucun geste correspondant à "<i>'+value+'</i>".'});
+        }
+    }else{
+        setStatus({'not_found':'Aucun nom correspondant à "<i>'+value+'</i>".'});
     }
+    return matched;
+}
+
+function getGesturesByName(name,data){
+    //startsWith is case sensitive!
+    if(name){
+        name = name.toLowerCase();
+
+        return data.filter(function(gesture){
+            if(gesture['name'].toLowerCase().startsWith(name)){
+                return gesture;
+            }
+        });
+    }
+}
+
+function sortByName(a,b){
+    return a.name.localeCompare(b.name);
 }
 
 function splitIntoTags(tags){
@@ -156,7 +192,6 @@ function clear(){
 //Must recieve an array
 function setStatus(status){
     var state =  Object.keys(status)[0];
-    console.log(state);
     switch(state){
         case 'success':setStatusMessage(state,status[state]);
             break;

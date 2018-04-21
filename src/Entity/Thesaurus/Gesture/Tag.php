@@ -6,6 +6,7 @@ use App\Entity\Thesaurus\Gesture;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Thesaurus\Gesture\TagRepository")
@@ -21,6 +22,7 @@ class Tag
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
+     * @Groups({"list"})
      */
     private $keyword;
 

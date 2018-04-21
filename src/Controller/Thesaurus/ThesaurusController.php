@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Translation\TranslatorInterface;
 
 use Symfony\Component\Serializer\Serializer;
@@ -18,6 +19,12 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 use App\Entity\Thesaurus\Gesture\Tag;
 use App\Entity\Thesaurus\Gesture;
+
+//SERIALIZER
+use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
+// For annotations
+use Doctrine\Common\Annotations\AnnotationReader;
+use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
 /**
  * @Route("/thesaurus")
  * 
@@ -51,9 +58,27 @@ class ThesaurusController extends AbstractController
 
             $tag = $request->get('tag');
 
-            $gesturesTagMatched = $this->getDoctrine()->getRepository(Gesture::class)->findByTagName($tag);
+            $encoder = new JsonEncoder();
+            $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
 
+            $normalizer = new GetSetMethodNormalizer(   $classMetadataFactory);
+
+            //Avoid infinite loop caused by ManyToMany relationship between them
+            $normalizer->setCircularReferenceHandler(function ($object) {
+                return $object->getId();
+            });
+
+            $serializer = new Serializer(array($normalizer), array($encoder));
+
+            // GET ALL GESTURES THAT MATCH TAG BEGINING BY $tag AND GESTURE NAME IS NOT BEGINNING BY $tag
+            $gesturesTagMatched = $this->getDoctrine()->getRepository(Gesture::class)->findByTagNameExcludeName($tag);
+            $json = $serializer->serialize($gesturesTagMatched, 'json',array('groups' => array('list')));
+            $gesturesTagMatched = json_decode($json);
+
+            //GET ALL GESTURES WHERE NAME BEGIN BY $tag
             $gesturesNameMatched = $this->getDoctrine()->getRepository(Gesture::class)->findByName($tag);
+            $json = $serializer->serialize($gesturesNameMatched, 'json',array('groups' => array('list')));
+            $gesturesNameMatched = json_decode($json);
 
             $response = ['matched' => ['byName' => [], 'byTag' => []], 'status' => []];
 
@@ -65,7 +90,7 @@ class ThesaurusController extends AbstractController
                         $found = false;
                         foreach($gesturesNameMatched as $namedMatched)
                         {
-                            if($gesture['id'] === $namedMatched['id']){
+                            if($gesture->id === $namedMatched->id){
                                 $found = true;
                                 break;
                             }
