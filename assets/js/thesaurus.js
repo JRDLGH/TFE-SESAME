@@ -67,38 +67,90 @@ function orderByPertinence(data,value){
     // console.log('GESTURE MATCHED ON NAME: ' + data.matched.byName.length);
     // console.log('GESTURE MATCHED ON TAG: ' + data.matched.byTag.length);
     var nameMatched = data.matched.byName;
+    var tagMatched = data.matched.byTag;
     nameMatched = matchNames(value,nameMatched);
+    tagMatched = matchTags(value,nameMatched,tagMatched);
+
+    var matched = nameMatched.concat(tagMatched);
+
+    console.log(matched);
     //If matched on name
 
 
 }
 
-function matchNames(value,nameMatched){
+function matchNames(pattern,nameMatched){
     var matched = [];
     if(Array.isArray(nameMatched) && nameMatched.length > 0 && name.length > 0){
 
-        matched = getGesturesByName(value,nameMatched);
+        matched = getGesturesByName(pattern,nameMatched);
 
         if(matched.length > 0){
 
             matched.sort(sortByName);
             //x gestures matched by name
-            setStatus({'success':matched.length+' geste(s) correspondant à <i>"'+value+'"</i>.'});
+            setStatus({'success':matched.length+' geste(s) correspondant à <i>"'+pattern+'"</i>.'});
 
         }else{
             //No gesture matched
-            setStatus({'not_found':'Aucun geste ne correspond à "<i>'+value+'</i>".'});
+            setStatus({'not_found':'Aucun geste ne correspond à "<i>'+pattern+'</i>".'});
 
         }
     }else{
-        setStatus({'not_found':'Aucun nom correspondant à "<i>'+value+'</i>".'});
+        setStatus({'not_found':'Aucun nom correspondant à "<i>'+pattern+'</i>".'});
     }
 
     return matched;
 }
 
-function matchTag(value,nameMatched,tagMatched){
+function matchTags(pattern,nameMatched,tagMatched){
+    var matched = [];
+    console.log('** TAG MATCHER **');
+    // console.log(pattern);
+    // console.log(nameMatched);
+    // console.log(tagMatched);
 
+    var tags = splitIntoTags(pattern);
+    if(tags[tags.length-1] == ''){
+        tags.pop();
+    }
+    matched = nameMatched.filter(function(gesture){
+        //First, eliminate gesture that does not have enoug tags
+        if(tags.length < gesture.tags.length){
+            var keywords = mapTag(gesture.tags);
+            var keep = true;
+            for(var i =0; i < tags.length ; i++){
+                if(keywords.indexOf(tags[i]) == -1){
+                    keep = false;
+                    break;
+                }
+            }
+            // tags.forEach(function(tag){
+            //
+            // });
+            if(keep){
+                return gesture;
+            }
+            // return gesture;
+        }
+    });
+    return matched;
+
+
+}
+
+//Convert array of object in array of value
+function mapTag(tags){
+    var tagArray = [];
+    if(Array.isArray(tags)){
+        var keys = Object.keys(tags[0]);
+        tags.forEach(function(tag){
+            keys.forEach(function (key){
+                tagArray.push(tag[keys[0]]);
+            });
+        });
+    }
+    return tagArray;
 }
 
 function getGesturesByName(name,data){
