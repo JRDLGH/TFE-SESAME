@@ -71,12 +71,12 @@ class ThesaurusController extends AbstractController
             $serializer = new Serializer(array($normalizer), array($encoder));
 
             // GET ALL GESTURES THAT MATCH TAG BEGINING BY $tag AND GESTURE NAME IS NOT BEGINNING BY $tag
-            $gesturesTagMatched = $this->getDoctrine()->getRepository(Gesture::class)->findByTagNameExcludeName($tag);
+            $gesturesTagMatched = $this->getDoctrine()->getRepository(Gesture::class)->findByTagNameExcludeNameBeginBy($tag);
             $json = $serializer->serialize($gesturesTagMatched, 'json',array('groups' => array('list')));
             $gesturesTagMatched = json_decode($json);
 
             //GET ALL GESTURES WHERE NAME BEGIN BY $tag
-            $gesturesNameMatched = $this->getDoctrine()->getRepository(Gesture::class)->findByName($tag);
+            $gesturesNameMatched = $this->getDoctrine()->getRepository(Gesture::class)->findByNameBeginBy($tag);
             $json = $serializer->serialize($gesturesNameMatched, 'json',array('groups' => array('list')));
             $gesturesNameMatched = json_decode($json);
 
