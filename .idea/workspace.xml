@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2286757d-c8e4-4c57-8ffb-c9c80e15daf7" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/assets/js/thesaurus.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/thesaurus.js" afterDir="false" />
-    </list>
+    <list default="true" id="2286757d-c8e4-4c57-8ffb-c9c80e15daf7" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -392,16 +390,15 @@
       <workItem from="1524071111708" duration="8107000" />
       <workItem from="1524115551796" duration="2675000" />
       <workItem from="1524157388672" duration="17011000" />
-      <workItem from="1524199876349" duration="7290000" />
+      <workItem from="1524199876349" duration="7358000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85473000" />
+    <option name="totallyTimeSpent" value="85541000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20362474" />
       <window_info anchor="bottom" id="TODO" order="6" />
