@@ -18,6 +18,7 @@ console.log(routes);
  */
 
 var previousValue = [];
+var currentValue = '';
 var gestures;
 var currentStatus = 'waiting'; //ex: {'success':"x gestures found"}
 
@@ -36,15 +37,14 @@ $(document).ready(function(){
             previousValue['position'] = value.indexOf(previousValue['value']);
             askGestures(value);
         }else{
+            //update current value
+            currentValue = value;
             //Search for correspondance depending on search type
             //By default: trie sur l'ordre de pertinence, les mots commençant par la sélection
             console.log('Not a new value');
             console.log(gestures);
             if(gestures){
                 orderByPertinence(gestures,value);
-                // if(isValid(value) && getStatus() != 'waiting'){
-                //     setStatus({'not_found':'No gesture found for: '+value});
-                // }
                 return false;
             }
         }
@@ -93,8 +93,9 @@ function matchNames(pattern,nameMatched){
 }
 
 function formatHTML(gesture){
-    var cover = gesture.cover ? gesture.cover : "default.jpg";
-    var html = "<article class=\"gesture\">\n" +
+    var cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
+    cover = "/build/static/thesaurus/gestures/" + cover;
+    var html = "<article class=\"gesture js-gesture\" data-id=\"" + gesture.id + "\">\n" +
     "    <img src=\"" + cover +"\" alt=\"gesture-cover\" class=\"cover\">\n" +
     "    <div class=\"content\">\n" +
     "        <h3 class=\"title\">"+ gesture.name +"</h3>\n" +
@@ -108,11 +109,19 @@ function formatHTML(gesture){
 
 function display(data){
     var content = '';
-    data.forEach(function (gesture){
-        content += formatHTML(gesture);
-    });
-    console.log(data);
-    getContainer().html(content);
+    if(isArray(data)){
+        data.forEach(function (gesture){
+            content += formatHTML(gesture);
+        });
+        console.log(data);
+        getContainer().html(content);
+        clearStatus();
+    }else{
+        console.log(data);
+        //Not found
+        setStatus({'not_found':'Aucun geste ne correspond à votre recherche'});
+        getContainer().html('');
+    }
 }
 
 /**
@@ -329,12 +338,10 @@ function askGestures(value){
     if(isValid(value))
     {
         var keywords = splitIntoTags(value);
-        console.log(keywords.length +' MOT: '+keywords[0] + ' Route: '+Routing.generate('thesaurus_search_tag', {tag: keywords[0]}));
 
         //contains one word
         if(keywords.length == 1)
         {
-            console.log('REQUEST ACCEPTED: QUERYING DATABASE FOR: '+value);
             clear();
             setStatusMessage('waiting');
 
@@ -345,21 +352,27 @@ function askGestures(value){
                 statusCode: {
                     404: function(data){
                         //RESOURCE NOT FOUND
-                        console.log(data.responseJSON);
                         setStatus(data.responseJSON);
                     },
                     500: function(){
+                        //ERROR BACKEND
                         setStatusMessage('error','Une erreur est survenue, veuillez contacter l\'administrateur, si cela se reproduit.');
                     }
                 }
             }).done(function(data){
                 //MATCH HTTP_OK -- 200
                 setGestures(data);
-                setStatus(data.status);
+                console.log(value);
+                console.log(currentValue);
+                orderByPertinence(data,currentValue);
             });
 
         }
         //send a request to get gestures matching the word - value
+    }else{
+        //Nothing entered
+        clearStatus();
+        clear();
     }
 }
 
@@ -368,13 +381,6 @@ function setGestures(data){
         gestures = data;
     }
 }
-
-// function getStatus(){
-//     if(currentStatus){
-//         return currentStatus;
-//     }
-//     return null;
-// }
 
 function isValid(value){
     var isValid= false;
