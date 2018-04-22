@@ -28,28 +28,26 @@ $(document).ready(function(){
      * ALSO, HIT ENTER OR THE SEARCH BUTTON WILL LEAD TO SAME OPERATIONS
      */
     $('#search').keyup(function(evt){
-        var value = this.value;
+        var value = this.value.toLowerCase();
         var valuePosition = value.indexOf(previousValue['value']);
 
-        //If new value, request database call
-        if(valuePosition == -1 || previousValue['value'] == '' || valuePosition != previousValue['position']){
-            previousValue['value'] = value;
-            previousValue['position'] = value.indexOf(previousValue['value']);
-            askGestures(value);
-        }else{
-            //update current value
-            currentValue = value;
-            //Search for correspondance depending on search type
-            //By default: trie sur l'ordre de pertinence, les mots commençant par la sélection
-            console.log('Not a new value');
-            console.log(gestures);
-            if(gestures){
-                orderByPertinence(gestures,value);
-                return false;
+        currentValue = value;
+        // if(isValid(value)){
+            //If new value, request database call
+            if(valuePosition == -1 || previousValue['value'] == '' || valuePosition != previousValue['position']){
+                previousValue['value'] = value;
+                previousValue['position'] = value.indexOf(previousValue['value']);
+                askGestures(value);
+            }else{
+                //update current value
+                //Search for correspondance depending on search type
+                //By default: trie sur l'ordre de pertinence, les mots commençant par la sélection
+                if(gestures){
+                    orderByPertinence(gestures,value);
+                }
             }
-        }
-
-
+        // }
+        return false;
     });
 });
 
@@ -94,11 +92,12 @@ function matchNames(pattern,nameMatched){
 
 function formatHTML(gesture){
     var cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
+    var title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
     cover = "/build/static/thesaurus/gestures/" + cover;
     var html = "<article class=\"gesture js-gesture\" data-id=\"" + gesture.id + "\">\n" +
     "    <img src=\"" + cover +"\" alt=\"gesture-cover\" class=\"cover\">\n" +
     "    <div class=\"content\">\n" +
-    "        <h3 class=\"title\">"+ gesture.name +"</h3>\n" +
+    "        <h3 class=\"title\">"+ title +"</h3>\n" +
     "        <p class=\"description\">\n" +
     "            " + gesture.description + "\n" +
     "        </p>\n" +
@@ -117,7 +116,6 @@ function display(data){
         getContainer().html(content);
         clearStatus();
     }else{
-        console.log(data);
         //Not found
         setStatus({'not_found':'Aucun geste ne correspond à votre recherche'});
         getContainer().html('');
@@ -148,6 +146,7 @@ function matchTags(pattern,tagMatched,nameMatched,sortedNameMatched,option){
 
     var tags = splitIntoTags(pattern);
     tags = tags.filter(getUniqueTags);
+    console.log(tags);
     var result = [];
     //DELETE USELESS PATTERNS like 'de', 'le', 'la'
     //TODO
@@ -157,15 +156,13 @@ function matchTags(pattern,tagMatched,nameMatched,sortedNameMatched,option){
         //Look into namedMatched & tagMatched
         case 'both':
             result = getGesturesByTags(tags,nameMatched);
-            console.log(result);
             if(isArray(result)){
                 //Delete duplicates and merge
                 result = arrayDiff(result,sortedNameMatched);
-                console.log(result);
+                console.log(sortedNameMatched);
 
                 result = result.concat(getGesturesByTags(tags,tagMatched));
             }else{
-                console.log(tagMatched);
                 result = getGesturesByTags(tags,tagMatched);
             }
         break;
@@ -213,7 +210,9 @@ function arrayDiff(array_a,array_b){
  */
 
 function getUniqueTags(value, index, self) {
-    return self.indexOf(value) === index;
+    if(self.indexOf(value) === index){
+        return value.toLowerCase();
+    };
 }
 
 
@@ -265,13 +264,14 @@ function getGesturesByTags(tags,data){
             if(tags.length <= gesture.tags.length){
                 var keywords = mapTag(gesture.tags);
                 var keep = true;
+                console.log(keywords);
                 for(var i =0; i < tags.length ; i++){
                     //if last tag
-                    if(i == tags.length-1 && i >= 1){
+                    if(i == tags.length-1 && i >= 0){
                         //look if it begin or match the tag!
-                        console.log(keywords);
                         for(var j = 0; j < keywords.length; j++){
-                            if(!keywords[i].startsWith(tags[i].toLowerCase())){
+                            console.log(tags);
+                            if(!keywords[j].startsWith(tags[i])){
                                 keep = false;
                             }else{
                                 keep = true;
@@ -302,7 +302,7 @@ function mapTag(tags){
         var keys = Object.keys(tags[0]);
         tags.forEach(function(tag){
             keys.forEach(function (key){
-                tagArray.push(tag[keys[0]]);
+                tagArray.push(tag[keys[0]].toLowerCase());
             });
         });
     }
@@ -343,9 +343,9 @@ function askGestures(value){
         if(keywords.length == 1)
         {
             clear();
+            getContainer().html('');
             setStatusMessage('waiting');
 
-            //your code to be executed after 1 second
             $.ajax({
                 url: Routing.generate('thesaurus_search_tag', {tag: keywords[0]}),
                 type: 'GET',
@@ -371,6 +371,7 @@ function askGestures(value){
         //send a request to get gestures matching the word - value
     }else{
         //Nothing entered
+        getContainer().html('');
         clearStatus();
         clear();
     }
@@ -404,6 +405,8 @@ function clear(){
 function setStatus(status){
     var state =  Object.keys(status)[0];
     switch(state){
+        case 'init':setStatusMessage(state,status[state]);
+        break;
         case 'success':setStatusMessage(state,status[state]);
             break;
         case 'waiting':setStatusMessage(state,status[state]);
