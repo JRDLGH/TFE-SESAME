@@ -53,92 +53,239 @@ $(document).ready(function(){
     });
 });
 
-//1: Select all gestures matched by name, sort them by name corresponding to the entire value in alphabetical order
-//2: Select all the gesture matched by Tag:
+
 /**
  * Filter the data depending on their match nature (by name or by tag).
  * @param data
  * @param value
  */
 function orderByPertinence(data,value){
-    console.log('*** FILTERING ***')
-    // console.log(data);
-    // console.log('ON   '+ value);
-    // console.log('GESTURE MATCHED ON NAME: ' + data.matched.byName.length);
-    // console.log('GESTURE MATCHED ON TAG: ' + data.matched.byTag.length);
+    var matched,filteredNameMatched = [];
     var nameMatched = data.matched.byName;
     var tagMatched = data.matched.byTag;
-    nameMatched = matchNames(value,nameMatched);
-    tagMatched = matchTags(value,nameMatched,tagMatched);
 
-    var matched = nameMatched.concat(tagMatched);
+    filteredNameMatched = matchNames(value,nameMatched);
 
-    console.log(matched);
-    //If matched on name
+    tagMatched = matchTags(value,tagMatched,nameMatched,filteredNameMatched);
 
-
+    matched = filteredNameMatched.concat(tagMatched);
+    display(matched);
 }
 
+/**
+ * This function returns gesture's name that matches the pattern entered.
+ * @param pattern
+ * @param nameMatched
+ * @return {Array}
+ */
 function matchNames(pattern,nameMatched){
     var matched = [];
-    if(Array.isArray(nameMatched) && nameMatched.length > 0 && name.length > 0){
+    if(isArray(nameMatched) && pattern.length > 0){
 
         matched = getGesturesByName(pattern,nameMatched);
 
         if(matched.length > 0){
-
             matched.sort(sortByName);
-            //x gestures matched by name
-            setStatus({'success':matched.length+' geste(s) correspondant à <i>"'+pattern+'"</i>.'});
-
-        }else{
-            //No gesture matched
-            setStatus({'not_found':'Aucun geste ne correspond à "<i>'+pattern+'</i>".'});
-
         }
-    }else{
-        setStatus({'not_found':'Aucun nom correspondant à "<i>'+pattern+'</i>".'});
     }
 
     return matched;
 }
 
-function matchTags(pattern,nameMatched,tagMatched){
-    var matched = [];
-    console.log('** TAG MATCHER **');
-    // console.log(pattern);
-    // console.log(nameMatched);
-    // console.log(tagMatched);
+function formatHTML(gesture){
+    var cover = gesture.cover ? gesture.cover : "default.jpg";
+    var html = "<article class=\"gesture\">\n" +
+    "    <img src=\"" + cover +"\" alt=\"gesture-cover\" class=\"cover\">\n" +
+    "    <div class=\"content\">\n" +
+    "        <h3 class=\"title\">"+ gesture.name +"</h3>\n" +
+    "        <p class=\"description\">\n" +
+    "            " + gesture.description + "\n" +
+    "        </p>\n" +
+    "    </div>\n" +
+    "</article>";
+    return html;
+}
+
+function display(data){
+    var content = '';
+    data.forEach(function (gesture){
+        content += formatHTML(gesture);
+    });
+    console.log(data);
+    getContainer().html(content);
+}
+
+/**
+ *
+ * @return {*|jQuery|HTMLElement}
+ */
+function getContainer(){
+    return $('#gesture');
+}
+
+/**
+ * This function returns gesture matched by tags with several differents options.
+ * By default, this function look into both arrays and compare them.
+ * @param pattern
+ * @param tagMatched
+ * @param nameMatched
+ * @param option
+ * @return array containing all gestures matching the pattern.
+ */
+function matchTags(pattern,tagMatched,nameMatched,sortedNameMatched,option){
+    if(!option){
+        option = 'both';
+    }
 
     var tags = splitIntoTags(pattern);
-    if(tags[tags.length-1] == ''){
-        tags.pop();
+    tags = tags.filter(getUniqueTags);
+    var result = [];
+    //DELETE USELESS PATTERNS like 'de', 'le', 'la'
+    //TODO
+    tags = removeBlanksFromArray(tags);
+
+    switch (option){
+        //Look into namedMatched & tagMatched
+        case 'both':
+            result = getGesturesByTags(tags,nameMatched);
+            console.log(result);
+            if(isArray(result)){
+                //Delete duplicates and merge
+                result = arrayDiff(result,sortedNameMatched);
+                console.log(result);
+
+                result = result.concat(getGesturesByTags(tags,tagMatched));
+            }else{
+                console.log(tagMatched);
+                result = getGesturesByTags(tags,tagMatched);
+            }
+        break;
+        //Look into tagMatched
+        case 'tag': result = getGesturesByTags(tags,tagMatched);
+        break;
+        //Look into namedMatched
+        case 'name': result = getGesturesByTags(tags,nameMatched);;
+        break;
+        default: 'Error';
     }
-    matched = nameMatched.filter(function(gesture){
-        //First, eliminate gesture that does not have enoug tags
-        if(tags.length < gesture.tags.length){
-            var keywords = mapTag(gesture.tags);
-            var keep = true;
-            for(var i =0; i < tags.length ; i++){
-                if(keywords.indexOf(tags[i]) == -1){
-                    keep = false;
-                    break;
-                }
+    return result;
+}
+
+/**
+ * Returns cells that are unique inside array_a
+ * @param array_a
+ * @param array_b
+ * @return {*}
+ */
+function arrayDiff(array_a,array_b){
+    var array_diff = array_a.filter(function (cell_a) {
+        var keep = true;
+        array_b.forEach(function (cell_b) {
+            if(cell_a === cell_b){
+                keep = false;
             }
-            // tags.forEach(function(tag){
-            //
-            // });
-            if(keep){
-                return gesture;
-            }
-            // return gesture;
+        });
+        if(keep){
+            return cell_a;
         }
     });
-    return matched;
-
+    return array_diff;
 
 }
 
+/**
+ * Delete duplicates.
+ * This code has been taken from:
+ * https://stackoverflow.com/questions/1960473/get-all-unique-values-in-an-array-remove-duplicates
+ * @param value
+ * @param index
+ * @param self
+ * @return {boolean}
+ */
+
+function getUniqueTags(value, index, self) {
+    return self.indexOf(value) === index;
+}
+
+
+/**
+ * Checks if the parameter is an array and is not empty.
+ * @param array
+ * @return {boolean}
+ */
+function isArray(array){
+    var isArray = false;
+    if(Array.isArray(array) && array.length > 0){
+        isArray = true;
+    }
+    return isArray;
+}
+
+/**
+ * Remove blanks cells and empty cells in array given.
+ * @param tags
+ * @return {*}
+ */
+function removeBlanksFromArray(tags){
+    var blankPositions = [];
+    if(Array.isArray(tags) && tags.length > 0){
+        tags.forEach(function(tag,index){
+            if(tag == '' || tag == ' ' || tag == undefined || /\s\s+/g.test(tag)){
+                blankPositions.push(index);
+            }
+        });
+        if(blankPositions.length > 0){
+            blankPositions.forEach(function (pos) {
+                tags.splice(pos,1);
+            });
+        }
+    }
+    return tags;
+}
+
+/**
+ * Get all gestures that are tagged by each tag inside tags array.
+ * @param data, the gestures array
+ * @param tags, the tags array
+ */
+function getGesturesByTags(tags,data){
+    var matched = [];
+    if(isArray(tags) && isArray(data)){
+        matched = data.filter(function(gesture){
+            //First, eliminate gesture that does not have enough tags
+            if(tags.length <= gesture.tags.length){
+                var keywords = mapTag(gesture.tags);
+                var keep = true;
+                for(var i =0; i < tags.length ; i++){
+                    //if last tag
+                    if(i == tags.length-1 && i >= 1){
+                        //look if it begin or match the tag!
+                        console.log(keywords);
+                        for(var j = 0; j < keywords.length; j++){
+                            if(!keywords[i].startsWith(tags[i].toLowerCase())){
+                                keep = false;
+                            }else{
+                                keep = true;
+                                break;
+                            }
+                        }
+                        break;
+                    }else{
+                        if(keywords.indexOf(tags[i]) == -1){
+                            keep = false;
+                            break;
+                        }
+                    }
+                }
+                if(keep){
+                    return gesture;
+                }
+            }
+        });
+    }
+    return matched;
+
+}
 //Convert array of object in array of value
 function mapTag(tags){
     var tagArray = [];
