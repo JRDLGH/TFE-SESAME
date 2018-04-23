@@ -59,6 +59,10 @@ section{
                     }
                     .gesture-content{
                         @include make-row();
+                        margin: 0;
+                        background-color: $darker-body;
+                        @include box-shadow(0px 0px 5px $shadow-body);
+                        transition: color $short-duration ease-in-out,background-color $medium-duration, border $medium-duration;
                         .cover{
                             height: auto;
                             width: auto;
@@ -66,9 +70,7 @@ section{
                             max-height: 300px;
                             @include make-col-ready();
                             @include make-col(12);
-                            // @include media-breakpoint-up(md){
-                            //     @include make-col(6);
-                            // }
+                            padding: 0;
                         }
                         .content{
                             height: 100%;
@@ -76,12 +78,51 @@ section{
                             @include make-col-ready();
                             @include make-col(12);
                             .title{
-                                padding: 0.5% 0.5% 1.5% 1.5%;
+                                padding: .5rem;
+                                text-align: center;
+                                border-bottom: .1rem solid $blue;
+                            }
+                            .description{
+                                font-size: 1rem;
+                                text-align: justify;
                             }
                         }
-                    }
-                    &:hover{
-                        background-color: $light;
+                        .btn.btn-secondary{
+                            position: relative;
+                            width: 100%;
+                            margin: .5rem;
+                            span{
+                                padding: .2rem;
+                                position: relative;
+                                &::after{
+                                    transition: left $extra-short-duration ease-in;
+                                    content:'\00bb';
+                                    position: absolute;         
+                                    top: 50%;
+                                    left: 50%;
+                                    opacity: 0;
+                                    transform: translate(-50%,-50%);
+                                }
+                            }
+                            &:hover{
+                                span{
+                                    left: 0;
+                                    &::after{
+                                        left:110%;
+                                        opacity: 1;
+                                    }
+                                }
+                            }
+                        }
+                        &:hover{
+                            background-color: $blue;
+                            color: $white;
+                            .content{
+                                .title{
+                                    border-bottom: .1rem solid $white;
+                                }
+                            }
+                        }
                     }
                 }
             }

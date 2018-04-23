@@ -72,7 +72,9 @@ $footer-shadow: darken($body,45%);
 
 /* IMPORTANT COLORS */
 $main: $blue;
-$light-main: lighten($main, 10%);
+$light-main:  lighten($main, 10%);
+$darker-body: darken($body,1%);
+$shadow-body: darken($darker-body,10%);
 
 $theme-colors: (
   "primary": $main,
