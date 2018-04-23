@@ -130,7 +130,12 @@ li {
         border-radius: .5rem;
         color: lighten($color: $black, $amount: 50%);        
         padding: .5rem;
-        margin: 0rem .5rem;
+        margin: .5rem .5rem;
+
+        @include media-breakpoint-up(md){
+            margin: 0rem .5rem;
+
+        }
         &:hover{
             color: $black;
             

@@ -8,6 +8,7 @@ $break-medium: get('breakpoints.md'); //TO CHANGE
 $break-large: get('breakpoints.lg'); //TO CHANGE
 
 $body:#f8f9fa;
+$img-dir:'../img/';
 
 /* THEME COLOR */
 $blue:#61c5f3;
@@ -44,14 +45,22 @@ $link-size:1.1rem;
 
 /* BANNER */
 $banner-opacity:0.95;
-$banner-img:'../img/banner.jpg';
+$banner-img:'banner.jpg';
+$banner-img-sm: $img-dir + 'sm-' + $banner-img;
+$banner-img-md: $img-dir + 'md-' + $banner-img;
+$banner-img-lg: $img-dir + 'lg-' + $banner-img;
 
 $banner-title-color:white;
 $banner-title-weight:300;
 $banner-title-letter-spacing:.5rem;
 // New banner?
 
+/* THESAURUS */
+$search-button-color:darken($body,10%);
+
+
 /* ANIMATIONS */
+$extra-short-duration:0.3s;
 $short-duration:0.5s;
 $medium-duration:0.75s;
 $long-duration:1s;

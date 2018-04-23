@@ -1,101 +1,88 @@
-@import 'mixins/mixins.scss';
+/* THESAURUS STYLE PAGE */
+@import "shared/variables";
 
-$search-button-color:#000000;
+@import "node_modules/bootstrap/scss/bootstrap";
+
+@import "mixins/mixins.scss";
+@import "structure/forms.scss";
+
+
 section{
     &#thesaurus{
         width: 100%;
         form{
-            &.form-container div{
-                padding: 0%;
-            }
             margin-top:1%;
-            border-radius: 5px;
             .search-input{
-                // position: relative;
-                // @include flex();
-                // justify-content: center;
-                // align-items: center;
-                // border-radius: 4px;
-                // &::before{
-                //     content: '';
-                //     position: absolute;
-                //     background-image: url('../img/search-icon.svg');
-                //     background-size: contain;
-                //     background-repeat: no-repeat;
-                //     left:0;
-                //     width: 2.3rem;
-                //     height: 100%;
-                //     background-color: #b1c368;
-                //     &::content{
-                //         padding: .2rem;
-                //     }
-                //     // padding: .5rem;
-                // }
-                @include flex();
-                flex-direction: row;
-                justify-content: flex-start;
+                margin: 0;
                 width: 100%;
                 height: 50%;
-                background-color: #b5e083;
-                border-radius: 5px 0px 0px 5px;
-                .search-logo{
-                    @include flex();
-                    justify-content: center;
-                    align-items: center;
-                    display: block;
-                    background-image: url('../img/search-icon.svg');
-                    background-size: contain;
-                    background-repeat: no-repeat;
-                    width: 1.5rem;
-                    margin: .4rem;
-                    margin-right: 0;
-                    height: auto;
-                    position: relative;
-                }
                 input{
-                    width: calc(100% - 1.5rem);
+                    // width: calc(100% - 1.5rem);
                     height: 100%;
+                }
+                .input-logo{
+                    background-color: $blue;
+                    padding: 0 .5rem;
+                    color:white;
+                    border-top-left-radius:3px;
+                    border-bottom-left-radius:3px;
+                    display: flex;
+                    align-items: center;
                 }
             }
         }
         .gestures-container{
-            margin: 2% 0%;
+            margin: 2rem 0;
             width: 100%;
             height: 100%;
-            border:1px solid #eff8e8;
-            border-radius: 1%;
-            overflow: hidden;
+            @include make-container();
             .status{
-                @include flex();
-                flex-direction: column;
-                align-items: center;
                 padding: 1rem;
-                color: #000;
-                color: rgba($color: #000, $alpha: 0.5);
+                color: $black;
+                color: rgba($color: $black, $alpha: 0.5);
             }
-            .gesture{
-                z-index: 0;
-                transition: all 0.3s;
-                padding: .5rem;
-                width: 100%;
-                @include flex();
-                align-items: center;
-                justify-content: flex-start;
-                .cover{
-                    width:35%;
-                    height: auto;
-                }
-                align-items: flex-start;
-                .content{
-                    height: 100%;
+            #gesture{
+                @include make-row();
+                .gesture{
+                    z-index: 0;
+                    transition: all $extra-short-duration;
+                    // padding: .5rem;
                     width: 100%;
-                    .title{
-                        padding: 0.5% 0.5% 1.5% 1.5%;
+                    padding: .5rem;
+                    @include make-col-ready();
+                    @include make-col(12);
+                    @include media-breakpoint-up(md){
+                        @include make-col(6);
                     }
-                }
-                &:hover{
-                    background-color: #cbe079;                    
-                    background-color: #cbe079ab;
+                    @include media-breakpoint-up(lg){
+                        @include make-col(4);
+                    }
+                    .gesture-content{
+                        @include make-row();
+                        .cover{
+                            height: auto;
+                            width: auto;
+                            max-width: 300px;
+                            max-height: 300px;
+                            @include make-col-ready();
+                            @include make-col(12);
+                            // @include media-breakpoint-up(md){
+                            //     @include make-col(6);
+                            // }
+                        }
+                        .content{
+                            height: 100%;
+                            width: 100%;
+                            @include make-col-ready();
+                            @include make-col(12);
+                            .title{
+                                padding: 0.5% 0.5% 1.5% 1.5%;
+                            }
+                        }
+                    }
+                    &:hover{
+                        background-color: $light;
+                    }
                 }
             }
         }

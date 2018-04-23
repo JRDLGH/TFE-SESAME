@@ -3,8 +3,19 @@
     @include flex();
     justify-content: center;
     align-items: center;
+    background-image: url($banner-img-sm);
 
-    background-image: url($banner-img);
+    @include media-breakpoint-down(md){
+        //little 
+    }
+    @include media-breakpoint-between(md,lg){
+        background-image: url($banner-img-md);
+    }
+    @include media-breakpoint-up(lg){
+        //high resolution image
+        background-image: url($banner-img-lg);        
+    }
+    
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
