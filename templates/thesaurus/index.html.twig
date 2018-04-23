@@ -14,12 +14,12 @@
                 <p class="content-text">
                     Si vous recherchez un geste, alors vous êtes tombez au bon endroit!
                 </p>
-                <form action="#" class="full form-container">
-                    <div class="full-input">
+                <form action="#" class="form-container">
+                    <div class="form-group">
                         <label for="search_gesture">Rechercher un geste ici</label>
-                        <div class="search-input">
-                            <span class="search-logo"></span>
-                            <input type="text" name="search_gesture" id="search" placeholder="Rechercher un geste ici...">
+                        <div class="search-input row input-group">
+                            <span class="input-logo" id="sizing-addon1 col-1"><i class="fa fa-search fa"></i></span>
+                            <input type="text" name="search_gesture" id="search" class="form-control col-11" placeholder="Rechercher un geste ici...">
                         </div>
                     </div>
                 </form>
@@ -30,9 +30,9 @@
                         <span class="status-message"></span>
                     </div>
                     <div id="gesture">
-                        {#{% for gesture in gestures %}#}
-                        {#{{ thes.gesture(gesture.name, gesture.cover ,gesture.description) }}#}
-                        {#{% endfor %}#}
+                        {% for gesture in gestures %}
+                        {{ thes.gesture(gesture.name, gesture.cover ,gesture.description) }}
+                        {% endfor %}
                     </div>
                 </div>
             </div>
