@@ -4,6 +4,7 @@ import "../scss/thesaurus.scss";
 const routes = require( './Components/Routing/fos_js_routes.json');
 import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
 
+var paginator = {breakAt: 2,enabled: true}; //paginator conf
 
 //php bin/console fos:js-routing:dump --format=json --target=assets/js/Components/Routing/fos_js_routes.json
 
@@ -181,6 +182,7 @@ function display(data,type){
 
             break;
             default: //list
+                data = paginate(data);
                 data.forEach(function (gesture){
                     content += listHTML(gesture);
                 });
@@ -542,4 +544,57 @@ function clearStatus(){
     $statusElement.children('.status-message').html('');
     //clear icon
     $statusElement.children('i').attr('class','');
+}
+
+
+/*
+PAGINATOR -- AUTHOR: JORDAN LGH
+ */
+
+var previous = 0;
+var next = 0;
+
+
+// IF THERE'S MORE THAN 10 RESULT, BREAK INTO SMALLER ARRAYS
+// DISPLAY 2 BUTTONS. PREVS AND NEXT
+
+/**
+ * Do pagination.
+ * @param data
+ */
+function paginate(data){
+    var result = data;
+
+    if(paginator.enabled){
+        //If we already are in pagination, then ... do something
+        var bArr = breakArray(data,2);
+        if(isArray(bArr)){
+            result = bArr;
+            //If enough data, then there's another page next
+            next += 1;
+            console.log(next);
+        }else{
+            //if not enough data, disable next
+            console.log("No enough data to break");
+        }
+    }
+    return result;
+}
+
+/**
+ * Break array depending on the limit.
+ * @param array
+ * @return {*}
+ */
+function breakArray(array,limit){
+    var brokeArray = [];
+
+    //Need to be broke
+    if(array.length > limit){
+        brokeArray = array.filter(function (gesture,index) {
+            console.log(index + 'vs' + limit);
+            return index < limit;
+        });
+    }
+    return brokeArray;
 }
