@@ -24,29 +24,31 @@ class Gesture
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"list"})
+     * @Groups({"list","show"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"show"})
      */
     private $profileVideo;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"show"})
      */
     private $video;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"list"})
+     * @Groups({"list","show"})
      */
     private $cover;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"list"})
+     * @Groups({"list","show"})
      */
     private $description;
 

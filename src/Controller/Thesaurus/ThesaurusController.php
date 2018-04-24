@@ -48,20 +48,59 @@ class ThesaurusController extends AbstractController
     }
 
     /**
-     * @Route("/search",name="thesaurus_search_tag",options={"expose"=true})
+     * @Route("/gestures/{id}",name="thesaurus_gesture_show",options={"expose"=true},requirements={
+        "id"="\d+"
+*     })
+     * @Method("GET")
      */
-    public function searchByTagName(TranslatorInterface $translator, Request $request)
+    public function gestureShow($id, Request $request){
+//        if($request->isXmlHttpRequest()){
+            if($id){
+
+                $encoder = new JsonEncoder();
+
+                //Extract group view from gesture class
+                $classMetaDataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
+
+                //GetSetMethodNormalizer is faster that ObjectNormalizer
+                $normalizer = new GetSetMethodNormalizer($classMetaDataFactory);
+
+                $serializer = new Serializer(array($normalizer),array($encoder));
+
+                //Request database
+                $gestureIdMatched = $this->getDoctrine()->getRepository(Gesture::class)->findPublishedById($id);
+
+//                echo '<pre>'.print_r($gestureIdMatched,1).'</pre>';
+                var_dump($gestureIdMatched);
+                //Serialize
+//                $json = $serializer->serialize($gestureIdMatched,'json',array('groups' => array('view')));
+
+
+                return new JsonResponse($gestureIdMatched);
+
+            }else{
+                return new JsonResponse('Error: This request does not respect the requirements',Response::HTTP_BAD_REQUEST);
+            }
+//        }
+        return new JsonResponse('Error: This request is not valid.',Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @Route("/search",name="thesaurus_search_tag",options={"expose"=true})
+     * @Method("GET")
+     */
+    public function search(TranslatorInterface $translator, Request $request)
     {
         //If request from AJAX
         //Temporary disabling this if in order to test with postman
-//        if($request->isXMLHttpRequest()){
+        if($request->isXMLHttpRequest()){
 
             $tag = $request->get('tag');
 
             $encoder = new JsonEncoder();
             $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
 
-            $normalizer = new GetSetMethodNormalizer(   $classMetadataFactory);
+            $normalizer = new GetSetMethodNormalizer($classMetadataFactory);
 
             //Avoid infinite loop caused by ManyToMany relationship between them
             $normalizer->setCircularReferenceHandler(function ($object) {
@@ -111,7 +150,7 @@ class ThesaurusController extends AbstractController
             }
             $response['status'] = $status;
             return new JsonResponse($response,Response::HTTP_OK);
-//        }
-//        return new JsonResponse('Error: This request is not valid.',Response::HTTP_BAD_REQUEST);
+        }
+        return new JsonResponse('Error: This request is not valid.',Response::HTTP_BAD_REQUEST);
     }
 }

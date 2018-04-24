@@ -49,8 +49,36 @@ $(document).ready(function(){
         // }
         return false;
     });
+
+    $(document).on('click','.gesture.js-gesture',function(evt){
+        //Show a cursor pointer on gesture!
+        showGesture($(this).data('id'));
+        return false;
+    });
 });
 
+/**
+ * Get the gesture with id passed.
+ * @param id
+ */
+function showGesture(id){
+    console.log(id);
+    $.ajax({
+        url: Routing.generate('thesaurus_gesture_show', {id: id}),
+        type: 'GET',
+        statusCode: {
+            404: function(data){
+                //RESOURCE NOT FOUND
+            },
+            500: function(){
+                //ERROR BACKEND
+            }
+        }
+    }).done(function(data){
+        //MATCH HTTP_OK -- 200
+        console.log(data);
+    });
+}
 
 /**
  * Filter the data depending on their match nature (by name or by tag).

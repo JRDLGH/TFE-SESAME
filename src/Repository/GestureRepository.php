@@ -32,6 +32,19 @@ class GestureRepository extends ServiceEntityRepository
 
     }
 
+    public function findPublishedById($id){
+        $dql= "SELECT g
+                  FROM App\Entity\Thesaurus\Gesture g
+               WHERE g.id = :id";
+
+        $query= $this->getEntityManager()->createQuery($dql);
+        $query->setParameters([
+            'id' => $id
+        ]);
+
+        return $query->execute();
+    }
+
     public function findByTagNameExcludeNameBeginBy($tag){
 
         $dql = "SELECT g
@@ -52,11 +65,11 @@ class GestureRepository extends ServiceEntityRepository
     public function findByNameBeginBy($name){
         $dql = "SELECT g
                   FROM App\Entity\Thesaurus\Gesture g
-                WHERE g.name like :nname";
+                WHERE g.name like :name";
 
         $query = $this->getEntityManager()->createQuery($dql);
         $query->setParameters([
-            'nname' => $name.'%',
+            'name' => $name.'%',
         ]);
 
          return $query->execute();
