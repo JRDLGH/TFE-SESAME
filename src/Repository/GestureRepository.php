@@ -35,7 +35,7 @@ class GestureRepository extends ServiceEntityRepository
     public function findPublishedById($id){
         $dql= "SELECT g
                   FROM App\Entity\Thesaurus\Gesture g
-               WHERE g.id = :id";
+               WHERE g.id = :id AND g.isPublished = 1";
 
         $query= $this->getEntityManager()->createQuery($dql);
         $query->setParameters([
@@ -50,7 +50,7 @@ class GestureRepository extends ServiceEntityRepository
         $dql = "SELECT g
                   FROM App\Entity\Thesaurus\Gesture g 
                     JOIN g.tags as t
-                WHERE t.keyword like :tag AND g.name not like :tag
+                WHERE t.keyword like :tag AND g.name not like :tag AND g.isPublished = 1
                 GROUP BY g.id";
 
         $query = $this->getEntityManager()->createQuery($dql);
@@ -65,7 +65,7 @@ class GestureRepository extends ServiceEntityRepository
     public function findByNameBeginBy($name){
         $dql = "SELECT g
                   FROM App\Entity\Thesaurus\Gesture g
-                WHERE g.name like :name";
+                WHERE g.name like :name AND g.isPublished = 1";
 
         $query = $this->getEntityManager()->createQuery($dql);
         $query->setParameters([
