@@ -55,6 +55,13 @@ $(document).ready(function(){
         showGesture($(this).data('id'));
         return false;
     });
+
+    $(document).on('click','.js-previous-search',function(evt){
+        //back to previous search
+        containerDisplay('list');
+        getDetailsContainer().scroll();
+        return false;
+    });
 });
 
 /**
@@ -62,7 +69,6 @@ $(document).ready(function(){
  * @param id
  */
 function showGesture(id){
-    console.log(id);
     $.ajax({
         url: Routing.generate('thesaurus_gesture_show', {id: id}),
         type: 'GET',
@@ -76,7 +82,10 @@ function showGesture(id){
         }
     }).done(function(data){
         //MATCH HTTP_OK -- 200
-        console.log(data);
+        display(JSON.parse(data),'details');
+        console.log(JSON.parse(data));
+
+
     });
 }
 
@@ -120,28 +129,64 @@ function matchNames(pattern,nameMatched){
 
 function formatHTML(gesture){
     var cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
-    var title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
     cover = "/build/static/thesaurus/gestures/" + cover;
+    var video = gesture.name;
+    var video_path = "/build/static/thesaurus/gestures/videos/" + video + ".mp4";
+    var title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
+    var video = '';
+    var profileVideo= '';
+
+    var html = "<article class=\"gesture-details js-gesture\" data-id=\"" + gesture.id + "\">\n" +
+        "    <img src=\"" + cover +"\" alt=\"gesture-cover\" class=\"cover\">\n" +
+        "    <div class=\"content\">\n" +
+        "        <h3 class=\"title\">"+ title +"</h3>\n" +
+        "        <p class=\"description\">\n" +
+        "            " + gesture.description + "\n" +
+        "        </p>\n" +
+        "    </div>\n" +
+        "<div class='gesture-video'>" +
+        "<video width=\"400\" height=\"222\" controls controlsList=\"nodownload\">" +
+        "<source src=\""+video_path+"\" type=\"video/mp4\" />\n" +
+        "Please update your browser." +
+        "</video>" +
+        "</div>" +
+        backToSearchButton() +
+        "</article>";
+   return html;
+}
+
+function listHTML(gesture) {
+    var cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
+    cover = "/build/static/thesaurus/gestures/" + cover;
+    var title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
     var html = "<article class=\"gesture js-gesture\" data-id=\"" + gesture.id + "\">\n" +
-    "    <img src=\"" + cover +"\" alt=\"gesture-cover\" class=\"cover\">\n" +
-    "    <div class=\"content\">\n" +
-    "        <h3 class=\"title\">"+ title +"</h3>\n" +
-    "        <p class=\"description\">\n" +
-    "            " + gesture.description + "\n" +
-    "        </p>\n" +
-    "    </div>\n" +
-    "</article>";
+        "    <img src=\"" + cover +"\" alt=\"gesture-cover\" class=\"cover\">\n" +
+        "    <div class=\"content\">\n" +
+        "        <h3 class=\"title\">"+ title +"</h3>\n" +
+        "        <p class=\"description\">\n" +
+        "            " + gesture.description + "\n" +
+        "        </p>\n" +
+        "    </div>\n" +
+        "</article>";
     return html;
 }
 
-function display(data){
+function display(data,type){
     var content = '';
     if(isArray(data)){
-        data.forEach(function (gesture){
-            content += formatHTML(gesture);
-        });
-        console.log(data);
-        getContainer().html(content);
+        switch (type){
+            case 'details': content = formatHTML(data[0]);
+                containerDisplay('details');
+                getDetailsContainer().html(content);
+
+            break;
+            default: //list
+                data.forEach(function (gesture){
+                    content += listHTML(gesture);
+                });
+                containerDisplay('list');
+                getContainer().html(content);
+        }
         clearStatus();
     }else{
         //Not found
@@ -150,12 +195,36 @@ function display(data){
     }
 }
 
+function containerDisplay(container){
+    switch (container){
+        case 'details':
+            getContainer().toggleClass('opened');
+            getDetailsContainer().toggleClass('opened');
+        break;
+        case 'list':
+            getDetailsContainer().toggleClass('opened');
+            getContainer().toggleClass('opened');
+        break;
+    }
+}
+function backToSearchButton() {
+    return '<button class="btn btn-primary js-previous-search">Retourner à la recherche</button>';
+}
+
 /**
- *
+ * HTML element that holds list of gestures.
  * @return {*|jQuery|HTMLElement}
  */
 function getContainer(){
     return $('#gesture');
+}
+
+/**
+ * HTML element that holds one gesture and his details.
+ * @return {*|jQuery|HTMLElement}
+ */
+function getDetailsContainer(){
+    return $('.gesture-details');
 }
 
 /**
