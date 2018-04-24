@@ -54,34 +54,36 @@ class ThesaurusController extends AbstractController
      * @Method("GET")
      */
     public function gestureShow($id, Request $request){
-//        if($request->isXmlHttpRequest()){
+        if($request->isXmlHttpRequest()){
             if($id){
 
                 $encoder = new JsonEncoder();
-
                 //Extract group view from gesture class
-                $classMetaDataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
+                $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
 
                 //GetSetMethodNormalizer is faster that ObjectNormalizer
-                $normalizer = new GetSetMethodNormalizer($classMetaDataFactory);
+                $normalizer = new ObjectNormalizer($classMetadataFactory);
+
+                $normalizer->setCircularReferenceHandler(function ($object) {
+                    return $object->getId();
+                });
 
                 $serializer = new Serializer(array($normalizer),array($encoder));
 
                 //Request database
                 $gestureIdMatched = $this->getDoctrine()->getRepository(Gesture::class)->findPublishedById($id);
 
-//                echo '<pre>'.print_r($gestureIdMatched,1).'</pre>';
-                var_dump($gestureIdMatched);
                 //Serialize
-//                $json = $serializer->serialize($gestureIdMatched,'json',array('groups' => array('view')));
-
-
-                return new JsonResponse($gestureIdMatched);
-
+                $matched = $serializer->serialize($gestureIdMatched,'json',array('groups' => array('show')));
+                if(!empty($matched)){
+                    return new JsonResponse($matched,Response::HTTP_OK);
+                }else{
+                    return new JsonResponse(Response::HTTP_NOT_FOUND);
+                }
             }else{
                 return new JsonResponse('Error: This request does not respect the requirements',Response::HTTP_BAD_REQUEST);
             }
-//        }
+        }
         return new JsonResponse('Error: This request is not valid.',Response::HTTP_BAD_REQUEST);
     }
 
