@@ -3,6 +3,15 @@ import "../scss/thesaurus.scss";
 const routes = require( './Components/Routing/fos_js_routes.json');
 import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
 
+var paginator = {
+    breakAt:    2,
+    prevPg:     0,
+    nextPg:     0,
+    currentPg:  0,
+    nbPages:    0,
+    pageMap:    [],
+    enabled:    true
+}; //paginator conf
 
 //php bin/console fos:js-routing:dump --format=json --target=assets/js/Components/Routing/fos_js_routes.json
 
@@ -48,8 +57,61 @@ $(document).ready(function(){
         // }
         return false;
     });
+
+    $(document).on('click','.gesture.js-gesture',function(evt){
+        //Show a cursor pointer on gesture!
+        showGesture($(this).data('id'));
+        return false;
+    });
+
+    $(document).on('click','.js-previous-search',function(evt){
+        //back to previous search
+        containerDisplay('list');
+        getDetailsContainer().scroll();
+        return false;
+    });
+
+    /**
+     * PAGINATOR EVENT LISTENER
+     */
+
+    $('.js-previous-page').click(function(evt){
+        evt.preventDefault();
+        console.log('prev page');
+    });
+
+    $('.js-next-page').click(function(evt){
+        evt.preventDefault();
+        console.log('next page');
+        next();
+    });
+
 });
 
+/**
+ * Get the gesture with id passed.
+ * @param id
+ */
+function showGesture(id){
+    $.ajax({
+        url: Routing.generate('thesaurus_gesture_show', {id: id}),
+        type: 'GET',
+        statusCode: {
+            404: function(data){
+                //RESOURCE NOT FOUND
+            },
+            500: function(){
+                //ERROR BACKEND
+            }
+        }
+    }).done(function(data){
+        //MATCH HTTP_OK -- 200
+        display(JSON.parse(data),'details');
+        console.log(JSON.parse(data));
+
+
+    });
+}
 
 /**
  * Filter the data depending on their match nature (by name or by tag).
@@ -91,28 +153,65 @@ function matchNames(pattern,nameMatched){
 
 function formatHTML(gesture){
     var cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
-    var title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
     cover = "/build/static/thesaurus/gestures/" + cover;
+    var video = gesture.name;
+    var video_path = "/build/static/thesaurus/gestures/videos/" + video + ".mp4";
+    var title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
+    var video = '';
+    var profileVideo= '';
+
+    var html = "<article class=\"gesture-details js-gesture\" data-id=\"" + gesture.id + "\">\n" +
+        "    <img src=\"" + cover +"\" alt=\"gesture-cover\" class=\"cover\">\n" +
+        "    <div class=\"content\">\n" +
+        "        <h3 class=\"title\">"+ title +"</h3>\n" +
+        "        <p class=\"description\">\n" +
+        "            " + gesture.description + "\n" +
+        "        </p>\n" +
+        "    </div>\n" +
+        "<div class='gesture-video'>" +
+        "<video width=\"400\" height=\"222\" controls controlsList=\"nodownload\">" +
+        "<source src=\""+video_path+"\" type=\"video/mp4\" />\n" +
+        "Please update your browser." +
+        "</video>" +
+        "</div>" +
+        backToSearchButton() +
+        "</article>";
+   return html;
+}
+
+function listHTML(gesture) {
+    var cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
+    cover = "/build/static/thesaurus/gestures/" + cover;
+    var title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
     var html = "<article class=\"gesture js-gesture\" data-id=\"" + gesture.id + "\">\n" +
-    "    <img src=\"" + cover +"\" alt=\"gesture-cover\" class=\"cover\">\n" +
-    "    <div class=\"content\">\n" +
-    "        <h3 class=\"title\">"+ title +"</h3>\n" +
-    "        <p class=\"description\">\n" +
-    "            " + gesture.description + "\n" +
-    "        </p>\n" +
-    "    </div>\n" +
-    "</article>";
+        "    <img src=\"" + cover +"\" alt=\"gesture-cover\" class=\"cover\">\n" +
+        "    <div class=\"content\">\n" +
+        "        <h3 class=\"title\">"+ title +"</h3>\n" +
+        "        <p class=\"description\">\n" +
+        "            " + gesture.description + "\n" +
+        "        </p>\n" +
+        "    </div>\n" +
+        "</article>";
     return html;
 }
 
-function display(data){
+function display(data,type){
     var content = '';
     if(isArray(data)){
-        data.forEach(function (gesture){
-            content += formatHTML(gesture);
-        });
-        console.log(data);
-        getContainer().html(content);
+        switch (type){
+            case 'details': content = formatHTML(data[0]);
+                containerDisplay('details');
+                getDetailsContainer().html(content);
+
+            break;
+            default: //list
+                data = paginate(data);
+                data.forEach(function (gesture){
+                    content += listHTML(gesture);
+                });
+                containerDisplay('list');
+                getContainer().html(content);
+        }
         clearStatus();
     }else{
         //Not found
@@ -121,12 +220,36 @@ function display(data){
     }
 }
 
+function containerDisplay(container){
+    switch (container){
+        case 'details':
+            getContainer().toggleClass('opened');
+            getDetailsContainer().toggleClass('opened');
+        break;
+        case 'list':
+            getDetailsContainer().toggleClass('opened');
+            getContainer().toggleClass('opened');
+        break;
+    }
+}
+function backToSearchButton() {
+    return '<button class="btn btn-primary js-previous-search">Retourner à la recherche</button>';
+}
+
 /**
- *
+ * HTML element that holds list of gestures.
  * @return {*|jQuery|HTMLElement}
  */
 function getContainer(){
     return $('#gesture');
+}
+
+/**
+ * HTML element that holds one gesture and his details.
+ * @return {*|jQuery|HTMLElement}
+ */
+function getDetailsContainer(){
+    return $('.gesture-details');
 }
 
 /**
@@ -397,6 +520,7 @@ function isValid(value){
 
 function clear(){
     gestures = null;
+    hidePaginationButtons();
 }
 
 //success, waiting, not_found
@@ -419,6 +543,7 @@ function setStatusMessage(state,message){
     clearStatus();
     currentStatus = state;
 
+    hidePaginationButtons();
     var $statusElement = $('.status');
     if(message){
         $statusElement.children('.status-message').html(message);
@@ -426,7 +551,7 @@ function setStatusMessage(state,message){
     switch (state){
         case 'success': $statusElement.children('i').addClass('fa fa-check fa-2x');
             break;
-        case 'waiting': $statusElement.children('i').addClass('fa fa-spinner fa-spin fa-2x');
+        case 'waiting':  $statusElement.children('i').addClass('fa fa-spinner fa-spin fa-2x');
             break;
         case 'not_found': $statusElement.children('i').addClass('fa fa-times fa-2x');
             break;
@@ -445,3 +570,121 @@ function clearStatus(){
     //clear icon
     $statusElement.children('i').attr('class','');
 }
+
+
+/*
+PAGINATOR -- AUTHOR: JORDAN LGH
+ */
+
+
+
+// IF THERE'S MORE THAN 10 RESULT, BREAK INTO SMALLER ARRAYS
+// DISPLAY 2 BUTTONS. PREVS AND NEXT
+
+/**
+ * Do pagination.
+ * @param data
+ */
+function paginate(data){
+    var result = data;
+
+    if(paginator.enabled && data.length > paginator.breakAt){
+        breakIntoPage(data,paginator.breakAt);
+        if(isArray(paginator.pageMap)){
+            result = paginator.pageMap[0];
+            paginator.current = 0;
+            showPaginationButtons();
+        }
+    }else{
+        //hide buttons
+        hidePaginationButtons();
+    }
+    return result;
+}
+
+function hidePaginationButtons(){
+    if(!getPaginationContainer().attr('style','display:none;')){
+        getPaginationContainer().hide();
+    }
+}
+
+function showPaginationButtons(){
+    if(getPaginationContainer().attr('style','display:none;')){
+        getPaginationContainer().show();
+    }
+}
+
+function getPaginationContainer(){
+    return $('.js-pagination-controls');
+}
+
+function next(){
+    //go to next page IF there's a next page
+    if(paginator.currentPg < paginator.nbPages-1){
+        //you can go to next page
+        paginator.currentPg += 1;
+        console.log(paginator);
+        display(paginator.pageMap[paginator.currentPg]);
+        showPaginationButtons();
+        if(paginator.currentPg == paginator.nbPages -1){
+            $('.js-next-page').disabled = true;
+        }else{
+            if($('.js-next-page').is(":disabled")){
+                console.log('is disabled!');
+            }
+        }
+    }else{
+        //disable button!
+        console.log("no next page!");
+
+    }
+
+}
+
+function previous(){
+    //go to previous page IF there's a next page
+    console.log(paginator);
+}
+
+/**
+ * Break an array of data in mutliple array of data, each key represent a page.
+ * @param data
+ * @param limit
+ */
+function breakIntoPage(data,limit){
+    //Must be done only once per pagination
+    if(isArray(data) && limit >= 2){
+        paginator.nbPages = Math.round(data.length/limit);
+        paginator.pageMap = splitArray(data,limit);
+    }
+}
+
+/**
+*   Split an array in mutliple array of x cells.
+ *   @param array
+ *   @param limit, the number of element per array
+ */
+function splitArray(array,limit){
+    var splitArray = [];
+    while(array.length > 0){
+        splitArray.push(array.splice(0,limit));
+    }
+    return splitArray;
+}
+
+// *
+//  * Break array depending on the limit.
+//  * @param array
+//  * @return {*}
+// function breakArray(array,begin,limit){
+//     var brokeArray = [];
+//
+//     //Need to be broke
+//     if(array.length > limit){
+//         brokeArray = array.filter(function (gesture,index) {
+//             console.log(index + 'vs' + limit);
+//             return index < limit;
+//         });
+//     }
+//     return brokeArray;
+// }
