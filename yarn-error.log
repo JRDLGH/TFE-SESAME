@@ -2,7 +2,7 @@ Arguments:
   C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js watch
 
 PATH: 
-  C:\Users\LP26\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\LP26\bin;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;D:\wamp64\bin\php\php7.1.9;C:\ProgramData\ComposerSetup\bin;C:\Users\LP26\AppData\Roaming\Composer\vendor\drush\drush;D:\wamp64\bin\mysql\mysql5.7.19\bin;C:\Program Files (x86)\Yarn\bin;C:\Program Files\nodejs;C:\Users\LP26\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Microsoft VS Code\bin;C:\Users\LP26\AppData\Local\Yarn\bin;C:\Program Files (x86)\Yarn\bin;C:\Users\LP26\AppData\Roaming\npm;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+  C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;D:\wamp64\bin\php\php7.1.9;C:\ProgramData\ComposerSetup\bin;C:\Users\LP26\AppData\Roaming\Composer\vendor\drush\drush;D:\wamp64\bin\mysql\mysql5.7.19\bin;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\nodejs\;C:\Users\LP26\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Microsoft VS Code\bin;C:\Users\LP26\AppData\Local\Yarn\bin;C:\Program Files (x86)\Yarn\bin;C:\Users\LP26\AppData\Roaming\npm
 
 Yarn version: 
   1.5.1
@@ -5978,7 +5978,7 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 3221225786
+  Exit code: 1
   Command: C:\Windows\system32\cmd.exe
   Arguments: /d /s /c encore dev --watch
   Directory: D:\wamp64\www\projects\TFE-SESAME

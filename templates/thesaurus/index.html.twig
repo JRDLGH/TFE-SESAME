@@ -37,9 +37,12 @@
                         {{ thes.gesture(gesture.name, gesture.cover ,gesture.description) }}
                         {% endfor %}
                     </div>
-                    <div class='pagination-controls js-pagination-controls' style="display: none">
-                        <button class='btn btn-primary disabled js-previous-page'>Précédent</button>
-                        <button class='btn btn-primary js-next-page'>Suivant</button>
+                    <div class='pagination-controls js-pagination-controls'>
+                        <div class="controls">
+                            <button class='btn btn-primary disabled js-previous-page'>Précédent</button>
+                            <div class="separator"></div>
+                            <button class='btn btn-primary js-next-page'>Suivant</button>
+                        </div>
                     </div>
                 </div>
             </div>

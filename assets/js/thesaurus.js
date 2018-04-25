@@ -78,10 +78,15 @@ $(document).ready(function(){
     $('.js-previous-page').click(function(evt){
         evt.preventDefault();
         console.log('prev page');
+        previous();
+        //enable previous        
+        //possibility of disabling next
     });
 
     $('.js-next-page').click(function(evt){
         evt.preventDefault();
+        //enable previous
+        //possibility of disabling prev        
         console.log('next page');
         next();
     });
@@ -107,9 +112,6 @@ function showGesture(id){
     }).done(function(data){
         //MATCH HTTP_OK -- 200
         display(JSON.parse(data),'details');
-        console.log(JSON.parse(data));
-
-
     });
 }
 
@@ -183,15 +185,21 @@ function listHTML(gesture) {
     var cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
     cover = "/build/static/thesaurus/gestures/" + cover;
     var title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
-    var html = "<article class=\"gesture js-gesture\" data-id=\"" + gesture.id + "\">\n" +
-        "    <img src=\"" + cover +"\" alt=\"gesture-cover\" class=\"cover\">\n" +
-        "    <div class=\"content\">\n" +
-        "        <h3 class=\"title\">"+ title +"</h3>\n" +
-        "        <p class=\"description\">\n" +
-        "            " + gesture.description + "\n" +
-        "        </p>\n" +
-        "    </div>\n" +
-        "</article>";
+    var html = 
+    "<article class=\"gesture js-gesture\" data-id="+ gesture.id +">" +
+        "<div class=\"gesture-content\">" +
+            "<img src=\""+ cover +"\" " + "alt=\"gesture-cover\" class=\"cover\">" +
+            "<div class=\"content\">" +
+                "<h3 class=\"title\">"+ title +"</h3>" +
+                "<p class=\"description\">" +
+                    gesture.description +
+                "</p>" +
+            "</div>" +
+            "<button class=\"btn btn-secondary\">" +
+                "<span>En savoir plus</span>" +
+            "</button>" +
+        "</div>" +
+    "</article>";
     return html;
 }
 
@@ -627,23 +635,55 @@ function next(){
         display(paginator.pageMap[paginator.currentPg]);
         showPaginationButtons();
         if(paginator.currentPg == paginator.nbPages -1){
-            $('.js-next-page').disabled = true;
+            $('.js-next-page').addClass("disabled");
+            enableButton('previous');
         }else{
-            if($('.js-next-page').is(":disabled")){
-                console.log('is disabled!');
-            }
+            enableButton('next');
+            enableButton('previous');
         }
     }else{
-        //disable button!
-        console.log("no next page!");
-
+        console.log('disableeed');
     }
+}
 
+function enableButton(button){
+    switch(button){
+        case 'next': 
+            if(isDisbaled($('.js-next-page'))){
+                console.log('next is disabled!');
+                $('.js-next-page').removeClass('disabled');
+            }
+        break;
+        case 'previous': 
+            if(isDisbaled($('.js-previous-page'))){
+                $('.js-previous-page').removeClass('disabled');
+            }
+        break;
+    }
+}
+
+function isDisbaled(elem){
+    return elem.hasClass('disabled');
 }
 
 function previous(){
-    //go to previous page IF there's a next page
     console.log(paginator);
+    if(paginator.currentPg >= 1 && paginator.nbPages >= paginator.currentPg){
+        //you can go to previous page
+        paginator.currentPg -= 1;
+        console.log(paginator);
+        display(paginator.pageMap[paginator.currentPg]);
+        showPaginationButtons();
+        if(paginator.currentPg == 0){
+            $('.js-previous-page').addClass("disabled");
+            enableButton('next');            
+        }else{
+            enableButton('next');
+            enableButton('previous');
+        }
+    }else{
+        console.log('disableeed');
+    }
 }
 
 /**
