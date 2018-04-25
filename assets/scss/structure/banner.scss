@@ -1,30 +1,30 @@
 //BANNER
 .banner{
+
     @include flex();
     justify-content: center;
     align-items: center;
     background-image: url($banner-img-sm);
-
-    @include media-breakpoint-down(md){
-        //little 
-    }
+    height: $banner-height-sm;
+    background-position: center;
+    
     @include media-breakpoint-between(md,lg){
         background-image: url($banner-img-md);
+        height: $banner-height-md;
     }
     @include media-breakpoint-up(lg){
         //high resolution image
-        background-image: url($banner-img-lg);        
+        background-image: url($banner-img-lg);
+        height: $banner-height-lg;
     }
     
     background-attachment: fixed;
-    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     opacity: $banner-opacity; 
 
     width: 100%;
-    min-height: 35vh;
-    max-height:50vh;
+    // max-height:50vh;
 
     margin-bottom:.5rem;
     h1{
