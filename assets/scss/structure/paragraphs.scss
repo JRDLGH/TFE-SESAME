@@ -1,5 +1,5 @@
 p{
-    font-size: 0.9rem;
+    font-size: $alert-text-size;
     &.info{
         padding: .5rem;
         background-color: $info;

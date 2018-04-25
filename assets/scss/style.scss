@@ -142,17 +142,15 @@ li {
         margin: .5rem 0;
         width: 100%;
         text-align: center;
-        // margin: .5rem .5rem;
+
         @include media-breakpoint-up(md){
             margin: 0rem .5rem;
             width: auto;
 
         }
-        // col-md-12 col-lg-6 order-12 justify-content-end
         
         &:hover{
             color: $black;
-            
         }
     }
 }

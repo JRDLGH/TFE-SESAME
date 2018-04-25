@@ -5978,7 +5978,7 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 1
+  Exit code: 3221225786
   Command: C:\Windows\system32\cmd.exe
   Arguments: /d /s /c encore dev --watch
   Directory: D:\wamp64\www\projects\TFE-SESAME

@@ -2,71 +2,94 @@
 FORM --
 **/
 
-// $input-border-color:rgb(129, 129, 129);
 
 form {
+
     padding: 0.5%;
     margin: 1rem 0;
-    @include responsive(wide-screens) {
-        flex-direction: row;
-    }
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    flex-grow: 1;
+
     .form-group {
+
         padding:1rem 0rem;
         width: 100%;
+
         label{
+
             display: block;
             // @include media-breakpoint-down(md){
             //     display: none; NOT SUPPORTED IE9
             // }
         }
+
         .form-control {
+
             border: 1px solid $input-border-color;
             border-radius: 3px;
             outline-color: none;
             transition: border 0.3s;
+
             &:focus {
+
                 outline-color: transparent;
                 box-shadow: none;
                 border:0;
                 border: 1px solid $light-main;
+
                 &::placeholder {
+
                     color: transparent;
+
                 }
+
             }
             &::placeholder {
+
                 color: transparent;
+
                 @include media-breakpoint-down(md){
                     color:$input-border-color;
                 }
+
             }
             
         }
     }
+
     .btn {
+
         line-height: 1.25;
+
         white-space: nowrap;
         text-align: center;
         vertical-align: middle;
+        font-size: 1rem;
+
         border-radius: .25rem;
         padding: .75rem 1rem;
-        font-size: 1rem;
+
         @include media-breakpoint-down(md){
             margin: 0 1rem 1rem 0;
             width: 100%;
         }
+        
         transition: background-color 0.3s;
         border:none;
+
         &.btn-submit {
+
             color: white;
+
         }
+
         &.btn-reset {
+
             background-color: $red;
             color: white;
+
             &:hover {
+
                 background-color: $red-hover;
+
             }
         }
     }
