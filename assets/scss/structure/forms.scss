@@ -2,7 +2,7 @@
 FORM --
 **/
 
-$border-color:rgb(129, 129, 129);
+// $input-border-color:rgb(129, 129, 129);
 
 form {
     padding: 0.5%;
@@ -23,8 +23,7 @@ form {
             // }
         }
         .form-control {
-            border: 1px solid $border-color;
-            border: 1px solid rgba($color: $border-color, $alpha: 0.4);
+            border: 1px solid $input-border-color;
             border-radius: 3px;
             outline-color: none;
             transition: border 0.3s;
@@ -40,7 +39,7 @@ form {
             &::placeholder {
                 color: transparent;
                 @include media-breakpoint-down(md){
-                    color:$border-color;
+                    color:$input-border-color;
                 }
             }
             
