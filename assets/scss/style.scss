@@ -122,17 +122,34 @@ li {
 .help-links{
     padding: .5rem;
     border-radius: .5rem;
+    @include make-row();
+    @include make-col-ready();
+    @include make-col(12);
+    justify-content: flex-start;
+    margin: 0;
+
+    @include media-breakpoint-up(lg){
+
+        @include make-col(6);
+
+    }
+    
     a{
         background-color: rgba($color: $gray-400, $alpha:0.2);
         border-radius: .5rem;
         color: lighten($color: $black, $amount: 50%);        
         padding: .5rem;
-        margin: .5rem .5rem;
-
+        margin: .5rem 0;
+        width: 100%;
+        text-align: center;
+        // margin: .5rem .5rem;
         @include media-breakpoint-up(md){
             margin: 0rem .5rem;
+            width: auto;
 
         }
+        // col-md-12 col-lg-6 order-12 justify-content-end
+        
         &:hover{
             color: $black;
             
