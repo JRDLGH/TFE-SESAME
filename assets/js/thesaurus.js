@@ -4,7 +4,7 @@ const routes = require( './Components/Routing/fos_js_routes.json');
 import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
 
 var paginator = {
-    breakAt:    2,
+    breakAt:    6,
     prevPg:     0,
     nextPg:     0,
     currentPg:  0,
@@ -31,6 +31,7 @@ var gestures;
 var currentStatus = 'waiting'; //ex: {'success':"x gestures found"}
 
 $(document).ready(function(){
+
     /**
      * KEY PRESS WILL NEED TO DETECT ENTER
      * ALSO, HIT ENTER OR THE SEARCH BUTTON WILL LEAD TO SAME OPERATIONS
@@ -61,13 +62,15 @@ $(document).ready(function(){
     $(document).on('click','.gesture.js-gesture',function(evt){
         //Show a cursor pointer on gesture!
         showGesture($(this).data('id'));
+        console.log("you clicked a gesture");
         return false;
     });
 
     $(document).on('click','.js-previous-search',function(evt){
         //back to previous search
         containerDisplay('list');
-        getDetailsContainer().scroll();
+        getDetailsContainer().removeClass('opened');
+        getContainer().removeClass('closed');
         return false;
     });
 
@@ -76,9 +79,9 @@ $(document).ready(function(){
      */
 
     $('.js-previous-page').click(function(evt){
-        evt.preventDefault();
         console.log('prev page');
         previous();
+        return false;
         //enable previous        
         //possibility of disabling next
     });
@@ -89,6 +92,7 @@ $(document).ready(function(){
         //possibility of disabling prev        
         console.log('next page');
         next();
+        return false;
     });
 
 });
@@ -162,7 +166,7 @@ function formatHTML(gesture){
     var video = '';
     var profileVideo= '';
 
-    var html = "<article class=\"gesture-details js-gesture\" data-id=\"" + gesture.id + "\">\n" +
+    var html = "<article class=\"gesture-details-content\">\n" +
         "    <img src=\"" + cover +"\" alt=\"gesture-cover\" class=\"cover\">\n" +
         "    <div class=\"content\">\n" +
         "        <h3 class=\"title\">"+ title +"</h3>\n" +
@@ -171,10 +175,14 @@ function formatHTML(gesture){
         "        </p>\n" +
         "    </div>\n" +
         "<div class='gesture-video'>" +
-        "<video width=\"400\" height=\"222\" controls controlsList=\"nodownload\">" +
-        "<source src=\""+video_path+"\" type=\"video/mp4\" />\n" +
-        "Please update your browser." +
-        "</video>" +
+        "   <video controls controlsList=\"nodownload\">" +
+        "       <source src=\""+video_path+"\" type=\"video/mp4\" />\n" +
+        "       Please update your browser." +
+        "   </video>" +
+        "   <video controls controlsList=\"nodownload\">" +
+        "       <source src=\""+video_path+"\" type=\"video/mp4\" />\n" +
+        "       Please update your browser." +
+        "   </video>" +
         "</div>" +
         backToSearchButton() +
         "</article>";
@@ -186,14 +194,11 @@ function listHTML(gesture) {
     cover = "/build/static/thesaurus/gestures/" + cover;
     var title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
     var html = 
-    "<article class=\"gesture js-gesture\" data-id="+ gesture.id +">" +
+    "<article class=\"gesture js-gesture\" data-id=\""+ gesture.id +"\">" +
         "<div class=\"gesture-content\">" +
             "<img src=\""+ cover +"\" " + "alt=\"gesture-cover\" class=\"cover\">" +
             "<div class=\"content\">" +
                 "<h3 class=\"title\">"+ title +"</h3>" +
-                "<p class=\"description\">" +
-                    gesture.description +
-                "</p>" +
             "</div>" +
             "<button class=\"btn btn-secondary\">" +
                 "<span>En savoir plus</span>" +
@@ -210,6 +215,7 @@ function display(data,type){
             case 'details': content = formatHTML(data[0]);
                 containerDisplay('details');
                 getDetailsContainer().html(content);
+                hidePaginationButtons();
 
             break;
             default: //list
@@ -231,12 +237,12 @@ function display(data,type){
 function containerDisplay(container){
     switch (container){
         case 'details':
-            getContainer().toggleClass('opened');
-            getDetailsContainer().toggleClass('opened');
+            getContainer().addClass('closed');
+            getDetailsContainer().addClass('opened');
         break;
         case 'list':
-            getDetailsContainer().toggleClass('opened');
-            getContainer().toggleClass('opened');
+            getDetailsContainer().removeClass('opened');
+            getContainer().removeClass('closed');
         break;
     }
 }
@@ -482,11 +488,13 @@ function askGestures(value){
                 statusCode: {
                     404: function(data){
                         //RESOURCE NOT FOUND
-                        setStatus(data.responseJSON);
+                        if(isArray(data)){
+                            setStatus(data.responseJSON);
+                        }
                     },
                     500: function(){
                         //ERROR BACKEND
-                        setStatusMessage('error','Une erreur est survenue, veuillez contacter l\'administrateur, si cela se reproduit.');
+                        setStatusMessage('error','Une erreur est survenue, veuillez contacter l\'administrateur.');
                     }
                 }
             }).done(function(data){
@@ -561,9 +569,9 @@ function setStatusMessage(state,message){
             break;
         case 'waiting':  $statusElement.children('i').addClass('fa fa-spinner fa-spin fa-2x');
             break;
-        case 'not_found': $statusElement.children('i').addClass('fa fa-times fa-2x');
+        case 'not_found': $statusElement.children('i').addClass('fa fa-times fa-2x red-text');
             break;
-        case 'error': $statusElement.children('i').addClass('fa fa-exclamation-triangle fa-2x');
+        case 'error': $statusElement.children('i').addClass('fa fa-exclamation-triangle fa-2x yellow-text');
             break;
         case 'invalid': $statusElement.children('i').addClass('fa fa-ban fa-2x');
             break;
@@ -627,6 +635,7 @@ function getPaginationContainer(){
 
 function next(){
     //go to next page IF there's a next page
+    console.log(paginator);
     if(paginator.currentPg < paginator.nbPages-1){
         //you can go to next page
         paginator.currentPg += 1;
@@ -689,7 +698,7 @@ function previous(){
 function breakIntoPage(data,limit){
     //Must be done only once per pagination
     if(isArray(data) && limit >= 2){
-        paginator.nbPages = Math.round(data.length/limit);
+        paginator.nbPages = Math.ceil(data.length/limit); //round up!
         paginator.pageMap = splitArray(data,limit);
     }
 }

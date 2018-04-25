@@ -1,4 +1,20 @@
 .pagination-controls{
     margin: .5rem;
     padding: 0rem;
+    button{
+        text-align: center;
+        width: 100%;
+        &.js-previous-page{
+            .prev-icon{
+                color: $white;
+                margin-right: .5rem;                
+            }
+        }
+        &.js-next-page{
+            .next-icon{
+                margin-left: .5rem;
+                color: $white;
+            }
+        }
+    }
 }

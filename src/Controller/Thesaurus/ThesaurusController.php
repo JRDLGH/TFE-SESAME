@@ -38,19 +38,16 @@ class ThesaurusController extends AbstractController
      */
     public function index()
     {
-        //load gestures
-        $gestures = $this->getDoctrine()->getRepository(Gesture::class)->findAll();
 
         return $this->render('thesaurus/index.html.twig', [
             'controller_name' => 'ThesaurusController',
-            'gestures' => $gestures
         ]);
     }
 
     /**
      * @Route("/gestures/{id}",name="thesaurus_gesture_show",options={"expose"=true},requirements={
         "id"="\d+"
-*     })
+    *     })
      * @Method("GET")
      */
     public function gestureShow($id, Request $request){
@@ -122,7 +119,6 @@ class ThesaurusController extends AbstractController
             $gesturesNameMatched = json_decode($json);
 
             $response = ['matched' => ['byName' => [], 'byTag' => []], 'status' => []];
-
             if(!empty($gesturesNameMatched))
             {
                 $response['matched']['byName'] = $gesturesNameMatched;
