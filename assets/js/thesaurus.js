@@ -4,7 +4,15 @@ import "../scss/thesaurus.scss";
 const routes = require( './Components/Routing/fos_js_routes.json');
 import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
 
-var paginator = {breakAt: 2,enabled: true}; //paginator conf
+var paginator = {
+    breakAt:    2,
+    prevPg:     0,
+    nextPg:     0,
+    currentPg:  0,
+    nbPages:    0,
+    pageMap:    [],
+    enabled:    true
+}; //paginator conf
 
 //php bin/console fos:js-routing:dump --format=json --target=assets/js/Components/Routing/fos_js_routes.json
 
@@ -63,6 +71,22 @@ $(document).ready(function(){
         getDetailsContainer().scroll();
         return false;
     });
+
+    /**
+     * PAGINATOR EVENT LISTENER
+     */
+
+    $('.js-previous-page').click(function(evt){
+        evt.preventDefault();
+        console.log('prev page');
+    });
+
+    $('.js-next-page').click(function(evt){
+        evt.preventDefault();
+        console.log('next page');
+        next();
+    });
+
 });
 
 /**
@@ -497,6 +521,7 @@ function isValid(value){
 
 function clear(){
     gestures = null;
+    hidePaginationButtons();
 }
 
 //success, waiting, not_found
@@ -519,6 +544,7 @@ function setStatusMessage(state,message){
     clearStatus();
     currentStatus = state;
 
+    hidePaginationButtons();
     var $statusElement = $('.status');
     if(message){
         $statusElement.children('.status-message').html(message);
@@ -526,7 +552,7 @@ function setStatusMessage(state,message){
     switch (state){
         case 'success': $statusElement.children('i').addClass('fa fa-check fa-2x');
             break;
-        case 'waiting': $statusElement.children('i').addClass('fa fa-spinner fa-spin fa-2x');
+        case 'waiting':  $statusElement.children('i').addClass('fa fa-spinner fa-spin fa-2x');
             break;
         case 'not_found': $statusElement.children('i').addClass('fa fa-times fa-2x');
             break;
@@ -551,8 +577,6 @@ function clearStatus(){
 PAGINATOR -- AUTHOR: JORDAN LGH
  */
 
-var previous = 0;
-var next = 0;
 
 
 // IF THERE'S MORE THAN 10 RESULT, BREAK INTO SMALLER ARRAYS
@@ -565,36 +589,103 @@ var next = 0;
 function paginate(data){
     var result = data;
 
-    if(paginator.enabled){
-        //If we already are in pagination, then ... do something
-        var bArr = breakArray(data,2);
-        if(isArray(bArr)){
-            result = bArr;
-            //If enough data, then there's another page next
-            next += 1;
-            console.log(next);
-        }else{
-            //if not enough data, disable next
-            console.log("No enough data to break");
+    if(paginator.enabled && data.length > paginator.breakAt){
+        breakIntoPage(data,paginator.breakAt);
+        if(isArray(paginator.pageMap)){
+            result = paginator.pageMap[0];
+            paginator.current = 0;
+            showPaginationButtons();
         }
+    }else{
+        //hide buttons
+        hidePaginationButtons();
     }
     return result;
 }
 
-/**
- * Break array depending on the limit.
- * @param array
- * @return {*}
- */
-function breakArray(array,limit){
-    var brokeArray = [];
-
-    //Need to be broke
-    if(array.length > limit){
-        brokeArray = array.filter(function (gesture,index) {
-            console.log(index + 'vs' + limit);
-            return index < limit;
-        });
+function hidePaginationButtons(){
+    if(!getPaginationContainer().attr('style','display:none;')){
+        getPaginationContainer().hide();
     }
-    return brokeArray;
 }
+
+function showPaginationButtons(){
+    if(getPaginationContainer().attr('style','display:none;')){
+        getPaginationContainer().show();
+    }
+}
+
+function getPaginationContainer(){
+    return $('.js-pagination-controls');
+}
+
+function next(){
+    //go to next page IF there's a next page
+    if(paginator.currentPg < paginator.nbPages-1){
+        //you can go to next page
+        paginator.currentPg += 1;
+        console.log(paginator);
+        display(paginator.pageMap[paginator.currentPg]);
+        showPaginationButtons();
+        if(paginator.currentPg == paginator.nbPages -1){
+            $('.js-next-page').disabled = true;
+        }else{
+            if($('.js-next-page').is(":disabled")){
+                console.log('is disabled!');
+            }
+        }
+    }else{
+        //disable button!
+        console.log("no next page!");
+
+    }
+
+}
+
+function previous(){
+    //go to previous page IF there's a next page
+    console.log(paginator);
+}
+
+/**
+ * Break an array of data in mutliple array of data, each key represent a page.
+ * @param data
+ * @param limit
+ */
+function breakIntoPage(data,limit){
+    //Must be done only once per pagination
+    if(isArray(data) && limit >= 2){
+        paginator.nbPages = Math.round(data.length/limit);
+        paginator.pageMap = splitArray(data,limit);
+    }
+}
+
+/**
+*   Split an array in mutliple array of x cells.
+ *   @param array
+ *   @param limit, the number of element per array
+ */
+function splitArray(array,limit){
+    var splitArray = [];
+    while(array.length > 0){
+        splitArray.push(array.splice(0,limit));
+    }
+    return splitArray;
+}
+
+// *
+//  * Break array depending on the limit.
+//  * @param array
+//  * @return {*}
+// function breakArray(array,begin,limit){
+//     var brokeArray = [];
+//
+//     //Need to be broke
+//     if(array.length > limit){
+//         brokeArray = array.filter(function (gesture,index) {
+//             console.log(index + 'vs' + limit);
+//             return index < limit;
+//         });
+//     }
+//     return brokeArray;
+// }
