@@ -1,8 +1,6 @@
 //BANNER
 .banner{
-
     @include flex();
-    justify-content: center;
     align-items: center;
     background-image: url($banner-img-sm);
     height: $banner-height-sm;
@@ -17,6 +15,11 @@
         background-image: url($banner-img-lg);
         height: $banner-height-lg;
     }
+    @include media-breakpoint-up(xl){
+        //high resolution image
+        background-image: url($banner-img-lg); //xl?
+        height: $banner-height-xl;
+    }
     
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -24,16 +27,21 @@
     opacity: $banner-opacity; 
 
     width: 100%;
-    // max-height:50vh;
 
     margin-bottom:.5rem;
+
     h1{
+
+        margin: 0;
         padding: .2rem 1rem;
+
+        width: 100%;
+        
         text-align: center;
         color: $banner-title-color;
         font-weight: $banner-title-weight;
         letter-spacing: $banner-title-letter-spacing;
-        height: 20%;
+
     }
 }
 
