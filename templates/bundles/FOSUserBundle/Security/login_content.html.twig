@@ -32,7 +32,8 @@
             <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="btn btn-primary btn-submit"/>
         </div>
         <div class="w-100"></div>
-        <div class="row help-links col-md-12 col-lg-6 order-12 justify-content-end">
+        <div class="help-links order-12 justify-content-end">
+        {# col-md-12 col-lg-6 order-12 justify-content-end #}
             <a href="{{ path('fos_user_registration_register') }}" class="help-link">{{ 'security.login.not_member'|trans }}</a>
             <a href="{{ path('fos_user_resetting_request') }}" class="help-link">{{ 'resetting.link'|trans }}</a>
         </div>
