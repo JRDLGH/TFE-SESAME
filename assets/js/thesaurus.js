@@ -604,7 +604,6 @@ function paginate(data){
             showPaginationButtons();
         }
     }else{
-        //hide buttons
         hidePaginationButtons();
     }
     return result;
@@ -631,7 +630,6 @@ function next(){
     if(paginator.currentPg < paginator.nbPages-1){
         //you can go to next page
         paginator.currentPg += 1;
-        console.log(paginator);
         display(paginator.pageMap[paginator.currentPg]);
         showPaginationButtons();
         if(paginator.currentPg == paginator.nbPages -1){
@@ -642,7 +640,7 @@ function next(){
             enableButton('previous');
         }
     }else{
-        console.log('disableeed');
+        //disabled
     }
 }
 
@@ -650,7 +648,6 @@ function enableButton(button){
     switch(button){
         case 'next': 
             if(isDisbaled($('.js-next-page'))){
-                console.log('next is disabled!');
                 $('.js-next-page').removeClass('disabled');
             }
         break;
@@ -667,11 +664,9 @@ function isDisbaled(elem){
 }
 
 function previous(){
-    console.log(paginator);
     if(paginator.currentPg >= 1 && paginator.nbPages >= paginator.currentPg){
         //you can go to previous page
         paginator.currentPg -= 1;
-        console.log(paginator);
         display(paginator.pageMap[paginator.currentPg]);
         showPaginationButtons();
         if(paginator.currentPg == 0){
@@ -682,7 +677,7 @@ function previous(){
             enableButton('previous');
         }
     }else{
-        console.log('disableeed');
+        //disabled
     }
 }
 
@@ -711,20 +706,3 @@ function splitArray(array,limit){
     }
     return splitArray;
 }
-
-// *
-//  * Break array depending on the limit.
-//  * @param array
-//  * @return {*}
-// function breakArray(array,begin,limit){
-//     var brokeArray = [];
-//
-//     //Need to be broke
-//     if(array.length > limit){
-//         brokeArray = array.filter(function (gesture,index) {
-//             console.log(index + 'vs' + limit);
-//             return index < limit;
-//         });
-//     }
-//     return brokeArray;
-// }
