@@ -9,3 +9,9 @@
 ###> symfony/web-server-bundle ###
 /.web-server-pid
 ###< symfony/web-server-bundle ###
+
+### NODE JS
+/node_modules/*
+
+### WEBPACK
+/public/build/*

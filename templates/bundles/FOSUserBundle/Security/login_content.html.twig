@@ -1,35 +1,41 @@
-{% include 'logbox.html.twig' %}
+{# {% include 'logbox.html.twig' %} #}
 {% trans_default_domain 'FOSUserBundle' %}
 
 
 <h2>{{ 'layout.login'|trans }}</h2>
 
 {% if error %}
-    <div class="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    <div class="alert alert-warning">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 
-<form action="{{ path("fos_user_security_check") }}" method="post" class="full form-container">
+<form action="{{ path("fos_user_security_check") }}" method="post" class="form-group">
     {% if csrf_token %}
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
     {% endif %}
 
-    <div class="full-input">
+    <div class="form-group">
         <label for="username">{{ 'security.login.username_email'|trans }}</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" placeholder="{{ 'security.login.username_email'|trans }}"/>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" placeholder="{{ 'security.login.username_email'|trans }}" class="form-control"/>
     </div>
 
-    <div class="full-input">
+    <div class="form-group">
         <label for="password">{{ 'security.login.password'|trans }}</label>
-        <input type="password" id="password" name="_password" required="required" autocomplete="current-password" placeholder="{{ 'security.login.password'|trans }}"/>
+        <input type="password" id="password" name="_password" required="required" autocomplete="current-password" placeholder="{{ 'security.login.password'|trans }}" class="form-control"/>
     </div>
 
-    <div class="full-input checkbox-input">
-        <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
-        <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+    <div class="form-check">
+        <input type="checkbox" id="remember_me" name="_remember_me" value="on" class="form-check-input"/>
+        <label for="remember_me" class="form-check-label">{{ 'security.login.remember_me'|trans }}</label>
     </div>
-
-    <div class="form-buttons">
-        <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="btn btn-submit"/>
-    <a href="{{ path('fos_user_resetting_request') }}">{{ 'resetting.link'|trans }}</a>
+    <div class="row justify-content-between align-items-center">
+        <div class="form-buttons col-md-12 col-lg-6 order-1">
+            <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="btn btn-primary btn-submit"/>
+        </div>
+        <div class="w-100"></div>
+        <div class="help-links order-12 justify-content-end">
+        {# col-md-12 col-lg-6 order-12 justify-content-end #}
+            <a href="{{ path('fos_user_registration_register') }}" class="help-link">{{ 'security.login.not_member'|trans }}</a>
+            <a href="{{ path('fos_user_resetting_request') }}" class="help-link">{{ 'resetting.link'|trans }}</a>
+        </div>
     </div>
 </form>

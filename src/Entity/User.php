@@ -26,14 +26,14 @@ class User extends BaseUser
      * @ORM\Column(type="string", length=255)
      * 
      * @Assert\NotBlank(message="fos_user.firstname.blank",
-     * groups={"Registration","Profile"})
+     * groups={"Registration"})
      * 
      * @Assert\Length(
      *  min=3,
      *  max=255,
      *  minMessage="fos_user.firstname.short",
      *  maxMessage="fos_user.firstname.long",
-     *  groups={"Registration", "Profile"}
+     *  groups={"Registration"}
      * )
      * 
      * @Assert\Type(type="string",
@@ -50,13 +50,13 @@ class User extends BaseUser
      * 
      * @ORM\Column(type="string", length=255)
      * 
-     *  @Assert\NotBlank(message="fos_user.lastname.blank", groups={"Registration", "Profile"})
+     *  @Assert\NotBlank(message="fos_user.lastname.blank", groups={"Registration"})
      * @Assert\Length(
      *     min=3,
      *     max=255,
      *     minMessage="fos_user.lastname.short",
      *     maxMessage="fos_user.lastname.long",
-     *     groups={"Registration", "Profile"}
+     *     groups={"Registration"}
      * )
      * 
      * @Assert\Type(type="string",

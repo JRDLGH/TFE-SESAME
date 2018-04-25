@@ -1,37 +1,17 @@
 {% trans_default_domain 'FOSUserBundle' %}
-{% import 'form/forms.html.twig' as forms %}
-{% form_theme form 'form/fields.html.twig' %}
-{% include 'logbox.html.twig' %}
  
 <h2>{{ 'layout.register'|trans }}</h2>
 
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register')}) }}
+    {{ form_widget(form) }}
 
-    <div class="small-input">
-        {{ forms.input(form.firstname,'form.firstname'|trans) }}
-    </div>
-
-    <div class="small-input">
-        {{ forms.input(form.lastname,'form.lastname'|trans) }}
-    </div>
-
-    <div class="small-input">
-        {{ forms.input(form.email,'form.email'|trans) }}
-    </div>
-
-    <div class="small-input">
-        {{ forms.input(form.username,'form.username'|trans) }}
-    </div>
-
-    <div class="small-input">
-        {{ forms.input(form.plainPassword.first,'form.password'|trans) }}
-    </div>
-
-    <div class="small-input">
-        {{ forms.input(form.plainPassword.second,'form.password_confirmation'|trans) }}
-    </div>
-
-    <div class="form-buttons">
-        <input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-submit"/>
+    <div class="row justify-content-between align-items-center">
+        <div class="form-buttons col-md-12 col-lg-6 order-1">
+            <input type="submit" id="_submit" name="_submit" value="{{ 'registration.submit'|trans }}" class="btn btn-primary btn-submit"/>
+        </div>
+        <div class="w-100"></div>
+        <div class="row help-links col-md-12 col-lg-6 order-12 justify-content-end">
+            <a href="{{ path('fos_user_security_login') }}" class="help-link">{{ 'registration.yet_member'|trans }}</a>
+        </div>
     </div>
 {{ form_end(form) }}

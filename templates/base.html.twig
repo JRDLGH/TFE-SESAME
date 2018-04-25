@@ -7,45 +7,43 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}Hello World!{% endblock %}</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700" rel="stylesheet">
-    <link href="{{ asset('build/css/style.css') }}" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    {% block stylesheets %}{% endblock %}
+    <link href="{{ asset('build/layout.css') }}" rel="stylesheet"> {% block stylesheets %}{% endblock %}
 </head>
 
 <body>
-    <header>
-        <nav role="nav">
-            <div class="nav-brand">
-                <a href="#">
-                    <img class="nav-brand-logo" src="{{ asset('build/img/Dolby-Vision-brand-logo.png') }}" alt="nav-brand-logo">
-                </a>
-            </div>
+    <header class="fluid-container">
+        <nav class="navbar navbar-expand-lg d-flex justify-content-between" role="nav">
+        <div class="nav-brand navbar-brand">
+            <a href="#" class="navbar-brand">
+                <img class="nav-brand-logo" src="{{ asset('build/static/Dolby-Vision-brand-logo.png') }}" alt="nav-brand-logo">
+            </a>
+        </div>
             <div class="nav-menu">
                 <div class="menu-icon">
                     <span></span>
                 </div>
-                <ul class="nav-links">
-                {% block navlinks %}
+                <ul class="navbar-nav nav-links nav-fill">
+                {# nav-links #}
+                    {% block navlinks %}
                     <li class="nav-item">
-                        <a class="nav-link center" href="{{ path('app_home') }}">Accueil</a>
+                        <a class="nav-item nav-link" href="{{ path('app_home') }}">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link center" href="#">À propos</a>
+                        <a class="nav-item nav-link" href="#">À propos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link center" href="#">Dictionnaire</a>
+                        <a class="nav-item nav-link" href="{{ path('thesaurus_index') }}">Dictionnaire</a>
                     </li>
                     <li class="nav-item">
-                    {% if is_granted('ROLE_USER') %}
-                        <a class="nav-link center" href="{{ path('fos_user_security_logout') }}">Se déconnecter</a>
-                    {% else %}
-                        <a class="nav-link center" href="{{ path('fos_user_security_login') }}">Se connecter</a>
-                    {% endif %}
+                        {% if is_granted('ROLE_USER') %}
+                        <a class="nav-item nav-link" href="{{ path('fos_user_security_logout') }}">Se déconnecter</a>
+                        {% else %}
+                        <a class="nav-item nav-link" href="{{ path('fos_user_security_login') }}">Se connecter</a>
+                        {% endif %}
                     </li>
 
-                {% endblock %}
-                    
+                    {% endblock %}
+
                 </ul>
             </div>
         </nav>
@@ -53,26 +51,28 @@
     <main role="main">
         <div class="full-container" id="content">
             {% block banner %}
-                <div class="banner">
-                    <h1 class="content-title center">
-                        {% block banner_title %}LA MÉTHODE GESTUELLE SÉSAME{% endblock %}
-                    </h1>
-                </div>
+            <div class="banner">
+                <h1 class="content-title center">
+                    {% block banner_title %}LA MÉTHODE GESTUELLE SÉSAME{% endblock %}
+                </h1>
+            </div>
             {% endblock %}
+        <div class="fluid-container">
             <div class="container">
                 {% block content %}{% endblock %}
             </div>
         </div>
     </main>
-    
+
     <footer>
         <p>
-            Copyright &copy; {{ 'now'|date("Y") }} JRDNLGH
+            Copyright <i class="fa fa-copyright"></i> {{ 'now'|date("Y") }} JRDNLGH
         </p>
     </footer>
-
+    {# Cache boosting #}
+    <script src="{{ asset('build/manifest.js') }}"></script>
+    <script src="{{ asset('build/layout.js') }}"></script>
     {% block javascripts %}{% endblock %}
-    <script src="{{ asset('build/js/menu.js') }}"></script>
 </body>
 
 </html>

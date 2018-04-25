@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Gesture{% endblock %}
+
+{% block content %}
+    <h1>Edit Gesture</h1>
+
+    {{ include('thesaurus/gesture/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a href="{{ path('thesaurus_gesture_index') }}">Retourner à la liste</a>
+
+    {{ include('thesaurus/gesture/_delete_form.html.twig') }}
+{% endblock %}

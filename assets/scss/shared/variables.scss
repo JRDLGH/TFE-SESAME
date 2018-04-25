@@ -1,0 +1,101 @@
+/**
+GLOBAL VARIABLES
+
+  author: JORDAN LGH
+  overrides _variables.scss from bootstrap.
+ */
+
+$font:get('typography.font');
+$text-size:get('typography.size');
+$break-medium: get('breakpoints.md'); 
+$break-large: get('breakpoints.lg');
+
+/*
+ MAIN BACKGROUND COLOR
+*/
+$body:#f8f9fa;
+$img-dir:'../img/';
+
+/* THEME COLOR */
+$blue:#61c5f3;
+$light-blue:rgb(97, 221, 243);
+$light:#e7e7e7;
+$red:rgb(223, 116, 102);
+$red-hover:rgb(247, 157, 146);
+$green:rgb(143, 206, 61);
+$green-hover:rgb(172, 231, 94);
+$yellow:#f9dda3;
+
+/* DISPLAYS PARAMS */
+$warning:       $yellow;
+$danger:        $red;
+$info:        rgb(195, 228, 255);
+$success:       $green;
+$alert:       rgb(255, 199, 195);
+$alert-text-size:0.9rem;
+
+
+//PARAGRAPHS
+
+
+/* MENU */
+// SIZE
+$menu_height-small: 45px;
+$menu_height-large: 58px;
+
+// NAV COLORS
+$nav-color: #61c5f3; // OR #afe0f7
+$nav-color-dark: darken($nav-color,20%);
+
+//BURGER
+$burger-bg-color:transparent;
+$burger-color:#ffffff;
+$burger-size: 40px;
+
+//LINKS
+$link-color: #272727;
+$link-hover-color:white;
+$link-weight:300;
+$link-size:1.1rem;
+
+/* BANNER */
+$banner-opacity:0.95;
+$banner-img:'banner.jpg';
+$banner-img-sm: $img-dir + 'sm-' + $banner-img;
+$banner-img-md: $img-dir + 'md-' + $banner-img;
+$banner-img-lg: $img-dir + 'lg-' + $banner-img;
+
+$banner-title-color:white;
+$banner-title-weight:300;
+$banner-title-letter-spacing:.5rem;
+
+$banner-height-sm:22vh;
+$banner-height-md:24vh;
+$banner-height-lg:27vh;
+$banner-height-xl:30vh;
+
+/* THESAURUS */
+$search-button-color:darken($body,10%);
+
+/* FORMS */
+$input-border-color: darken($body,15%);
+/* ANIMATIONS */
+$extra-short-duration:0.3s;
+$short-duration:0.5s;
+$medium-duration:0.75s;
+$long-duration:1s;
+
+/* FOOTER */
+$footer-bg-color:#dddddd;
+$footer-p-color: darken($body,80%);
+$footer-shadow: darken($body,45%);
+
+/* IMPORTANT COLORS */
+$main: $blue;
+$light-main:  lighten($main, 10%);
+$darker-body: darken($body,1%);
+$shadow-body: darken($darker-body,10%);
+
+$theme-colors: (
+  "primary": $main,
+);

@@ -1,0 +1,21 @@
+admin:
+  gesture:
+    title: 'Gestes'
+    name: 'Nom'
+    profileVideo: 'Vidéo de profil'
+    video: 'Vidéo'
+    cover: 'Image'
+    description: "Description"
+    creationDate: 'Date de création'
+    isPublished: 'Publié'
+    publicationDate: 'Date de publication'
+
+  control:
+    actions: 'Actions'
+    back_to_list: "Retourner à la liste"
+    yes: 'Oui'
+    no: 'Non'
+    add: 'ajouter'
+    modify: 'modifer'
+    delete: 'supprimer'
+    show: 'Voir'
