@@ -1,7 +1,10 @@
 module.exports = {
     breakpoints: {
-        md: "800px",
-        lg: "1024px"
+        xs: '0',
+        sm: '576',
+        md: '768',
+        lg: '992',
+        xl: '1200'
     },
     typography: {
         font: "'Raleway', sans-serif",

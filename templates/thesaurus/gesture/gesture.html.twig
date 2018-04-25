@@ -3,12 +3,17 @@
 {% set img_dir = "build/static/thesaurus/gestures/" %}
 
 <article class="gesture">
-    <img src="{{ asset(img_dir ~ image|default('default.jpg')) }}" alt="gesture-cover" class="cover">
-    <div class="content">
-        <h3 class="title">{{ title }}</h3>
-        <p class="description">
-            {{ description }}
-        </p>
+    <div class="gesture-content">
+        <img src="{{ asset(img_dir ~ image|default('default.jpg')) }}" alt="gesture-cover" class="cover">
+        <div class="content">
+            <h3 class="title">{{ title }}</h3>
+            <p class="description">
+                {{ description }}
+            </p>
+        </div>
+        <button class="btn btn-secondary">
+            <span>En savoir plus</span>
+        </button>
     </div>
 </article>
 
