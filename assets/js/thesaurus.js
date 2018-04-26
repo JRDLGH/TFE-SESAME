@@ -309,6 +309,7 @@ function containerDisplay(container){
 function showDetails(){
     getContainer().addClass('display-none');
     getDetailsContainer().addClass('display-block').addClass('opened');
+    scrollToContainer();
 }
 
 function backToSearchButton() {
@@ -700,7 +701,7 @@ function next(){
         paginator.currentPg += 1;
         display(paginator.pageMap[paginator.currentPg]);
         showPaginationButtons();
-        scrollToContent();
+        scrollToContainer();
         if(paginator.currentPg == paginator.nbPages -1){
             $('.js-next-page').addClass("disabled");
             enableButton('previous');
@@ -742,7 +743,7 @@ function previous(){
         paginator.currentPg -= 1;
         display(paginator.pageMap[paginator.currentPg]);
         showPaginationButtons();
-        scrollToContent();
+        scrollToContainer();
         if(paginator.currentPg == 0){
             $('.js-previous-page').addClass("disabled");
             enableButton('next');            
