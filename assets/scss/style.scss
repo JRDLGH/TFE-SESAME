@@ -174,3 +174,9 @@ li {
 .display-block{
     display: block;
 }
+
+.separator{
+    background-color: $shadow-body;
+    margin: 1.5rem 0;
+    width: 100%;
+}

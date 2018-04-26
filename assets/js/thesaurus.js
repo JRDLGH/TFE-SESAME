@@ -55,6 +55,8 @@ $(document).ready(function(){
                 //Search for correspondance depending on search type
                 //By default: trie sur l'ordre de pertinence, les mots commençant par la sélection
                 if(gestures){
+                    //reset pagination in order to avoid to be stuck inside a page
+                    resetPagination();
                     orderByPertinence(gestures,value);
                 }
             }
@@ -64,10 +66,7 @@ $(document).ready(function(){
 
     $(document).on('click','.js-gesture-show',function(evt){
         //Show a cursor pointer on gesture!
-        console.log($(this));
-        console.log($(this).parent());
-        showGesture($(this).parent().data('id'));
-        console.log("you clicked a gesture");
+        showGesture($(this).closest('.gesture').data('id'));
         return false;
     });
 
@@ -169,7 +168,8 @@ function formatHTML(gesture){
     var video = '';
     var profileVideo= '';
 
-    var html = "<article class=\"gesture-details-content\">\n" +
+    var html = "<h2 class=\"gesture-details-header-title\">Détails</h2>" +
+        "<article class=\"gesture-details-content\">\n" +
         "    <img src=\"" + cover +"\" alt=\"gesture-cover\" class=\"cover\">\n" +
         "    <div class=\"content\">\n" +
         "        <h3 class=\"title\">"+ title +"</h3>\n" +
@@ -177,15 +177,23 @@ function formatHTML(gesture){
         "            " + gesture.description + "\n" +
         "        </p>\n" +
         "    </div>\n" +
-        "<div class='gesture-video'>" +
-        "   <video controls controlsList=\"nodownload\">" +
-        "       <source src=\""+video_path+"\" type=\"video/mp4\" />\n" +
-        "       Please update your browser." +
-        "   </video>" +
-        "   <video controls controlsList=\"nodownload\">" +
-        "       <source src=\""+video_path+"\" type=\"video/mp4\" />\n" +
-        "       Please update your browser." +
-        "   </video>" +
+        "    <hr class=\"separator\">" +
+        "   <h3 class=\"gesture-details-video-title\">Vidéos</h3>" +
+        "   <div id=\"gesture-videos\">" +
+        "       <div class=\"gesture-video\">" +
+        "           <h4 class=\"gesture-video-title\">De profil</h4>" +
+        "            <video controls controlsList=\"nodownload\">" +
+        "                   <source src=\""+video_path+"\" type=\"video/mp4\" />\n" +
+        "                   Please update your browser." +
+        "               </video>" +
+        "       </div>" +
+        "       <div class=\"gesture-video\">" +
+        "           <h4 class=\"gesture-video-title\">De face</h4>" +
+        "           <video controls controlsList=\"nodownload\">" +
+        "               <source src=\""+video_path+"\" type=\"video/mp4\" />\n" +
+        "               Please update your browser." +
+        "           </video>" +
+        "       </div>" +
         "</div>" +
         backToSearchButton() +
         "</article>";
@@ -694,6 +702,10 @@ function enableButton(button){
                 $('.js-previous-page').removeClass('disabled');
             }
         break;
+        case 'init':
+            $('.js-previous-page').addClass('disabled');
+            $('.js-next-page').removeClass('disabled');
+        break;
     }
 }
 
@@ -743,4 +755,13 @@ function splitArray(array,limit){
         splitArray.push(array.splice(0,limit));
     }
     return splitArray;
+}
+
+function resetPagination(){
+    paginator.prevPg = 0;
+    paginator.nextPg = 0;
+    paginator.currentPg = 0;
+    paginator.nbPages = 0;
+    paginator.pageMap = 0;
+    enableButton('init');
 }
