@@ -59,9 +59,11 @@ $(document).ready(function(){
         return false;
     });
 
-    $(document).on('click','.gesture.js-gesture',function(evt){
+    $(document).on('click','.js-gesture-show',function(evt){
         //Show a cursor pointer on gesture!
-        showGesture($(this).data('id'));
+        console.log($(this));
+        console.log($(this).parent());
+        showGesture($(this).parent().data('id'));
         console.log("you clicked a gesture");
         return false;
     });
@@ -200,7 +202,7 @@ function listHTML(gesture) {
             "<div class=\"content\">" +
                 "<h3 class=\"title\">"+ title +"</h3>" +
             "</div>" +
-            "<button class=\"btn btn-secondary\">" +
+            "<button class=\"btn btn-secondary js-gesture-show\">" +
                 "<span>En savoir plus</span>" +
             "</button>" +
         "</div>" +

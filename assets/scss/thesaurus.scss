@@ -112,6 +112,7 @@ section{
                         @include media-breakpoint-up(lg){
                             @include make-col(6);
                         }
+                                                    
 
                         // max-width: 400px;
                         // max-height: 400px;
@@ -212,10 +213,11 @@ section{
 
                         .cover{
 
-                            height: auto;
+                            height: 300px;
                             width: auto;
-                            max-width: 300px;
-                            max-height: 300px;
+                            // max-width: 300px;
+                            // max-height: 300px;
+                            // min-height: 300px;
 
                             @include make-col-ready();
                             @include make-col(12);
