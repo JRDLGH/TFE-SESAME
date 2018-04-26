@@ -87,6 +87,7 @@ section{
                     }
                 }
             }
+            
 
             .gesture-details{
                 position: relative;
@@ -96,8 +97,9 @@ section{
                 display: none;
 
                 z-index: 5;
-                transition: all $short-duration ease-in-out;
-
+                opacity: 0;
+                // transition: opacity 2s ease-in-out, display 0s;
+                
 
                 .gesture-details-content{
 
@@ -107,31 +109,31 @@ section{
                         @include make-col-ready();
                         @include make-col(12);
 
-                        @include media-breakpoint-up(md){
+                        @include media-breakpoint-up(lg){
                             @include make-col(6);
                         }
 
-                        max-width: 400px;
-                        max-height: 400px;
+                        // max-width: 400px;
+                        // max-height: 400px;
                     }
                     .content{
                         @include make-col-ready();
                         @include make-col(12);
 
-                        @include media-breakpoint-up(md){
-                            @include make-col(6);
+                        @include media-breakpoint-up(lg){
+                            @include make-col(5);
                         }
                     }
                     .gesture-video{
-                        @include make-col(12);                        
+                        @include make-row();                        
                         video{
                             @include make-col-ready();
                             @include make-col(12);
-                            padding: .5rem;
+                            padding: .5rem 1rem;
                             // width: 100%;
                             // max-width: 300px;
 
-                            @include media-breakpoint-up(md){
+                            @include media-breakpoint-up(lg){
                                 @include make-col(6);
                                 // padding: 1.5rem;
                             }
@@ -140,29 +142,47 @@ section{
                     .js-previous-search{
                         @include make-col-ready();
                         @include make-col(12);
-                        @include media-breakpoint-up(md){
+                        @include media-breakpoint-up(lg){
                             @include make-col(3);
                         }
                     }
                 }
                 &.opened{
                     left:0;
-                    display: block;
+                    // display: block;
+                    // opacity: 1;
+                    animation: disp-block $extra-short-duration forwards;
+                    @keyframes disp-block{
+                        0%{opacity: 0;}
+                        100%{opacity: 1;}
+                    }
+                    &.display-block{
+                        display: block;
+                    }
                 }
             }
 
+            
             #gesture{
 
                 @include make-row();
 
-                visibility: visible;
                 opacity: 1;
-                transition: visibility 0s linear $short-duration, opacity $short-duration;
 
                 .gesture{
+                    // opacity: 0;
+                    // animation: fadeIn $medium-duration forwards;
 
+                    // @keyframes fadeIn{
+                    //     0%{
+                    //         opacity: 0;
+                    //     }
+                    //     100%{
+                    //         opacity: 1;
+                    //     }
+                    // }
                     z-index: 0;
-                    transition: all $extra-short-duration;
+                    // transition: all $extra-short-duration;
 
                     width: 100%;
                     padding: .5rem;
@@ -277,9 +297,24 @@ section{
                 }
                 
                 &.closed{
-                    display: none;
-                    visibility: hidden;
-                    opacity: 0;
+                    // display: none;
+                    // visibility: hidden;
+                    // opacity: 0;
+                    animation: disp-none $short-duration forwards;
+
+                    @keyframes disp-none{
+                        0%{
+                            opacity: 1;
+                        }
+                        100%{
+                            opacity: 0;
+                        }
+                    }
+
+                    &.display-none{
+                        display: none;
+                    }
+                    
                 }
             }
 

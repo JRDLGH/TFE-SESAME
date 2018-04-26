@@ -237,15 +237,20 @@ function display(data,type){
 function containerDisplay(container){
     switch (container){
         case 'details':
-            getContainer().addClass('closed');
-            getDetailsContainer().addClass('opened');
+            getContainer().addClass('closed').on('transitionend',showDetails());
         break;
         case 'list':
-            getDetailsContainer().removeClass('opened');
-            getContainer().removeClass('closed');
+            getDetailsContainer().removeClass('opened').removeClass('display-block');
+            getContainer().removeClass('closed').removeClass('display-none');
         break;
     }
 }
+
+function showDetails(){
+    getContainer().addClass('display-none');
+    getDetailsContainer().addClass('display-block').addClass('opened');
+}
+
 function backToSearchButton() {
     return '<button class="btn btn-primary js-previous-search">Retourner à la recherche</button>';
 }
