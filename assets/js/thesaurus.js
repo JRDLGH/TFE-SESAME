@@ -75,6 +75,7 @@ $(document).ready(function(){
         containerDisplay('list');
         getDetailsContainer().removeClass('opened');
         getContainer().removeClass('closed');
+        showPaginationButtons();
         return false;
     });
 
