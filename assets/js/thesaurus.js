@@ -33,6 +33,12 @@ var currentStatus = 'waiting'; //ex: {'success':"x gestures found"}
 
 $(document).ready(function(){
 
+
+    $('#search').on('click',function(){
+        $('body, html').animate({
+            scrollTop: $(this).offset().top - $('header').outerHeight() - 50
+        },1000);
+    });
     /**
      * KEY PRESS WILL NEED TO DETECT ENTER
      * ALSO, HIT ENTER OR THE SEARCH BUTTON WILL LEAD TO SAME OPERATIONS
@@ -101,6 +107,17 @@ $(document).ready(function(){
     });
 
 });
+
+
+function scrollToContainer(){
+
+    var space = '50';
+    var position = getContainer().offset().top - $('header').outerHeight() - space;
+        $('body, html').animate({
+            scrollTop: position
+        },1000);
+}
+
 
 /**
  * Get the gesture with id passed.
@@ -683,6 +700,7 @@ function next(){
         paginator.currentPg += 1;
         display(paginator.pageMap[paginator.currentPg]);
         showPaginationButtons();
+        scrollToContent();
         if(paginator.currentPg == paginator.nbPages -1){
             $('.js-next-page').addClass("disabled");
             enableButton('previous');
@@ -724,6 +742,7 @@ function previous(){
         paginator.currentPg -= 1;
         display(paginator.pageMap[paginator.currentPg]);
         showPaginationButtons();
+        scrollToContent();
         if(paginator.currentPg == 0){
             $('.js-previous-page').addClass("disabled");
             enableButton('next');            
