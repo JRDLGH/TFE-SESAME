@@ -28,6 +28,7 @@ console.log(routes);
 var previousValue = [];
 var currentValue = '';
 var gestures;
+var lastMatched = []; // last gesture that matched
 var currentStatus = 'waiting'; //ex: {'success':"x gestures found"}
 
 $(document).ready(function(){
@@ -211,6 +212,14 @@ function listHTML(gesture) {
 }
 
 function display(data,type){
+
+    var gIds = getGestureId(data);
+    var display = false;
+    if(!isArray(lastMatched) || !compareArray(gIds,lastMatched)){
+        lastMatched = gIds; //must only contains id of last matched gestures
+        display = true;
+    }
+
     var content = '';
     if(isArray(data)){
         switch (type){
@@ -221,18 +230,35 @@ function display(data,type){
 
             break;
             default: //list
+            if(display){
                 data = paginate(data);
                 data.forEach(function (gesture){
                     content += listHTML(gesture);
                 });
                 containerDisplay('list');
                 getContainer().html(content);
+            }
         }
         clearStatus();
     }else{
         //Not found
         setStatus({'not_found':'Aucun geste ne correspond à votre recherche'});
         getContainer().html('');
+    }
+}
+
+function compareArray(array1,array2){
+    console.log(JSON.stringify(array1));
+    console.log(JSON.stringify(array2));
+    return JSON.stringify(array1)==JSON.stringify(array2);
+}
+
+function getGestureId(gArray){
+    if(isArray(gArray)){
+        var ids = gArray.map(function(gesture){
+            return gesture.id;
+        });
+        return ids;
     }
 }
 

@@ -171,17 +171,17 @@ section{
                 opacity: 1;
 
                 .gesture{
-                    // opacity: 0;
-                    // animation: fadeIn $medium-duration forwards;
+                    opacity: 0;
+                    animation: fadeIn $long-duration forwards;
 
-                    // @keyframes fadeIn{
-                    //     0%{
-                    //         opacity: 0;
-                    //     }
-                    //     100%{
-                    //         opacity: 1;
-                    //     }
-                    // }
+                    @keyframes fadeIn{
+                        0%{
+                            opacity: 0;
+                        }
+                        100%{
+                            opacity: 1;
+                        }
+                    }
                     z-index: 0;
                     // transition: all $extra-short-duration;
 
