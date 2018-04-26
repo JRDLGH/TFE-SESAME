@@ -47,6 +47,8 @@ $(document).ready(function(){
             if(valuePosition == -1 || previousValue['value'] == '' || valuePosition != previousValue['position']){
                 previousValue['value'] = value;
                 previousValue['position'] = value.indexOf(previousValue['value']);
+                console.log("new value");
+                console.log(previousValue);
                 askGestures(value);
             }else{
                 //update current value
@@ -82,7 +84,6 @@ $(document).ready(function(){
      */
 
     $('.js-previous-page').click(function(evt){
-        console.log('prev page');
         previous();
         return false;
         //enable previous        
@@ -93,7 +94,6 @@ $(document).ready(function(){
         evt.preventDefault();
         //enable previous
         //possibility of disabling prev        
-        console.log('next page');
         next();
         return false;
     });
@@ -247,9 +247,13 @@ function display(data,type){
     }
 }
 
+/**
+ * Compare two array, if they are exactly the same, return true;
+ * @param {*} array1 
+ * @param {*} array2 
+ * @returns boolean
+ */
 function compareArray(array1,array2){
-    console.log(JSON.stringify(array1));
-    console.log(JSON.stringify(array2));
     return JSON.stringify(array1)==JSON.stringify(array2);
 }
 
@@ -315,7 +319,6 @@ function matchTags(pattern,tagMatched,nameMatched,sortedNameMatched,option){
 
     var tags = splitIntoTags(pattern);
     tags = tags.filter(getUniqueTags);
-    console.log(tags);
     var result = [];
     //DELETE USELESS PATTERNS like 'de', 'le', 'la'
     //TODO
@@ -328,8 +331,6 @@ function matchTags(pattern,tagMatched,nameMatched,sortedNameMatched,option){
             if(isArray(result)){
                 //Delete duplicates and merge
                 result = arrayDiff(result,sortedNameMatched);
-                console.log(sortedNameMatched);
-
                 result = result.concat(getGesturesByTags(tags,tagMatched));
             }else{
                 result = getGesturesByTags(tags,tagMatched);
@@ -433,13 +434,11 @@ function getGesturesByTags(tags,data){
             if(tags.length <= gesture.tags.length){
                 var keywords = mapTag(gesture.tags);
                 var keep = true;
-                console.log(keywords);
                 for(var i =0; i < tags.length ; i++){
                     //if last tag
                     if(i == tags.length-1 && i >= 0){
                         //look if it begin or match the tag!
                         for(var j = 0; j < keywords.length; j++){
-                            console.log(tags);
                             if(!keywords[j].startsWith(tags[i])){
                                 keep = false;
                             }else{
@@ -533,8 +532,6 @@ function askGestures(value){
             }).done(function(data){
                 //MATCH HTTP_OK -- 200
                 setGestures(data);
-                console.log(value);
-                console.log(currentValue);
                 orderByPertinence(data,currentValue);
             });
 
@@ -668,7 +665,6 @@ function getPaginationContainer(){
 
 function next(){
     //go to next page IF there's a next page
-    console.log(paginator);
     if(paginator.currentPg < paginator.nbPages-1){
         //you can go to next page
         paginator.currentPg += 1;
