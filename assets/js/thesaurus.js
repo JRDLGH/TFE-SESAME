@@ -75,7 +75,9 @@ $(document).ready(function(){
         containerDisplay('list');
         getDetailsContainer().removeClass('opened');
         getContainer().removeClass('closed');
-        showPaginationButtons();
+        if(paginator.nbPages > 0){
+            showPaginationButtons();
+        }
         return false;
     });
 
@@ -183,14 +185,14 @@ function formatHTML(gesture){
         "   <div id=\"gesture-videos\">" +
         "       <div class=\"gesture-video\">" +
         "           <h4 class=\"gesture-video-title\">De profil</h4>" +
-        "            <video controls controlsList=\"nodownload\">" +
+        "            <video class=\"js-gesture-video\" controls controlsList=\"nodownload\">" +
         "                   <source src=\""+video_path+"\" type=\"video/mp4\" />\n" +
         "                   Please update your browser." +
         "               </video>" +
         "       </div>" +
         "       <div class=\"gesture-video\">" +
         "           <h4 class=\"gesture-video-title\">De face</h4>" +
-        "           <video controls controlsList=\"nodownload\">" +
+        "           <video class=\"js-gesture-video\" controls controlsList=\"nodownload\">" +
         "               <source src=\""+video_path+"\" type=\"video/mp4\" />\n" +
         "               Please update your browser." +
         "           </video>" +
@@ -531,6 +533,8 @@ function askGestures(value){
                         //RESOURCE NOT FOUND
                         if(isArray(data)){
                             setStatus(data.responseJSON);
+                        }else{
+                            setStatus({'not_found':'Aucun geste ne correspond à votre recherche.'});
                         }
                     },
                     500: function(){
