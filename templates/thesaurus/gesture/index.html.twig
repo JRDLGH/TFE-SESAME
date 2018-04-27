@@ -22,12 +22,12 @@
     <table class="table admin-table">
         <thead>
             <tr>
-                <th>{{ 'admin.gesture.name'|trans }}</th>
-                <th>{{ 'admin.gesture.profileVideo'|trans }}</th>
-                <th>{{ 'admin.gesture.video'|trans }}</th>
-                <th>{{ 'admin.gesture.cover'|trans }}</th>
-                <th>{{ 'admin.gesture.description'|trans }}</th>
-                <th>{{ 'admin.gesture.isPublished'|trans }}</th>
+                <th>{{ knp_pagination_sortable(gestures,'admin.gesture.name'|trans,'g.name') }}</th>
+                <th>{{ knp_pagination_sortable(gestures,'admin.gesture.profileVideo'|trans,'g.profileVideo') }}</th>
+                <th>{{ knp_pagination_sortable(gestures,'admin.gesture.video'|trans,'g.video') }}</th>
+                <th>{{ knp_pagination_sortable(gestures,'admin.gesture.cover'|trans,'g.cover') }}</th>
+                <th>{{ knp_pagination_sortable(gestures,'admin.gesture.description'|trans,'g.description') }}</th>
+                <th>{{ knp_pagination_sortable(gestures,'admin.gesture.isPublished'|trans,'g.isPublished') }}</th>
                 <th>{{ 'admin.control.actions'|trans }}</th>
             </tr>
         </thead>
@@ -58,6 +58,10 @@
         {% endfor %}
         </tbody>
     </table>
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(gestures) }}
+    </div>
 
     <a class="action-link" href="{{ path('thesaurus_gesture_new') }}">
         <i class="fa fa-plus action-icon"></i>

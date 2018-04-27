@@ -18,9 +18,24 @@ class GestureController extends Controller
     /**
      * @Route("/", name="thesaurus_gesture_index", methods="GET")
      */
-    public function index(GestureRepository $gestureRepository): Response
+    public function index(Request $request, GestureRepository $gestureRepository): Response
     {
-        return $this->render('thesaurus/gesture/index.html.twig', ['gestures' => $gestureRepository->findAll()]);
+
+//        $gestures = $gestureRepository->findAll();
+        $paginator = $this->get('knp_paginator');
+        $dql = 'SELECT g FROM App\Entity\Thesaurus\Gesture g';
+        $query = $this->getDoctrine()->getManager()->createQuery($dql);
+
+        $result = $paginator->paginate(
+            $query,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',5)
+        );
+
+
+        return $this->render('thesaurus/gesture/index.html.twig', [
+            'gestures' => $result
+        ]);
     }
 
     /**
