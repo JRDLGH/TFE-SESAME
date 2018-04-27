@@ -22,7 +22,6 @@
         <tbody>
         {% for gesture in gestures %}
             <tr>
-                <td>{{ gesture.id }}</td>
                 <td>{{ gesture.name }}</td>
                 <td>{{ gesture.profileVideo ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
                 <td>{{ gesture.video ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
