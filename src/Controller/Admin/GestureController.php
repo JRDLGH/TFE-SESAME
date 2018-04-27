@@ -33,6 +33,10 @@ class GestureController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if($form->getData()->getIsPublished() && empty($form->getData()->getPublicationDate()))
+            {
+                $form->getData()->setPublicationDate(new \DateTime("now",new \DateTimeZone("Europe/Brussels")));
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($gesture);
             $em->flush();

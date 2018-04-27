@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 {% trans_default_domain 'admin' %}
 
-{% block title %}Edit Gesture{% endblock %}
+{% block title %}{{ 'admin.gesture.edit'|trans }}{% endblock %}
 
 {% block content %}
-    <h1>Edit Gesture</h1>
+    <h1>{{ 'admin.gesture.edit'|trans }}</h1>
 
     {{ include('thesaurus/gesture/_form.html.twig', {'button_label': 'Modifier'}) }}
 
@@ -20,4 +20,8 @@
     </div>
 
 
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/admin.js') }}"></script>
 {% endblock %}

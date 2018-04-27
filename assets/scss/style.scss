@@ -11,7 +11,7 @@
 @import "structure/banner.scss";
 
 @import "structure/admin/table"; //TODO remove
-@import "structure/buttons";
+@import "structure/buttons"; //TODO remove
 
 /*
     global styling file
@@ -149,6 +149,7 @@ li {
         margin: .5rem 0;
         width: 100%;
         text-align: center;
+        font-size: 0.8rem;
 
         @include media-breakpoint-up(md){
             margin: 0rem .5rem;
@@ -206,6 +207,13 @@ li {
     background-color: $shadow-body;
     margin: 1.5rem 0;
     width: 100%;
+}
+
+.special-link{
+    color:$main;
+    &:hover{
+        color:lighten($main,10%);
+    }
 }
 
 .action-link{

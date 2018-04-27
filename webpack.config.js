@@ -11,11 +11,14 @@ Encore
     // the public path used by the web server to access the previous directory
     .setPublicPath('/build')
 
-    // allow to load jQuery once in order to don't load for each files that require this module
-    .createSharedEntry('layout','./assets/js/layout.js')
+
 
     // will create public/build/app.js and public/build/thesaurus.css
     .addEntry('thesaurus', './assets/js/thesaurus.js')
+    .addEntry('admin', './assets/js/admin.js')
+
+    // allow to load jQuery once in order to don't load for each files that require this module
+    .createSharedEntry('layout','./assets/js/layout.js')
 
     // .addPlugin(new sassUtils())
     // allow sass/scss files to be processed

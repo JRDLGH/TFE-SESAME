@@ -1,14 +1,16 @@
 {% extends 'base.html.twig' %}
 {% trans_default_domain 'admin' %}
 
-{% block title %}Gesture index{% endblock %}
+{% block title %}{{ 'admin.gesture.list'|trans }}{% endblock %}
 
 {% block content %}
     <h1>{{ 'admin.gesture.list'|trans }}</h1>
 
+    {{ include('thesaurus/gesture/details.html.twig') }}
+
     <form action="#" class="form-container">
         <div class="form-group">
-            <label for="search_gesture">Rechercher un geste</label>
+            <label for="search_gesture">{{ 'admin.gesture.search'|trans }}</label>
             <div class="search-input row input-group">
                 <span class="input-logo" id="sizing-addon1 col-1"><i class="fa fa-search fa"></i></span>
                 <input type="text" name="search_gesture" id="search" class="form-control col-11" placeholder="Rechercher un geste ici...">
@@ -51,7 +53,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="10">no records found</td>
+                <td colspan="10">Aucun geste trouvé...</td>
             </tr>
         {% endfor %}
         </tbody>

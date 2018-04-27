@@ -1,19 +1,23 @@
 admin:
   gesture:
     list: 'Liste des gestes'
-    title: 'Gestes'
+    show: 'Preview du geste'
+    new: 'Nouveau geste'
+    search: 'Rechercher un geste'
+    edit: 'Modification du geste'
     name: 'Nom'
     profileVideo: 'Vidéo de profil'
     video: 'Vidéo'
     cover: 'Image'
-    description: "Description"
+    description: 'Description'
     creationDate: 'Date de création'
-    isPublished: 'Publié'
+    isPublished: 'Publier le geste'
     publicationDate: 'Date de publication'
+    tags: 'Mots-clés à utiliser pour la recherche'
 
   control:
     actions: 'Actions'
-    back_to_list: "Retourner à la liste"
+    back_to_list: 'Retourner à la liste'
     yes: 'Oui'
     no: 'Non'
     create: 'Créer un nouveau geste'
@@ -21,3 +25,4 @@ admin:
     modify: 'Modifier'
     delete: 'Supprimer'
     show: 'Voir'
+    save: 'Enregistrer'
