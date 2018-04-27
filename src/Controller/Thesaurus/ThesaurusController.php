@@ -45,7 +45,7 @@ class ThesaurusController extends AbstractController
     }
 
     /**
-     * @Route("/gestures/{id}",name="thesaurus_gesture_show",options={"expose"=true},requirements={
+     * @Route("/gestures/{id}",name="thesaurus_gesture_show_details",options={"expose"=true},requirements={
         "id"="\d+"
     *     })
      * @Method("GET")

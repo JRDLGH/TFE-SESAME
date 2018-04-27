@@ -137,7 +137,7 @@ function scrollToDetailsContainer(){
  */
 function showGesture(id){
     $.ajax({
-        url: Routing.generate('thesaurus_gesture_show', {id: id}),
+        url: Routing.generate('thesaurus_gesture_show_details', {id: id}),
         type: 'GET',
         statusCode: {
             404: function(data){

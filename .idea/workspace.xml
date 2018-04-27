@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2286757d-c8e4-4c57-8ffb-c9c80e15daf7" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/Components/Routing/fos_js_routes.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/Components/Routing/fos_js_routes.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/thesaurus.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/thesaurus.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Thesaurus/ThesaurusController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Thesaurus/ThesaurusController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,8 +22,8 @@
       <file leaf-file-name="ThesaurusController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/Thesaurus/ThesaurusController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="53" column="41" selection-start-line="53" selection-start-column="41" selection-end-line="53" selection-end-column="41" />
+            <state relative-caret-position="221">
+              <caret line="47" column="67" selection-start-line="47" selection-start-column="67" selection-end-line="47" selection-end-column="67" />
               <folding>
                 <element signature="e#44#102#0#PHP" expanded="true" />
               </folding>
@@ -31,11 +31,18 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="GestureController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Admin/GestureController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-204" />
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="thesaurus.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/js/thesaurus.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="348" column="30" selection-start-line="348" selection-start-column="30" selection-end-line="348" selection-end-column="30" />
+            <state relative-caret-position="255">
+              <caret line="15" column="108" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="108" />
             </state>
           </provider>
         </entry>
@@ -105,12 +112,12 @@
         <option value="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" />
         <option value="$PROJECT_DIR$/src/Entity/Thesaurus/Gesture/Tag.php" />
         <option value="$PROJECT_DIR$/src/Entity/Thesaurus/Gesture.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Thesaurus/ThesaurusController.php" />
         <option value="$PROJECT_DIR$/src/Repository/GestureRepository.php" />
         <option value="$PROJECT_DIR$/assets/js/layout.js" />
         <option value="$PROJECT_DIR$/assets/js/Components/paginator.js" />
         <option value="$PROJECT_DIR$/templates/thesaurus/index.html.twig" />
         <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/src/Controller/Thesaurus/ThesaurusController.php" />
         <option value="$PROJECT_DIR$/assets/js/thesaurus.js" />
       </list>
     </option>
@@ -248,6 +255,24 @@
               <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
+            <path>
+              <item name="sesame.be" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sesame.be" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="sesame.be" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sesame.be" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="sesame.be" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sesame.be" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -310,18 +335,17 @@
       <workItem from="1524585509373" duration="13776000" />
       <workItem from="1524633007335" duration="6414000" />
       <workItem from="1524675833901" duration="2184000" />
-      <workItem from="1524814929806" duration="1942000" />
+      <workItem from="1524814929806" duration="3405000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="164169000" />
+    <option name="totallyTimeSpent" value="165632000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17857143" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17857143" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5117271" side_tool="true" visible="true" weight="0.32897604" />
@@ -330,7 +354,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5317708" weight="0.20403826" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.48827294" visible="true" weight="0.32897604" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.48827294" visible="true" weight="0.32897604" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -350,13 +374,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Entity/Thesaurus/Gesture/Tag.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/DataFixtures/AppFixtures.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2635">
@@ -665,10 +682,15 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Admin/GestureController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-204" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Thesaurus/ThesaurusController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="53" column="41" selection-start-line="53" selection-start-column="41" selection-end-line="53" selection-end-column="41" />
+        <state relative-caret-position="221">
+          <caret line="47" column="67" selection-start-line="47" selection-start-column="67" selection-end-line="47" selection-end-column="67" />
           <folding>
             <element signature="e#44#102#0#PHP" expanded="true" />
           </folding>
@@ -677,8 +699,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/thesaurus.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="348" column="30" selection-start-line="348" selection-start-column="30" selection-end-line="348" selection-end-column="30" />
+        <state relative-caret-position="255">
+          <caret line="15" column="108" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="108" />
         </state>
       </provider>
     </entry>
