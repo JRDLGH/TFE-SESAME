@@ -63,6 +63,14 @@ class GestureController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            var_dump($form->getData()->getIsPublished());
+            //if published and previous published data is empty, set published data to today!
+            //in every other cases, do nothing!
+            if($form->getData()->getIsPublished() && empty($form->getData()->getPublicationDate())){
+                $form->getData()->setPublicationDate(new \DateTime("now",new \DateTimeZone("Europe/Brussels")));
+            }
+            var_dump($form->getData()->getPublicationDate());
+            die();
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('thesaurus_gesture_edit', ['id' => $gesture->getId()]);
