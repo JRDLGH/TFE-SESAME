@@ -210,7 +210,7 @@ class Gesture
      */
     public function onPrePersist()
     {
-        $this->creationDate = new \DateTime("now");
+        $this->creationDate = new \DateTime("now",new \DateTimeZone("Europe/Brussels"));
     }
 
 }
