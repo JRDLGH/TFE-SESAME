@@ -154,3 +154,29 @@ li {
         }
     }
 }
+
+.red-text{
+    color:$red;
+}
+
+.green-text{
+    color:$green;
+}
+
+.yellow-text{
+    color:$heavy-yellow;
+}
+
+.display-none{
+    display: none;
+}
+
+.display-block{
+    display: block;
+}
+
+.separator{
+    background-color: $shadow-body;
+    margin: 1.5rem 0;
+    width: 100%;
+}

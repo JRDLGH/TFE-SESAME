@@ -21,16 +21,60 @@ class GestureRepository extends ServiceEntityRepository
 
     public function findAllPublished()
     {
-        $conn = $this->getEntityManager()->getConnection();
-        $sql = 'SELECT g.id, g.name, t.keyword
-                  FROM gesture as g natural join tag as t 
-                  WHERE g.is_published is true';
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll();
+        $dql = "SELECT g 
+                  FROM App\Entity\Thesaurus\Gesture g
+                WHERE g.isPublished = 1
+                ORDER BY g.id";
+
+        $query = $this->getEntityManager()->createQuery($dql);
+
+        return $query->execute();
 
     }
 
+    public function findPublishedById($id){
+        $dql= "SELECT g
+                  FROM App\Entity\Thesaurus\Gesture g
+               WHERE g.id = :id AND g.isPublished = 1";
+
+        $query= $this->getEntityManager()->createQuery($dql);
+        $query->setParameters([
+            'id' => $id
+        ]);
+
+        return $query->execute();
+    }
+
+    public function findByTagNameExcludeNameBeginBy($tag){
+
+        $dql = "SELECT g
+                  FROM App\Entity\Thesaurus\Gesture g 
+                    JOIN g.tags as t
+                WHERE t.keyword like :tag AND g.name not like :tag AND g.isPublished = 1
+                GROUP BY g.id";
+
+        $query = $this->getEntityManager()->createQuery($dql);
+        $query->setParameters([
+            'tag' => $tag.'%'
+        ]);
+
+        return $query->execute();
+
+    }
+
+    public function findByNameBeginBy($name){
+        $dql = "SELECT g
+                  FROM App\Entity\Thesaurus\Gesture g
+                WHERE g.name like :name AND g.isPublished = 1";
+
+        $query = $this->getEntityManager()->createQuery($dql);
+        $query->setParameters([
+            'name' => $name.'%',
+        ]);
+
+         return $query->execute();
+
+    }
 //    /**
 //     * @return Gesture[] Returns an array of Gesture objects
 //     */
