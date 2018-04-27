@@ -20,7 +20,7 @@ Routing.setRoutingData(routes);
 /**
  * DEBUGGING SECTION
  */
-console.log(routes);
+// console.log(routes);
 /**
  * DEBUGGING END
  */
@@ -53,8 +53,6 @@ $(document).ready(function(){
             if(valuePosition == -1 || previousValue['value'] == '' || valuePosition != previousValue['position']){
                 previousValue['value'] = value;
                 previousValue['position'] = value.indexOf(previousValue['value']);
-                console.log("new value");
-                console.log(previousValue);
                 askGestures(value);
             }else{
                 //update current value
@@ -108,7 +106,9 @@ $(document).ready(function(){
 
 });
 
-
+/**
+ * jQuery animation that scrolls to gestures container.
+ */
 function scrollToContainer(){
 
     var space = '50';
@@ -116,6 +116,18 @@ function scrollToContainer(){
         $('body, html').animate({
             scrollTop: position
         },1000);
+}
+
+/**
+ * jQuery animation that scolls to details container.
+ */
+function scrollToDetailsContainer(){
+
+    var space = '50';
+    var position = getDetailsContainer().offset().top - $('header').outerHeight() - space;
+    $('body, html').animate({
+        scrollTop: position
+    },1000);
 }
 
 
@@ -179,6 +191,11 @@ function matchNames(pattern,nameMatched){
     return matched;
 }
 
+/**
+ * Format HTML for a gesture details.
+ * @param gesture
+ * @return {string}, the html details
+ */
 function formatHTML(gesture){
     var cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
     cover = "/build/static/thesaurus/gestures/" + cover;
@@ -220,6 +237,11 @@ function formatHTML(gesture){
    return html;
 }
 
+/**
+ * Format the HTML for gesture displayed in a list.
+ * @param gesture
+ * @return {string}
+ */
 function listHTML(gesture) {
     var cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
     cover = "/build/static/thesaurus/gestures/" + cover;
@@ -239,6 +261,11 @@ function listHTML(gesture) {
     return html;
 }
 
+/**
+ * Display gestures depending on the data given and the type of display.
+ * @param data
+ * @param type
+ */
 function display(data,type){
 
     var gIds = getGestureId(data);
@@ -285,6 +312,11 @@ function compareArray(array1,array2){
     return JSON.stringify(array1)==JSON.stringify(array2);
 }
 
+/**
+ * Return the id of all the gestures inside the array.
+ * @param gArray
+ * @return {*}
+ */
 function getGestureId(gArray){
     if(isArray(gArray)){
         var ids = gArray.map(function(gesture){
@@ -294,6 +326,10 @@ function getGestureId(gArray){
     }
 }
 
+/**
+ * Display/hide a container depending on the container to display.
+ * @param container
+ */
 function containerDisplay(container){
     switch (container){
         case 'details':
@@ -306,12 +342,17 @@ function containerDisplay(container){
     }
 }
 
+
 function showDetails(){
     getContainer().addClass('display-none');
     getDetailsContainer().addClass('display-block').addClass('opened');
-    scrollToContainer();
+    scrollToDetailsContainer();
 }
 
+/**
+ * Allow you to go back on search.
+ * @return {string}
+ */
 function backToSearchButton() {
     return '<button class="btn btn-primary js-previous-search">Retourner à la recherche</button>';
 }
@@ -530,6 +571,10 @@ function splitIntoTags(tags){
     return tags;
 }
 
+/**
+ * Verify if the value given is correct and if it is, query the database with.
+ * @param value
+ */
 function askGestures(value){
     //REGEX -- ALLOW ONLY LETTERS
     if(isValid(value))
