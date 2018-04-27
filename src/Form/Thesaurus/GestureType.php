@@ -17,9 +17,9 @@ class GestureType extends AbstractType
             ->add('video')
             ->add('cover')
             ->add('description')
-            ->add('creationDate')
+//            ->add('creationDate')
             ->add('isPublished')
-            ->add('publicationDate')
+//            ->add('publicationDate')
             ->add('tags')
         ;
     }
