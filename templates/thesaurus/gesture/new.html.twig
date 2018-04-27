@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% trans_default_domain 'admin' %}
 
 {% block title %}Nouveau geste{% endblock %}
 
@@ -7,5 +8,12 @@
 
     {{ include('thesaurus/gesture/_form.html.twig') }}
 
-    <a href="{{ path('thesaurus_gesture_index') }}">back to list</a>
+    <div class="help-links">
+        <a href="{{ path('thesaurus_gesture_index') }}">
+            <i class="fa fa-undo action-icon"></i>
+            <span class="action-name">
+            {{ 'admin.control.back_to_list'|trans|capitalize }}
+            </span>
+        </a>
+    </div>
 {% endblock %}

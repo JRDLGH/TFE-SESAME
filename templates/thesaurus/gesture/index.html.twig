@@ -4,12 +4,22 @@
 {% block title %}Gesture index{% endblock %}
 
 {% block content %}
-    <h1>Gesture index</h1>
+    <h1>{{ 'admin.gesture.list'|trans }}</h1>
 
-    <table class="table">
+    <form action="#" class="form-container">
+        <div class="form-group">
+            <label for="search_gesture">Rechercher un geste</label>
+            <div class="search-input row input-group">
+                <span class="input-logo" id="sizing-addon1 col-1"><i class="fa fa-search fa"></i></span>
+                <input type="text" name="search_gesture" id="search" class="form-control col-11" placeholder="Rechercher un geste ici...">
+            </div>
+        </div>
+    </form>
+
+
+    <table class="table admin-table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>{{ 'admin.gesture.name'|trans }}</th>
                 <th>{{ 'admin.gesture.profileVideo'|trans }}</th>
                 <th>{{ 'admin.gesture.video'|trans }}</th>
@@ -22,15 +32,21 @@
         <tbody>
         {% for gesture in gestures %}
             <tr>
-                <td>{{ gesture.name }}</td>
+                <td class="td-lead">{{ gesture.name|capitalize }}</td>
                 <td>{{ gesture.profileVideo ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
                 <td>{{ gesture.video ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
                 <td>{{ gesture.cover ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
                 <td>{{ gesture.description ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
-                <td>{{ gesture.isPublished ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
-                <td>
-                    <a href="{{ path('thesaurus_gesture_show', {'id': gesture.id}) }}">{{ 'admin.control.show'|trans }}</a>
-                    <a href="{{ path('thesaurus_gesture_edit', {'id': gesture.id}) }}">{{ 'admin.control.modify'|trans }}</a>
+                <td>{{ gesture.publicationDate ? gesture.publicationDate|date('d/m/Y') : 'admin.control.no'|trans }}</td>
+                <td class="actions">
+                    <a class="action-link" href="{{ path('thesaurus_gesture_show', {'id': gesture.id}) }}">
+                        <i class="fa fa-eye action-icon"></i>
+                        <span class="action-name">{{ 'admin.control.show'|trans|capitalize }}</span>
+                    </a>
+                    <a class="action-link" href="{{ path('thesaurus_gesture_edit', {'id': gesture.id}) }}">
+                        <i class="fa fa-edit action-icon"></i>
+                        <span class="action-name">{{ 'admin.control.modify'|trans|capitalize }}</span>
+                    </a>
                 </td>
             </tr>
         {% else %}
@@ -41,5 +57,10 @@
         </tbody>
     </table>
 
-    <a href="{{ path('thesaurus_gesture_new') }}">Create new</a>
+    <a class="action-link" href="{{ path('thesaurus_gesture_new') }}">
+        <i class="fa fa-plus action-icon"></i>
+        <span class="action-name">
+            {{ 'admin.control.create'|trans }}
+        </span>
+    </a>
 {% endblock %}

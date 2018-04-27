@@ -18,6 +18,7 @@ $img-dir:'../img/';
 
 /* THEME COLOR */
 $blue:#61c5f3;
+$secondary:#6c757d;
 $light-blue:rgb(97, 221, 243);
 $light:#e7e7e7;
 $red:rgb(223, 116, 102);
@@ -97,6 +98,19 @@ $light-main:  lighten($main, 10%);
 $darker-body: darken($body,1%);
 $shadow-body: darken($darker-body,10%);
 
+/**
+  TABLES
+ */
+/* ADMIN-TABLE */
+$table-head-bg-color:$secondary;
+$table-head-color:lighten($body,10%);
+
+$td-lead-color:darken($secondary,25%);
+$action-color:white;
+$actions-hover-color:$main;
+
+
 $theme-colors: (
   "primary": $main,
+  "secondary":$secondary,
 );

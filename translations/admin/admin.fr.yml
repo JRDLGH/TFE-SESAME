@@ -1,5 +1,6 @@
 admin:
   gesture:
+    list: 'Liste des gestes'
     title: 'Gestes'
     name: 'Nom'
     profileVideo: 'Vidéo de profil'
@@ -15,7 +16,8 @@ admin:
     back_to_list: "Retourner à la liste"
     yes: 'Oui'
     no: 'Non'
-    add: 'ajouter'
-    modify: 'modifer'
-    delete: 'supprimer'
+    create: 'Créer un nouveau geste'
+    add: 'Ajouter'
+    modify: 'Modifier'
+    delete: 'Supprimer'
     show: 'Voir'

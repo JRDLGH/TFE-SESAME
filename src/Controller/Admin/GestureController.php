@@ -65,15 +65,17 @@ class GestureController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             var_dump($form->getData()->getIsPublished());
             //if published and previous published data is empty, set published data to today!
-            //in every other cases, do nothing!
-            if($form->getData()->getIsPublished() && empty($form->getData()->getPublicationDate())){
+            if($form->getData()->getIsPublished() && empty($form->getData()->getPublicationDate()))
+            {
                 $form->getData()->setPublicationDate(new \DateTime("now",new \DateTimeZone("Europe/Brussels")));
             }
-            var_dump($form->getData()->getPublicationDate());
-            die();
+            else if(!$form->getData()->getIsPublished() && !empty($form->getData()->getPublicationDate()))
+            {
+                $form->getData()->setPublicationDate(null);
+            }
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('thesaurus_gesture_edit', ['id' => $gesture->getId()]);
+            $this->addFlash('success','Vos modifications ont été enregistrées.');
+            return $this->redirectToRoute('thesaurus_gesture_show', ['id' => $gesture->getId()]);
         }
 
         return $this->render('thesaurus/gesture/edit.html.twig', [
