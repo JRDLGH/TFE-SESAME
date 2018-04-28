@@ -22,15 +22,29 @@ class TagsTransformer implements DataTransformerInterface{
     public function reverseTransform($string) : array
     {
         //Get all keywords used
-        $keywords = explode(',',$string);
-
+        $keywords = array_map('trim',explode(',',$string));
+        //tolower all cells
+        $keywords = array_map('strtolower',$keywords);
+        //remove empty tags and duplicated ones
+        $keywords = array_unique(array_filter($keywords));
 
         //Verify in database if they dont already exist
         $tags = $this->manager->getRepository(Tag::class)->findBy([
             'keyword' => $keywords
         ]);
 
-        $newTags = array_diff($keywords,$tags);
-    }
+        foreach($tags as $tag){
+            //put each tag keyword as tolower
+            $tag->setKeyword(strtolower($tag->getKeyword()));
+        }
 
+        $newTags = array_diff($keywords,$tags);
+        foreach ($newTags as $newTag){
+            $tag = new Tag();
+            $tag->setKeyword($newTag);
+            $tags[] = $tag;
+        }
+
+        return $tags;
+    }
 }
