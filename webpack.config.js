@@ -13,7 +13,7 @@ Encore
 
 
 
-    // will create public/build/app.js and public/build/thesaurus.css
+    // will create public/build/thesaurus.js and public/build/thesaurus.css
     .addEntry('thesaurus', './assets/js/thesaurus.js')
     .addEntry('admin', './assets/js/admin.js')
 

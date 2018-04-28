@@ -2,11 +2,12 @@
 
 import swal from 'sweetalert';
 import './Components/filter';
+import tagsinput from 'bootstrap-tagsinput';
 
 $(document).ready(function(){
     $(document).on('submit','.js-delete-gesture',confirmDelete);
+    $('.tag-input').tagsinput();
 });
-
 
 function confirmDelete(){
     swal({

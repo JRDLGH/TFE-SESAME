@@ -3,6 +3,10 @@
 
 {% block title %}{{ 'admin.gesture.edit'|trans }}{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/bootstrap-tagsinput.css') }}">
+{% endblock %}
+
 {% block content %}
     <h1>{{ 'admin.gesture.edit'|trans }}</h1>
 

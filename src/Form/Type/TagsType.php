@@ -35,7 +35,8 @@ class TagsType extends AbstractType {
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefault('attr',[
-            'class' => 'tag-input'
+            'class' => 'tag-input',
+            'data-role' => 'tagsinput'
         ]);
         //Set this input as non required by default
         $resolver->setDefault('required',false);
