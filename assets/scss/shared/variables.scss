@@ -79,8 +79,6 @@ $banner-height-xl:30vh;
 /* THESAURUS */
 $search-button-color:darken($body,10%);
 
-/* FORMS */
-$input-border-color: darken($body,15%);
 /* ANIMATIONS */
 $extra-short-duration:0.3s;
 $short-duration:0.5s;
@@ -97,6 +95,10 @@ $main: $blue;
 $light-main:  lighten($main, 10%);
 $darker-body: darken($body,1%);
 $shadow-body: darken($darker-body,10%);
+
+/* FORMS */
+$input-border-color: darken($body,15%);
+$required-input-border-color:darken($main,10%);
 
 /**
   TABLES

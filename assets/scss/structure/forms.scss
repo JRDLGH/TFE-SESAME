@@ -37,8 +37,21 @@ form {
             //     display: none; NOT SUPPORTED IE9
             // }
         }
-
+        .form-control-label{
+            &.required{
+                &::after{
+                    content:" \2217";
+                    color:$red;
+                    display: inline;
+                }
+            }
+        }
         .form-control {
+            &:required{
+                border-left: .25rem solid $required-input-border-color;
+                border-bottom-left-radius: .5rem;
+                border-top-left-radius: .5rem;
+            }
 
             border: 1px solid $input-border-color;
             border-radius: 3px;
