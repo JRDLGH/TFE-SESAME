@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2286757d-c8e4-4c57-8ffb-c9c80e15daf7" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sesame.be.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sesame.be.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/DataTransformer/TagsTransformer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/DataTransformer/TagsTransformer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Form/DataTransformer/TagsTransformerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Form/DataTransformer/TagsTransformerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/Type/TagsType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/Type/TagsType.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -47,11 +43,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="TagsType.php" pinned="false" current-in-tab="false">
+          <file leaf-file-name="TagsType.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Form/Type/TagsType.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="153">
-                  <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
+                <state relative-caret-position="466">
+                  <caret line="38" column="11" lean-forward="true" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
                   <folding>
                     <element signature="e#33#78#0#PHP" expanded="true" />
                   </folding>
@@ -71,11 +67,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="TagsTransformerTest.php" pinned="false" current-in-tab="true">
+          <file leaf-file-name="TagsTransformerTest.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/tests/Form/DataTransformer/TagsTransformerTest.php">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="245">
-                  <caret line="45" column="36" selection-start-line="45" selection-start-column="36" selection-end-line="45" selection-end-column="36" />
+                  <caret line="45" column="42" lean-forward="true" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
                   <folding>
                     <element signature="e#49#94#0#PHP" expanded="true" />
                   </folding>
@@ -218,10 +214,10 @@
         <option value="$PROJECT_DIR$/translations/validator.fr.yml" />
         <option value="$PROJECT_DIR$/src/Form/Thesaurus/GestureType.php" />
         <option value="$PROJECT_DIR$/config/services.yaml" />
-        <option value="$PROJECT_DIR$/src/Form/Type/TagsType.php" />
         <option value="$PROJECT_DIR$/src/Tests/Form/DataTransformer/TagsTransformerTest.php" />
         <option value="$PROJECT_DIR$/src/Form/DataTransformer/TagsTransformer.php" />
         <option value="$PROJECT_DIR$/tests/Form/DataTransformer/TagsTransformerTest.php" />
+        <option value="$PROJECT_DIR$/src/Form/Type/TagsType.php" />
       </list>
     </option>
   </component>
@@ -463,12 +459,12 @@
       <workItem from="1524633007335" duration="6414000" />
       <workItem from="1524675833901" duration="2184000" />
       <workItem from="1524814929806" duration="3405000" />
-      <workItem from="1524899496078" duration="27062000" />
+      <workItem from="1524899496078" duration="27310000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="215939000" />
+    <option name="totallyTimeSpent" value="216187000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -813,16 +809,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/Type/TagsType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
-          <folding>
-            <element signature="e#33#78#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Thesaurus/Gesture/Tag.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -837,6 +823,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/Form/DataTransformer/TagsTransformerTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="45" column="42" lean-forward="true" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
+          <folding>
+            <element signature="e#49#94#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/DataTransformer/TagsTransformer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="449">
@@ -847,12 +843,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/Form/DataTransformer/TagsTransformerTest.php">
+    <entry file="file://$PROJECT_DIR$/src/Form/Type/TagsType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="45" column="36" selection-start-line="45" selection-start-column="36" selection-end-line="45" selection-end-column="36" />
+        <state relative-caret-position="466">
+          <caret line="38" column="11" lean-forward="true" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
           <folding>
-            <element signature="e#49#94#0#PHP" expanded="true" />
+            <element signature="e#33#78#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
