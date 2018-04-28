@@ -36,3 +36,9 @@ services:
         autowire: true
         tags:
             - { name: kernel.event_subscriber }
+
+    app.form.type.tags:
+      class: App\Form\Type\TagsType
+      arguments: ['@doctrine.orm.entity_manager']
+      tags:
+        - { name: form.type }

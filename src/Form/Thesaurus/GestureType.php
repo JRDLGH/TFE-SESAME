@@ -3,6 +3,7 @@
 namespace App\Form\Thesaurus;
 
 use App\Entity\Thesaurus\Gesture;
+use App\Form\Type\TagsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,7 +20,7 @@ class GestureType extends AbstractType
             ->add('cover')
             ->add('description',TextareaType::class)
             ->add('isPublished')
-            ->add('tags')
+            ->add('tags',TagsType::class)
         ;
     }
 
