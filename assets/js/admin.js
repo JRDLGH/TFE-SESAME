@@ -1,6 +1,7 @@
 'use strict';
 
 import swal from 'sweetalert';
+import './Components/filter';
 
 $(document).ready(function(){
     $(document).on('submit','.js-delete-gesture',confirmDelete);

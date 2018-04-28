@@ -17,6 +17,11 @@ table{
       vertical-align:middle;
       border:0;
     }
+    th{
+      a{
+        color:$white;
+      }
+    }
     tr{
       margin: 0;
       &:nth-child(even){

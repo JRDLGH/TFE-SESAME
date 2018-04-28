@@ -6,6 +6,7 @@ use App\Entity\Thesaurus\Gesture;
 use App\Form\Thesaurus\GestureType;
 use App\Repository\GestureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,15 +17,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class GestureController extends Controller
 {
     /**
-     * @Route("/", name="thesaurus_gesture_index", methods="GET")
+     * @Route("/", name="thesaurus_gesture_index", methods="GET",options={"expose"=true})
      */
-    public function index(Request $request, GestureRepository $gestureRepository): Response
+    public function index(Request $request): Response
     {
 
 //        $gestures = $gestureRepository->findAll();
         $paginator = $this->get('knp_paginator');
         $dql = 'SELECT g FROM App\Entity\Thesaurus\Gesture g';
-        $query = $this->getDoctrine()->getManager()->createQuery($dql);
+        $manager = $this->getDoctrine()->getManager();
+        $queryBuilder = $manager->getRepository(Gesture::class)->createQueryBuilder('g');
+
+        if($request->query->get('filter')){
+            $queryBuilder->where('g.name LIKE :name')
+                ->setParameter('name','%'. $request->query->get('filter') .'%');
+        }
+
+        $query = $queryBuilder->getQuery();
 
         $result = $paginator->paginate(
             $query,
@@ -32,7 +41,10 @@ class GestureController extends Controller
             $request->query->getInt('limit',5)
         );
 
-
+        if($request->isXmlHttpRequest()){
+            return $this->render('thesaurus/gesture/list_pagination.html.twig', [
+                'gestures' => $result]);
+        }
         return $this->render('thesaurus/gesture/index.html.twig', [
             'gestures' => $result
         ]);

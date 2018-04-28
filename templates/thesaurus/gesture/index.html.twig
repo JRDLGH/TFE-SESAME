@@ -8,59 +8,18 @@
 
     {{ include('thesaurus/gesture/details.html.twig') }}
 
-    <form action="#" class="form-container">
+    <form action="#" class="form-container search-form">
         <div class="form-group">
             <label for="search_gesture">{{ 'admin.gesture.search'|trans }}</label>
             <div class="search-input row input-group">
-                <span class="input-logo" id="sizing-addon1 col-1"><i class="fa fa-search fa"></i></span>
-                <input type="text" name="search_gesture" id="search" class="form-control col-11" placeholder="Rechercher un geste ici...">
+                <input type="text" name="search_gesture" id="search" class="form-control col-11">
+                <a class="input-logo search-action" id="sizing-addon1 col-1"><i class="fa fa-search fa"></i>Rechercher</a>
             </div>
         </div>
     </form>
 
-
-    <table class="table admin-table">
-        <thead>
-            <tr>
-                <th>{{ knp_pagination_sortable(gestures,'admin.gesture.name'|trans,'g.name') }}</th>
-                <th>{{ knp_pagination_sortable(gestures,'admin.gesture.profileVideo'|trans,'g.profileVideo') }}</th>
-                <th>{{ knp_pagination_sortable(gestures,'admin.gesture.video'|trans,'g.video') }}</th>
-                <th>{{ knp_pagination_sortable(gestures,'admin.gesture.cover'|trans,'g.cover') }}</th>
-                <th>{{ knp_pagination_sortable(gestures,'admin.gesture.description'|trans,'g.description') }}</th>
-                <th>{{ knp_pagination_sortable(gestures,'admin.gesture.isPublished'|trans,'g.isPublished') }}</th>
-                <th>{{ 'admin.control.actions'|trans }}</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for gesture in gestures %}
-            <tr>
-                <td class="td-lead">{{ gesture.name|capitalize }}</td>
-                <td>{{ gesture.profileVideo ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
-                <td>{{ gesture.video ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
-                <td>{{ gesture.cover ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
-                <td>{{ gesture.description ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
-                <td>{{ gesture.publicationDate ? gesture.publicationDate|date('d/m/Y') : 'admin.control.no'|trans }}</td>
-                <td class="actions">
-                    <a class="action-link" href="{{ path('thesaurus_gesture_show', {'id': gesture.id}) }}">
-                        <i class="fa fa-eye action-icon"></i>
-                        <span class="action-name">{{ 'admin.control.show'|trans|capitalize }}</span>
-                    </a>
-                    <a class="action-link" href="{{ path('thesaurus_gesture_edit', {'id': gesture.id}) }}">
-                        <i class="fa fa-edit action-icon"></i>
-                        <span class="action-name">{{ 'admin.control.modify'|trans|capitalize }}</span>
-                    </a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="10">Aucun geste trouvé...</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    {# display navigation #}
-    <div class="navigation">
-        {{ knp_pagination_render(gestures) }}
+    <div class="pagination-content">
+        {{ include('thesaurus/gesture/list_pagination.html.twig') }}
     </div>
 
     <a class="action-link" href="{{ path('thesaurus_gesture_new') }}">
@@ -69,4 +28,8 @@
             {{ 'admin.control.create'|trans }}
         </span>
     </a>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/admin.js') }}"></script>
 {% endblock %}
