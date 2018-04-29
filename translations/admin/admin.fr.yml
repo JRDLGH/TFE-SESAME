@@ -1,21 +1,39 @@
 admin:
+  constraints:
+    gesture:
+      name:
+        unique: 'Ce geste existe déjà.'
+        min: 'Le nom du geste doit faire au moins 2 caractères.'
+        max: 'Le nom du geste doit faire au maximum 50 caractères.'
+        type: 'Le nom du geste doit être une chaîne de caractères.'
+      description:
+        min: 'La description doit être d''au moins x caractères.'
+        max: 'La description ne peut pas être plus longue que 255 caractères.'
+
   gesture:
-    title: 'Gestes'
+    list: 'Liste des gestes'
+    show: 'Preview du geste'
+    new: 'Nouveau geste'
+    search: 'Rechercher un geste'
+    edit: 'Modification du geste'
     name: 'Nom'
     profileVideo: 'Vidéo de profil'
     video: 'Vidéo'
     cover: 'Image'
-    description: "Description"
+    description: 'Description'
     creationDate: 'Date de création'
-    isPublished: 'Publié'
+    isPublished: 'Publier le geste'
     publicationDate: 'Date de publication'
+    tags: 'Mots-clés à utiliser pour la recherche'
 
   control:
     actions: 'Actions'
-    back_to_list: "Retourner à la liste"
+    back_to_list: 'Retourner à la liste'
     yes: 'Oui'
     no: 'Non'
-    add: 'ajouter'
-    modify: 'modifer'
-    delete: 'supprimer'
+    create: 'Créer un nouveau geste'
+    add: 'Ajouter'
+    modify: 'Modifier'
+    delete: 'Supprimer'
     show: 'Voir'
+    save: 'Enregistrer'

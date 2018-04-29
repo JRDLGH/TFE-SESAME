@@ -1,46 +1,35 @@
 {% extends 'base.html.twig' %}
 {% trans_default_domain 'admin' %}
 
-{% block title %}Gesture index{% endblock %}
+{% block title %}{{ 'admin.gesture.list'|trans }}{% endblock %}
 
 {% block content %}
-    <h1>Gesture index</h1>
+    <h1>{{ 'admin.gesture.list'|trans }}</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>{{ 'admin.gesture.name'|trans }}</th>
-                <th>{{ 'admin.gesture.profileVideo'|trans }}</th>
-                <th>{{ 'admin.gesture.video'|trans }}</th>
-                <th>{{ 'admin.gesture.cover'|trans }}</th>
-                <th>{{ 'admin.gesture.description'|trans }}</th>
-                <th>{{ 'admin.gesture.isPublished'|trans }}</th>
-                <th>{{ 'admin.control.actions'|trans }}</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for gesture in gestures %}
-            <tr>
-                <td>{{ gesture.id }}</td>
-                <td>{{ gesture.name }}</td>
-                <td>{{ gesture.profileVideo ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
-                <td>{{ gesture.video ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
-                <td>{{ gesture.cover ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
-                <td>{{ gesture.description ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
-                <td>{{ gesture.isPublished ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
-                <td>
-                    <a href="{{ path('thesaurus_gesture_show', {'id': gesture.id}) }}">{{ 'admin.control.show'|trans }}</a>
-                    <a href="{{ path('thesaurus_gesture_edit', {'id': gesture.id}) }}">{{ 'admin.control.modify'|trans }}</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="10">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {{ include('thesaurus/gesture/details.html.twig') }}
 
-    <a href="{{ path('thesaurus_gesture_new') }}">Create new</a>
+    <form action="#" class="form-container search-form">
+        <div class="form-group">
+            <label for="search_gesture">{{ 'admin.gesture.search'|trans }}</label>
+            <div class="search-input row input-group">
+                <input type="text" name="search_gesture" id="search" class="form-control col-11">
+                <a class="input-logo search-action" id="sizing-addon1 col-1"><i class="fa fa-search fa"></i>Rechercher</a>
+            </div>
+        </div>
+    </form>
+
+    <div class="pagination-content">
+        {{ include('thesaurus/gesture/list_pagination.html.twig') }}
+    </div>
+
+    <a class="action-link" href="{{ path('thesaurus_gesture_new') }}">
+        <i class="fa fa-plus action-icon"></i>
+        <span class="action-name">
+            {{ 'admin.control.create'|trans }}
+        </span>
+    </a>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/admin.js') }}"></script>
 {% endblock %}

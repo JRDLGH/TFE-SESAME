@@ -13,25 +13,7 @@ section{
         width: 100%;
         form{
             margin-top:1%;
-            .search-input{
-                margin: 0;
-                width: 100%;
-                height: 50%;
-                input{
-                    height: 100%;
-                }
-                .input-logo{
-
-                    background-color: $main;
-                    padding: 0 .5rem;
-                    color:white;
-                    border-top-left-radius:3px;
-                    border-bottom-left-radius:3px;
-                    display: flex;
-                    align-items: center;
-
-                }
-            }
+            //search
         }
         .gestures-container{
 

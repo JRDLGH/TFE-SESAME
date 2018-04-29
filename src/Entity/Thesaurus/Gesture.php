@@ -7,10 +7,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="App\Repository\GestureRepository")
+ * @UniqueEntity(
+ *     fields={"name"},
+ *     message="admin.constraints.gesture.name.unique",
+ * )
  */
 class Gesture
 {
@@ -25,12 +32,26 @@ class Gesture
     /**
      * @ORM\Column(type="string", length=50)
      * @Groups({"list","show"})
+     * @Assert\NotBlank()
+     * @Assert\Type(
+     *     type="string",
+     *     message="admin.constraints.gesture.name.type"
+     * )
+     * @Assert\Length(
+     *     min=2,
+     *     max=50,
+     *     minMessage="admin.constraints.gesture.name.min",
+     *     maxMessage="admin.constraints.gesture.name.max",
+     * )
+     *
+     *
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"show"})
+     *
      */
     private $profileVideo;
 
@@ -49,6 +70,12 @@ class Gesture
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"list","show"})
+     * @Assert\Length(
+     *     min= "5",
+     *     max= "255",
+     *     minMessage="admin.constraints.gesture.description.min",
+     *     maxMessage="admin.constraints.gesture.description.max",
+     * )
      */
     private $description;
 
@@ -210,7 +237,7 @@ class Gesture
      */
     public function onPrePersist()
     {
-        $this->creationDate = new \DateTime("now");
+        $this->creationDate = new \DateTime("now",new \DateTimeZone("Europe/Brussels"));
     }
 
 }

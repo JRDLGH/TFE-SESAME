@@ -2,10 +2,19 @@
 
 {% trans_default_domain 'admin' %}
 
-{% block title %}Gesture{% endblock %}
+{% block title %}{{ 'admin.gesture.show'|trans }}{% endblock %}
 
 {% block content %}
-    <h1>{{ 'admin.gesture.title'|trans }}</h1>
+    <h1>{{ 'admin.gesture.show'|trans }}</h1>
+
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
 
     <table class="table">
         <tbody>
@@ -35,22 +44,42 @@
             </tr>
             <tr>
                 <th>{{ 'admin.gesture.creationDate'|trans }}</th>
-                <td>{{ gesture.creationDate ? gesture.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ gesture.creationDate ? gesture.creationDate|date('d/m/Y H:i') : '' }}</td>
             </tr>
             <tr>
                 <th>{{ 'admin.gesture.isPublished'|trans }}</th>
                 <td>{{ gesture.isPublished ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
             </tr>
             <tr>
-                <th>{{ 'admin.gesture.publicationDate'|trans }}</th>
-                <td>{{ gesture.publicationDate ? gesture.publicationDate|date('Y-m-d H:i:s') : '' }}</td>
+                {% if(gesture.isPublished) %}
+                    <th>{{ 'admin.gesture.publicationDate'|trans }}</th>
+                    <td>{{ gesture.publicationDate ? gesture.publicationDate|date('d/m/Y H:i') : '' }}</td>
+                {% endif %}
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('thesaurus_gesture_index') }}">{{ 'admin.control.back_to_list'|trans }}</a>
 
-    <a href="{{ path('thesaurus_gesture_edit', {'id': gesture.id}) }}">{{ 'admin.control.modify'|trans }}</a>
+    <div class="help-links">
+        <a href="{{ path('thesaurus_gesture_index') }}">
+            <i class="fa fa-undo action-icon"></i>
+            <span class="action-name">
+            {{ 'admin.control.back_to_list'|trans|capitalize }}
+            </span>
+        </a>
+
+        <a href="{{ path('thesaurus_gesture_edit', {'id': gesture.id}) }}">
+            <i class="fa fa-edit action-icon"></i>
+            <span class="action-name">
+            {{ 'admin.control.modify'|trans|capitalize }}
+            </span>
+        </a>
+    </div>
 
     {{ include('thesaurus/gesture/_delete_form.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }} {# In order to add after parent's content #}
+    <script src="{{ asset('build/admin.js') }}"></script>
 {% endblock %}

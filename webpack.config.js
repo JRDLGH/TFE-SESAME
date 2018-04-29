@@ -1,5 +1,6 @@
 var Encore = require('@symfony/webpack-encore');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const
 const sassVars = require('./assets/js/Components/theme');
 const sass = require('node-sass');
 const sassUtils = require('node-sass-utils')(sass);
@@ -11,11 +12,14 @@ Encore
     // the public path used by the web server to access the previous directory
     .setPublicPath('/build')
 
+
+
+    // will create public/build/thesaurus.js and public/build/thesaurus.css
+    .addEntry('thesaurus', './assets/js/thesaurus.js')
+    .addEntry('admin', './assets/js/admin.js')
+
     // allow to load jQuery once in order to don't load for each files that require this module
     .createSharedEntry('layout','./assets/js/layout.js')
-
-    // will create public/build/app.js and public/build/thesaurus.css
-    .addEntry('thesaurus', './assets/js/thesaurus.js')
 
     // .addPlugin(new sassUtils())
     // allow sass/scss files to be processed
