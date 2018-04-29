@@ -53,7 +53,10 @@ header {
 
         .nav-menu {
 
-            width: 58%;
+            width: 68%;
+            @include media-breakpoint-up(xl){
+                width:58%;
+            }
             height: 100%;
 
             .nav-links{
