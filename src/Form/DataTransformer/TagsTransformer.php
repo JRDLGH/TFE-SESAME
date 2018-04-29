@@ -23,10 +23,12 @@ class TagsTransformer implements DataTransformerInterface{
     {
         //Get all keywords used
         $keywords = array_map('trim',explode(',',$string));
-        //tolower all cells
-        $keywords = array_map('strtolower',$keywords);
+
+        //tolower all cells, mb because strtolower causes problem with UTF8
+        $keywords = array_map('mb_strtolower',$keywords);
         //remove empty tags and duplicated ones
         $keywords = array_unique(array_filter($keywords));
+
 
         //Verify in database if they dont already exist
         $tags = $this->manager->getRepository(Tag::class)->findBy([
@@ -35,7 +37,7 @@ class TagsTransformer implements DataTransformerInterface{
 
         foreach($tags as $tag){
             //put each tag keyword as tolower
-            $tag->setKeyword(strtolower($tag->getKeyword()));
+            $tag->setKeyword(mb_strtolower($tag->getKeyword()));
         }
 
         $newTags = array_diff($keywords,$tags);

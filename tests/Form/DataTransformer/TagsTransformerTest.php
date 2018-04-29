@@ -11,7 +11,7 @@ class TagsTransformerTest extends TestCase{
 
     public function testCreateTagsArrayFromString(){
         $transfomer = $this->getMockedTransformer();
-        $tags = $transfomer->reverseTransform('manger,boire,jambe');
+        $tags = $transfomer->reverseTransform('manger,LongTag,TrèsLongTag');
         $this->assertCount(3,$tags);
         $this->assertSame('manger',$tags[0]->getKeyword());
     }

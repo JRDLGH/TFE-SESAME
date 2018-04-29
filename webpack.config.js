@@ -1,5 +1,6 @@
 var Encore = require('@symfony/webpack-encore');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const
 const sassVars = require('./assets/js/Components/theme');
 const sass = require('node-sass');
 const sassUtils = require('node-sass-utils')(sass);

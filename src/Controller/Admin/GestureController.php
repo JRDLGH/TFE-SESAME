@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Thesaurus\Gesture;
 use App\Form\Thesaurus\GestureType;
 use App\Repository\GestureRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -77,6 +78,17 @@ class GestureController extends Controller
         ]);
     }
 
+
+    /**
+     * @Route("/tags",name="tags_json",options={"expose"="true"})
+     *
+     */
+    public function getTags(){
+        $tags = $this->getDoctrine()->getRepository(Gesture\Tag::class)->findAll();
+        return $this->json($tags,200,[],['groups'=>['list']]);
+//        return new JsonResponse('hello');
+    }
+
     /**
      * @Route("/{id}", name="thesaurus_gesture_show", methods="GET")
      */
@@ -94,7 +106,6 @@ class GestureController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            var_dump($form->getData()->getIsPublished());
             //if published and previous published data is empty, set published data to today!
             if($form->getData()->getIsPublished() && empty($form->getData()->getPublicationDate()))
             {
@@ -128,4 +139,5 @@ class GestureController extends Controller
 
         return $this->redirectToRoute('thesaurus_gesture_index');
     }
+
 }

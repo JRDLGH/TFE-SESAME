@@ -1,13 +1,57 @@
-'use strict';
-
 import swal from 'sweetalert';
 import './Components/filter';
-import tagsinput from 'bootstrap-tagsinput';
+
+import 'typeahead.js/dist/typeahead.jquery.min';
+import Bloodhound from 'bloodhound-js';
+import 'bootstrap-tagsinput';
+
+
+import 'bootstrap-tagsinput/dist/bootstrap-tagsinput';
+
+import 'bootstrap-tagsinput/dist/bootstrap-tagsinput.css';
+import 'bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css';
+import '../scss/structure/admin/tags.scss';
+
+
+
 
 $(document).ready(function(){
+    var $input = $('input[data-role="tagsinput"]');
+
+    var tags = [];
+    $.get('/admin/thesaurus/gesture/tags',function(data){
+        tags=data;
+    });
+    var source = new Bloodhound({
+        prefetch: '/admin/thesaurus/gesture/tags',
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('keyword'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+    });
+    if ($input.length) {
+        console.log('ok');
+        $input.tagsinput({
+            trimValue: true,
+            focusClass: 'focus',
+            typeaheadjs: [
+                {
+                    hint: true,
+                    highlight: true,
+                    minLength: 1
+                },
+                {
+                    source: ['value1','value2']
+                }
+            ]
+        });
+    }
+    $(document).on('keyup','.bootstrap-tagsinput input',typeah);
+
     $(document).on('submit','.js-delete-gesture',confirmDelete);
-    $('.tag-input').tagsinput();
 });
+
+function typeah(elem){
+    console.log(elem);
+}
 
 function confirmDelete(){
     swal({
