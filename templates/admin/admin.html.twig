@@ -1,0 +1,26 @@
+{% trans_default_domain 'admin' %}
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'admin.space.title'|trans }}
+{%  endblock %}
+
+{% block stylesheets %}
+    {# ADMIN SPACE STYLESHEET #}
+{% endblock %}
+
+{#{%  block navbar %}#}
+    {#{{ parent() }}#}
+    {#{% block navlinks %}#}
+
+
+        {##}
+
+    {#{% endblock %}#}
+{#{%  endblock navbar %}#}
+{% block connectionState %}
+    {{ parent() }}
+{% endblock %}
+
+{% block banner %}
+{% endblock banner %}

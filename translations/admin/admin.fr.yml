@@ -1,4 +1,6 @@
 admin:
+  space:
+    title: 'Espace d''administration'
   gesture:
     title: 'Gestes'
     name: 'Nom'
