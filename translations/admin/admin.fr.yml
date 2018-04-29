@@ -1,8 +1,19 @@
 admin:
   space:
     title: 'Espace d''administration'
+    links:
+      gesture: 'Gestion des gestes'
+      profiles: 'Gérer les profils'
+      back_to_site: 'Quitter'
+
+  gestures:
+    list: 'Gestion des gestes'
+    edit: 'Modifier un geste'
+    show: 'Preview du geste'
+    new: 'Créer un nouveau geste'
+
+
   gesture:
-    title: 'Gestes'
     name: 'Nom'
     profileVideo: 'Vidéo de profil'
     video: 'Vidéo'
