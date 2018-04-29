@@ -7,7 +7,24 @@ form {
 
     padding: 0.5%;
     margin: 1rem 0;
-
+    &.search-form{
+        .search-action{
+            color:$white;
+            border-radius: 0;
+            border-top-left-radius:0;
+            border-bottom-left-radius:0;
+            border-top-right-radius:3px;
+            border-bottom-right-radius:3px;
+            cursor:pointer;
+            .fa{
+                margin-right: .5rem;
+            }
+            &:hover{
+                background-color: darken($main,10%);
+                color:$white;
+            }
+        }
+    }
     .form-group {
 
         padding:1rem 0rem;
@@ -20,8 +37,21 @@ form {
             //     display: none; NOT SUPPORTED IE9
             // }
         }
-
+        .form-control-label{
+            &.required{
+                &::after{
+                    content:" \2217";
+                    color:$red;
+                    display: inline;
+                }
+            }
+        }
         .form-control {
+            &:required{
+                border-left: .25rem solid $required-input-border-color;
+                border-bottom-left-radius: .5rem;
+                border-top-left-radius: .5rem;
+            }
 
             border: 1px solid $input-border-color;
             border-radius: 3px;

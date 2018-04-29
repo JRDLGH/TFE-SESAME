@@ -9,6 +9,7 @@ import '../scss/style.scss';
 import theme from './Components/theme';
 import 'font-awesome/css/font-awesome.min.css';
 
+
 $(document).ready(function(){
     //MENU
     $('.menu-icon').click(function(evt){

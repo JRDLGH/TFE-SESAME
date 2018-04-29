@@ -1,0 +1,11 @@
+admin:
+  constraints:
+    gesture:
+      name:
+        unique: 'Ce geste existe déjà.'
+        min: 'Le nom du geste doit faire au moins 2 caractères.'
+        max: 'Le nom du geste doit faire au maximum 50 caractères.'
+        type: 'Le nom du geste doit être une chaîne de caractères.'
+      description:
+        min: 'La description doit être d''au moins x caractères.'
+        max: 'La description ne peut pas être plus longue que 255 caractères.'

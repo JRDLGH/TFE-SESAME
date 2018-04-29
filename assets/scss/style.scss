@@ -10,6 +10,9 @@
 @import "structure/forms.scss";
 @import "structure/banner.scss";
 
+@import "structure/admin/table"; //TODO remove
+@import "structure/buttons"; //TODO remove
+
 /*
     global styling file
  */
@@ -34,18 +37,22 @@ body {
         }
     
         h1 {
-            font-size: 2rem;
-            margin: 1% 0% 2% 0%;
-            text-transform: uppercase;
-        }
-    
-        h2{
+            font-size:1.8rem;
             padding: 0.5rem 0.2rem;
             font-weight: 500;
             color: darken($body,60%);
             border-left:.5rem solid rgba($color: $main, $alpha: 0.7);
-            background-color: darken($body, 1%);
+            background-color: darken($body, 0.5%);
             text-align: left;
+        }
+    
+        h2{
+            //padding: 0.5rem 0.2rem;
+            //font-weight: 500;
+            //color: darken($body,60%);
+            //border-left:.5rem solid rgba($color: $main, $alpha: 0.7);
+            //background-color: darken($body, 1%);
+            //text-align: left;
         }
     
         p{
@@ -142,6 +149,7 @@ li {
         margin: .5rem 0;
         width: 100%;
         text-align: center;
+        font-size: 0.8rem;
 
         @include media-breakpoint-up(md){
             margin: 0rem .5rem;
@@ -152,6 +160,26 @@ li {
         &:hover{
             color: $black;
         }
+    }
+}
+
+.search-input{
+    margin: 0;
+    width: 100%;
+    height: 50%;
+    input{
+        height: 100%;
+    }
+    .input-logo{
+
+        background-color: $main;
+        padding: 0 .5rem;
+        color:white;
+        border-top-left-radius:3px;
+        border-bottom-left-radius:3px;
+        display: flex;
+        align-items: center;
+
     }
 }
 
@@ -179,4 +207,52 @@ li {
     background-color: $shadow-body;
     margin: 1.5rem 0;
     width: 100%;
+}
+
+.special-link{
+    color:$main;
+    &:hover{
+        color:lighten($main,10%);
+    }
+}
+
+.action-link{
+    background-color:$main;
+    color:$white;
+    padding:.5rem;
+    margin: 1rem 0rem;
+    display:inline-block;
+    width:auto;
+    border-radius:.3rem;
+    text-align:center;
+
+    @include make-col-ready();
+    @include make-col(6);
+    @include media-breakpoint-up(md){
+        @include make-col(6);
+    }
+    @include media-breakpoint-up(lg){
+        @include make-col(3);
+    }
+    -webkit-transition: background-color $short-duration ease-in-out;
+    -moz-transition: background-color $short-duration ease-in-out;
+    -ms-transition: background-color $short-duration ease-in-out;
+    -o-transition: background-color $short-duration ease-in-out;
+    transition: background-color $short-duration ease-in-out;
+
+    .action-icon{
+        padding:.25rem;
+        @include media-breakpoint-up(lg){
+            padding-right: .35rem;
+        }
+    }
+    .action-name{
+    }
+    &:hover{
+        background-color: $secondary;
+        color:$main;
+    }
+    &:visited{
+        background-color: transparent;
+    }
 }
