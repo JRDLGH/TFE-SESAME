@@ -1,11 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/admin.html.twig' %}
+{% trans_default_domain 'admin' %}
 
-{% block title %}Nouveau geste{% endblock %}
+{% block title %}{{ 'admin.gestures.new'|trans }}{% endblock %}
 
 {% block content %}
-    <h1>Créer un nouveau geste</h1>
+    <h1>{{ 'admin.gestures.new'|trans }}</h1>
 
     {{ include('thesaurus/gesture/_form.html.twig') }}
 
-    <a href="{{ path('thesaurus_gesture_index') }}">back to list</a>
+    <a href="{{ path('thesaurus_gesture_index') }}">{{ 'admin.control.back_to_list'|trans }}</a>
 {% endblock %}

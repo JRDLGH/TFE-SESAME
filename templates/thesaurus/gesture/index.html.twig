@@ -1,10 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/admin.html.twig' %}
 {% trans_default_domain 'admin' %}
 
-{% block title %}Gesture index{% endblock %}
+{% block title %}{{ 'admin.gestures.list'|trans }}{% endblock %}
 
 {% block content %}
-    <h1>Gesture index</h1>
+    <h1>{{ 'admin.gestures.list'|trans }}</h1>
 
     <table class="table">
         <thead>

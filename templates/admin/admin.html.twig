@@ -9,18 +9,29 @@
     {# ADMIN SPACE STYLESHEET #}
 {% endblock %}
 
-{#{%  block navbar %}#}
-    {#{{ parent() }}#}
-    {#{% block navlinks %}#}
 
-
-        {##}
-
-    {#{% endblock %}#}
-{#{%  endblock navbar %}#}
-{% block connectionState %}
-    {{ parent() }}
+{% block headerClass %}
+    admin-header
 {% endblock %}
+
+{% block navClass %}
+
+    class="navbar-nav nav-links justify-content-end"
+
+{% endblock navClass %}
+
+{%  block navlinks %}
+    <li class="">
+        <a class="admin-link" href="{{ path('home') }}">{{ 'admin.space.links.back_to_site'|trans }}</a>
+    </li>
+
+{% endblock %}
+
 
 {% block banner %}
 {% endblock banner %}
+
+{% block admin_content %}
+    {% block content %}
+    {% endblock content %}
+{% endblock admin_content %}

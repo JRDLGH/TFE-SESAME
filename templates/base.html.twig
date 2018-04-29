@@ -11,7 +11,10 @@
 </head>
 
 <body>
-    <header class="fluid-container">
+    <header class="fluid-container
+    {% block headerClass %}
+    {% endblock headerClass %}
+        ">
         {% block navbar %}
             <nav class="navbar navbar-expand-lg d-flex justify-content-between" role="nav">
             <div class="nav-brand navbar-brand">
@@ -23,7 +26,12 @@
                     <div class="menu-icon">
                         <span></span>
                     </div>
-                    <ul class="navbar-nav nav-links nav-fill">
+                    <ul
+                            {% block navClass %}
+                            class="navbar-nav nav-links nav-fill"
+                            {% endblock navClass %}
+
+                    >
                     {# nav-links #}
                         {% block navlinks %}
                         <li class="nav-item">
@@ -35,12 +43,20 @@
                         <li class="nav-item">
                             <a class="nav-item nav-link" href="{{ path('thesaurus_index') }}">Dictionnaire</a>
                         </li>
+                        {% block actionLinks %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item">
+                                <a class="nav-item nav-link" href="{{ path('admin') }}">Administration</a>
+                            </li>
+                            {% endif %}
+
+                        {% endblock actionLinks %}
                         {% block connectionState %}
                             <li class="nav-item">
                                 {% if is_granted('ROLE_USER') %}
-                                <a class="nav-item nav-link" href="{{ path('fos_user_security_logout') }}">Se déconnecter</a>
+                                <a class="nav-item nav-link text-center" href="{{ path('fos_user_security_logout') }}">Se déconnecter</a>
                                 {% else %}
-                                <a class="nav-item nav-link" href="{{ path('fos_user_security_login') }}">Se connecter</a>
+                                <a class="nav-item nav-link text-center" href="{{ path('fos_user_security_login') }}">Se connecter</a>
                                 {% endif %}
                             </li>
                         {% endblock connectionState %}
@@ -63,9 +79,11 @@
             </div>
             {% endblock %}
         <div class="fluid-container">
+            {% block admin_content %}
             <div class="container">
                 {% block content %}{% endblock %}
             </div>
+            {% endblock admin_content %}
         </div>
     </main>
 
