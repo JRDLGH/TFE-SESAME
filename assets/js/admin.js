@@ -5,13 +5,13 @@ import 'typeahead.js/dist/typeahead.jquery.min';
 import Bloodhound from 'bloodhound-js';
 import 'bootstrap-tagsinput';
 
-
 import 'bootstrap-tagsinput/dist/bootstrap-tagsinput';
 
 import 'bootstrap-tagsinput/dist/bootstrap-tagsinput.css';
 import 'bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css';
-import '../scss/structure/admin/tags.scss';
 
+import '../scss/structure/admin/tags.scss';
+import '../scss/structure/admin.scss';
 
 
 
