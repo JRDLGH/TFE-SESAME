@@ -30,7 +30,7 @@ class Gesture
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, unique=true)
      * @Groups({"list","show"})
      * @Assert\NotBlank()
      * @Assert\Type(

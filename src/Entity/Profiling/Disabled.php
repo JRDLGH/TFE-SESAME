@@ -1,0 +1,112 @@
+<?php
+
+namespace App\Entity\Profiling;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\Profiling\DisabledRepository")
+ */
+class Disabled
+{
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $lastname;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $birthday;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Profiling\Deficiency", inversedBy="disableds")
+     */
+    private $deficiencies;
+
+    public function __construct()
+    {
+        $this->deficiencies = new ArrayCollection();
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): self
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getBirthday(): ?\DateTimeInterface
+    {
+        return $this->birthday;
+    }
+
+    public function setBirthday(?\DateTimeInterface $birthday): self
+    {
+        $this->birthday = $birthday;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Deficiency[]
+     */
+    public function getDeficiencies(): Collection
+    {
+        return $this->deficiencies;
+    }
+
+    public function addDeficiency(Deficiency $deficiency): self
+    {
+        if (!$this->deficiencies->contains($deficiency)) {
+            $this->deficiencies[] = $deficiency;
+        }
+
+        return $this;
+    }
+
+    public function removeDeficiency(Deficiency $deficiency): self
+    {
+        if ($this->deficiencies->contains($deficiency)) {
+            $this->deficiencies->removeElement($deficiency);
+        }
+
+        return $this;
+    }
+}
