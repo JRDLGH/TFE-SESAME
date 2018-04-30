@@ -45,7 +45,7 @@ class Profile
     private $owner;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Thesaurus\Gesture")
+     * @ORM\OneToMany(targetEntity="App\Entity\Profiling\ProfileGesture",mappedBy="profile")
      */
     private $learnedGestures;
 
@@ -84,14 +84,14 @@ class Profile
     }
 
     /**
-     * @return Collection|Gesture[]
+     * @return Collection|ProfileGesture[]
      */
     public function getLearnedGestures(): Collection
     {
         return $this->learnedGestures;
     }
 
-    public function addLearnedGesture(Gesture $learnedGesture): self
+    public function addLearnedGesture(ProfileGesture $learnedGesture): self
     {
         if (!$this->learnedGestures->contains($learnedGesture)) {
             $this->learnedGestures[] = $learnedGesture;
@@ -100,7 +100,7 @@ class Profile
         return $this;
     }
 
-    public function removeLearnedGesture(Gesture $learnedGesture): self
+    public function removeLearnedGesture(ProfileGesture $learnedGesture): self
     {
         if ($this->learnedGestures->contains($learnedGesture)) {
             $this->learnedGestures->removeElement($learnedGesture);
