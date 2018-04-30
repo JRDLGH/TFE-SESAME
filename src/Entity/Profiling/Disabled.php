@@ -69,6 +69,9 @@ class Disabled
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * example of format: 24/01/96 or 24/01/1996
+     * @Assert\Date()
+     * @Assert\LessThan("-3 years")
      */
     private $birthday;
 
