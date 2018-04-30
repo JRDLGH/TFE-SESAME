@@ -2,10 +2,42 @@
 MENU
  */
 
-.admin-header{
-  background-color: $secondary;
-}
+@import '../shared/variables';
 
-.admin-link{
-  color:$main;
+.admin-header{
+
+  background-color: $admin-header-bg-color;
+
+  li{
+
+    display: table;
+    height: 100%;
+
+    .admin-link{
+
+      color:$admin-header-link-color;
+      display: table-cell;
+      vertical-align: middle;
+      padding: .5rem;
+      font-size: 1rem;
+
+      &:hover{
+
+        color:$admin-header-hover-link-color;
+        background-color:rgba(white,0.05);
+
+      }
+
+    }
+
+  }
+
+}
+.container{
+  h3{
+    font-size: 1.4rem;
+  }
+}
+.content-container{
+  padding: 1.5rem 1rem;
 }
