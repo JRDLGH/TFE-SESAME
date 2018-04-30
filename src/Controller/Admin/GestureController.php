@@ -30,8 +30,11 @@ class GestureController extends Controller
         $queryBuilder = $manager->getRepository(Gesture::class)->createQueryBuilder('g');
 
         if($request->query->get('filter')){
-            $queryBuilder->where('g.name LIKE :name')
-                ->setParameter('name','%'. $request->query->get('filter') .'%');
+            if(!empty($request->query->get('filter'))){
+                $queryBuilder->where('g.name LIKE :name')
+                    ->setParameter('name','%'. $request->query->get('filter') .'%');
+            }
+
         }
 
         $query = $queryBuilder->getQuery();

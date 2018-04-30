@@ -1,4 +1,18 @@
 admin:
+  space:
+    title: 'Espace d''administration'
+    links:
+      gesture: 'Gestion des gestes'
+      profiles: 'Gérer les profils'
+      back_to_site: 'Quitter'
+
+  gestures:
+    list: 'Gestion des gestes'
+    edit: 'Modifier un geste'
+    show: 'Preview du geste'
+    new: 'Créer un nouveau geste'
+    search: 'Rechercher un geste'
+
   constraints:
     gesture:
       name:
@@ -11,11 +25,6 @@ admin:
         max: 'La description ne peut pas être plus longue que 255 caractères.'
 
   gesture:
-    list: 'Liste des gestes'
-    show: 'Preview du geste'
-    new: 'Nouveau geste'
-    search: 'Rechercher un geste'
-    edit: 'Modification du geste'
     name: 'Nom'
     profileVideo: 'Vidéo de profil'
     video: 'Vidéo'

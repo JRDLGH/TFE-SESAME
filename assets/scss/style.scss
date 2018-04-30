@@ -211,6 +211,7 @@ li {
 
 .special-link{
     color:$main;
+    font-size: $p-size;
     &:hover{
         color:lighten($main,10%);
     }

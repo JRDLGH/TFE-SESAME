@@ -1,19 +1,20 @@
-{% extends 'base.html.twig' %}
+
+{% extends 'admin/admin.html.twig' %}
 {% trans_default_domain 'admin' %}
 
-{% block title %}{{ 'admin.gesture.new'|trans }}{% endblock %}
-
 {% block content %}
-    <h1>{{ 'admin.gesture.new'|trans }}</h1>
+    <div class="container">
+        <h1>{{ 'admin.gestures.new'|trans }}</h1>
 
-    {{ include('thesaurus/gesture/_form.html.twig') }}
+        {{ include('thesaurus/gesture/_form.html.twig') }}
 
-    <div class="help-links">
-        <a href="{{ path('thesaurus_gesture_index') }}">
-            <i class="fa fa-undo action-icon"></i>
-            <span class="action-name">
+        <div class="help-links">
+            <a href="{{ path('thesaurus_gesture_index') }}">
+                <i class="fa fa-undo action-icon"></i>
+                <span class="action-name">
             {{ 'admin.control.back_to_list'|trans|capitalize }}
             </span>
-        </a>
+            </a>
+        </div>
     </div>
 {% endblock %}

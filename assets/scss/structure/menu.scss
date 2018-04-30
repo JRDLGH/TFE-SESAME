@@ -13,7 +13,7 @@ header {
     @include media-breakpoint-up(md) {
         height: $menu_height-large;
     }
-    @include box-shadow(0px 0px 10px $black);
+    @include box-shadow(0px 0px 10px rgba($black,0.3));
 
     .navbar{
 
@@ -53,7 +53,10 @@ header {
 
         .nav-menu {
 
-            width: 58%;
+            width: 68%;
+            @include media-breakpoint-up(xl){
+                width:58%;
+            }
             height: 100%;
 
             .nav-links{
