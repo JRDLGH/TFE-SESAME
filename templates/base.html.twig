@@ -18,9 +18,11 @@
         {% block navbar %}
             <nav class="navbar navbar-expand-lg d-flex justify-content-between" role="nav">
             <div class="nav-brand navbar-brand">
-                <a href="#" class="navbar-brand">
+                {% block navbrand %}
+                <a href="{{ path('home') }}" class="navbar-brand">
                     <img class="nav-brand-logo" src="{{ asset('build/static/Dolby-Vision-brand-logo.png') }}" alt="nav-brand-logo">
                 </a>
+                {% endblock navbrand %}
             </div>
                 <div class="nav-menu">
                     <div class="menu-icon">
@@ -78,13 +80,16 @@
                 </h1>
             </div>
             {% endblock %}
+        </div>
+        {% block main_content %}
         <div class="fluid-container">
-            {% block admin_content %}
+            {% block container %}
             <div class="container">
                 {% block content %}{% endblock %}
             </div>
-            {% endblock admin_content %}
+            {% endblock container %}
         </div>
+        {% endblock main_content %}
     </main>
 
     <footer>

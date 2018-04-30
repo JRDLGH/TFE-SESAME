@@ -4,7 +4,7 @@
 
 {% block title %}{{ 'admin.gestures.list'|trans }}{% endblock %}
 
-{% block content %}
+{% block container %}
     <h1>{{ 'admin.gestures.list'|trans }}</h1>
 
 
@@ -12,7 +12,7 @@
 
     <form action="#" class="form-container search-form">
         <div class="form-group">
-            <label for="search_gesture">{{ 'admin.gesture.search'|trans }}</label>
+            <label for="search_gesture">{{ 'admin.gestures.search'|trans }}</label>
             <div class="search-input row input-group">
                 <input type="text" name="search_gesture" id="search" class="form-control col-11">
                 <a class="input-logo search-action" id="sizing-addon1 col-1"><i class="fa fa-search fa"></i>Rechercher</a>
@@ -32,6 +32,3 @@
     </a>
 {% endblock %}
 
-{% block javascripts %}
-    <script src="{{ asset('build/admin.js') }}"></script>
-{% endblock %}

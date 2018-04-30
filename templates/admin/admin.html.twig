@@ -7,12 +7,19 @@
 
 {% block stylesheets %}
     {# ADMIN SPACE STYLESHEET #}
+    <link rel="stylesheet" href="{{ asset('build/admin.css') }}">
 {% endblock %}
 
-
+{# ----- MENU ----- #}
 {% block headerClass %}
     admin-header
 {% endblock %}
+
+{% block navbrand %}
+    <a href="{{ path('admin') }}" class="navbar-brand">
+        <img class="nav-brand-logo" src="{{ asset('build/static/Dolby-Vision-brand-logo.png') }}" alt="nav-brand-logo">
+    </a>
+{% endblock navbrand %}
 
 {% block navClass %}
 
@@ -21,6 +28,12 @@
 {% endblock navClass %}
 
 {%  block navlinks %}
+    <li class="">
+        <a class="admin-link" href="#">{{ 'admin.space.links.profiles'|trans }}</a>
+    </li>
+    <li class="">
+        <a class="admin-link" href="{{ path('thesaurus_gesture_index') }}">{{ 'admin.space.links.gesture'|trans }}</a>
+    </li>
     <li class="">
         <a class="admin-link" href="{{ path('home') }}">{{ 'admin.space.links.back_to_site'|trans }}</a>
     </li>
@@ -31,7 +44,27 @@
 {% block banner %}
 {% endblock banner %}
 
-{% block admin_content %}
-    {% block content %}
-    {% endblock content %}
-{% endblock admin_content %}
+{% block main_content %}
+    <div class="content-container">
+        {% block container %}
+            {% block content %}
+                <div class="container">
+                    <h3 class="title">Bienvenue sur l'espace d'administration</h3>
+                    <div class="alert alert-info">
+                        <p>
+                            L'espace d'administration est un outil a utiliser avec des précautions,
+
+                        </p>
+
+                    </div>
+                </div>
+            {% endblock content %}
+        {% endblock container %}
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/admin.js') }}"></script>
+{% endblock %}
