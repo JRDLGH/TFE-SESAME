@@ -5,6 +5,8 @@ namespace App\Entity\Profiling;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Profiling\DisabledRepository")
@@ -20,11 +22,48 @@ class Disabled
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="profile.constraint.firstname.blank",
+     * groups={"Registration"})
+     *
+     * @Assert\Length(
+     *  min=3,
+     *  max=255,
+     *  minMessage="profile.constraint.firstname.min",
+     *  maxMessage="profile.constraint.firstname.max",
+     *  groups={"Registration"}
+     * )
+     *
+     * @Assert\Type(type="string",
+     *  message="profile.constraint.firstname.type")
+     *
+     * @Assert\Regex(pattern="/\d/",
+     *  match=false,
+     *  message="profile.constraint.firstname.invalid_type")
+     * @Groups({"list"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="profile.constraint.lastname.blank",
+     * groups={"Registration"})
+     *
+     * @Assert\Length(
+     *  min=3,
+     *  max=255,
+     *  minMessage="profile.constraint.lastname.min",
+     *  maxMessage="profile.constraint.lastname.max",
+     *  groups={"Registration"}
+     * )
+     *
+     * @Assert\Type(type="string",
+     *  message="profile.constraint.lastname.type")
+     *
+     * @Assert\Regex(pattern="/\d/",
+     *  match=false,
+     *  message="profile.constraint.lastname.invalid_type")
+     *
+     * @Groups({"list"})
      */
     private $lastname;
 
