@@ -54,13 +54,26 @@
 
                         {% endblock actionLinks %}
                         {% block connectionState %}
-                            <li class="nav-item">
-                                {% if is_granted('ROLE_USER') %}
-                                <a class="nav-item nav-link text-center" href="{{ path('fos_user_security_logout') }}">Se déconnecter</a>
-                                {% else %}
-                                <a class="nav-item nav-link text-center" href="{{ path('fos_user_security_login') }}">Se connecter</a>
-                                {% endif %}
+                            {% if is_granted('ROLE_USER') %}
+                            <li class="user-bar">
+                                <a class="text-center user-link dropdown-toggle" role="button"
+                                   id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                   aria-expanded="false"
+                                   href="#">
+                                    <i class="fa fa-user-circle fa user-icon"></i>
+                                    <span class="user-name">{{ app.user.username }}</span>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
                             </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-item nav-link text-center" href="{{ path('fos_user_security_login') }}">Se connecter</a>
+                            </li>
+                            {% endif %}
                         {% endblock connectionState %}
 
 

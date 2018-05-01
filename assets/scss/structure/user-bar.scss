@@ -1,0 +1,39 @@
+.user-bar{
+  display: table;
+  height:100%;
+  width: 100%;
+  background-color: $user-bar-bg-color;
+  @include media-breakpoint-up(lg){
+    width:75%;
+  }
+  @include media-breakpoint-up(xl){
+    width: 60%;
+  }
+
+  .user-link{
+    display: table-cell;
+    vertical-align: middle;
+    color:$user-bar-color;
+    .user-icon{
+      padding:.2rem;
+      font-size: $link-size;
+    }
+    .user-name{
+      display: inline;
+      padding: .2rem;
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      @include media-breakpoint-up(lg){
+        display:none;
+      }
+    }
+    &:hover{
+      color: $link-hover-color;
+      background-color: transparent;
+    }
+  }
+  &:hover{
+    background-color: transparent;
+  }
+}

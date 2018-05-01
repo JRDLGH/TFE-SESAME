@@ -8,6 +8,7 @@ import $ from 'jquery'; // load jQuery module
 import '../scss/style.scss';
 import theme from './Components/theme';
 import 'font-awesome/css/font-awesome.min.css';
+import 'bootstrap/js/dist/dropdown';
 
 
 $(document).ready(function(){
