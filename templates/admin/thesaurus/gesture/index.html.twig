@@ -8,7 +8,7 @@
     <h1>{{ 'admin.gestures.list'|trans }}</h1>
 
 
-    {{ include('thesaurus/gesture/details.html.twig') }}
+    {{ include('admin/thesaurus/gesture/details.html.twig') }}
 
     <form action="#" class="form-container search-form">
         <div class="form-group">
@@ -21,10 +21,10 @@
     </form>
 
     <div class="pagination-content">
-        {{ include('thesaurus/gesture/list_pagination.html.twig') }}
+        {{ include('admin/thesaurus/gesture/list_pagination.html.twig') }}
     </div>
 
-    <a class="action-link" href="{{ path('thesaurus_gesture_new') }}">
+    <a class="action-link" href="{{ path('admin_gesture_new') }}">
         <i class="fa fa-plus action-icon"></i>
         <span class="action-name">
             {{ 'admin.control.create'|trans }}

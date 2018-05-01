@@ -6,10 +6,10 @@
     <div class="container">
         <h1>{{ 'admin.gestures.new'|trans }}</h1>
 
-        {{ include('thesaurus/gesture/_form.html.twig') }}
+        {{ include('admin/thesaurus/gesture/_form.html.twig') }}
 
         <div class="help-links">
-            <a href="{{ path('thesaurus_gesture_index') }}">
+            <a href="{{ path('admin_gesture_index') }}">
                 <i class="fa fa-undo action-icon"></i>
                 <span class="action-name">
             {{ 'admin.control.back_to_list'|trans|capitalize }}

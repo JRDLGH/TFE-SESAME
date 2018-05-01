@@ -6,7 +6,7 @@
 
 
 {% block content %}
-    <h1>{{ 'admin.gesture.show'|trans }}</h1>
+    <h1>{{ 'admin.gestures.show'|trans }}</h1>
 
 
     {% for label, messages in app.flashes %}
@@ -62,14 +62,14 @@
 
 
     <div class="help-links">
-        <a href="{{ path('thesaurus_gesture_index') }}">
+        <a href="{{ path('admin_gesture_index') }}">
             <i class="fa fa-undo action-icon"></i>
             <span class="action-name">
             {{ 'admin.control.back_to_list'|trans|capitalize }}
             </span>
         </a>
 
-        <a href="{{ path('thesaurus_gesture_edit', {'id': gesture.id}) }}">
+        <a href="{{ path('admin_gesture_edit', {'id': gesture.id}) }}">
             <i class="fa fa-edit action-icon"></i>
             <span class="action-name">
             {{ 'admin.control.modify'|trans|capitalize }}
@@ -77,7 +77,7 @@
         </a>
     </div>
 
-    {{ include('thesaurus/gesture/_delete_form.html.twig') }}
+    {{ include('admin/thesaurus/gesture/_delete_form.html.twig') }}
 {% endblock %}
 
 {% block javascripts %}
