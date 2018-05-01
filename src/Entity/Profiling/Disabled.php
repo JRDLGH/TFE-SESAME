@@ -85,7 +85,7 @@ class Disabled
 
     /**
      * @var Profile
-     * @ORM\OneToOne(targetEntity="App\Entity\Profiling\Profile", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Profiling\Profile", inversedBy="owner", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $profile;

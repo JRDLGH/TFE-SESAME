@@ -65,7 +65,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
                                     <span class="user-name">{{ app.user.username|capitalize }}</span>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{ path('fos_user_profile_show') }}">
                                         <i class="fa fa-user"></i>Mon compte
                                     </a>
                                     <a class="dropdown-item" href="#">

@@ -16,15 +16,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileController extends Controller
 {
     /**
-     * @Route("/", name="manage_profile_index", methods="GET")
+     * @Route("/", name="management_profile_index", methods="GET")
      */
     public function index(ProfileRepository $profileRepository): Response
     {
-        return $this->render('profiling/profile/index.html.twig', ['profiles' => $profileRepository->findAll()]);
+        return $this->render('management/profiling/profile/index.html.twig', ['profiles' => $profileRepository->findAll()]);
     }
 
     /**
-     * @Route("/new", name="manage_profile_new", methods="GET|POST")
+     * @Route("/new", name="management_profile_new", methods="GET|POST")
      */
     public function new(Request $request): Response
     {
@@ -37,25 +37,25 @@ class ProfileController extends Controller
             $em->persist($profile);
             $em->flush();
 
-            return $this->redirectToRoute('profiling_profile_index');
+            return $this->redirectToRoute('management_profile_index');
         }
 
-        return $this->render('profiling/profile/new.html.twig', [
+        return $this->render('management/profiling/profile/new.html.twig', [
             'profile' => $profile,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="manage_profile_show", methods="GET")
+     * @Route("/{id}", name="management_profile_show", methods="GET")
      */
     public function show(Profile $profile): Response
     {
-        return $this->render('profiling_profile/show.html.twig', ['profile' => $profile]);
+        return $this->render('management/profiling/profile/show.html.twig', ['profile' => $profile]);
     }
 
     /**
-     * @Route("/{id}/edit", name="manage_profile_edit", methods="GET|POST")
+     * @Route("/{id}/edit", name="management_profile_edit", methods="GET|POST")
      */
     public function edit(Request $request, Profile $profile): Response
     {
@@ -65,17 +65,17 @@ class ProfileController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('profiling_profile_edit', ['id' => $profile->getId()]);
+            return $this->redirectToRoute('management_profile_edit', ['id' => $profile->getId()]);
         }
 
-        return $this->render('profiling/profile/edit.html.twig', [
+        return $this->render('management/profiling/profile/edit.html.twig', [
             'profile' => $profile,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="manage_profile_delete", methods="DELETE")
+     * @Route("/{id}", name="management_profile_delete", methods="DELETE")
      */
     public function delete(Request $request, Profile $profile): Response
     {
@@ -85,6 +85,6 @@ class ProfileController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('profiling/profile_index');
+        return $this->redirectToRoute('management_profile_index');
     }
 }

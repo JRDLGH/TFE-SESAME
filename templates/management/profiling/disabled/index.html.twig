@@ -23,8 +23,8 @@
                 <td>{{ disabled.lastname }}</td>
                 <td>{{ disabled.birthday ? disabled.birthday|date('d-m-Y') : '' }}</td>
                 <td>
-                    <a href="{{ path('profiling_disabled_show', {'id': disabled.id}) }}">show</a>
-                    <a href="{{ path('profiling_disabled_edit', {'id': disabled.id}) }}">edit</a>
+                    <a href="{{ path('management_disabled_show', {'id': disabled.id}) }}">show</a>
+                    <a href="{{ path('management_disabled_edit', {'id': disabled.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('profiling_disabled_new') }}">Create new</a>
+    <a href="{{ path('management_disabled_new') }}">Create new</a>
 {% endblock %}

@@ -17,15 +17,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class DisabledController extends Controller
 {
     /**
-     * @Route("/", name="manage_disabled_index", methods="GET")
+     * @Route("/", name="management_disabled_index", methods="GET")
      */
     public function index(DisabledRepository $disabledRepository): Response
     {
-        return $this->render('profiling/disabled/index.html.twig', ['disableds' => $disabledRepository->findAll()]);
+        return $this->render('management/profiling/disabled/index.html.twig', ['disableds' => $disabledRepository->findAll()]);
     }
 
     /**
-     * @Route("/new", name="manage_disabled_new", methods="GET|POST")
+     * @Route("/new", name="management_disabled_new", methods="GET|POST")
      */
     public function new(Request $request): Response
     {
@@ -38,25 +38,25 @@ class DisabledController extends Controller
             $em->persist($disabled);
             $em->flush();
 
-            return $this->redirectToRoute('profiling_disabled_index');
+            return $this->redirectToRoute('management_disabled_index');
         }
 
-        return $this->render('profiling/disabled/new.html.twig', [
+        return $this->render('management/profiling/disabled/new.html.twig', [
             'disabled' => $disabled,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="manage_disabled_show", methods="GET")
+     * @Route("/{id}", name="management_disabled_show", methods="GET")
      */
     public function show(Disabled $disabled): Response
     {
-        return $this->render('profiling/disabled/show.html.twig', ['disabled' => $disabled]);
+        return $this->render('management/profiling/disabled/show.html.twig', ['disabled' => $disabled]);
     }
 
     /**
-     * @Route("/{id}/edit", name="manage_disabled_edit", methods="GET|POST")
+     * @Route("/{id}/edit", name="management_disabled_edit", methods="GET|POST")
      */
     public function edit(Request $request, Disabled $disabled): Response
     {
@@ -66,17 +66,17 @@ class DisabledController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('profiling_disabled_edit', ['id' => $disabled->getId()]);
+            return $this->redirectToRoute('management_disabled_edit', ['id' => $disabled->getId()]);
         }
 
-        return $this->render('profiling/disabled/edit.html.twig', [
+        return $this->render('management/profiling/disabled/edit.html.twig', [
             'disabled' => $disabled,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="manage_disabled_delete", methods="DELETE")
+     * @Route("/{id}", name="management_disabled_delete", methods="DELETE")
      */
     public function delete(Request $request, Disabled $disabled): Response
     {
@@ -86,6 +86,6 @@ class DisabledController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('profiling/disabled_index');
+        return $this->redirectToRoute('management_disabled_index');
     }
 }

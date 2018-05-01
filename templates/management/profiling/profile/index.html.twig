@@ -2,7 +2,7 @@
 
 {% block title %}Profile index{% endblock %}
 
-{% block body %}
+{% block content %}
     <h1>Profile index</h1>
 
     <table class="table">
@@ -19,8 +19,8 @@
                 <td>{{ profile.id }}</td>
                 <td>{{ profile.content }}</td>
                 <td>
-                    <a href="{{ path('profiling_profile_show', {'id': profile.id}) }}">show</a>
-                    <a href="{{ path('profiling_profile_edit', {'id': profile.id}) }}">edit</a>
+                    <a href="{{ path('management_profile_show', {'id': profile.id}) }}">show</a>
+                    <a href="{{ path('management_profile_edit', {'id': profile.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('profiling_profile_new') }}">Create new</a>
+    <a href="{{ path('management_profile_new') }}">Create new</a>
 {% endblock %}
