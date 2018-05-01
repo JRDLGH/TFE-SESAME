@@ -3,7 +3,8 @@ admin:
     title: 'Espace d''administration'
     links:
       gesture: 'Gestion des gestes'
-      profiles: 'Gérer les profils'
+      users: 'Gérer les membres'
+      news: 'Gérer les news'
       back_to_site: 'Quitter'
 
   gestures:
