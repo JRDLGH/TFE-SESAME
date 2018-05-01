@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Disabled{% endblock %}
+
+{% block content %}
+    <h1>Edit Disabled</h1>
+
+    {{ include('profiling/disabled/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('profiling_disabled_index') }}">back to list</a>
+
+    {{ include('profiling/disabled/_delete_form.html.twig') }}
+{% endblock %}
