@@ -36,11 +36,19 @@ Encore
                     return result;
                 }
             }
+        },
+        {
+                 resolveUrlLoader: false
         }
     )
 
     // allow legacy applications to use $/jQuery as a global variable
     .autoProvidejQuery()
+
+    .autoProvideVariables(
+        { Popper: ['popper.js', 'default'] },
+        { 'Util': 'exports-loader?Util!bootstrap/js/dist/util'}
+        )
 
     .enableSourceMaps(!Encore.isProduction())
 
