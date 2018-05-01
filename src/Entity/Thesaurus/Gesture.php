@@ -235,9 +235,30 @@ class Gesture
      * Triggered on insert
      * @ORM\PrePersist
      */
-    public function onPrePersist()
+    public function setCreationDateValue()
     {
         $this->creationDate = new \DateTime("now",new \DateTimeZone("Europe/Brussels"));
+    }
+
+    /**
+     * Triggered on insert
+     * @ORM\PrePersist
+     */
+    public function setPublicationDateValue(){
+        if($this->getIsPublished()){
+            $this->setPublicationDate(new \DateTime("now",new \DateTimeZone("Europe/Brussels")));
+        }
+    }
+    /**
+     * Triggerd on update
+     * @ORM\PreUpdate
+     */
+    public function setPublicationDateValueIfPublished(){
+        if($this->getIsPublished() && empty($this->getPublicationDate())){
+            $this->setPublicationDate(new \DateTime("now",new \DateTimeZone("Europe/Brussels")));
+        }else if(!$this->getIsPublished() && !empty($this->getPublicationDate())){
+            $this->setPublicationDate(null);
+        }
     }
 
 }
