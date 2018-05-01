@@ -2,6 +2,7 @@ admin:
   space:
     title: 'Espace d''administration'
     links:
+      doc: 'Documentation'
       gesture: 'Gestion des gestes'
       users: 'Gérer les membres'
       news: 'Gérer les news'

@@ -38,10 +38,7 @@ class ThesaurusController extends AbstractController
      */
     public function index()
     {
-
-        return $this->render('thesaurus/index.html.twig', [
-            'controller_name' => 'ThesaurusController',
-        ]);
+        return $this->render('thesaurus/index.html.twig');
     }
 
     /**
