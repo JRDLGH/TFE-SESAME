@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class GestureController extends Controller
 {
     /**
-     * @Route("/", name="thesaurus_gesture_index", methods="GET",options={"expose"=true})
+     * @Route("/", name="admin_gesture_index", methods="GET",options={"expose"=true})
      */
     public function index(Request $request): Response
     {
@@ -46,16 +46,16 @@ class GestureController extends Controller
         );
 
         if($request->isXmlHttpRequest()){
-            return $this->render('thesaurus/gesture/list_pagination.html.twig', [
+            return $this->render('admin/thesaurus/gesture/list_pagination.html.twig', [
                 'gestures' => $result]);
         }
-        return $this->render('thesaurus/gesture/index.html.twig', [
+        return $this->render('admin/thesaurus/gesture/index.html.twig', [
             'gestures' => $result
         ]);
     }
 
     /**
-     * @Route("/new", name="thesaurus_gesture_new", methods="GET|POST")
+     * @Route("/new", name="admin_gesture_new", methods="GET|POST")
      */
     public function new(Request $request): Response
     {
@@ -68,10 +68,10 @@ class GestureController extends Controller
             $em->persist($gesture);
             $em->flush();
 
-            return $this->redirectToRoute('thesaurus_gesture_index');
+            return $this->redirectToRoute('admin_gesture_index');
         }
 
-        return $this->render('thesaurus/gesture/new.html.twig', [
+        return $this->render('admin/thesaurus/gesture/new.html.twig', [
             'gesture' => $gesture,
             'form' => $form->createView(),
         ]);
@@ -88,15 +88,15 @@ class GestureController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="thesaurus_gesture_show", methods="GET")
+     * @Route("/{id}", name="admin_gesture_show", methods="GET")
      */
     public function show(Gesture $gesture): Response
     {
-        return $this->render('thesaurus/gesture/show.html.twig', ['gesture' => $gesture]);
+        return $this->render('admin/thesaurus/gesture/show.html.twig', ['gesture' => $gesture]);
     }
 
     /**
-     * @Route("/{id}/edit", name="thesaurus_gesture_edit", methods="GET|POST")
+     * @Route("/{id}/edit", name="admin_gesture_edit", methods="GET|POST")
      */
     public function edit(Request $request, Gesture $gesture): Response
     {
@@ -106,17 +106,17 @@ class GestureController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success','Vos modifications ont été enregistrées.');
-            return $this->redirectToRoute('thesaurus_gesture_show', ['id' => $gesture->getId()]);
+            return $this->redirectToRoute('admin_gesture_show', ['id' => $gesture->getId()]);
         }
 
-        return $this->render('thesaurus/gesture/edit.html.twig', [
+        return $this->render('admin/thesaurus/gesture/edit.html.twig', [
             'gesture' => $gesture,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="thesaurus_gesture_delete", methods="DELETE")
+     * @Route("/{id}", name="admin_gesture_delete", methods="DELETE")
      */
     public function delete(Request $request, Gesture $gesture): Response
     {
