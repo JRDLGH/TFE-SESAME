@@ -1,20 +1,11 @@
 .user-bar{
-  display: table;
   height:100%;
-  width: 100%;
   background-color: $user-bar-bg-color;
-
+  display:table;
   @include media-breakpoint-up(lg){
-
-    width:75%;
-
+    max-width:75px;
   }
 
-  @include media-breakpoint-up(xl){
-
-    width: 60%;
-
-  }
 
   .user-link{
     width: 100%;
