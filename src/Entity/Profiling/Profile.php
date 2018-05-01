@@ -38,13 +38,6 @@ class Profile
     private $content;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Profiling\Disabled", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     * @Groups({"list"})
-     */
-    private $owner;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Profiling\ProfileGesture",mappedBy="profile")
      */
     private $learnedGestures;
@@ -67,18 +60,6 @@ class Profile
     public function setContent(?string $content): self
     {
         $this->content = $content;
-
-        return $this;
-    }
-
-    public function getOwner(): ?Disabled
-    {
-        return $this->owner;
-    }
-
-    public function setOwner(Disabled $owner): self
-    {
-        $this->owner = $owner;
 
         return $this;
     }
