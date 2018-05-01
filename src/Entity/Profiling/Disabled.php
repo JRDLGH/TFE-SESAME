@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Profiling\DisabledRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Disabled
 {
@@ -71,7 +72,9 @@ class Disabled
      * @ORM\Column(type="date", nullable=true)
      * example of format: 24/01/96 or 24/01/1996
      * @Assert\Date()
-     * @Assert\LessThan("-3 years")
+     * @Assert\LessThan("today")
+     * @Assert\LessThan("-3 years"
+     * )
      */
     private $birthday;
 
@@ -79,6 +82,14 @@ class Disabled
      * @ORM\ManyToMany(targetEntity="App\Entity\Profiling\Deficiency", inversedBy="disableds")
      */
     private $deficiencies;
+
+    /**
+     * @var Profile
+     * @ORM\OneToOne(targetEntity="App\Entity\Profiling\Profile", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $profile;
+
 
     public function __construct()
     {
@@ -150,5 +161,29 @@ class Disabled
         }
 
         return $this;
+    }
+
+    /**
+     * @return Profile|null
+     */
+    public function getProfile(): ?Profile
+    {
+        return $this->profile;
+    }
+
+    public function setProfile(Profile $profile): self
+    {
+        $this->profile = $profile;
+
+        return $this;
+    }
+
+    /**
+     * Triggered on insert
+     * @ORM\PrePersist
+     */
+    public function setDisabledProfile(){
+        $profile = new Profile();
+        $this->setProfile($profile);
     }
 }
