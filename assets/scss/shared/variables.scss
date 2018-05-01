@@ -123,6 +123,14 @@ $admin-header-bg-color:darken($main,20%);
 $admin-header-link-color:white;
 $admin-header-hover-link-color:$body;
 
+/**
+  USER BAR
+ */
+$user-bar-color:lighten($link-color,15%);
+$user-bar-bg-color:transparent;
+
+
+//$dropdown-link-hover-bg:;
 
 $theme-colors: (
   "primary": $main,
