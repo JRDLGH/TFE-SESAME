@@ -3,37 +3,125 @@
   height:100%;
   width: 100%;
   background-color: $user-bar-bg-color;
+
   @include media-breakpoint-up(lg){
+
     width:75%;
+
   }
+
   @include media-breakpoint-up(xl){
+
     width: 60%;
+
   }
 
   .user-link{
-    display: table-cell;
-    vertical-align: middle;
-    color:$user-bar-color;
-    .user-icon{
-      padding:.2rem;
-      font-size: $link-size;
+    width: 100%;
+    display:block;
+    @include media-breakpoint-up(lg){
+      display: table-cell;
+      vertical-align: middle;
+      color:$user-bar-color;
     }
     .user-name{
+      text-align: center;
       display: inline;
-      padding: .2rem;
+      padding: 0.25rem 1.5rem;
+      width: 125px;
+      white-space: nowrap;
       -ms-text-overflow: ellipsis;
       text-overflow: ellipsis;
-      white-space: nowrap;
+
       @include media-breakpoint-up(lg){
+
         display:none;
+
       }
+
     }
+    .user-icon{
+      color:$link-color;
+      padding:.2rem;
+      font-size: $link-size;
+
+    }
+
     &:hover{
+
       color: $link-hover-color;
       background-color: transparent;
+
     }
+
   }
-  &:hover{
+  .dropdown-toggle{
+    @include media-breakpoint-down(lg){
+      height:6vh;
+      line-height:6vh;
+    }
+
+  }
+  .dropdown-menu{
     background-color: transparent;
+    @include media-breakpoint-down(lg){
+      padding:0;
+      margin: 0;
+      border:0;
+    }
+
+    @include media-breakpoint-up(lg){
+      background-color:$dropdown-bg;
+    }
+    .user-name{
+      //width: 100%;
+      text-align: center;
+      display: none;
+      padding: 0.25rem 1.5rem;
+      width: 125px;
+      white-space: nowrap;
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+
+      @include media-breakpoint-up(lg){
+
+        display:inline;
+
+      }
+
+    }
+    .dropdown-item{
+      @include media-breakpoint-down(lg){
+        text-align: center;
+        transition: all $extra-short-duration;
+        height:6vh;
+        line-height: 6vh;
+      }
+
+      @include media-breakpoint-up(lg){
+        height: auto;
+        text-align: left;
+
+      }
+      &:hover{
+        background-color:darken($nav-color,10%);
+        color:$link-hover-color;
+      }
+
+      .fa{
+        padding-right: .5rem;
+      }
+      &:hover{
+        //background-color:$link-hover-color;
+      }
+    }
+
   }
+
+  &:hover{
+
+    background-color: transparent;
+
+  }
+
 }
