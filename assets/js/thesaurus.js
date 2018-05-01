@@ -270,7 +270,8 @@ function display(data,type){
 
     var gIds = getGestureId(data);
     var display = false;
-    if(!isArray(lastMatched) || !compareArray(gIds,lastMatched)){
+
+    if(!isArray(lastMatched) || !compareArray(gIds,lastMatched) || isContainerEmpty()){
         lastMatched = gIds; //must only contains id of last matched gestures
         display = true;
     }
@@ -300,6 +301,15 @@ function display(data,type){
         setStatus({'not_found':'Aucun geste ne correspond à votre recherche'});
         getContainer().html('');
     }
+}
+
+function isContainerEmpty() {
+    console.log(getContainer().html());
+    if(getContainer().html() === null || getContainer().html() == '' || getContainer().html() == undefined){
+        return true;
+    }
+    return false;
+
 }
 
 /**
