@@ -29,11 +29,6 @@ class Deficiency
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $severity;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Profiling\Disabled", mappedBy="deficiencies")
      */
     private $disableds;
