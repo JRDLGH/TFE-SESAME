@@ -254,7 +254,7 @@ function listHTML(gesture) {
                 "<h3 class=\"title\">"+ title +"</h3>" +
             "</div>" +
             "<button class=\"btn btn-secondary js-gesture-show\">" +
-                "<span>En savoir plus</span>" +
+                "<span>Voir les vidéos</span>" +
             "</button>" +
         "</div>" +
     "</article>";

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Profiling;
+namespace App\Controller\Management\Profiling;
 
 use App\Entity\Profiling\Disabled;
 use App\Entity\Profiling\Profile;
@@ -12,12 +12,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/profiling/disabled")
+ * @Route("manage/disabled")
  */
 class DisabledController extends Controller
 {
     /**
-     * @Route("/", name="profiling_disabled_index", methods="GET")
+     * @Route("/", name="manage_disabled_index", methods="GET")
      */
     public function index(DisabledRepository $disabledRepository): Response
     {
@@ -25,7 +25,7 @@ class DisabledController extends Controller
     }
 
     /**
-     * @Route("/new", name="profiling_disabled_new", methods="GET|POST")
+     * @Route("/new", name="manage_disabled_new", methods="GET|POST")
      */
     public function new(Request $request): Response
     {
@@ -48,7 +48,7 @@ class DisabledController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="profiling_disabled_show", methods="GET")
+     * @Route("/{id}", name="manage_disabled_show", methods="GET")
      */
     public function show(Disabled $disabled): Response
     {
@@ -56,7 +56,7 @@ class DisabledController extends Controller
     }
 
     /**
-     * @Route("/{id}/edit", name="profiling_disabled_edit", methods="GET|POST")
+     * @Route("/{id}/edit", name="manage_disabled_edit", methods="GET|POST")
      */
     public function edit(Request $request, Disabled $disabled): Response
     {
@@ -76,7 +76,7 @@ class DisabledController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="profiling_disabled_delete", methods="DELETE")
+     * @Route("/{id}", name="manage_disabled_delete", methods="DELETE")
      */
     public function delete(Request $request, Disabled $disabled): Response
     {
