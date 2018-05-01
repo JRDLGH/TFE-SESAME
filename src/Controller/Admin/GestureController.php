@@ -64,10 +64,6 @@ class GestureController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if($form->getData()->getIsPublished() && empty($form->getData()->getPublicationDate()))
-            {
-                $form->getData()->setPublicationDate(new \DateTime("now",new \DateTimeZone("Europe/Brussels")));
-            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($gesture);
             $em->flush();
@@ -89,7 +85,6 @@ class GestureController extends Controller
     public function getTags(){
         $tags = $this->getDoctrine()->getRepository(Gesture\Tag::class)->findAll();
         return $this->json($tags,200,[],['groups'=>['list']]);
-//        return new JsonResponse('hello');
     }
 
     /**
@@ -109,15 +104,6 @@ class GestureController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //if published and previous published data is empty, set published data to today!
-            if($form->getData()->getIsPublished() && empty($form->getData()->getPublicationDate()))
-            {
-                $form->getData()->setPublicationDate(new \DateTime("now",new \DateTimeZone("Europe/Brussels")));
-            }
-            else if(!$form->getData()->getIsPublished() && !empty($form->getData()->getPublicationDate()))
-            {
-                $form->getData()->setPublicationDate(null);
-            }
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success','Vos modifications ont été enregistrées.');
             return $this->redirectToRoute('thesaurus_gesture_show', ['id' => $gesture->getId()]);
