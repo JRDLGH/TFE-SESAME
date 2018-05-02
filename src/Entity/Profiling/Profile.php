@@ -94,4 +94,11 @@ class Profile
 
         return $this;
     }
+
+    /**
+     * @return Disabled
+     */
+    public function getOwner(){
+        return $this->owner;
+    }
 }

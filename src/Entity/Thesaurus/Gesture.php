@@ -261,4 +261,10 @@ class Gesture
         }
     }
 
+    public function __toString()
+    {
+        dump($this->getName());
+        return $this->getName();
+    }
+
 }

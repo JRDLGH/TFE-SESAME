@@ -186,4 +186,9 @@ class Disabled
         $profile = new Profile();
         $this->setProfile($profile);
     }
+
+    public function __toString()
+    {
+        return $this->getLastname().' '.$this->getFirstname();
+    }
 }

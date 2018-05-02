@@ -2,7 +2,7 @@
 
 namespace App\Repository\Profiling;
 
-use App\Entity\ProfileGesture;
+use App\Entity\Profiling\ProfileGesture;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 

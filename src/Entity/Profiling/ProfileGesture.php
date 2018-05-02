@@ -6,7 +6,7 @@ use App\Entity\Thesaurus\Gesture;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProfileGestureRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\Profiling\ProfileGestureRepository")
  * @ORM\Table(name="profile_gesture")
  */
 class ProfileGesture
@@ -74,5 +74,11 @@ class ProfileGesture
         $this->learningDate = $learningDate;
 
         return $this;
+    }
+
+
+    public function __toString()
+    {
+        return $this->getGesture()->getName();
     }
 }
