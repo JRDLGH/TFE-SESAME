@@ -21,11 +21,13 @@ npm manifest:
       "bootstrap": "^4.1.0",
       "bootstrap-tagsinput": "^0.7.1",
       "copy-webpack-plugin": "^4.5.1",
+      "exports-loader": "^0.7.0",
       "font-awesome": "^4.7.0",
       "jquery": "^3.3.1",
       "jquery-ui": "^1.12.1",
       "node-sass": "^4.8.3",
       "node-sass-utils": "^1.1.2",
+      "popper.js": "^1.14.3",
       "sass-loader": "^7.0.1",
       "sweetalert": "^2.1.0",
       "typeahead": "^0.2.2",
@@ -2114,6 +2116,13 @@ Lockfile:
     dependencies:
       fill-range "^2.1.0"
   
+  exports-loader@^0.7.0:
+    version "0.7.0"
+    resolved "https://registry.yarnpkg.com/exports-loader/-/exports-loader-0.7.0.tgz#84881c784dea6036b8e1cd1dac3da9b6409e21a5"
+    dependencies:
+      loader-utils "^1.1.0"
+      source-map "0.5.0"
+  
   express@^4.16.2:
     version "4.16.3"
     resolved "https://registry.yarnpkg.com/express/-/express-4.16.3.tgz#6af8a502350db3246ecc4becf6b5a34d22f7ed53"
@@ -4192,6 +4201,10 @@ Lockfile:
     dependencies:
       find-up "^1.0.0"
   
+  popper.js@^1.14.3:
+    version "1.14.3"
+    resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.3.tgz#1438f98d046acf7b4d78cd502bf418ac64d4f095"
+  
   portfinder@^1.0.9:
     version "1.0.13"
     resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.13.tgz#bb32ecd87c27104ae6ee44b5a3ccbf0ebb1aede9"
@@ -5248,6 +5261,10 @@ Lockfile:
     version "0.3.0"
     resolved "https://registry.yarnpkg.com/source-map-url/-/source-map-url-0.3.0.tgz#7ecaf13b57bcd09da8a40c5d269db33799d4aaf9"
   
+  source-map@0.5.0:
+    version "0.5.0"
+    resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.0.tgz#0fe96503ac86a5adb5de63f4e412ae4872cdbe86"
+  
   source-map@^0.1.38:
     version "0.1.43"
     resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.1.43.tgz#c24bc146ca517c1471f5dacbe2571b2b7f9e3346"
@@ -6098,7 +6115,7 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 1
+  Exit code: 2
   Command: C:\Windows\system32\cmd.exe
   Arguments: /d /s /c encore dev
   Directory: C:\wamp64\www\sesame.be

@@ -21,7 +21,7 @@ class Deficiency
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      */
-    private $name;
+    protected $name;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)

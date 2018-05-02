@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'profile' %}
+
+{% block title %}Hello!{% endblock %}
+
+{% block content %}
+{% if profile %}
+    <section class="profile-header">
+        <div class="profile-owner">
+            <h3>
+                {{ profile.owner.firstname|capitalize }}
+                {{ profile.owner.lastname|capitalize }}
+            </h3>
+
+        </div>
+        <div class="profile-requests">
+            <a href="#">
+                <i class="fa fa-envelope"></i>
+                <span class="profile-request-pending">0</span>
+                demande(s) d'accès à ce profil.
+            </a>
+        </div>
+    </section>
+    <section class="profile-container">
+        <div class="profile-news">
+            <div class="profile-news-title">
+                <h4>Dernières activitées</h4>
+            </div>
+            {% for learnedGesture in profile.learnedGestures.values %}
+                {{ learnedGesture.gesture.name }}
+            {% endfor %}
+        </div>
+        <div class="profile-thesaurus">
+            <div class="profile-thesaurus-title">
+                <h4>Dictionnaire de profil individualisé</h4>
+            </div>
+            {# THESAURUS HERE #}
+        </div>
+
+    </section>
+
+    {#{{ profile.owner.birthday|date }}#}
+    {#{% for deficiency in profile.owner.deficiencies.values %}#}
+        {#{{ deficiency.name }}#}
+    {#{% endfor %}#}
+    {#{{ profile.content }}#}
+{% else %}
+    no profile found with that id.
+{% endif %}
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/profile.css') }}">
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('build/profile.js') }}"></script>
+{% endblock %}

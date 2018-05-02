@@ -16,6 +16,7 @@ Encore
     // will create public/build/thesaurus.js and public/build/thesaurus.css
     .addEntry('thesaurus', './assets/js/thesaurus.js')
     .addEntry('admin', './assets/js/admin.js')
+    .addEntry('profile', './assets/js/profile.js')
 
     // allow to load jQuery once in order to don't load for each files that require this module
     .createSharedEntry('layout','./assets/js/layout.js')
