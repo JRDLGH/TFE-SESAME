@@ -7,10 +7,11 @@
 {% if profile %}
     <section class="profile-header">
         <div class="profile-owner">
-            <h3>
+            <h3 class="profile-owner-name">
                 {{ profile.owner.firstname|capitalize }}
                 {{ profile.owner.lastname|capitalize }}
             </h3>
+            {#{{ profile.owner.birthday|date }}#}
 
         </div>
         <div class="profile-requests">
@@ -39,7 +40,6 @@
 
     </section>
 
-    {#{{ profile.owner.birthday|date }}#}
     {#{% for deficiency in profile.owner.deficiencies.values %}#}
         {#{{ deficiency.name }}#}
     {#{% endfor %}#}
