@@ -31,7 +31,7 @@ class Gesture
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
-     * @Groups({"list","show"})
+     * @Groups({"list","show","minimal"})
      * @Assert\NotBlank()
      * @Assert\Type(
      *     type="string",

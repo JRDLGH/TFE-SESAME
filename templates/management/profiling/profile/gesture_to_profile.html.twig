@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <h2>Enrichir les dictionnaires individualisés</h2>
+    <h2>Compléter les profils</h2>
 
     <section class="profile-gesture">
 
@@ -21,12 +21,20 @@
 
             <div id="gesture-search-result" class="search-result">
                 <h6>Résultat de la recherche</h6>
+                <div class="search-content">
+                    {% if true %}
+                        Aucun profil ajouté.
+                    {% endif %}
+                </div>
             </div>
 
         </section>
 
         <section class="profiling-chosen-gesture">
             <h5>Geste(s) ajouté(s)</h5>
+            <div class="chosen-content">
+
+            </div>
         </section>
 
     </section>
@@ -49,20 +57,33 @@
 
             <div id="profile-search-result" class="search-result">
                 <h6>Résultat de la recherche</h6>
-
+                <div class="search-content">
+                    {% if true %}
+                        Aucun profil ajouté.
+                    {% endif %}
+                </div>
             </div>
 
         </section>
 
         <section class="profiling-chosen-profile">
             <h5>Profil(s) ajouté(s)</h5>
+            <div class="chosen-content">
 
+            </div>
         </section>
 
     </section>
 
     <section class="controls">
-
+        <form id="gesture-profile-form" action="{{ path('management_profile_gesture') }}" method="POST">
+            <button type="submit" class="btn btn-primary">Éxecuter</button>
+            <button type="button" class="btn btn-secondary">Annuler</button>
+        </form>
     </section>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/gesturesToProfiles.js') }}"></script>
 {% endblock %}

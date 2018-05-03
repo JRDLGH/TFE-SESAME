@@ -3,9 +3,11 @@
 namespace App\Controller\Management\Profiling;
 
 use App\Entity\Profiling\Profile;
+use App\Entity\Thesaurus\Gesture;
 use App\Form\Profiling\ProfileType;
 use App\Repository\Profiling\ProfileRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,13 +49,31 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/add/gesture", name="management_profile_gesture", methods={"GET"})
+     * @Route("/add/gesture", name="management_profile_gesture", methods="GET|POST")
      */
-    public function gesturesToProfiles()
+    public function gesturesToProfiles(Request $request)
     {
+
+
+        //if data is submitted, verify it!
+
         return $this->render('management/profiling/profile/gesture_to_profile.html.twig');
     }
 
+    /**
+     * @Route("/search/gesture",name="profiling_search_gesture",methods={"GET"},options={"expose"=true})
+     */
+    public function searchGesture(Request $request){
+        //Only XHTTP REQUEST
+        $name = $request->get('name');
+        if($name){
+            $gestureRepository = $this->getDoctrine()->getRepository(Gesture::class);
+            $gestures = $gestureRepository->findByNameBeginBy($name);
+            return $this->json($gestures,200,[],['groups'=>['minimal']]);
+//            return $this->json($tags,200,[],['groups'=>['list']]);
+
+        }
+    }
     /**
      * @Route("/{id}", name="management_profile_show", methods="GET")
      */

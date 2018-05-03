@@ -88,7 +88,6 @@ class ThesaurusController extends AbstractController
     public function search(TranslatorInterface $translator, Request $request)
     {
         //If request from AJAX
-        //Temporary disabling this if in order to test with postman
         if($request->isXMLHttpRequest()){
 
             $tag = $request->get('tag');
