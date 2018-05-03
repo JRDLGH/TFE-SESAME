@@ -47,6 +47,14 @@ class ProfileController extends Controller
     }
 
     /**
+     * @Route("/add/gesture", name="management_profile_gesture", methods={"GET"})
+     */
+    public function gesturesToProfiles()
+    {
+        return $this->render('management/profiling/profile/gesture_to_profile.html.twig');
+    }
+
+    /**
      * @Route("/{id}", name="management_profile_show", methods="GET")
      */
     public function show(Profile $profile): Response

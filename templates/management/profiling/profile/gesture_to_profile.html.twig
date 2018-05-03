@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <h2>Enrichir les dictionnaires individualisés</h2>
+
+    <section class="profile-gesture">
+
+        <section class="profiling-gesture-choice">
+            <form class="search-form js-gesture-choice">
+                <label for="search-gesture">Quelle(s) geste(s) voulez-vous ajouter?</label>
+
+                <div class="search-input row input-group">
+                    <span class="input-logo" name="search-gesture" id="sizing-addon1 col-1">
+                        <i class="fa fa-search fa"></i>
+                    </span>
+                    <input type="text" class="form-control search-input">
+
+                </div>
+            </form>
+
+            <div id="gesture-search-result" class="search-result">
+                <h6>Résultat de la recherche</h6>
+            </div>
+
+        </section>
+
+        <section class="profiling-chosen-gesture">
+            <h5>Geste(s) ajouté(s)</h5>
+        </section>
+
+    </section>
+
+    <section class="profiling-profile">
+
+        <section class="profiling-profile-choice">
+
+            <form class="search-form js-gesture-choice">
+                <label for="search-profile">Qui a appris ce(s) geste(s)?</label>
+
+                <div class="search-input row input-group">
+                    <span class="input-logo" name="search-profile" id="sizing-addon1 col-1">
+                        <i class="fa fa-search fa"></i>
+                    </span>
+                    <input type="text" class="form-control search-input">
+
+                </div>
+            </form>
+
+            <div id="profile-search-result" class="search-result">
+                <h6>Résultat de la recherche</h6>
+
+            </div>
+
+        </section>
+
+        <section class="profiling-chosen-profile">
+            <h5>Profil(s) ajouté(s)</h5>
+
+        </section>
+
+    </section>
+
+    <section class="controls">
+
+    </section>
+
+{% endblock %}
