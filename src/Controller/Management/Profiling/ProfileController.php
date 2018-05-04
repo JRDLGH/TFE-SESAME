@@ -69,11 +69,24 @@ class ProfileController extends Controller
         if($name){
             $gestureRepository = $this->getDoctrine()->getRepository(Gesture::class);
             $gestures = $gestureRepository->findByNameBeginBy($name);
-            return $this->json($gestures,200,[],['groups'=>['minimal']]);
-//            return $this->json($tags,200,[],['groups'=>['list']]);
+            if($gestures){
+                return $this->json($gestures,200,[],['groups'=>['minimal']]);
+            }
+
+            return new Response(['not_found'=>'No gestures found for your request.'],404);
 
         }
+        return new Response(['error'=>'Bad request sent, parameter is missing.'],400);
     }
+
+    /**
+     * @Route("/search",name="",methods={"GET"},options={"expose"=true})
+     */
+    public function search(Request $request){
+        //XHR REQUEST!
+        return new Response('hello',200);
+    }
+
     /**
      * @Route("/{id}", name="management_profile_show", methods="GET")
      */
