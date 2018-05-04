@@ -4,10 +4,11 @@ namespace App\Entity\Profiling;
 
 use App\Entity\Thesaurus\Gesture;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Profiling\ProfileGestureRepository")
- * @ORM\Table(name="profile_gesture")
+ * @ORM\Table(name="profile_gesture",uniqueConstraints={@UniqueConstraint(name="unique_learned", columns={"profile_id", "gesture_id"})})
  */
 class ProfileGesture
 {
