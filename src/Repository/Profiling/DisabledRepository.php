@@ -47,4 +47,8 @@ class DisabledRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAllBeginBy($pattern){
+//        $qb = $this->createQueryBuilder('d');
+    }
 }

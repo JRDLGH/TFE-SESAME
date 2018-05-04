@@ -25,7 +25,7 @@ class Gesture
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"list"})
+     * @Groups({"list","minimal"})
      */
     private $id;
 

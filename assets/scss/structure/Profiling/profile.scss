@@ -1,5 +1,5 @@
-@import "node_modules/bootstrap/scss/bootstrap";
 @import "../../shared/variables";
+@import "node_modules/bootstrap/scss/bootstrap";
 
 //TODO remove when bootstrap added globally
 a{
@@ -27,7 +27,7 @@ a{
   .profile-owner{
 
     @include make-col-ready();
-    @include make-col(12);
+    @include make-col(6);
 
     @include media-breakpoint-up(md){
       @include make-col(6);
@@ -47,9 +47,9 @@ a{
   .profile-requests{
 
     @include make-col-ready();
-    @include make-col(12);
+    @include make-col(6);
 
-    text-align: left;
+    text-align: right;
 
     @include media-breakpoint-up(md){
       @include make-col(6);
@@ -70,6 +70,13 @@ a{
 
         color:$profile-pending-request-color;
 
+      }
+
+      .profile-request-pending-text{
+        display: none;
+        @include media-breakpoint-up(lg){
+          display: inline;
+        }
       }
 
     }

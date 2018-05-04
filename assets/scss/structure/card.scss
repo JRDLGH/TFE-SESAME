@@ -1,0 +1,87 @@
+.card-container{
+
+  @include make-col-ready();
+  @include make-col(6);
+
+  @include media-breakpoint-up(lg){
+
+    @include make-col(4);
+
+  }
+
+  @include media-breakpoint-up(xl){
+
+    @include make-col(3);
+
+  }
+
+  width: auto;
+  padding: .25rem;
+
+  .card{
+
+    @include box-shadow(0px 0px 1.5px $shadow-body);
+
+    @include make-row();
+    padding:.2rem;
+
+    @include media-breakpoint-up(lg){
+      padding:.8rem;
+      flex-direction: row;
+    }
+
+    margin:0;
+
+    .card-icon{
+
+      @include make-col-ready();
+      @include make-col(12);
+
+      text-align: center;
+
+      @include media-breakpoint-up(lg){
+
+        @include make-col(4);
+
+        text-align:left;
+
+      }
+
+      color:$secondary;
+      font-size: 2rem;
+
+      margin:0;
+
+    }
+
+    .card-title{
+
+      @include make-col-ready();
+      @include make-col(12);
+
+      text-align: center;
+      padding-left: 0;
+
+      @include media-breakpoint-up(lg){
+
+        @include make-col(8);
+        text-align:left;
+
+      }
+
+      margin: 0;
+
+    }
+
+    &:hover{
+
+      background-color:lighten($main,7%);
+
+      cursor:pointer;
+
+    }
+
+  }
+  .selected-card{}
+
+}

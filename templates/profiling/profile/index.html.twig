@@ -11,14 +11,14 @@
                 {{ profile.owner.firstname|capitalize }}
                 {{ profile.owner.lastname|capitalize }}
             </h3>
-            {#{{ profile.owner.birthday|date }}#}
+            {{  'now'|date('Y') - profile.owner.birthday|date('Y') }} ans
 
         </div>
         <div class="profile-requests">
             <a href="#">
                 <i class="fa fa-envelope"></i>
                 <span class="profile-request-pending">0</span>
-                demande(s) d'accès à ce profil.
+                <span class="profile-request-pending-text">demande(s) d'accès à ce profil.</span>
             </a>
         </div>
     </section>

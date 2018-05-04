@@ -2,6 +2,7 @@
 
 namespace App\Controller\Management\Profiling;
 
+use App\Entity\Profiling\Disabled;
 use App\Entity\Profiling\Profile;
 use App\Entity\Thesaurus\Gesture;
 use App\Form\Profiling\ProfileType;
@@ -54,7 +55,6 @@ class ProfileController extends Controller
     public function gesturesToProfiles(Request $request)
     {
 
-
         //if data is submitted, verify it!
 
         return $this->render('management/profiling/profile/gesture_to_profile.html.twig');
@@ -73,7 +73,7 @@ class ProfileController extends Controller
                 return $this->json($gestures,200,[],['groups'=>['minimal']]);
             }
 
-            return new Response(['not_found'=>'No gestures found for your request.'],404);
+            return new Response(['not_found'=>'Aucun geste trouvé.'],404);
 
         }
         return new Response(['error'=>'Bad request sent, parameter is missing.'],400);
@@ -84,6 +84,14 @@ class ProfileController extends Controller
      */
     public function search(Request $request){
         //XHR REQUEST!
+        $pattern = $request->get('pattern');
+        if($pattern){
+            $pattern = array_filter(explode(' ',trim($pattern)));
+            $pattern = implode(' ',$pattern);
+            $disabledRepository = $this->getDoctrine()->getRepository(Disabled::class);
+            $disableds = $disabledRepository->findAllBeginBy($pattern);
+        }
+        //retrun disabled person with a link to his profile
         return new Response('hello',200);
     }
 

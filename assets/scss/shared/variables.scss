@@ -93,7 +93,7 @@ $profile-header-bg-color:darken($body,10%);
 $profile-header-color:darken($profile-header-bg-color,60%);
 
 $profile-request-color:darken($body,45%);
-$profile-pending-request-color:$main;
+$profile-pending-request-color:darken($profile-request-color,10%);
 $profile-logo-pending-request-color:darken($body,60%);
 
 $profile-news-bg-color:darken($body,1%);

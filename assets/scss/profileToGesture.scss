@@ -1,0 +1,8 @@
+@import "shared/variables";
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "mixins/mixins";
+@import 'structure/card';
+
+.search-content{
+  @include make-row();
+}

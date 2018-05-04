@@ -10,7 +10,7 @@
             <form class="search-form js-gesture-choice">
                 <label for="search-gesture">Quelle(s) geste(s) voulez-vous ajouter?</label>
 
-                <div class="search-input row input-group">
+                <div class="search-input input-group">
                     <span class="input-logo" name="search-gesture" id="sizing-addon1 col-1">
                         <i class="fa fa-search fa"></i>
                     </span>
@@ -23,7 +23,7 @@
                 <h6>Résultat de la recherche</h6>
                 <div class="search-content">
                     {% if true %}
-                        Aucun profil ajouté.
+                        Bla
                     {% endif %}
                 </div>
             </div>
@@ -46,7 +46,7 @@
             <form class="search-form js-gesture-choice">
                 <label for="search-profile">Qui a appris ce(s) geste(s)?</label>
 
-                <div class="search-input row input-group">
+                <div class="search-input input-group">
                     <span class="input-logo" name="search-profile" id="sizing-addon1 col-1">
                         <i class="fa fa-search fa"></i>
                     </span>
@@ -82,6 +82,10 @@
         </form>
     </section>
 
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/gesturesToProfiles.css') }}">
 {% endblock %}
 
 {% block javascripts %}
