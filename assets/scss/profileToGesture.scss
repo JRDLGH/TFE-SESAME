@@ -22,9 +22,12 @@ section{
 
   @include make-container();
 
-  .chosen-content{
-    @include make-row();
-  }
+}
+
+.chosen-content{
+
+  @include make-row();
+
 }
 
 .status{
