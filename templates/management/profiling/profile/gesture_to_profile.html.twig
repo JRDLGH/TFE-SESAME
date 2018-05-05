@@ -20,24 +20,29 @@
             </form>
 
             <div id="gesture-search-result" class="search-result">
-                <h6>Résultat de la recherche</h6>
+                {#<h6>Résultat de la recherche</h6>#}
+                <div class="status">
+                    Aucun résultat.
+                </div>
                 <div class="search-content">
-                    {% if true %}
-                        Bla
-                    {% endif %}
+
                 </div>
             </div>
 
         </section>
 
+        <hr>
+
         <section class="profiling-chosen-gesture">
             <h5>Geste(s) ajouté(s)</h5>
             <div class="chosen-content">
-
+                Aucun geste sélectionné.
             </div>
         </section>
 
     </section>
+
+    <hr>
 
     <section class="profiling-profile">
 
@@ -66,6 +71,8 @@
 
         </section>
 
+        <hr>
+
         <section class="profiling-chosen-profile">
             <h5>Profil(s) ajouté(s)</h5>
             <div class="chosen-content">
@@ -74,6 +81,8 @@
         </section>
 
     </section>
+
+    <hr>
 
     <section class="controls">
         <form id="gesture-profile-form" action="{{ path('management_profile_gesture') }}" method="POST">

@@ -82,6 +82,16 @@
     }
 
   }
-  .selected-card{}
-
+  &.selected{
+    .card{
+      background-color:lighten($main,5%);
+      .card-title{
+        color:white;
+        font-weight: bold;
+      }
+      &:hover{
+        background-color:lighten($red,5%);
+      }
+    }
+  }
 }

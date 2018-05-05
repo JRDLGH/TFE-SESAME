@@ -73,10 +73,10 @@ class ProfileController extends Controller
                 return $this->json($gestures,200,[],['groups'=>['minimal']]);
             }
 
-            return new Response(['not_found'=>'Aucun geste trouvé.'],404);
+            return new JsonResponse(['not_found'=>'Aucun geste trouvé.'],404);
 
         }
-        return new Response(['error'=>'Bad request sent, parameter is missing.'],400);
+        return new JsonResponse(['error'=>'Bad request sent, parameter is missing.'],400);
     }
 
     /**
