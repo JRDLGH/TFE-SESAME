@@ -7,6 +7,7 @@ Routing.setRoutingData(routes);
 
 var gestures = [];
 var selectedGestures = [];
+var selectedProfiles = [];
 
 $(document).ready(function () {
     //fonction pour form quand submit!!
@@ -22,7 +23,7 @@ $(document).ready(function () {
 
     $(document).on('click','.js-select-gesture',function(evt){
         console.log(this.dataset.id);
-        select('gesture',this.dataset.id);
+        select('gesture',this);
         return false;
     });
 });
@@ -108,7 +109,25 @@ function select(type,data){
         break;
 
         case 'gesture': console.log("you select a gesture");
+                //remove it from list
+            console.log(data);
+            addToSelectedGestures(data.id);
+                //move it to selected-container
+
         break;
 
+    }
+}
+
+function addToSelectedGestures(gesture){
+    if(gesture){
+        selectedGestures.push(gesture);
+    }
+}
+
+function removeFromSelectedGestures(gesture){
+    if(gesture){
+        //find its index by searching id and then remove
+        console.log("remove");
     }
 }
