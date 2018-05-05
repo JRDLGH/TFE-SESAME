@@ -18,6 +18,7 @@ class Profile
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"search"})
      */
     private $id;
 
@@ -100,5 +101,10 @@ class Profile
      */
     public function getOwner(){
         return $this->owner;
+    }
+
+    public function __toString()
+    {
+        return $this->getId();
     }
 }

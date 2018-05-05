@@ -40,7 +40,7 @@ class Disabled
      * @Assert\Regex(pattern="/\d/",
      *  match=false,
      *  message="profile.constraint.firstname.invalid_type")
-     * @Groups({"list"})
+     * @Groups({"list","search"})
      */
     private $firstname;
 
@@ -64,7 +64,7 @@ class Disabled
      *  match=false,
      *  message="profile.constraint.lastname.invalid_type")
      *
-     * @Groups({"list"})
+     * @Groups({"list","search"})
      */
     private $lastname;
 
@@ -73,8 +73,9 @@ class Disabled
      * example of format: 24/01/96 or 24/01/1996
      * @Assert\Date()
      * @Assert\LessThan("today")
-     * @Assert\LessThan("-3 years"
-     * )
+     * @Assert\LessThan("-3 years")
+     *
+     * @Groups({"search"})
      */
     private $birthday;
 
@@ -87,6 +88,7 @@ class Disabled
      * @var Profile
      * @ORM\OneToOne(targetEntity="App\Entity\Profiling\Profile", inversedBy="owner", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"search"})
      */
     private $profile;
 
