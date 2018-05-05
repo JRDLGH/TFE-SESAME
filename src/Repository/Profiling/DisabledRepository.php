@@ -49,6 +49,23 @@ class DisabledRepository extends ServiceEntityRepository
     */
 
     public function findAllBeginBy($pattern){
-//        $qb = $this->createQueryBuilder('d');
+
+        $qb = $this->createQueryBuilder('d');
+
+        return $qb->andWhere("concat(d.firstname,' ',d.lastname) LIKE :contains OR concat(d.lastname,' ',d.firstname) LIKE :contains")
+            ->addSelect("
+                (CASE
+                    WHEN concat(d.firstname,' ',d.lastname) = :match OR concat(d.lastname,' ',d.firstname) = :match THEN 0
+                    WHEN concat(d.firstname,' ',d.lastname) LIKE :beginBy OR concat(d.lastname,' ',d.firstname) LIKE :beginBy THEN 1
+                    WHEN concat(d.firstname,' ',d.lastname) LIKE :contains OR concat(d.lastname,' ',d.firstname) LIKE :contains THEN 2
+                    ELSE 4
+                END) AS HIDDEN ORD ")
+            ->setParameters([
+                ':contains' => '%'.$pattern.'%',
+                ':match' => $pattern,
+                ':beginBy' => $pattern.'%'
+            ])
+            ->orderBy("ORD","ASC")
+            ->getQuery()->getResult();
     }
 }
