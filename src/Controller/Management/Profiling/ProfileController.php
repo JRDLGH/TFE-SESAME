@@ -6,6 +6,7 @@ use App\Entity\Profiling\Disabled;
 use App\Entity\Profiling\Profile;
 use App\Entity\Thesaurus\Gesture;
 use App\Form\Profiling\ProfileType;
+use App\Helper\Profiling\ProfileHelper;
 use App\Repository\Profiling\ProfileRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -50,10 +51,40 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/add/gesture", name="management_profile_gesture", methods="GET|POST")
+     * @Route("/add/gesture", name="management_profile_gesture", methods="GET|POST", options={"expose"=true})
      */
     public function gesturesToProfiles(Request $request)
     {
+        if($request->isMethod('POST'))
+        {
+            $profiles = $request->get('profiles');
+            $gestures = $request->get('gestures');
+            if(!empty($profiles) && !empty($gestures)){
+                $manager = $this->getDoctrine()->getManager();
+                $profileHelper = new ProfileHelper($manager);
+
+                $not_found = false;
+                foreach ($profiles as $id){
+                    $ids[] = $id;
+                    $profile = new Profile();
+                    $profile->setId(intval($id));
+                    if(!$profileHelper->isExisting($profile)){
+                        $not_found = true;
+                        break;
+                    }
+                }
+                if($not_found){
+                    return new JsonResponse(['Error'=>'Les profils que vous essayez d\'enrichir n\'existent pas'],404);
+                }
+                //verify that is valid profile
+                //verify that is this profile can be accessed by this user
+                //verify if gesture exist and is published.
+
+                return new JsonResponse(['success'=>'1']);
+
+            }
+            return new JsonResponse(['Error'=>'Bad request.'],500);
+        }
 
         //if data is submitted, verify it!
 
@@ -69,7 +100,7 @@ class ProfileController extends Controller
             $name = $request->get('name');
             if($name){
                 $gestureRepository = $this->getDoctrine()->getRepository(Gesture::class);
-                $gestures = $gestureRepository->findByNameBeginBy($name);
+                $gestures = $gestureRepository->findByNameBeginBy($name,10);
                 if($gestures){
                     return $this->json($gestures,200,[],['groups'=>['minimal']]);
                 }
@@ -82,20 +113,22 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/search",name="",methods={"GET"},options={"expose"=true})
+     * @Route("/search",name="profiling_search_profile",methods={"GET"},options={"expose"=true})
      */
     public function search(Request $request){
         //XHR REQUEST!
-        $pattern = $request->get('pattern');
-        if($pattern){
-            $pattern = array_filter(explode(' ',trim($pattern)));
-            $pattern = implode(' ',$pattern);
-            $disabledRepository = $this->getDoctrine()->getRepository(Disabled::class);
-            $disableds = $disabledRepository->findAllBeginBy($pattern);
-            if($disableds){
-                return $this->json($disableds,200,[],['groups'=>['search']]);
+        if($request->isXmlHttpRequest()){
+            $pattern = $request->get('pattern');
+            if($pattern){
+                $pattern = array_filter(explode(' ',trim($pattern)));
+                $pattern = implode(' ',$pattern);
+                $disabledRepository = $this->getDoctrine()->getRepository(Disabled::class);
+                $disableds = $disabledRepository->findAllBeginBy($pattern,10);
+                if($disableds){
+                    return $this->json($disableds,200,[],['groups'=>['search']]);
+                }
+                return new JsonResponse(['not_found'=>'Aucun profil trouvé..'],404);
             }
-            return new JsonResponse(['not_found'=>'Aucun profil trouvé..'],404);
         }
         return new JsonResponse(['error'=>'Bad request sent, parameter is missing.'],400);
     }
