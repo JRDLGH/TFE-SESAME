@@ -65,16 +65,18 @@ class ProfileController extends Controller
      */
     public function searchGesture(Request $request){
         //Only XHTTP REQUEST
-        $name = $request->get('name');
-        if($name){
-            $gestureRepository = $this->getDoctrine()->getRepository(Gesture::class);
-            $gestures = $gestureRepository->findByNameBeginBy($name);
-            if($gestures){
-                return $this->json($gestures,200,[],['groups'=>['minimal']]);
+        if($request->isXmlHttpRequest()){
+            $name = $request->get('name');
+            if($name){
+                $gestureRepository = $this->getDoctrine()->getRepository(Gesture::class);
+                $gestures = $gestureRepository->findByNameBeginBy($name);
+                if($gestures){
+                    return $this->json($gestures,200,[],['groups'=>['minimal']]);
+                }
+
+                return new JsonResponse(['not_found'=>'Aucun geste trouvé.'],404);
+
             }
-
-            return new JsonResponse(['not_found'=>'Aucun geste trouvé.'],404);
-
         }
         return new JsonResponse(['error'=>'Bad request sent, parameter is missing.'],400);
     }
@@ -90,9 +92,12 @@ class ProfileController extends Controller
             $pattern = implode(' ',$pattern);
             $disabledRepository = $this->getDoctrine()->getRepository(Disabled::class);
             $disableds = $disabledRepository->findAllBeginBy($pattern);
+            if($disableds){
+                return $this->json($disableds,200,[],['groups'=>['search']]);
+            }
+            return new JsonResponse(['not_found'=>'Aucun profil trouvé..'],404);
         }
-        //retrun disabled person with a link to his profile
-        return new Response('hello',200);
+        return new JsonResponse(['error'=>'Bad request sent, parameter is missing.'],400);
     }
 
     /**
