@@ -48,11 +48,11 @@ class DisabledRepository extends ServiceEntityRepository
     }
     */
 
-    public function findAllBeginBy($pattern){
+    public function findAllBeginBy($pattern,$limit){
 
         $qb = $this->createQueryBuilder('d');
 
-        return $qb->andWhere("concat(d.firstname,' ',d.lastname) LIKE :contains OR concat(d.lastname,' ',d.firstname) LIKE :contains")
+        $query = $qb->andWhere("concat(d.firstname,' ',d.lastname) LIKE :contains OR concat(d.lastname,' ',d.firstname) LIKE :contains")
             ->addSelect("
                 (CASE
                     WHEN concat(d.firstname,' ',d.lastname) = :match OR concat(d.lastname,' ',d.firstname) = :match THEN 0
@@ -65,7 +65,12 @@ class DisabledRepository extends ServiceEntityRepository
                 ':match' => $pattern,
                 ':beginBy' => $pattern.'%'
             ])
-            ->orderBy("ORD","ASC")
-            ->getQuery()->getResult();
+            ->orderBy("ORD","ASC");
+
+        if($limit){
+            $query->setMaxResults($limit);
+        }
+
+        return $query->getQuery()->getResult();
     }
 }
