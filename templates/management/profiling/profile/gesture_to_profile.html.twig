@@ -48,7 +48,7 @@
 
         <section class="profiling-profile-choice">
 
-            <form class="search-form js-gesture-choice">
+            <form class="search-form js-profile-choice">
                 <label for="search-profile">Qui a appris ce(s) geste(s)?</label>
 
                 <div class="search-input input-group">
@@ -61,7 +61,9 @@
             </form>
 
             <div id="profile-search-result" class="search-result">
-                <h6>Résultat de la recherche</h6>
+                <div class="status">
+                    Aucun résultat.
+                </div>
                 <div class="search-content">
                     {% if true %}
                         Aucun profil ajouté.
@@ -74,7 +76,7 @@
         <hr>
 
         <section class="profiling-chosen-profile">
-            <h5>Profil(s) ajouté(s)</h5>
+            <h5>Profil(s) concerné(s)</h5>
             <div class="chosen-content">
 
             </div>
