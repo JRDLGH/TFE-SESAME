@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileController extends Controller
 {
     /**
-     * @Route("/", name="management_profile_index", methods="GET")
+     * @Route("/", name="management_profile_index", methods="GET", options={"expose"=true})
      */
     public function index(ProfileRepository $profileRepository): Response
     {
