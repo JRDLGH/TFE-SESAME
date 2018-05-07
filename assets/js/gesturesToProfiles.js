@@ -42,11 +42,10 @@ $(document).ready(function () {
             .done(function(data){
 
             displayFormStatus(Object.keys(data),data.success);
+            redirectTo(Routing.generate('management_profile_index'));
 
             }).fail(function(error){
-                console.log(error);
-                displayFormStatus('warning',error['responseJSON']['Error']);
-
+                displayFormStatus('danger',error['responseJSON']['Error']);
             });
         return false;
     });
@@ -63,14 +62,17 @@ $(document).ready(function () {
 });
 
 function displayFormStatus(type,message){
-    console.log('go through');
-    console.log(getErrorContainer());
     var html=
         '<div class="alert alert-'+ type + '">' +
         '<p>'+ message +'</p>' +
         '</div>';
-    console.log(html);
     getErrorContainer().html(html);
+}
+
+function redirectTo(page){
+    setTimeout(function () {
+        window.location.href = page;
+    }, 2000);
 }
 
 function getErrorContainer(){
@@ -135,9 +137,6 @@ function formatHTML(data,type){
                 break;
         }
         $container.html(output);
-    }else{
-        console.log("no data available");
-
     }
 }
 
@@ -199,7 +198,6 @@ function select(type,data){
         break;
 
     }
-    console.log(selectedProfiles,selectedGestures);
     if(output){
         $container.append(output);
     }
@@ -226,8 +224,6 @@ function removeFromSelectedGestures(gesture){
             if(selectedGestures.length == 0){
                 getSelectedGesturesContainer().html('Aucun geste sélectionné.');
             }
-        }else{
-            console.log('not found!');
         }
     }
 }
@@ -312,8 +308,6 @@ function removeFromSelectedProfiles(profile){
             if(selectedProfiles.length == 0){
                 getSelectedProfilesContainer().html('Aucun geste sélectionné.');
             }
-        }else{
-            console.log('not found!');
         }
     }
 }
