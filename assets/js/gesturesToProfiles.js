@@ -83,7 +83,6 @@ function getErrorContainer(){
 
 function focusOn($container){
     if($container.offset().top != undefined && $container.offset().top >= 0){
-        console.log($container.offset().top);
         $('html, body').animate({
             scrollTop: $container.offset().top - 150
         },500);
