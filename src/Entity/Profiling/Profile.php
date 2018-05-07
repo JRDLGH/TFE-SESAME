@@ -44,7 +44,7 @@ class Profile
     private $owner;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Profiling\ProfileGesture",mappedBy="profile")
+     * @ORM\OneToMany(targetEntity="App\Entity\Profiling\ProfileGesture", mappedBy="profile", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $learnedGestures;
 
@@ -111,6 +111,6 @@ class Profile
 
     public function __toString()
     {
-        return $this->getId();
+        return strval($this->getId());
     }
 }

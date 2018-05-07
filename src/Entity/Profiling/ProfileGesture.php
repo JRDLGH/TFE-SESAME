@@ -20,7 +20,7 @@ class ProfileGesture
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Profiling\Profile",inversedBy="learnedGestures")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Profiling\Profile", inversedBy="learnedGestures",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $profile;
@@ -80,6 +80,14 @@ class ProfileGesture
 
     public function __toString()
     {
-        return $this->getGesture()->getName();
+        return strval($this->getGesture()->getId());
+    }
+
+    /**
+     * Triggered on insert
+     * @ORM\PrePersist
+     */
+    public function setLearningDateValue(){
+            $this->setLearningDate(new \DateTime("now",new \DateTimeZone("Europe/Brussels")));
     }
 }

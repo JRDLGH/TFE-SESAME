@@ -38,12 +38,16 @@ $(document).ready(function () {
     $('.js-profile-choice .search-input').typeWatch(profileOptions);
 
     $('#gesture-profile-form').on('submit',function(t){
-        $.post(Routing.generate('management_profile_gesture'),{profiles:selectedProfiles,gestures:selectedGestures}).
-        done(function(data){
-            console.log(data);
-        }).fail(function(error){
-            console.log(error)
-        });
+        $.post(Routing.generate('management_profile_gesture'),{profiles:selectedProfiles,gestures:selectedGestures})
+            .done(function(data){
+
+            displayFormStatus(Object.keys(data),data.success);
+
+            }).fail(function(error){
+                console.log(error);
+                displayFormStatus('warning',error['responseJSON']['Error']);
+
+            });
         return false;
     });
 
@@ -58,7 +62,20 @@ $(document).ready(function () {
     });
 });
 
+function displayFormStatus(type,message){
+    console.log('go through');
+    console.log(getErrorContainer());
+    var html=
+        '<div class="alert alert-'+ type + '">' +
+        '<p>'+ message +'</p>' +
+        '</div>';
+    console.log(html);
+    getErrorContainer().html(html);
+}
 
+function getErrorContainer(){
+    return $('.error-container');
+}
 
 function getGestures(name){
     if(name){

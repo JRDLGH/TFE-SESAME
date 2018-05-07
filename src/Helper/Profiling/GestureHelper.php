@@ -48,24 +48,4 @@ class GestureHelper{
 
         return $exists;
     }
-
-    public function isLearnead(Gesture $gesture, Profile $profile) : bool
-    {
-        if($gesture->getId() && $profile->getId()){
-            if($this->isPublished($gesture) && $this->isExisting($gesture))
-            {
-
-                if(empty($profile->getLearnedGestures()))
-                {
-                    return false;
-
-                }
-
-            }
-
-        }
-
-        return true; //not add
-
-    }
 }
