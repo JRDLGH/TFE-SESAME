@@ -42,10 +42,12 @@ $(document).ready(function () {
             .done(function(data){
 
             displayFormStatus(Object.keys(data),data.success);
+            focusOn(getErrorContainer());
             redirectTo(Routing.generate('management_profile_index'));
 
             }).fail(function(error){
                 displayFormStatus('danger',error['responseJSON']['Error']);
+                focusOn(getErrorContainer());
             });
         return false;
     });
@@ -77,6 +79,16 @@ function redirectTo(page){
 
 function getErrorContainer(){
     return $('.error-container');
+}
+
+function focusOn($container){
+    if($container.offset().top != undefined && $container.offset().top >= 0){
+        console.log($container.offset().top);
+        $('html, body').animate({
+            scrollTop: $container.offset().top - 150
+        },500);
+    }
+
 }
 
 function getGestures(name){
