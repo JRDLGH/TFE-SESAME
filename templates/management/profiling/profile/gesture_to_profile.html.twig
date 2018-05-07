@@ -93,7 +93,14 @@
     <section class="controls">
         <form id="gesture-profile-form" action="{{ path('management_profile_gesture') }}" method="POST">
             <button type="submit" class="btn btn-primary">Éxecuter</button>
-            <button type="button" class="btn btn-secondary">Annuler</button>
+            <div class="help-links">
+                <a href="{{ path('management_profile_index') }}">
+                    <i class="fa fa-undo action-icon"></i>
+                    <span>
+                {{ 'Annuler'|capitalize }}
+                </span>
+                </a>
+            </div>
         </form>
     </section>
 
