@@ -1,0 +1,8 @@
+{% macro action(name,path,iconClass) %}
+        <a href="{{ path }}">
+            <i class="{{ iconClass }}"></i>
+            <span>
+                {{ name|trans|capitalize }}
+                </span>
+        </a>
+{% endmacro %}
