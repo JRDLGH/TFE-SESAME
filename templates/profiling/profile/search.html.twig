@@ -8,18 +8,25 @@
         {{ s.searchbar('Rechercher un profil par le nom et/ou prénom d\'une personne') }}
     </form>
 
-    <hr class="separator">
-
     <div class="search-result">
         <div class="status">
-            Aucun résultat.
         </div>
         <div class="search-content">
-            {% if true %}
-                Aucun profil ajouté.
-            {% endif %}
+
         </div>
     </div>
+
+    <div class='pagination-controls js-pagination-controls' style="display:none;">
+        <div class="controls">
+            <button class='btn btn-primary disabled js-previous-page'><i class="fa fa-angle-left prev-icon"></i>Précédent</button>
+            <div class="separator"></div>
+            <button class='btn btn-primary js-next-page'>Suivant<i class="fa fa-angle-right next-icon"></i></button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/searchProfile.css') }}">
 {% endblock %}
 
 {% block javascripts %}

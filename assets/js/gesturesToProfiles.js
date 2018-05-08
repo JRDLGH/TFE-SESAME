@@ -22,7 +22,7 @@ $(document).ready(function () {
         wait: 1000,
         highlight: true,
         allowSubmit: true,
-        captureLength: 2
+        captureLength: 10
     };
 
     $('.js-gesture-choice .search-input').typeWatch(gestureOptions);
@@ -317,7 +317,7 @@ function removeFromSelectedProfiles(profile){
         if(index != -1){
             selectedProfiles.splice(index,1);
             if(selectedProfiles.length == 0){
-                getSelectedProfilesContainer().html('Aucun geste sélectionné.');
+                getSelectedProfilesContainer().html('Aucun profil sélectionné.');
             }
         }
     }

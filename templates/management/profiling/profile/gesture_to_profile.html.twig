@@ -65,9 +65,7 @@
                     Aucun résultat.
                 </div>
                 <div class="search-content">
-                    {% if true %}
-                        Aucun profil ajouté.
-                    {% endif %}
+
                 </div>
             </div>
 
@@ -78,7 +76,9 @@
         <section class="profiling-chosen-profile">
             <h5>Profil(s) concerné(s)</h5>
             <div class="chosen-content">
-
+                {% if true %}
+                    Aucun profil sélectionné.
+                {% endif %}
             </div>
         </section>
 

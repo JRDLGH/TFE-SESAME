@@ -176,27 +176,6 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/search",name="profiling_search_profile",methods={"GET"},options={"expose"=true})
-     */
-    public function search(Request $request){
-        //XHR REQUEST!
-        if($request->isXmlHttpRequest()){
-            $pattern = $request->get('pattern');
-            if($pattern){
-                $pattern = array_filter(explode(' ',trim($pattern)));
-                $pattern = implode(' ',$pattern);
-                $disabledRepository = $this->getDoctrine()->getRepository(Disabled::class);
-                $disableds = $disabledRepository->findAllBeginBy($pattern,10);
-                if($disableds){
-                    return $this->json($disableds,200,[],['groups'=>['search']]);
-                }
-                return new JsonResponse(['not_found'=>'Aucun profil trouvé..'],404);
-            }
-        }
-        return new JsonResponse(['error'=>'Bad request sent, parameter is missing.'],400);
-    }
-
-    /**
      * @Route("/{id}", name="management_profile_show", methods="GET")
      */
     public function show(Profile $profile): Response

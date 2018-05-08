@@ -165,6 +165,16 @@ li {
     }
 }
 
+div.separator{
+    @include make-col-ready();
+    @include make-col(2);
+    @include media-breakpoint-up(md){
+        @include make-col-ready();
+        @include make-col(8);
+    }
+
+}
+
 .search-input{
     margin: 0;
     width: 100%;
