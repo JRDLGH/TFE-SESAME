@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% import 'macros/searchbar.html.twig' as s %}
+
+{% block content %}
+    <h1>Rechercher un profil</h1>
+
+    <form>
+        {{ s.searchbar('Rechercher un profil par le nom et/ou prénom d\'une personne') }}
+    </form>
+
+    <hr class="separator">
+
+    <div class="search-result">
+        <div class="status">
+            Aucun résultat.
+        </div>
+        <div class="search-content">
+            {% if true %}
+                Aucun profil ajouté.
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/searchProfile.js') }}"></script>
+{% endblock %}
