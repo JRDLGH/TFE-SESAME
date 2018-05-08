@@ -1,4 +1,6 @@
 {% extends 'base.html.twig' %}
+{% import 'macros/searchbar.html.twig' as s %}
+
 
 {% block content %}
 
@@ -12,15 +14,7 @@
 
         <section class="profiling-gesture-choice">
             <form class="search-form js-gesture-choice">
-                <label for="search-gesture">Quelle(s) geste(s) voulez-vous ajouter?</label>
-
-                <div class="search-input input-group">
-                    <span class="input-logo" name="search-gesture" id="sizing-addon1 col-1">
-                        <i class="fa fa-search fa"></i>
-                    </span>
-                    <input type="text" class="form-control search-input">
-
-                </div>
+                {{ s.searchbar('Quelle(s) geste(s) voulez-vous ajouter?') }}
             </form>
 
             <div id="gesture-search-result" class="search-result">
@@ -53,15 +47,17 @@
         <section class="profiling-profile-choice">
 
             <form class="search-form js-profile-choice">
+                {{ s.searchbar('Qui a appris ce(s) geste(s)?') }}
+
                 <label for="search-profile">Qui a appris ce(s) geste(s)?</label>
 
-                <div class="search-input input-group">
-                    <span class="input-logo" name="search-profile" id="sizing-addon1 col-1">
-                        <i class="fa fa-search fa"></i>
-                    </span>
-                    <input type="text" class="form-control search-input">
+                {#<div class="search-input input-group">#}
+                    {#<span class="input-logo" name="search-profile" id="sizing-addon1 col-1">#}
+                        {#<i class="fa fa-search fa"></i>#}
+                    {#</span>#}
+                    {#<input type="text" class="form-control search-input">#}
 
-                </div>
+                {#</div>#}
             </form>
 
             <div id="profile-search-result" class="search-result">
