@@ -18,7 +18,10 @@ class GestureType extends AbstractType
             ->add('profileVideo')
             ->add('video')
             ->add('cover')
-            ->add('description',TextareaType::class)
+            ->add('description',TextareaType::class, array(
+                'required'=>false
+                )
+            )
             ->add('isPublished')
             ->add('tags',TagsType::class)
         ;
