@@ -50,11 +50,16 @@ $(document).ready(function(){
         currentValue = value;
         // if(isValid(value)){
             //If new value, request database call
-            if(valuePosition == -1 || previousValue['value'] == '' || valuePosition != previousValue['position']){
+            if((valuePosition == -1 || previousValue['value'] == '' || valuePosition != previousValue['position']) && currentValue.length >= 2){
                 previousValue['value'] = value;
                 previousValue['position'] = value.indexOf(previousValue['value']);
                 askGestures(value);
-            }else{
+            }else if(currentValue == '' || currentValue == ' '){
+                clearStatus();
+                clear();
+                getContainer().html('');
+            }
+            else{
                 //update current value
                 //Search for correspondance depending on search type
                 //By default: trie sur l'ordre de pertinence, les mots commençant par la sélection
@@ -304,7 +309,6 @@ function display(data,type){
 }
 
 function isContainerEmpty() {
-    console.log(getContainer().html());
     if(getContainer().html() === null || getContainer().html() == '' || getContainer().html() == undefined){
         return true;
     }
