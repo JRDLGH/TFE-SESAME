@@ -23,9 +23,7 @@ class GestureController extends Controller
     public function index(Request $request): Response
     {
 
-//        $gestures = $gestureRepository->findAll();
         $paginator = $this->get('knp_paginator');
-        $dql = 'SELECT g FROM App\Entity\Thesaurus\Gesture g';
         $manager = $this->getDoctrine()->getManager();
         $queryBuilder = $manager->getRepository(Gesture::class)->createQueryBuilder('g');
 
