@@ -1,7 +1,7 @@
 import swal from 'sweetalert';
 import './Components/filter';
 
-import 'typeahead.js/dist/typeahead.jquery.min';
+import "typeahead.js";
 import Bloodhound from 'bloodhound-js';
 import 'bootstrap-tagsinput';
 
@@ -13,38 +13,40 @@ import 'bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css';
 import '../scss/structure/admin/tags.scss';
 import '../scss/structure/admin.scss';
 
+var data = ["apple", "banana", "cherry", "peach"];
+
 
 
 $(document).ready(function(){
-    var $input = $('input[data-role="tagsinput"]');
+    var $input = $('input[data-toggle="tagsinput"]');
 
     var tags = [];
     $.get('/admin/thesaurus/gesture/tags',function(data){
         tags=data;
     });
-    var source = new Bloodhound({
-        prefetch: '/admin/thesaurus/gesture/tags',
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('keyword'),
+    // var source = new Bloodhound({
+    //     // prefetch: '/admin/thesaurus/gesture/tags',
+    //     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('keyword'),
+    //     queryTokenizer: Bloodhound.tokenizers.whitespace,
+    //     local: data
+    // });
+    var states = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.whitespace,
         queryTokenizer: Bloodhound.tokenizers.whitespace,
+        local: data
     });
+    states.initialize();
     if ($input.length) {
         console.log('ok');
         $input.tagsinput({
             trimValue: true,
             focusClass: 'focus',
-            typeaheadjs: [
-                {
-                    hint: true,
-                    highlight: true,
-                    minLength: 1
-                },
-                {
-                    source: ['value1','value2']
-                }
-            ]
+            typeaheadjs: {
+                name: 'tags',
+                source: states.ttAdapter()
+            }
         });
     }
-    $(document).on('keyup','.bootstrap-tagsinput input',typeah);
 
     $(document).on('submit','.js-delete-gesture',confirmDelete);
 });

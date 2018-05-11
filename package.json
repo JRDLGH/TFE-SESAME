@@ -3,6 +3,7 @@
     "@symfony/webpack-encore": "^0.19.0",
     "bloodhound-js": "^1.2.2",
     "bootstrap": "^4.1.0",
+    "bootstrap-3-typeahead": "bassjobsen/Bootstrap-3-Typeahead",
     "bootstrap-tagsinput": "^0.7.1",
     "copy-webpack-plugin": "^4.5.1",
     "exports-loader": "^0.7.0",
