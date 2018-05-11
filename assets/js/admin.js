@@ -24,18 +24,17 @@ $(document).ready(function(){
     $.get('/admin/thesaurus/gesture/tags',function(data){
         tags=data;
     });
-    // var source = new Bloodhound({
-    //     // prefetch: '/admin/thesaurus/gesture/tags',
-    //     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('keyword'),
+    var source = new Bloodhound({
+        prefetch: '/admin/thesaurus/gesture/tags',
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('keyword'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+    });
+    // var states = new Bloodhound({
+    //     datumTokenizer: Bloodhound.tokenizers.whitespace,
     //     queryTokenizer: Bloodhound.tokenizers.whitespace,
     //     local: data
     // });
-    var states = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.whitespace,
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        local: data
-    });
-    states.initialize();
+    // states.initialize();
     if ($input.length) {
         console.log('ok');
         $input.tagsinput({
@@ -43,8 +42,12 @@ $(document).ready(function(){
             focusClass: 'focus',
             typeaheadjs: {
                 name: 'tags',
-                source: states.ttAdapter()
-            }
+                display: 'keyword',
+                value: 'keyword',
+                // source: states.ttAdapter()
+                source: source.ttAdapter()
+            },
+            // itemValue: 'keyword'
         });
     }
 
