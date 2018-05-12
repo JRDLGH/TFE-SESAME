@@ -54,6 +54,9 @@ class ThesaurusController extends AbstractController
         if($request->isXmlHttpRequest()){
             if($id){
 
+                //videoHelper
+                $videopath = 'build/static/video/'; //const
+
                 $encoder = new JsonEncoder();
                 //Extract group view from gesture class
                 $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
@@ -70,8 +73,16 @@ class ThesaurusController extends AbstractController
                 //Request database
                 $gestureIdMatched = $this->getDoctrine()->getRepository(Gesture::class)->findPublishedById($id);
 
+                if(!empty($gestureIdMatched[0]->getVideo())){
+                    $gestureIdMatched[0]->setVideo($videopath.$gestureIdMatched[0]->getVideo());
+                }
+                if(!empty($gestureIdMatched[0]->getProfileVideo())){
+                    $gestureIdMatched[0]->setProfileVideo($videopath.$gestureIdMatched[0]->getProfileVideo());
+                }
+
                 //Serialize
                 $matched = $serializer->serialize($gestureIdMatched,'json',array('groups' => array('show')));
+
                 if(!empty($matched)){
                     return new JsonResponse($matched,Response::HTTP_OK);
                 }else{
@@ -110,11 +121,29 @@ class ThesaurusController extends AbstractController
 
             // GET ALL GESTURES THAT MATCH TAG BEGINING BY $tag AND GESTURE NAME IS NOT BEGINNING BY $tag
             $gesturesTagMatched = $this->getDoctrine()->getRepository(Gesture::class)->findByTagNameExcludeNameBeginBy($tag);
+
+            foreach($gesturesTagMatched as $gesture){
+                if(empty($gesture->getVideo()) && empty($gesture->getProfileVideo())){
+                    $gesture->setHasVideos(false);
+                }else{
+                    $gesture->setHasVideos(true);
+                }
+            }
+
             $json = $serializer->serialize($gesturesTagMatched, 'json',array('groups' => array('list')));
             $gesturesTagMatched = json_decode($json);
 
             //GET ALL GESTURES WHERE NAME BEGIN BY $tag
             $gesturesNameMatched = $this->getDoctrine()->getRepository(Gesture::class)->findByNameBeginBy($tag);
+
+            foreach($gesturesNameMatched as $gesture){
+                if(empty($gesture->getVideo()) && empty($gesture->getProfileVideo())){
+                    $gesture->setHasVideos(false);
+                }else{
+                    $gesture->setHasVideos(true);
+                }
+            }
+
             $json = $serializer->serialize($gesturesNameMatched, 'json',array('groups' => array('list')));
             $gesturesNameMatched = json_decode($json);
 
