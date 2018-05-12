@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add report with the information provided in C:\\wamp64\\www\\sesame.be\\yarn-error.log.
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js watch
 
 PATH: 
   C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\wamp64\bin\php\php7.1.9;C:\composer;C:\SymfonyInstaller\;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Users\JRDN\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\Microsoft VS Code\bin;C:\Users\JRDN\AppData\Roaming\Composer\vendor\bin;C:\Users\JRDN\AppData\Roaming\npm;C:\Users\JRDN\AppData\Local\Yarn\bin
@@ -19,6 +19,7 @@ npm manifest:
       "@symfony/webpack-encore": "^0.19.0",
       "bloodhound-js": "^1.2.2",
       "bootstrap": "^4.1.0",
+      "bootstrap-3-typeahead": "bassjobsen/Bootstrap-3-Typeahead",
       "bootstrap-tagsinput": "^0.7.1",
       "copy-webpack-plugin": "^4.5.1",
       "exports-loader": "^0.7.0",
@@ -951,6 +952,12 @@ Lockfile:
     dependencies:
       hoek "4.x.x"
   
+  bootstrap-3-typeahead@bassjobsen/Bootstrap-3-Typeahead:
+    version "4.0.2"
+    resolved "https://codeload.github.com/bassjobsen/Bootstrap-3-Typeahead/tar.gz/fc2d5dce4a5406d9b924224e395d5647918707c7"
+    dependencies:
+      uglify-js "^3.3.7"
+  
   bootstrap-tagsinput@^0.7.1:
     version "0.7.1"
     resolved "https://registry.yarnpkg.com/bootstrap-tagsinput/-/bootstrap-tagsinput-0.7.1.tgz#ffe3b06bbe2a106945ef2814568005a94f211937"
@@ -1344,7 +1351,7 @@ Lockfile:
     dependencies:
       delayed-stream "~1.0.0"
   
-  commander@^2.9.0:
+  commander@^2.9.0, commander@~2.15.0:
     version "2.15.1"
     resolved "https://registry.yarnpkg.com/commander/-/commander-2.15.1.tgz#df46e867d0fc2aec66a34662b406a9ccafff5b0f"
   
@@ -5701,6 +5708,13 @@ Lockfile:
     optionalDependencies:
       uglify-to-browserify "~1.0.0"
   
+  uglify-js@^3.3.7:
+    version "3.3.24"
+    resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.3.24.tgz#abeae7690c602ebd006f4567387a0c0c333bdc0d"
+    dependencies:
+      commander "~2.15.0"
+      source-map "~0.6.1"
+  
   uglify-to-browserify@~1.0.0:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
@@ -6119,11 +6133,17 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: Couldn't find package "provided" on the "npm" registry.
-      at new MessageError (C:\Program Files (x86)\Yarn\lib\cli.js:186:110)
-      at NpmResolver.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:51625:15)
-      at Generator.next (<anonymous>)
-      at step (C:\Program Files (x86)\Yarn\lib\cli.js:98:30)
-      at C:\Program Files (x86)\Yarn\lib\cli.js:109:13
-      at <anonymous>
-      at process._tickCallback (internal/process/next_tick.js:188:7)
+  Error: Command failed.
+  Exit code: 3221225786
+  Command: C:\Windows\system32\cmd.exe
+  Arguments: /d /s /c encore dev --watch
+  Directory: C:\wamp64\www\sesame.be
+  Output:
+  
+      at ProcessTermError.MessageError (C:\Program Files (x86)\Yarn\lib\cli.js:186:110)
+      at new ProcessTermError (C:\Program Files (x86)\Yarn\lib\cli.js:226:113)
+      at ChildProcess.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:30281:17)
+      at emitTwo (events.js:126:13)
+      at ChildProcess.emit (events.js:214:7)
+      at maybeClose (internal/child_process.js:925:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:209:5)
