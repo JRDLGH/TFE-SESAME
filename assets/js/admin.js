@@ -25,38 +25,54 @@ $(document).ready(function(){
         tags=data;
     });
     var source = new Bloodhound({
-        prefetch: '/admin/thesaurus/gesture/tags',
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('keyword'),
+        // local: ["avoir","rendre"],
+        // prefetch: {
+        //     url: '/admin/thesaurus/gesture/tags',
+        // },
+        prefetch: {
+            url: '/admin/thesaurus/gesture/tags',
+            filter: function (response) {
+                var tags = [];
+                response.forEach(function(tag){
+                    tags.push(tag.keyword);
+                });
+                return tags;
+            }
+        },
+        datumTokenizer: Bloodhound.tokenizers.whitespace,
         queryTokenizer: Bloodhound.tokenizers.whitespace,
     });
-    // var states = new Bloodhound({
-    //     datumTokenizer: Bloodhound.tokenizers.whitespace,
-    //     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    //     local: data
-    // });
-    // states.initialize();
+    source.initialize();
     if ($input.length) {
         console.log('ok');
         $input.tagsinput({
             trimValue: true,
             focusClass: 'focus',
-            typeaheadjs: {
-                name: 'tags',
-                display: 'keyword',
-                value: 'keyword',
-                // source: states.ttAdapter()
-                source: source.ttAdapter()
-            },
-            // itemValue: 'keyword'
+            typeaheadjs: [
+                {
+                    highlight: true,
+                    minLength: 2
+                },
+                {
+
+                    // name: 'keyword',
+                    //
+                    // display: 'keyword',
+                    // value: 'keyword',
+                    source: source.ttAdapter()
+                },
+            ]
         });
     }
 
     $(document).on('submit','.js-delete-gesture',confirmDelete);
 });
 
-function typeah(elem){
-    console.log(elem);
-}
+// function getTags(){
+//     $.ajax({
+//         url:'/admin/thesaurus/gesture/tags';
+//     });
+// }
 
 function confirmDelete(){
     swal({
