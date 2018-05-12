@@ -100,6 +100,12 @@ class Gesture
      */
     private $publicationDate;
 
+    /**
+     * @var bool
+     * @Groups({"list"})
+     */
+    private $hasVideos;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -231,6 +237,23 @@ class Gesture
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getHasVideos() : bool
+    {
+        return $this->hasVideos;
+    }
+
+    /**
+     * @param mixed $hasVideos
+     */
+    public function setHasVideos($hasVideos)
+    {
+        $this->hasVideos = $hasVideos;
+    }
+
     /**
      * Triggered on insert
      * @ORM\PrePersist
