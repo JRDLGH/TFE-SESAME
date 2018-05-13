@@ -3,6 +3,7 @@ import ArrayHelper from "./ArrayHelper";
 let HelperInstances = new WeakMap();
 
 class Paginator{
+
     constructor(limit = 10,$container){
         this.limit = limit;
         this.currentPg = 0;
@@ -13,22 +14,6 @@ class Paginator{
 
         HelperInstances.set(this,new ArrayHelper());
 
-        // this.$container.on(
-        //     'click',
-        //     '.js-previous-page',
-        //     this.previous
-        // );
-        //
-        // this.$container.on(
-        //     'click',
-        //     '.js-next-page',
-        //     this.next.bind(this)
-        // );
-        // this.$wrapper.on(
-        //     'click',
-        //     '.js-delete-rep-log',
-        //     this.handleRepLogDelete.bind(this)
-        // );
     }
 
     paginate(data){
@@ -60,7 +45,6 @@ class Paginator{
     }
 
     getPaginationContainer(){
-        console.log(this.$container);
         return this.$container;
     }
 
