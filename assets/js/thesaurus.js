@@ -2,6 +2,7 @@
 import "../scss/thesaurus.scss";
 const routes = require( './Components/Routing/fos_js_routes.json');
 import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
+import Status from './Components/Status';
 
 var paginator = {
     breakAt:    6,
@@ -17,6 +18,8 @@ var paginator = {
 
 Routing.setRoutingData(routes);
 
+const StatusHandler = new Status();
+
 /**
  * DEBUGGING SECTION
  */
@@ -25,16 +28,16 @@ Routing.setRoutingData(routes);
  * DEBUGGING END
  */
 
-var previousValue = [];
-var currentValue = '';
-var gestures;
-var lastMatched = []; // last gesture that matched
-var currentStatus = 'waiting'; //ex: {'success':"x gestures found"}
+let previousValue = [];
+let currentValue = '';
+let gestures;
+let lastMatched = []; // last gesture that matched
 
 $(document).ready(function(){
 
+    const $searchInput = $('#search');
 
-    $('#search').on('click',function(){
+    $searchInput.on('click',function(){
         $('body, html').animate({
             scrollTop: $(this).offset().top - $('header').outerHeight() - 50
         },1000);
@@ -43,9 +46,9 @@ $(document).ready(function(){
      * KEY PRESS WILL NEED TO DETECT ENTER
      * ALSO, HIT ENTER OR THE SEARCH BUTTON WILL LEAD TO SAME OPERATIONS
      */
-    $('#search').keyup(function(evt){
-        var value = this.value.toLowerCase();
-        var valuePosition = value.indexOf(previousValue['value']);
+    $searchInput.keyup(function(evt){
+        let value = this.value.toLowerCase();
+        let valuePosition = value.indexOf(previousValue['value']);
 
         currentValue = value;
         // if(isValid(value)){
@@ -55,7 +58,8 @@ $(document).ready(function(){
                 previousValue['position'] = value.indexOf(previousValue['value']);
                 askGestures(value);
             }else if(currentValue == '' || currentValue == ' '){
-                clearStatus();
+                // clearStatus();
+                StatusHandler.clear();
                 clear();
                 getContainer().html('');
             }
@@ -164,9 +168,9 @@ function showGesture(id){
  * @param value
  */
 function orderByPertinence(data,value){
-    var matched,filteredNameMatched = [];
-    var nameMatched = data.matched.byName;
-    var tagMatched = data.matched.byTag;
+    let matched,filteredNameMatched = [];
+    let nameMatched = data.matched.byName;
+    let tagMatched = data.matched.byTag;
 
     filteredNameMatched = matchNames(value,nameMatched);
 
@@ -183,7 +187,7 @@ function orderByPertinence(data,value){
  * @return {Array}
  */
 function matchNames(pattern,nameMatched){
-    var matched = [];
+    let matched = [];
     if(isArray(nameMatched) && pattern.length > 0){
 
         matched = getGesturesByName(pattern,nameMatched);
@@ -202,15 +206,13 @@ function matchNames(pattern,nameMatched){
  * @return {string}, the html details
  */
 function formatHTML(gesture){
-    var cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
+    let cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
     cover = "/build/static/thesaurus/gestures/" + cover;
-    var video = gesture.name;
-    var video_path = "/build/static/thesaurus/gestures/videos/" + video + ".mp4";
-    var title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
-    var video = '';
-    var profileVideo= '';
+    let video = gesture.name;
+    let video_path = "/build/static/thesaurus/gestures/videos/" + video + ".mp4";
+    let title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
 
-    var html = "<h2 class=\"gesture-details-header-title\">Détails</h2>" +
+    let html = "<h2 class=\"gesture-details-header-title\">Détails</h2>" +
         "<article class=\"gesture-details-content\">\n" +
         "    <img src=\"" + cover +"\" alt=\"gesture-cover\" class=\"cover\">\n" +
         "    <div class=\"content\">\n" +
@@ -248,11 +250,10 @@ function formatHTML(gesture){
  * @return {string}
  */
 function listHTML(gesture) {
-    var cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
+    let cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
     cover = "/build/static/thesaurus/gestures/" + cover;
-    var title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
-    var html = 
-    "<article class=\"gesture js-gesture\" data-id=\""+ gesture.id +"\">" +
+    let title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
+    return "<article class=\"gesture js-gesture\" data-id=\""+ gesture.id +"\">" +
         "<div class=\"gesture-content\">" +
             "<img src=\""+ cover +"\" " + "alt=\"gesture-cover\" class=\"cover\">" +
             "<div class=\"content\">" +
@@ -263,7 +264,6 @@ function listHTML(gesture) {
             "</button>" +
         "</div>" +
     "</article>";
-    return html;
 }
 
 /**
@@ -273,15 +273,15 @@ function listHTML(gesture) {
  */
 function display(data,type){
 
-    var gIds = getGestureId(data);
-    var display = false;
+    let gIds = getGestureId(data);
+    let display = false;
 
     if(!isArray(lastMatched) || !compareArray(gIds,lastMatched) || isContainerEmpty()){
         lastMatched = gIds; //must only contains id of last matched gestures
         display = true;
     }
 
-    var content = '';
+    let content = '';
     if(isArray(data)){
         switch (type){
             case 'details': content = formatHTML(data[0]);
@@ -300,10 +300,10 @@ function display(data,type){
                 getContainer().html(content);
             }
         }
-        clearStatus();
+        StatusHandler.clear();
     }else{
         //Not found
-        setStatus({'not_found':'Aucun geste ne correspond à votre recherche'});
+        StatusHandler.set('not_found','Aucun geste ne correspond à votre recherche');
         getContainer().html('');
     }
 }
@@ -401,9 +401,9 @@ function matchTags(pattern,tagMatched,nameMatched,sortedNameMatched,option){
         option = 'both';
     }
 
-    var tags = splitIntoTags(pattern);
+    let tags = splitIntoTags(pattern);
     tags = tags.filter(getUniqueTags);
-    var result = [];
+    let result = [];
     //DELETE USELESS PATTERNS like 'de', 'le', 'la'
     //TODO
     tags = removeBlanksFromArray(tags);
@@ -424,9 +424,8 @@ function matchTags(pattern,tagMatched,nameMatched,sortedNameMatched,option){
         case 'tag': result = getGesturesByTags(tags,tagMatched);
         break;
         //Look into namedMatched
-        case 'name': result = getGesturesByTags(tags,nameMatched);;
+        case 'name': result = getGesturesByTags(tags,nameMatched);
         break;
-        default: 'Error';
     }
     return result;
 }
@@ -438,8 +437,8 @@ function matchTags(pattern,tagMatched,nameMatched,sortedNameMatched,option){
  * @return {*}
  */
 function arrayDiff(array_a,array_b){
-    var array_diff = array_a.filter(function (cell_a) {
-        var keep = true;
+    let array_diff = array_a.filter(function (cell_a) {
+        let keep = true;
         array_b.forEach(function (cell_b) {
             if(cell_a === cell_b){
                 keep = false;
@@ -476,7 +475,7 @@ function getUniqueTags(value, index, self) {
  * @return {boolean}
  */
 function isArray(array){
-    var isArray = false;
+    let isArray = false;
     if(Array.isArray(array) && array.length > 0){
         isArray = true;
     }
@@ -489,7 +488,7 @@ function isArray(array){
  * @return {*}
  */
 function removeBlanksFromArray(tags){
-    var blankPositions = [];
+    let blankPositions = [];
     if(Array.isArray(tags) && tags.length > 0){
         tags.forEach(function(tag,index){
             if(tag == '' || tag == ' ' || tag == undefined || /\s\s+/g.test(tag)){
@@ -511,18 +510,18 @@ function removeBlanksFromArray(tags){
  * @param tags, the tags array
  */
 function getGesturesByTags(tags,data){
-    var matched = [];
+    let matched = [];
     if(isArray(tags) && isArray(data)){
         matched = data.filter(function(gesture){
             //First, eliminate gesture that does not have enough tags
             if(tags.length <= gesture.tags.length){
-                var keywords = mapTag(gesture.tags);
-                var keep = true;
-                for(var i =0; i < tags.length ; i++){
+                let keywords = mapTag(gesture.tags);
+                let keep = true;
+                for(let i =0; i < tags.length ; i++){
                     //if last tag
-                    if(i == tags.length-1 && i >= 0){
+                    if(i === tags.length-1 && i >= 0){
                         //look if it begin or match the tag!
-                        for(var j = 0; j < keywords.length; j++){
+                        for(let j = 0; j < keywords.length; j++){
                             if(!keywords[j].startsWith(tags[i])){
                                 keep = false;
                             }else{
@@ -532,7 +531,7 @@ function getGesturesByTags(tags,data){
                         }
                         break;
                     }else{
-                        if(keywords.indexOf(tags[i]) == -1){
+                        if(keywords.indexOf(tags[i]) === -1){
                             keep = false;
                             break;
                         }
@@ -549,11 +548,11 @@ function getGesturesByTags(tags,data){
 }
 //Convert array of object in array of value
 function mapTag(tags){
-    var tagArray = [];
+    let tagArray = [];
     if(Array.isArray(tags)){
-        var keys = Object.keys(tags[0]);
+        let keys = Object.keys(tags[0]);
         tags.forEach(function(tag){
-            keys.forEach(function (key){
+            keys.forEach(function (){
                 tagArray.push(tag[keys[0]].toLowerCase());
             });
         });
@@ -579,7 +578,7 @@ function sortByName(a,b){
 }
 
 function splitIntoTags(tags){
-    var nospace_regex = /\s\s+/g;
+    let nospace_regex = /\s\s+/g;
     tags = tags.replace(nospace_regex,' ');
     tags = tags.split(/\s/);
     return tags;
@@ -593,14 +592,14 @@ function askGestures(value){
     //REGEX -- ALLOW ONLY LETTERS
     if(isValid(value))
     {
-        var keywords = splitIntoTags(value);
+        let keywords = splitIntoTags(value);
 
         //contains one word
-        if(keywords.length == 1)
+        if(keywords.length === 1)
         {
             clear();
             getContainer().html('');
-            setStatusMessage('waiting');
+            StatusHandler.set('waiting');
 
             $.ajax({
                 url: Routing.generate('thesaurus_search_tag', {tag: keywords[0]}),
@@ -609,14 +608,15 @@ function askGestures(value){
                     404: function(data){
                         //RESOURCE NOT FOUND
                         if(isArray(data)){
-                            setStatus(data.responseJSON);
+                            // StatusHandler.set();
+                            console.log(data.responseJSON);
                         }else{
-                            setStatus({'not_found':'Aucun geste ne correspond à votre recherche.'});
+                            StatusHandler.set('not_found');
                         }
                     },
                     500: function(){
                         //ERROR BACKEND
-                        setStatusMessage('error','Une erreur est survenue, veuillez contacter l\'administrateur.');
+                        StatusHandler.set('error');
                     }
                 }
             }).done(function(data){
@@ -630,7 +630,7 @@ function askGestures(value){
     }else{
         //Nothing entered
         getContainer().html('');
-        clearStatus();
+        StatusHandler.clear();
         clear();
     }
 }
@@ -642,14 +642,14 @@ function setGestures(data){
 }
 
 function isValid(value){
-    var isValid= false;
+    let isValid= false;
     if(/\w/.test(value) && !/[0-9]/.test(value))
     {
         isValid = true;
-    }else if(value != ''){
-        setStatusMessage('invalid','Format invalide');
+    }else if(value !== ''){
+        StatusHandler.set('invalid','Format invalide');
     }else{
-        clearStatus();
+        StatusHandler.clear();
     }
     return isValid;
 }
@@ -658,55 +658,6 @@ function clear(){
     gestures = null;
     hidePaginationButtons();
 }
-
-//success, waiting, not_found
-//Must recieve an array
-function setStatus(status){
-    var state =  Object.keys(status)[0];
-    switch(state){
-        case 'init':setStatusMessage(state,status[state]);
-        break;
-        case 'success':setStatusMessage(state,status[state]);
-            break;
-        case 'waiting':setStatusMessage(state,status[state]);
-            break;
-        case 'not_found':setStatusMessage(state,status[state]);
-            break;
-    }
-}
-
-function setStatusMessage(state,message){
-    clearStatus();
-    currentStatus = state;
-
-    hidePaginationButtons();
-    var $statusElement = $('.status');
-    if(message){
-        $statusElement.children('.status-message').html(message);
-    }
-    switch (state){
-        case 'success': $statusElement.children('i').addClass('fa fa-check fa-2x');
-            break;
-        case 'waiting':  $statusElement.children('i').addClass('fa fa-spinner fa-spin fa-2x');
-            break;
-        case 'not_found': $statusElement.children('i').addClass('fa fa-times fa-2x red-text');
-            break;
-        case 'error': $statusElement.children('i').addClass('fa fa-exclamation-triangle fa-2x yellow-text');
-            break;
-        case 'invalid': $statusElement.children('i').addClass('fa fa-ban fa-2x');
-            break;
-    }
-}
-
-//Removes everything inside status elem
-function clearStatus(){
-    var $statusElement = $('.status');
-    // clear message
-    $statusElement.children('.status-message').html('');
-    //clear icon
-    $statusElement.children('i').attr('class','');
-}
-
 
 /*
 PAGINATOR -- AUTHOR: JORDAN LGH
