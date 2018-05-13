@@ -34,6 +34,37 @@
         <div class="profile-thesaurus">
             <div class="profile-thesaurus-title">
                 <h4>Dictionnaire de profil individualisé</h4>
+                <section id="thesaurus">
+                    <div>
+                        <form action="#" class="form-container">
+                            <div class="form-group">
+                                <label for="search_gesture">{{ 'thesaurus.search.input.label'|trans }}</label>
+                                <div class="search-input row input-group">
+                                    <span class="input-logo" id="sizing-addon1 col-1"><i class="fa fa-search fa"></i></span>
+                                    <input type="text" name="search_gesture" id="search" class="form-control col-11" placeholder="{{ 'thesaurus.search.input.placeholder'|trans }}">
+                                </div>
+                            </div>
+                        </form>
+                        <div class="gestures-container">
+                            <div class="status">
+                                <i></i>
+                                <span class="status-message"></span>
+                            </div>
+                            <div class="gesture-details">
+
+                            </div>
+                            <div id="gesture">
+                            </div>
+                            <div class='pagination-controls js-pagination-controls' style="display:none;">
+                                <div class="controls">
+                                    <button class='btn btn-primary disabled js-previous-page'><i class="fa fa-angle-left prev-icon"></i>Précédent</button>
+                                    <div class="separator"></div>
+                                    <button class='btn btn-primary js-next-page'>Suivant<i class="fa fa-angle-right next-icon"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
             {# THESAURUS HERE #}
         </div>
