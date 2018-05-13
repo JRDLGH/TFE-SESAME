@@ -1,17 +1,16 @@
 import Paginator from "./Components/Paginator";
 
 const routes = require( './Components/Routing/fos_js_routes.json');
-import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
+import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min';
 
 import 'jquery.typewatch';
 import '../scss/searchProfile.scss';
-// import '../scss/structure/card.scss';
-// import '../scss/structure/search.scss';
-
-
+import Status from "./Components/Status";
 
 Routing.setRoutingData(routes);
+
 const Pagination = new Paginator(2,$('.js-pagination-controls'));
+const StatusHandler = new Status($('.search-result .search-content').parent().find('.status'));
 
 
 $(document).ready(function () {
@@ -24,65 +23,28 @@ $(document).ready(function () {
         captureLength: 2
     };
 
-    console.log(getProfileContainer());
-
     $('.search-input').typeWatch(profileOptions);
 
     /**
      * PAGINATOR EVENT LISTENER
      */
 
-    $('.js-previous-page').click(function(evt){
+    $('.js-previous-page').click(function(){
         displayProfiles(Pagination.previous());
         return false;
-        //enable previous
-        //possibility of disabling next
     });
 
-    $('.js-next-page').click(function(evt){
-        evt.preventDefault();
-        //enable previous
-        //possibility of disabling prev
+    $('.js-next-page').click(function(){
         displayProfiles(Pagination.next());
         return false;
     });
 
 });
-
-/* STATUS*/
-
-function clearStatusContainer($statusContainer){
-    $statusContainer.html('');
-}
-
-function getStatusContainer($container){
-    return $container.parent().find('.status');
-}
-
-function setError(type,$container){
-    switch (type){
-        case 'not_found':
-            getStatusContainer($container).html('Aucune correspondance trouvée.');
-
-            break;
-        case 'internal':
-            getStatusContainer($container).html('Une erreur est survenue...');
-
-            break;
-    }
-    $container.html('');
-}
-
-function setWaiting($container){
-    getStatusContainer($container).html('<i class="fa fa-spinner fa-spin"></i>');
-}
-
-
 /** PROFILES **/
 
 function profileHTML(profile){
-    var age = getAge(profile.birthday);
-    var html = '';
+    let age = getAge(profile.birthday);
+    let html = '';
     html +=
         '<div class="card-container profile-card js-select-profile" data-id="' + profile.profile.id + '">' +
         '<div class="card">' +
@@ -95,10 +57,10 @@ function profileHTML(profile){
 }
 
 function getAge(birthday){
-    var currentDate = new Date();
-    var birthDate = new Date(birthday);
-    var age = currentDate.getFullYear() - birthDate.getFullYear();
-    var m = currentDate.getMonth() - birthDate.getMonth();
+    let currentDate = new Date();
+    let birthDate = new Date(birthday);
+    let age = currentDate.getFullYear() - birthDate.getFullYear();
+    let m = currentDate.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && currentDate.getDate() < birthDate.getDate())) {
         age--;
     }
@@ -107,25 +69,24 @@ function getAge(birthday){
 
 function getProfiles(pattern){
     if(pattern){
-        setWaiting(getProfileContainer());
+        StatusHandler.set('waiting');
         $.ajax({
             url: Routing.generate('profiling_search_profile',{pattern : pattern}),
             type: 'GET',
             statusCode: {
-                404: function(data){
+                404: function(){
                     //RESOURCE NOT FOUND
-                    setError('not_found',getProfileContainer());
+                    StatusHandler.set('not_found');
                 },
                 500: function(){
                     //ERROR BACKEND
-                    setError('internal',getProfileContainer());
+                    StatusHandler.set('internal');
 
                 }
             }
         }).done(function(data){
-            console.log(data);
             //MATCH HTTP_OK -- 200
-            clearStatusContainer(getStatusContainer(getProfileContainer()));
+            StatusHandler.clear();
             display(data);
         });
     }
@@ -136,22 +97,15 @@ function getProfileContainer(){
 }
 
 function formatHTML(data,type){
-    var output = '';
-    var $container;
+    let output = '';
+    let $container;
     if(data){
         switch (type){
             case 'profile':
                 $container = getProfileContainer();
                 data.forEach(function (profile) {
                     output += profileHTML(profile);
-                })
-                break;
-            case 'gesture':
-                data.forEach(function(gesture){
-                    output += gestureHTML(gesture);
                 });
-                $container = getGestureContainer();
-                ;
                 break;
         }
         $container.html(output);
