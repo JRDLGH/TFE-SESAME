@@ -199,7 +199,8 @@ function matchNames(pattern,nameMatched){
 function formatHTML(gesture){
     var title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
 
-    var video, profileVideo = '';
+    var profileVideo = '';
+    var video = '';
 
     if(gesture.video != '' && gesture.video != null && gesture.video != undefined){
         console.log(gesture.video);
@@ -209,6 +210,8 @@ function formatHTML(gesture){
         console.log(gesture.profileVideo);
         profileVideo = createVideo("De profil",gesture.profileVideo);
     }
+
+    console.log(video,profileVideo);
     var description = gesture.description ? gesture.description : 'Aucune description disponible';
 
     var html = "<h2 class=\"gesture-details-header-title\">Détails</h2>" +
@@ -248,6 +251,9 @@ function listHTML(gesture) {
     var cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
     cover = "/build/static/thesaurus/gestures/" + cover;
     var title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
+    var videoButton = '';
+    videoButton = getVideoButton(gesture.hasVideos,gesture.description)
+
     var html = 
     "<article class=\"gesture js-gesture\" data-id=\""+ gesture.id +"\">" +
         "<div class=\"gesture-content\">" +
@@ -255,12 +261,24 @@ function listHTML(gesture) {
             "<div class=\"content\">" +
                 "<h3 class=\"title\">"+ title +"</h3>" +
             "</div>" +
-            "<button class=\"btn btn-secondary js-gesture-show\">" +
-                "<span>En savoir plus</span>" +
-            "</button>" +
+        videoButton +
         "</div>" +
     "</article>";
     return html;
+}
+
+function getVideoButton(hasVideos,description){
+    var c = 'js-gesture-show';
+    var text= 'Voir les vidéos';
+    if(!hasVideos && (description == '' || description == null)){
+        c = 'disabled';
+        text = 'Aucune vidéo.';
+    }else if(!hasVideos && (description != null || description != '')){
+        text = 'Voir la description';
+    }
+    return "<button class=\"btn btn-secondary "+ c +"\">" +
+        "<span>"+ text +"</span>" +
+        "</button>";
 }
 
 /**
