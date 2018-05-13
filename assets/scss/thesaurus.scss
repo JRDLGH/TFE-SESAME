@@ -6,6 +6,7 @@
 @import "mixins/mixins.scss";
 @import "structure/forms.scss";
 @import "structure/pagination.scss";
+//@import "structure/status";
 
 
 section{
@@ -23,19 +24,19 @@ section{
             @include make-container();
             position: relative;
 
-            .status{
-                @include make-row();
-                padding: .2rem;
-                color: $black;
-                color: rgba($color: $black, $alpha: 0.5);
-                text-align: center;
-                i{
-                    margin: auto;
-                }
-                .status-message{
-                    width: 100%;
-                }
-            }
+            //.status{
+            //    @include make-row();
+            //    padding: .2rem;
+            //    color: $black;
+            //    color: rgba($color: $black, $alpha: 0.5);
+            //    text-align: center;
+            //    i{
+            //        margin: auto;
+            //    }
+            //    .status-message{
+            //        width: 100%;
+            //    }
+            //}
             
 
             .gesture-details{
