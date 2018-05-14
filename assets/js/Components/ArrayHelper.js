@@ -5,7 +5,7 @@ class ArrayHelper
      * @param array
      * @return {boolean}
      */
-    static isArray(array)
+    isArray(array)
     {
         let isArray = false;
         if(Array.isArray(array) && array.length > 0){
@@ -19,7 +19,7 @@ class ArrayHelper
      * @param tags
      * @return {*}
      */
-    static removeBlanks(tags)
+    removeBlanks(tags)
     {
         let blankPositions = [];
         if(Array.isArray(tags) && tags.length > 0){
@@ -37,7 +37,7 @@ class ArrayHelper
         return tags;
     }
 
-    static mapValues(object)
+    mapValues(object)
     {
         let valuesArray = [];
         if(this.isArray(object)){
@@ -56,7 +56,7 @@ class ArrayHelper
      *   @param array
      *   @param limit, the number of element per array
      */
-    static splitArray(array,limit)
+    splitArray(array,limit)
     {
         let splitArray = [];
         while(array.length > 0){
@@ -71,7 +71,7 @@ class ArrayHelper
      * @param array_b
      * @return {*}
      */
-    static arrayDiff(array_a,array_b){
+    arrayDiff(array_a,array_b){
         return array_a.filter(
             (cell_a) => {
                 let keep = true;
@@ -92,7 +92,7 @@ class ArrayHelper
      * @param {*} array2
      * @returns boolean
      */
-    static compareArray(array1,array2){
+    compareArray(array1,array2){
         return JSON.stringify(array1) === JSON.stringify(array2);
     }
 }
