@@ -29,6 +29,7 @@ class Paginator{
         }else{
             this.hidePaginationButtons();
         }
+        console.log(result);
         return result;
     }
 
@@ -134,6 +135,13 @@ class Paginator{
             this.nbPages = Math.ceil(data.length/limit); //round up!
             this.pageMap = HelperInstances.get(this).splitArray(data,limit);
         }
+    }
+
+    reset()
+    {
+        this.nbPages = 0;
+        this.pageMap = [];
+        this.currentPg = 0;
     }
 
 }
