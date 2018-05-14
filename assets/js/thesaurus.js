@@ -573,9 +573,8 @@ function askGestures(value){
                 statusCode: {
                     404: function(data){
                         //RESOURCE NOT FOUND
-                        if(isArray(data) || typeof(data) == 'object'){
+                        if(isArray(data) || typeof(data) === 'object'){
                             let state = Object.keys(data.responseJSON)[0];
-                            console.log(state);
                             let msg = data.responseJSON[state];
                             StatusHandler.set(state,msg);
                         }else{
