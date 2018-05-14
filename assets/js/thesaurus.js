@@ -6,15 +6,16 @@ import Status from './Components/Status';
 import Paginator from "./Components/Paginator";
 import Scroller from './Components/Scroller';
 import ArrayHelper from './Components/ArrayHelper';
+import Thesaurus from "./Components/Thesaurus/Thesaurus";
 
 //php bin/console fos:js-routing:dump --format=json --target=assets/js/Components/Routing/fos_js_routes.json
 
 Routing.setRoutingData(routes);
 
 const StatusHandler = new Status();
-const Pagination = new Paginator(6,$('.js-pagination-controls'));
 const ScrollTool = new Scroller();
 const AHelper = new ArrayHelper();
+const Thes = new Thesaurus(null,$('#gesture'),new Paginator(6,$('.js-pagination-controls')));
 
 /**
  * DEBUGGING SECTION
@@ -25,9 +26,6 @@ const AHelper = new ArrayHelper();
  */
 
 let previousValue = [];
-let currentValue = '';
-let gestures;
-let lastMatched = []; // last gesture that matched
 
 $(document).ready(function(){
 
@@ -40,30 +38,30 @@ $(document).ready(function(){
      * KEY PRESS WILL NEED TO DETECT ENTER
      * ALSO, HIT ENTER OR THE SEARCH BUTTON WILL LEAD TO SAME OPERATIONS
      */
-    $searchInput.keyup(function(evt){
+    $searchInput.keyup(function(){
         let value = this.value.toLowerCase();
         let valuePosition = value.indexOf(previousValue['value']);
 
-        currentValue = value;
+        Thes.currentlySearched = value;
         // if(isValid(value)){
             //If new value, request database call
-            if((valuePosition === -1 || previousValue['value'] === '' || valuePosition !== previousValue['position']) && currentValue.length >= 2){
+            if((valuePosition === -1 || previousValue['value'] === '' || valuePosition !== previousValue['position']) && Thes.currentlySearched.length >= 2){
                 previousValue['value'] = value;
                 previousValue['position'] = value.indexOf(previousValue['value']);
-                askGestures(value);
-            }else if(currentValue === '' || currentValue === ' '){
+                Thes.getGestures(value);
+            }else if(Thes.currentlySearched === '' || Thes.currentlySearched === ' '){
                 StatusHandler.clear();
-                clear();
-                getContainer().html('');
+                Thes.clear();
+                Thes.getContainer().html('');
             }
             else{
                 //update current value
                 //Search for correspondance depending on search type
                 //By default: trie sur l'ordre de pertinence, les mots commençant par la sélection
-                if(gestures){
+                if(Thes.gestures){
                     //reset pagination in order to avoid to be stuck inside a page
-                    Pagination.reset();
-                    orderByPertinence(gestures,value);
+                    Thes.paginator.reset();
+                    Thes.orderByPertinence(Thes.gestures,value);
                 }
             }
         // }
@@ -72,15 +70,15 @@ $(document).ready(function(){
 
     $(document).on('click','.js-gesture-show',function(){
         //Show a cursor pointer on gesture!
-        showGesture($(this).closest('.gesture').data('id'));
+        Thes.showGesture($(this).closest('.gesture').data('id'));
         return false;
     });
 
     $(document).on('click','.js-previous-search',function(){
         //back to previous search
-        containerDisplay('list');
-        getDetailsContainer().removeClass('opened');
-        getContainer().removeClass('closed');
+        Thes.containerDisplay('list');
+        Thesaurus.getDetailsContainer().removeClass('opened');
+        Thes.getContainer().removeClass('closed');
         if(Pagination.nbPages > 0){
             Pagination.showPaginationButtons();
         }
@@ -92,16 +90,16 @@ $(document).ready(function(){
      */
 
     $('.js-previous-page').click(function(){
-        display(Pagination.previous());
-        ScrollTool.scrollTo(getContainer(),0,'',true);
-        Pagination.showPaginationButtons();
+        Thes.display(Thes.paginator.previous());
+        ScrollTool.scrollTo(Thes.getContainer(),0,'',true);
+        Thes.paginator.showPaginationButtons();
         return false;
     });
 
     $('.js-next-page').click(function(){
-        display(Pagination.next());
-        ScrollTool.scrollTo(getContainer(),0,'',true);
-        Pagination.showPaginationButtons();
+        Thes.display(Thes.paginator.next());
+        ScrollTool.scrollTo(Thes.getContainer(),0,'',true);
+        Thes.paginator.showPaginationButtons();
         return false;
     });
 
@@ -282,16 +280,6 @@ function isContainerEmpty() {
     }
     return false;
 
-}
-
-/**
- * Compare two array, if they are exactly the same, return true;
- * @param {*} array1 
- * @param {*} array2 
- * @returns boolean
- */
-function compareArray(array1,array2){
-    return JSON.stringify(array1)==JSON.stringify(array2);
 }
 
 /**
