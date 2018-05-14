@@ -4,16 +4,7 @@ const routes = require( './Components/Routing/fos_js_routes.json');
 import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
 import Status from './Components/Status';
 import Paginator from "./Components/Paginator";
-
-var paginator = {
-    breakAt:    6,
-    prevPg:     0,
-    nextPg:     0,
-    currentPg:  0,
-    nbPages:    0,
-    pageMap:    [],
-    enabled:    true
-}; //paginator conf
+import Scroller from './Components/Scroller';
 
 //php bin/console fos:js-routing:dump --format=json --target=assets/js/Components/Routing/fos_js_routes.json
 
@@ -21,6 +12,7 @@ Routing.setRoutingData(routes);
 
 const StatusHandler = new Status();
 const Pagination = new Paginator(6,$('.js-pagination-controls'));
+const ScrollTool = new Scroller();
 
 /**
  * DEBUGGING SECTION
@@ -40,9 +32,7 @@ $(document).ready(function(){
     const $searchInput = $('#search');
 
     $searchInput.on('click',function(){
-        $('body, html').animate({
-            scrollTop: $(this).offset().top - $('header').outerHeight() - 50
-        },1000);
+        ScrollTool.scrollTo($(this),0,null,true);
     });
     /**
      * KEY PRESS WILL NEED TO DETECT ENTER
@@ -90,7 +80,7 @@ $(document).ready(function(){
         containerDisplay('list');
         getDetailsContainer().removeClass('opened');
         getContainer().removeClass('closed');
-        if(paginator.nbPages > 0){
+        if(Pagination.nbPages > 0){
             Pagination.showPaginationButtons();
         }
         return false;
@@ -102,39 +92,31 @@ $(document).ready(function(){
 
     $('.js-previous-page').click(function(){
         display(Pagination.previous());
+        ScrollTool.scrollTo(getContainer(),0,'',true);
+        Pagination.showPaginationButtons();
         return false;
     });
 
     $('.js-next-page').click(function(){
         display(Pagination.next());
+        ScrollTool.scrollTo(getContainer(),0,'',true);
+        Pagination.showPaginationButtons();
         return false;
     });
 
 });
 
-/**
- * jQuery animation that scrolls to gestures container.
- */
-function scrollToContainer(){
-
-    let space = '50';
-    let position = getContainer().offset().top - $('header').outerHeight() - space;
-        $('body, html').animate({
-            scrollTop: position
-        },1000);
-}
-
-/**
- * jQuery animation that scolls to details container.
- */
-function scrollToDetailsContainer(){
-
-    let space = '50';
-    let position = getDetailsContainer().offset().top - $('header').outerHeight() - space;
-    $('body, html').animate({
-        scrollTop: position
-    },1000);
-}
+// /**
+//  * jQuery animation that scolls to details container.
+//  */
+// function scrollToDetailsContainer(){
+//
+//     let space = '50';
+//     let position = getDetailsContainer().offset().top - $('header').outerHeight() - space;
+//     $('body, html').animate({
+//         scrollTop: position
+//     },1000);
+// }
 
 
 /**
@@ -284,7 +266,7 @@ function display(data,type){
             case 'details': content = formatHTML(data[0]);
                 containerDisplay('details');
                 getDetailsContainer().html(content);
-                hidePaginationButtons();
+                Pagination.hidePaginationButtons();
 
             break;
             default: //list
@@ -359,7 +341,8 @@ function containerDisplay(container){
 function showDetails(){
     getContainer().addClass('display-none');
     getDetailsContainer().addClass('display-block').addClass('opened');
-    scrollToDetailsContainer();
+    // scrollToDetailsContainer();
+    ScrollTool.scrollTo(getDetailsContainer(),0,null,true);
 }
 
 /**
@@ -640,6 +623,11 @@ function setGestures(data){
     }
 }
 
+/**
+ * Verify if the search entry is valid and contains letters.
+ * @param value
+ * @return {boolean}
+ */
 function isValid(value){
     let isValid= false;
     if(/\w/.test(value) && !/[0-9]/.test(value))
@@ -657,145 +645,3 @@ function clear(){
     gestures = null;
     Pagination.hidePaginationButtons();
 }
-
-/*
-PAGINATOR -- AUTHOR: JORDAN LGH
- */
-
-
-
-// IF THERE'S MORE THAN 10 RESULT, BREAK INTO SMALLER ARRAYS
-// DISPLAY 2 BUTTONS. PREVS AND NEXT
-
-/**
- * Do pagination.
- * @param data
- */
-// function paginate(data){
-//     var result = data;
-//
-//     if(paginator.enabled && data.length > paginator.breakAt){
-//         breakIntoPage(data,paginator.breakAt);
-//         if(isArray(paginator.pageMap)){
-//             result = paginator.pageMap[0];
-//             paginator.current = 0;
-//             showPaginationButtons();
-//         }
-//     }else{
-//         hidePaginationButtons();
-//     }
-//     return result;
-// }
-
-// function hidePaginationButtons(){
-//     if(!getPaginationContainer().attr('style','display:none;')){
-//         getPaginationContainer().hide();
-//     }
-// }
-//
-// function showPaginationButtons(){
-//     if(getPaginationContainer().attr('style','display:none;')){
-//         getPaginationContainer().show();
-//     }
-// }
-//
-// function getPaginationContainer(){
-//     return $('.js-pagination-controls');
-// }
-
-// function next(){
-//     //go to next page IF there's a next page
-//     if(paginator.currentPg < paginator.nbPages-1){
-//         //you can go to next page
-//         paginator.currentPg += 1;
-//         display(paginator.pageMap[paginator.currentPg]);
-//         showPaginationButtons();
-//         scrollToContainer();
-//         if(paginator.currentPg == paginator.nbPages -1){
-//             $('.js-next-page').addClass("disabled");
-//             enableButton('previous');
-//         }else{
-//             enableButton('next');
-//             enableButton('previous');
-//         }
-//     }else{
-//         //disabled
-//     }
-// }
-
-// function enableButton(button){
-//     switch(button){
-//         case 'next':
-//             if(isDisbaled($('.js-next-page'))){
-//                 $('.js-next-page').removeClass('disabled');
-//             }
-//         break;
-//         case 'previous':
-//             if(isDisbaled($('.js-previous-page'))){
-//                 $('.js-previous-page').removeClass('disabled');
-//             }
-//         break;
-//         case 'init':
-//             $('.js-previous-page').addClass('disabled');
-//             $('.js-next-page').removeClass('disabled');
-//         break;
-//     }
-// }
-
-// function isDisbaled(elem){
-//     return elem.hasClass('disabled');
-// }
-
-// function previous(){
-//     if(paginator.currentPg >= 1 && paginator.nbPages >= paginator.currentPg){
-//         //you can go to previous page
-//         paginator.currentPg -= 1;
-//         display(paginator.pageMap[paginator.currentPg]);
-//         showPaginationButtons();
-//         scrollToContainer();
-//         if(paginator.currentPg == 0){
-//             $('.js-previous-page').addClass("disabled");
-//             enableButton('next');
-//         }else{
-//             enableButton('next');
-//             enableButton('previous');
-//         }
-//     }else{
-//         //disabled
-//     }
-// }
-
-// /**
-//  * Break an array of data in mutliple array of data, each key represent a page.
-//  * @param data
-//  * @param limit
-//  */
-// function breakIntoPage(data,limit){
-//     //Must be done only once per pagination
-//     if(isArray(data) && limit >= 2){
-//         paginator.nbPages = Math.ceil(data.length/limit); //round up!
-//         paginator.pageMap = splitArray(data,limit);
-//     }
-// }
-//
-// /**
-// *   Split an array in mutliple array of x cells.
-//  *   @param array
-//  *   @param limit, the number of element per array
-//  */
-// function splitArray(array,limit){
-//     var splitArray = [];
-//     while(array.length > 0){
-//         splitArray.push(array.splice(0,limit));
-//     }
-//     return splitArray;
-// }
-
-// function resetPagination(){
-//     paginator.prevPg = 0;
-//     paginator.nextPg = 0;
-//     paginator.currentPg = 0;
-//     paginator.nbPages = 0;
-//     paginator.pageMap = 0;
-//     enableButton('init');
-// }
