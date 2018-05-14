@@ -139,7 +139,7 @@ class ThesaurusController extends AbstractController
                 $response['matched']['byTag'] = $gesturesTagMatched;
                 $status = ['success' => count($response['matched']['byTag']).' gestures found'];
             }else{
-                $response = ['not_found' => 'No gesture found.'];
+                $response = ['not_found' => 'Aucun geste ne correspond à votre recherche.'];
                 return new JsonResponse($response,Response::HTTP_NOT_FOUND);
             }
             $response['status'] = $status;
