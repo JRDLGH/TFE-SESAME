@@ -29,7 +29,6 @@ class Paginator{
         }else{
             this.hidePaginationButtons();
         }
-        console.log(result);
         return result;
     }
 
@@ -50,11 +49,9 @@ class Paginator{
     }
 
     next(){
-        //go to next page IF there's a next page
         if(this.currentPg < this.nbPages-1){
             //you can go to next page
             this.currentPg += 1;
-            // display(this.pageMap[this.currentPg]);
             let data = this.pageMap[this.currentPg];
             this.showPaginationButtons();
             // scrollToContainer();
@@ -74,7 +71,6 @@ class Paginator{
         if(this.currentPg >= 1 && this.nbPages >= this.currentPg){
             //you can go to previous page
             this.currentPg -= 1;
-            // this.display(this.pageMap[this.currentPg]);
             let data = this.pageMap[this.currentPg];
             this.showPaginationButtons();
             // this.scrollToContainer();
