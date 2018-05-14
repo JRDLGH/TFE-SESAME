@@ -3,6 +3,7 @@ import "../scss/thesaurus.scss";
 const routes = require( './Components/Routing/fos_js_routes.json');
 import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
 import Status from './Components/Status';
+import Paginator from "./Components/Paginator";
 
 var paginator = {
     breakAt:    6,
@@ -19,6 +20,7 @@ var paginator = {
 Routing.setRoutingData(routes);
 
 const StatusHandler = new Status();
+const Pagination = new Paginator(6,$('.js-pagination-controls'));
 
 /**
  * DEBUGGING SECTION
@@ -53,11 +55,11 @@ $(document).ready(function(){
         currentValue = value;
         // if(isValid(value)){
             //If new value, request database call
-            if((valuePosition == -1 || previousValue['value'] == '' || valuePosition != previousValue['position']) && currentValue.length >= 2){
+            if((valuePosition === -1 || previousValue['value'] === '' || valuePosition !== previousValue['position']) && currentValue.length >= 2){
                 previousValue['value'] = value;
                 previousValue['position'] = value.indexOf(previousValue['value']);
                 askGestures(value);
-            }else if(currentValue == '' || currentValue == ' '){
+            }else if(currentValue === '' || currentValue === ' '){
                 // clearStatus();
                 StatusHandler.clear();
                 clear();
@@ -69,7 +71,7 @@ $(document).ready(function(){
                 //By default: trie sur l'ordre de pertinence, les mots commençant par la sélection
                 if(gestures){
                     //reset pagination in order to avoid to be stuck inside a page
-                    resetPagination();
+                    Pagination.reset();
                     orderByPertinence(gestures,value);
                 }
             }
@@ -77,19 +79,19 @@ $(document).ready(function(){
         return false;
     });
 
-    $(document).on('click','.js-gesture-show',function(evt){
+    $(document).on('click','.js-gesture-show',function(){
         //Show a cursor pointer on gesture!
         showGesture($(this).closest('.gesture').data('id'));
         return false;
     });
 
-    $(document).on('click','.js-previous-search',function(evt){
+    $(document).on('click','.js-previous-search',function(){
         //back to previous search
         containerDisplay('list');
         getDetailsContainer().removeClass('opened');
         getContainer().removeClass('closed');
         if(paginator.nbPages > 0){
-            showPaginationButtons();
+            Pagination.showPaginationButtons();
         }
         return false;
     });
@@ -98,18 +100,13 @@ $(document).ready(function(){
      * PAGINATOR EVENT LISTENER
      */
 
-    $('.js-previous-page').click(function(evt){
-        previous();
+    $('.js-previous-page').click(function(){
+        display(Pagination.previous());
         return false;
-        //enable previous        
-        //possibility of disabling next
     });
 
-    $('.js-next-page').click(function(evt){
-        evt.preventDefault();
-        //enable previous
-        //possibility of disabling prev        
-        next();
+    $('.js-next-page').click(function(){
+        display(Pagination.next());
         return false;
     });
 
@@ -120,8 +117,8 @@ $(document).ready(function(){
  */
 function scrollToContainer(){
 
-    var space = '50';
-    var position = getContainer().offset().top - $('header').outerHeight() - space;
+    let space = '50';
+    let position = getContainer().offset().top - $('header').outerHeight() - space;
         $('body, html').animate({
             scrollTop: position
         },1000);
@@ -132,8 +129,8 @@ function scrollToContainer(){
  */
 function scrollToDetailsContainer(){
 
-    var space = '50';
-    var position = getDetailsContainer().offset().top - $('header').outerHeight() - space;
+    let space = '50';
+    let position = getDetailsContainer().offset().top - $('header').outerHeight() - space;
     $('body, html').animate({
         scrollTop: position
     },1000);
@@ -292,7 +289,9 @@ function display(data,type){
             break;
             default: //list
             if(display){
-                data = paginate(data);
+                if(data.length > Pagination.limit){
+                    data = Pagination.paginate(data);
+                }
                 data.forEach(function (gesture){
                     content += listHTML(gesture);
                 });
@@ -656,7 +655,7 @@ function isValid(value){
 
 function clear(){
     gestures = null;
-    hidePaginationButtons();
+    Pagination.hidePaginationButtons();
 }
 
 /*
@@ -672,131 +671,131 @@ PAGINATOR -- AUTHOR: JORDAN LGH
  * Do pagination.
  * @param data
  */
-function paginate(data){
-    var result = data;
+// function paginate(data){
+//     var result = data;
+//
+//     if(paginator.enabled && data.length > paginator.breakAt){
+//         breakIntoPage(data,paginator.breakAt);
+//         if(isArray(paginator.pageMap)){
+//             result = paginator.pageMap[0];
+//             paginator.current = 0;
+//             showPaginationButtons();
+//         }
+//     }else{
+//         hidePaginationButtons();
+//     }
+//     return result;
+// }
 
-    if(paginator.enabled && data.length > paginator.breakAt){
-        breakIntoPage(data,paginator.breakAt);
-        if(isArray(paginator.pageMap)){
-            result = paginator.pageMap[0];
-            paginator.current = 0;
-            showPaginationButtons();
-        }
-    }else{
-        hidePaginationButtons();
-    }
-    return result;
-}
+// function hidePaginationButtons(){
+//     if(!getPaginationContainer().attr('style','display:none;')){
+//         getPaginationContainer().hide();
+//     }
+// }
+//
+// function showPaginationButtons(){
+//     if(getPaginationContainer().attr('style','display:none;')){
+//         getPaginationContainer().show();
+//     }
+// }
+//
+// function getPaginationContainer(){
+//     return $('.js-pagination-controls');
+// }
 
-function hidePaginationButtons(){
-    if(!getPaginationContainer().attr('style','display:none;')){
-        getPaginationContainer().hide();
-    }
-}
+// function next(){
+//     //go to next page IF there's a next page
+//     if(paginator.currentPg < paginator.nbPages-1){
+//         //you can go to next page
+//         paginator.currentPg += 1;
+//         display(paginator.pageMap[paginator.currentPg]);
+//         showPaginationButtons();
+//         scrollToContainer();
+//         if(paginator.currentPg == paginator.nbPages -1){
+//             $('.js-next-page').addClass("disabled");
+//             enableButton('previous');
+//         }else{
+//             enableButton('next');
+//             enableButton('previous');
+//         }
+//     }else{
+//         //disabled
+//     }
+// }
 
-function showPaginationButtons(){
-    if(getPaginationContainer().attr('style','display:none;')){
-        getPaginationContainer().show();
-    }
-}
+// function enableButton(button){
+//     switch(button){
+//         case 'next':
+//             if(isDisbaled($('.js-next-page'))){
+//                 $('.js-next-page').removeClass('disabled');
+//             }
+//         break;
+//         case 'previous':
+//             if(isDisbaled($('.js-previous-page'))){
+//                 $('.js-previous-page').removeClass('disabled');
+//             }
+//         break;
+//         case 'init':
+//             $('.js-previous-page').addClass('disabled');
+//             $('.js-next-page').removeClass('disabled');
+//         break;
+//     }
+// }
 
-function getPaginationContainer(){
-    return $('.js-pagination-controls');
-}
+// function isDisbaled(elem){
+//     return elem.hasClass('disabled');
+// }
 
-function next(){
-    //go to next page IF there's a next page
-    if(paginator.currentPg < paginator.nbPages-1){
-        //you can go to next page
-        paginator.currentPg += 1;
-        display(paginator.pageMap[paginator.currentPg]);
-        showPaginationButtons();
-        scrollToContainer();
-        if(paginator.currentPg == paginator.nbPages -1){
-            $('.js-next-page').addClass("disabled");
-            enableButton('previous');
-        }else{
-            enableButton('next');
-            enableButton('previous');
-        }
-    }else{
-        //disabled
-    }
-}
+// function previous(){
+//     if(paginator.currentPg >= 1 && paginator.nbPages >= paginator.currentPg){
+//         //you can go to previous page
+//         paginator.currentPg -= 1;
+//         display(paginator.pageMap[paginator.currentPg]);
+//         showPaginationButtons();
+//         scrollToContainer();
+//         if(paginator.currentPg == 0){
+//             $('.js-previous-page').addClass("disabled");
+//             enableButton('next');
+//         }else{
+//             enableButton('next');
+//             enableButton('previous');
+//         }
+//     }else{
+//         //disabled
+//     }
+// }
 
-function enableButton(button){
-    switch(button){
-        case 'next': 
-            if(isDisbaled($('.js-next-page'))){
-                $('.js-next-page').removeClass('disabled');
-            }
-        break;
-        case 'previous': 
-            if(isDisbaled($('.js-previous-page'))){
-                $('.js-previous-page').removeClass('disabled');
-            }
-        break;
-        case 'init':
-            $('.js-previous-page').addClass('disabled');
-            $('.js-next-page').removeClass('disabled');
-        break;
-    }
-}
+// /**
+//  * Break an array of data in mutliple array of data, each key represent a page.
+//  * @param data
+//  * @param limit
+//  */
+// function breakIntoPage(data,limit){
+//     //Must be done only once per pagination
+//     if(isArray(data) && limit >= 2){
+//         paginator.nbPages = Math.ceil(data.length/limit); //round up!
+//         paginator.pageMap = splitArray(data,limit);
+//     }
+// }
+//
+// /**
+// *   Split an array in mutliple array of x cells.
+//  *   @param array
+//  *   @param limit, the number of element per array
+//  */
+// function splitArray(array,limit){
+//     var splitArray = [];
+//     while(array.length > 0){
+//         splitArray.push(array.splice(0,limit));
+//     }
+//     return splitArray;
+// }
 
-function isDisbaled(elem){
-    return elem.hasClass('disabled');
-}
-
-function previous(){
-    if(paginator.currentPg >= 1 && paginator.nbPages >= paginator.currentPg){
-        //you can go to previous page
-        paginator.currentPg -= 1;
-        display(paginator.pageMap[paginator.currentPg]);
-        showPaginationButtons();
-        scrollToContainer();
-        if(paginator.currentPg == 0){
-            $('.js-previous-page').addClass("disabled");
-            enableButton('next');            
-        }else{
-            enableButton('next');
-            enableButton('previous');
-        }
-    }else{
-        //disabled
-    }
-}
-
-/**
- * Break an array of data in mutliple array of data, each key represent a page.
- * @param data
- * @param limit
- */
-function breakIntoPage(data,limit){
-    //Must be done only once per pagination
-    if(isArray(data) && limit >= 2){
-        paginator.nbPages = Math.ceil(data.length/limit); //round up!
-        paginator.pageMap = splitArray(data,limit);
-    }
-}
-
-/**
-*   Split an array in mutliple array of x cells.
- *   @param array
- *   @param limit, the number of element per array
- */
-function splitArray(array,limit){
-    var splitArray = [];
-    while(array.length > 0){
-        splitArray.push(array.splice(0,limit));
-    }
-    return splitArray;
-}
-
-function resetPagination(){
-    paginator.prevPg = 0;
-    paginator.nextPg = 0;
-    paginator.currentPg = 0;
-    paginator.nbPages = 0;
-    paginator.pageMap = 0;
-    enableButton('init');
-}
+// function resetPagination(){
+//     paginator.prevPg = 0;
+//     paginator.nextPg = 0;
+//     paginator.currentPg = 0;
+//     paginator.nbPages = 0;
+//     paginator.pageMap = 0;
+//     enableButton('init');
+// }
