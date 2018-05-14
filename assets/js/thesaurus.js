@@ -5,6 +5,7 @@ import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/pu
 import Status from './Components/Status';
 import Paginator from "./Components/Paginator";
 import Scroller from './Components/Scroller';
+import ArrayHelper from './Components/ArrayHelper';
 
 //php bin/console fos:js-routing:dump --format=json --target=assets/js/Components/Routing/fos_js_routes.json
 
@@ -13,6 +14,7 @@ Routing.setRoutingData(routes);
 const StatusHandler = new Status();
 const Pagination = new Paginator(6,$('.js-pagination-controls'));
 const ScrollTool = new Scroller();
+const AHelper = new ArrayHelper();
 
 /**
  * DEBUGGING SECTION
@@ -50,7 +52,6 @@ $(document).ready(function(){
                 previousValue['position'] = value.indexOf(previousValue['value']);
                 askGestures(value);
             }else if(currentValue === '' || currentValue === ' '){
-                // clearStatus();
                 StatusHandler.clear();
                 clear();
                 getContainer().html('');
@@ -154,7 +155,7 @@ function orderByPertinence(data,value){
  */
 function matchNames(pattern,nameMatched){
     let matched = [];
-    if(isArray(nameMatched) && pattern.length > 0){
+    if(AHelper.isArray(nameMatched) && pattern.length > 0){
 
         matched = getGesturesByName(pattern,nameMatched);
 
@@ -242,13 +243,14 @@ function display(data,pagination=true,type){
     let gIds = getGestureId(data);
     let display = false;
 
-    if(!isArray(lastMatched) || !compareArray(gIds,lastMatched) || isContainerEmpty()){
+    if(!AHelper.isArray(lastMatched) || !AHelper.compareArray(gIds,lastMatched)
+        || isContainerEmpty()){
         lastMatched = gIds; //must only contains id of last matched gestures
         display = true;
     }
 
     let content = '';
-    if(isArray(data)){
+    if(AHelper.isArray(data)){
         switch (type){
             case 'details': content = formatHTML(data[0]);
                 containerDisplay('details');
@@ -298,7 +300,7 @@ function compareArray(array1,array2){
  * @return {*}
  */
 function getGestureId(gArray){
-    if(isArray(gArray)){
+    if(AHelper.isArray(gArray)){
         var ids = gArray.map(function(gesture){
             return gesture.id;
         });
@@ -372,15 +374,15 @@ function matchTags(pattern,tagMatched,nameMatched,sortedNameMatched,option){
     let result = [];
     //DELETE USELESS PATTERNS like 'de', 'le', 'la'
     //TODO
-    tags = removeBlanksFromArray(tags);
+    tags = AHelper.removeBlanks(tags);
 
     switch (option){
         //Look into namedMatched & tagMatched
         case 'both':
             result = getGesturesByTags(tags,nameMatched);
-            if(isArray(result)){
+            if(AHelper.isArray(result)){
                 //Delete duplicates and merge
-                result = arrayDiff(result,sortedNameMatched);
+                result = AHelper.arrayDiff(result,sortedNameMatched);
                 result = result.concat(getGesturesByTags(tags,tagMatched));
             }else{
                 result = getGesturesByTags(tags,tagMatched);
@@ -394,28 +396,6 @@ function matchTags(pattern,tagMatched,nameMatched,sortedNameMatched,option){
         break;
     }
     return result;
-}
-
-/**
- * Returns cells that are unique inside array_a
- * @param array_a
- * @param array_b
- * @return {*}
- */
-function arrayDiff(array_a,array_b){
-    let array_diff = array_a.filter(function (cell_a) {
-        let keep = true;
-        array_b.forEach(function (cell_b) {
-            if(cell_a === cell_b){
-                keep = false;
-            }
-        });
-        if(keep){
-            return cell_a;
-        }
-    });
-    return array_diff;
-
 }
 
 /**
@@ -434,42 +414,6 @@ function getUniqueTags(value, index, self) {
     };
 }
 
-
-/**
- * Checks if the parameter is an array and is not empty.
- * @param array
- * @return {boolean}
- */
-function isArray(array){
-    let isArray = false;
-    if(Array.isArray(array) && array.length > 0){
-        isArray = true;
-    }
-    return isArray;
-}
-
-/**
- * Remove blanks cells and empty cells in array given.
- * @param tags
- * @return {*}
- */
-function removeBlanksFromArray(tags){
-    let blankPositions = [];
-    if(Array.isArray(tags) && tags.length > 0){
-        tags.forEach(function(tag,index){
-            if(tag == '' || tag == ' ' || tag == undefined || /\s\s+/g.test(tag)){
-                blankPositions.push(index);
-            }
-        });
-        if(blankPositions.length > 0){
-            blankPositions.forEach(function (pos) {
-                tags.splice(pos,1);
-            });
-        }
-    }
-    return tags;
-}
-
 /**
  * Get all gestures that are tagged by each tag inside tags array.
  * @param data, the gestures array
@@ -477,11 +421,11 @@ function removeBlanksFromArray(tags){
  */
 function getGesturesByTags(tags,data){
     let matched = [];
-    if(isArray(tags) && isArray(data)){
+    if(AHelper.isArray(tags) && AHelper.isArray(data)){
         matched = data.filter(function(gesture){
             //First, eliminate gesture that does not have enough tags
             if(tags.length <= gesture.tags.length){
-                let keywords = mapTag(gesture.tags);
+                let keywords = AHelper.mapValues(gesture.tags);
                 let keep = true;
                 for(let i =0; i < tags.length ; i++){
                     //if last tag
@@ -511,19 +455,6 @@ function getGesturesByTags(tags,data){
     }
     return matched;
 
-}
-//Convert array of object in array of value
-function mapTag(tags){
-    let tagArray = [];
-    if(Array.isArray(tags)){
-        let keys = Object.keys(tags[0]);
-        tags.forEach(function(tag){
-            keys.forEach(function (){
-                tagArray.push(tag[keys[0]].toLowerCase());
-            });
-        });
-    }
-    return tagArray;
 }
 
 function getGesturesByName(name,data){
@@ -573,7 +504,7 @@ function askGestures(value){
                 statusCode: {
                     404: function(data){
                         //RESOURCE NOT FOUND
-                        if(isArray(data) || typeof(data) === 'object'){
+                        if(AHelper.isArray(data) || typeof(data) === 'object'){
                             let state = Object.keys(data.responseJSON)[0];
                             let msg = data.responseJSON[state];
                             StatusHandler.set(state,msg);
