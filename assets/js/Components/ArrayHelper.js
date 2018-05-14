@@ -16,25 +16,26 @@ class ArrayHelper
 
     /**
      * Remove blanks cells and empty cells in array given.
-     * @param tags
+     * @param array
      * @return {*}
      */
-    removeBlanks(tags)
+    removeBlanks(array)
     {
         let blankPositions = [];
-        if(Array.isArray(tags) && tags.length > 0){
-            tags.forEach(function(tag,index){
-                if(tag === '' || tag === ' ' || tag === undefined || /\s\s+/g.test(tag)){
+        if(Array.isArray(array) && array.length > 0){
+            array.forEach(function(cell,index){
+                if(cell === '' || cell === ' ' || cell === undefined || /\s\s+/g.test(cell))
+                {
                     blankPositions.push(index);
                 }
             });
             if(blankPositions.length > 0){
                 blankPositions.forEach(function (pos) {
-                    tags.splice(pos,1);
+                    array.splice(pos,1);
                 });
             }
         }
-        return tags;
+        return array;
     }
 
     mapValues(object)
