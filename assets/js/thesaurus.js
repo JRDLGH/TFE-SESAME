@@ -106,19 +106,6 @@ $(document).ready(function(){
 
 });
 
-// /**
-//  * jQuery animation that scolls to details container.
-//  */
-// function scrollToDetailsContainer(){
-//
-//     let space = '50';
-//     let position = getDetailsContainer().offset().top - $('header').outerHeight() - space;
-//     $('body, html').animate({
-//         scrollTop: position
-//     },1000);
-// }
-
-
 /**
  * Get the gesture with id passed.
  * @param id
@@ -137,7 +124,7 @@ function showGesture(id){
         }
     }).done(function(data){
         //MATCH HTTP_OK -- 200
-        display(JSON.parse(data),'details');
+        display(JSON.parse(data),null,'details');
     });
 }
 
@@ -250,7 +237,7 @@ function listHTML(gesture) {
  * @param data
  * @param type
  */
-function display(data,type){
+function display(data,pagination=true,type){
 
     let gIds = getGestureId(data);
     let display = false;
@@ -271,9 +258,7 @@ function display(data,type){
             break;
             default: //list
             if(display){
-                if(data.length > Pagination.limit){
-                    data = Pagination.paginate(data);
-                }
+                data = Pagination.paginate(data);
                 data.forEach(function (gesture){
                     content += listHTML(gesture);
                 });
@@ -341,7 +326,6 @@ function containerDisplay(container){
 function showDetails(){
     getContainer().addClass('display-none');
     getDetailsContainer().addClass('display-block').addClass('opened');
-    // scrollToDetailsContainer();
     ScrollTool.scrollTo(getDetailsContainer(),0,null,true);
 }
 
@@ -589,9 +573,11 @@ function askGestures(value){
                 statusCode: {
                     404: function(data){
                         //RESOURCE NOT FOUND
-                        if(isArray(data)){
-                            // StatusHandler.set();
-                            console.log(data.responseJSON);
+                        if(isArray(data) || typeof(data) == 'object'){
+                            let state = Object.keys(data.responseJSON)[0];
+                            console.log(state);
+                            let msg = data.responseJSON[state];
+                            StatusHandler.set(state,msg);
                         }else{
                             StatusHandler.set('not_found');
                         }
