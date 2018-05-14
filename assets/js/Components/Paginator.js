@@ -138,6 +138,7 @@ class Paginator{
         this.nbPages = 0;
         this.pageMap = [];
         this.currentPg = 0;
+        this.enableButton('init');
     }
 
 }
