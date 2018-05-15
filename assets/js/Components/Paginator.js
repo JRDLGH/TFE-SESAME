@@ -26,6 +26,8 @@ class Paginator{
                 this.current = 0;
                 this.showPaginationButtons();
             }
+        }else if(this.enabled && this.currentPg > 0){
+
         }else{
             this.hidePaginationButtons();
         }

@@ -17,14 +17,6 @@ const ScrollTool = new Scroller();
 const AHelper = new ArrayHelper();
 const Thes = new Thesaurus(null,$('#gesture'),new Paginator(6,$('.js-pagination-controls')));
 
-/**
- * DEBUGGING SECTION
- */
-// console.log(routes);
-/**
- * DEBUGGING END
- */
-
 let previousValue = [];
 
 $(document).ready(function(){
@@ -60,7 +52,9 @@ $(document).ready(function(){
                 //By default: trie sur l'ordre de pertinence, les mots commençant par la sélection
                 if(Thes.gestures){
                     //reset pagination in order to avoid to be stuck inside a page
-                    Thes.paginator.reset();
+                    if(Thes.containsNewGestures(Thes.gestures)){
+                        Thes.paginator.reset();
+                    }
                     Thes.orderByPertinence(Thes.gestures,value);
                 }
             }
@@ -79,8 +73,9 @@ $(document).ready(function(){
         Thes.containerDisplay('list');
         Thesaurus.getDetailsContainer().removeClass('opened');
         Thes.getContainer().removeClass('closed');
-        if(Pagination.nbPages > 0){
-            Pagination.showPaginationButtons();
+        if(Thes.paginator.nbPages > 0){
+            //Possible problem here
+            Thes.paginator.showPaginationButtons();
         }
         return false;
     });
@@ -90,14 +85,15 @@ $(document).ready(function(){
      */
 
     $('.js-previous-page').click(function(){
-        Thes.display(Thes.paginator.previous());
+        Thes.display(Thes.paginator.previous(),false);
         ScrollTool.scrollTo(Thes.getContainer(),0,'',true);
         Thes.paginator.showPaginationButtons();
         return false;
     });
 
     $('.js-next-page').click(function(){
-        Thes.display(Thes.paginator.next());
+        let nextPageContent = Thes.paginator.next();
+        Thes.display(nextPageContent,false,'');
         ScrollTool.scrollTo(Thes.getContainer(),0,'',true);
         Thes.paginator.showPaginationButtons();
         return false;

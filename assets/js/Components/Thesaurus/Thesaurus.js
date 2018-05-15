@@ -21,7 +21,7 @@ class Thesaurus{
         this.source = source;
         this.currentlySearched = '';
         this.$container = $container;
-        this.gestures = [];
+        this.gestures = undefined;
         this.lastMatchedGesture = [];
         this.paginator = Paginator;
     }
@@ -152,14 +152,8 @@ class Thesaurus{
             "</article>";
     }
 
-    /**
-     * Display gestures depending on the data given and the type of display.
-     * @param data
-     * @param pagination
-     * @param type
-     */
-    display(data,pagination=true,type){
-
+    containsNewGestures(data)
+    {
         let gIds = Thesaurus.getGestureId(data);
         let display = false;
 
@@ -168,6 +162,17 @@ class Thesaurus{
             this.lastMatched = gIds; //must only contains id of last matched gestures
             display = true;
         }
+        return display;
+    }
+
+    /**
+     * Display gestures depending on the data given and the type of display.
+     * @param data
+     * @param pagination
+     * @param type
+     */
+    display(data,pagination=true,type){
+        let display = this.containsNewGestures(data);
 
         let content = '';
         if(AHelper.isArray(data)){
