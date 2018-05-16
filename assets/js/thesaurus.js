@@ -14,8 +14,7 @@ Routing.setRoutingData(routes);
 
 const StatusHandler = new Status();
 const ScrollTool = new Scroller();
-const AHelper = new ArrayHelper();
-const Thes = new Thesaurus(null,$('#gesture'),new Paginator(6,$('.js-pagination-controls')));
+const Thes = new Thesaurus('thesaurus_search_tag',$('#gesture'),new Paginator(6,$('.js-pagination-controls')));
 
 let previousValue = [];
 
