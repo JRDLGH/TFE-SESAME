@@ -414,7 +414,7 @@ class Thesaurus{
                 StatusHandler.set('waiting');
 
                 $.ajax({
-                    url: Routing.generate('thesaurus_search_tag', {tag: keywords[0]}),
+                    url: Routing.generate(this.source, {tag: keywords[0]}),
                     type: 'GET',
                     statusCode: {
                         404: function(data){
