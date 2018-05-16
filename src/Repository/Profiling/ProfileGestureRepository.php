@@ -19,6 +19,19 @@ class ProfileGestureRepository extends ServiceEntityRepository
         parent::__construct($registry, ProfileGesture::class);
     }
 
+
+    public function findGesturesByProfileId($profileId)
+    {
+        return $this->createQueryBuilder('pg')
+            ->join('App\Entity\Thesaurus\Gesture',' g','WITH',
+                'g.id = pg.profileId')
+            ->where('pg.profileId = :id')
+            ->setParameters([
+                'id' => $profileId
+            ])
+            ->getQuery()
+            ->getResult();
+    }
 //    /**
 //     * @return ProfileGesture[] Returns an array of ProfileGesture objects
 //     */
