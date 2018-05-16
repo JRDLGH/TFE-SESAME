@@ -4,9 +4,10 @@ namespace App\Controller\Profiling;
 
 use App\Entity\Profiling\Disabled;
 use App\Entity\Profiling\Profile;
-use App\Repository\Profiling\ProfileRepository;
+use App\Entity\Profiling\ProfileGesture;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -33,13 +34,29 @@ class ProfilingController extends Controller
 
         $profileRepo = $this->getDoctrine()->getRepository(Profile::class);
         $profile = $profileRepo->find($id);
-//        dump($profile->getOwner()->getDeficiencies());
-//        dump($profile->getLearnedGestures()->getValues());
-//        die();
         return $this->render('profiling/profile/index.html.twig',
             [
                 'profile' => $profile
             ]);
+    }
+
+    /**
+     * @Route("/profile/gestures",name="profile_gestures",methods={"GET"},options={"expose"=true})
+     */
+    public function getProfileGestures(Request $request){
+        //we must check that the person is authorized to consult the profile specified.
+        if($request->query->getInt('id')){
+            $id = $request->query->getInt('id');
+
+            $profileGestureRepo = $this->getDoctrine()->getRepository(ProfileGesture::class);
+            $gestures = $profileGestureRepo->findGesturesByProfileId($id);
+
+            if($gestures){
+                return $this->json($gestures,200,[],['groups'=>array('list')]);
+            }
+        }
+        return new JsonResponse('Invalid request',Response::HTTP_BAD_REQUEST);
+
     }
 
     /**
