@@ -2,6 +2,7 @@
 
 namespace App\Controller\Thesaurus;
 
+use App\Helper\Thesaurus\ThesaurusHelper;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -13,11 +14,9 @@ use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Translation\TranslatorInterface;
 
 use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
-use App\Entity\Thesaurus\Gesture\Tag;
 use App\Entity\Thesaurus\Gesture;
 
 //SERIALIZER
@@ -48,44 +47,29 @@ class ThesaurusController extends AbstractController
      * @Method("GET")
      */
     public function gestureShow($id, Request $request){
-        if($request->isXmlHttpRequest()){
-            if($id){
-
-                $encoder = new JsonEncoder();
-                //Extract group view from gesture class
-                $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
-
-                //GetSetMethodNormalizer is faster that ObjectNormalizer
-                $normalizer = new ObjectNormalizer($classMetadataFactory);
-
-                $normalizer->setCircularReferenceHandler(function ($object) {
-                    return $object->getId();
-                });
-
-                $serializer = new Serializer(array($normalizer),array($encoder));
-
-                //Request database
-                $gestureIdMatched = $this->getDoctrine()->getRepository(Gesture::class)->findPublishedById($id);
-
-                //Serialize
-                $matched = $serializer->serialize($gestureIdMatched,'json',array('groups' => array('show')));
-                if(!empty($matched)){
-                    return new JsonResponse($matched,Response::HTTP_OK);
-                }else{
-                    return new JsonResponse(Response::HTTP_NOT_FOUND);
-                }
-            }else{
-                return new JsonResponse('Error: This request does not respect the requirements',Response::HTTP_BAD_REQUEST);
+        if($request->isXmlHttpRequest())
+        {
+            if($id)
+            {
+                $helper = new ThesaurusHelper($this->getDoctrine()->getManager());
             }
+            else
+            {
+                return new JsonResponse('Fatal: Parameter id is missing.',
+                    Response::HTTP_BAD_REQUEST);
+            }
+
+
         }
-        return new JsonResponse('Error: This request is not valid.',Response::HTTP_BAD_REQUEST);
+        return new JsonResponse('Error: This request is not valid.',
+            Response::HTTP_BAD_REQUEST);
     }
 
     /**
      * @Route("/search",name="thesaurus_search_tag",options={"expose"=true})
      * @Method("GET")
      */
-    public function search(TranslatorInterface $translator, Request $request)
+    public function search(Request $request)
     {
         //If request from AJAX
         if($request->isXMLHttpRequest()){

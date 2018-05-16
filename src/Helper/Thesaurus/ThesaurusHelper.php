@@ -12,6 +12,7 @@ namespace App\Helper\Thesaurus;
 use App\Entity\Thesaurus\Gesture;
 use Doctrine\Common\Annotations\AnnotationException;
 use Doctrine\Common\Annotations\AnnotationReader;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
 use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
