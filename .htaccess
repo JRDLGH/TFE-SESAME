@@ -3,9 +3,11 @@
 # AuthType Basic
 # Require valid-user
 
+Options -Indexes
+
 <IfModule mod_rewrite.c>
     Options -MultiViews
     RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URI} !-f
     RewriteRule ^(.*)$ public/$1 [QSA,L]
 </IfModule>
