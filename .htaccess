@@ -1,8 +1,10 @@
-RewriteEngine On
-RewriteCond %{SERVER_PORT} 80
-RewriteRule ^(.*)$ https://www.gestuelle-sesame.be/$1 [R,L]
+Order deny,allow
+Deny from all
+Allow from 127.0.0.1
 
-AuthUserFile /home/gestuellra/www/.htpasswd
-AuthName "Accès Restreint"
-AuthType Basic
-Require valid-user
+<IfModule mod_rewrite.c>
+    Options -MultiViews
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ public/$1 [QSA,L]
+</IfModule>
