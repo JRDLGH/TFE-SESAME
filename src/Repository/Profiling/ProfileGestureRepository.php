@@ -32,6 +32,47 @@ class ProfileGestureRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findByProfile($tag,$profileId)
+    {
+        $dql = "SELECT pg 
+                    FROM App\Entity\Profiling\ProfileGesture as pg
+                        JOIN pg.gesture as g
+                        JOIN g.tags as t
+                WHERE t.keyword like :tag AND g.name not like :tag AND g.isPublished = 1 AND pg.profile = :profileId
+                GROUP BY g.id";
+
+        $query = $this->getEntityManager()->createQuery($dql);
+        $query->setParameters([
+            'tag' => $tag.'%',
+            'profileId' => $profileId
+        ]);
+
+        return $query->execute();
+    }
+
+    public function findByNameBeginBy($name,$profileId,$limit = null)
+    {
+        $dql = "SELECT pg 
+                    FROM App\Entity\Profiling\ProfileGesture as pg
+                        JOIN pg.gesture as g 
+                WHERE g.name like :name  AND g.isPublished = 1 AND pg.profile = :profileId
+                GROUP BY g.id";
+
+        $query = $this->getEntityManager()->createQuery($dql);
+        $query->setParameters([
+            'name' => $name.'%',
+            'profileId' => $profileId
+        ]);
+
+        if($limit){
+            $query->setMaxResults($limit);
+        }
+
+        return $query->execute();
+    }
+
+
 //    /**
 //     * @return ProfileGesture[] Returns an array of ProfileGesture objects
 //     */
