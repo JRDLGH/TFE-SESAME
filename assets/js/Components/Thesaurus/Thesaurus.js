@@ -196,7 +196,7 @@ class Thesaurus{
             StatusHandler.clear();
         }else{
             //Not found
-            StatusHandler.set('not_found','Aucun geste ne correspond à votre recherche');
+            StatusHandler.set('not_found');
             this.getContainer().html('');
         }
     }
