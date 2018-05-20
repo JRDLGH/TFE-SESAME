@@ -5,6 +5,7 @@ namespace App\Entity\Profiling;
 use App\Entity\Thesaurus\Gesture;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Profiling\ProfileGestureRepository")
@@ -28,11 +29,13 @@ class ProfileGesture
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Thesaurus\Gesture")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"list"})
      */
     private $gesture;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"list"})
      */
     private $learningDate;
 
