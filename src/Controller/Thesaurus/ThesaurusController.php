@@ -42,8 +42,8 @@ class ThesaurusController extends AbstractController
 
     /**
      * @Route("/gestures/{id}",name="thesaurus_gesture_show_details",options={"expose"=true},requirements={
-        "id"="\d+"
-    *     })
+    "id"="\d+"
+     *     })
      * @Method("GET")
      */
     public function gestureShow($id, Request $request){
@@ -51,7 +51,24 @@ class ThesaurusController extends AbstractController
         {
             if($id)
             {
-                $helper = new ThesaurusHelper($this->getDoctrine()->getManager());
+                $encoder = new JsonEncoder();
+                //Extract group view from gesture class
+                $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
+                //GetSetMethodNormalizer is faster that ObjectNormalizer
+                $normalizer = new ObjectNormalizer($classMetadataFactory);
+                $normalizer->setCircularReferenceHandler(function ($object) {
+                    return $object->getId();
+                });
+                $serializer = new Serializer(array($normalizer),array($encoder));
+                //Request database
+                $gestureIdMatched = $this->getDoctrine()->getRepository(Gesture::class)->findPublishedById($id);
+                //Serialize
+                $matched = $serializer->serialize($gestureIdMatched,'json',array('groups' => array('show')));
+                if(!empty($matched)){
+                    return new JsonResponse($matched,Response::HTTP_OK);
+                }else{
+                    return new JsonResponse(Response::HTTP_NOT_FOUND);
+                }
             }
             else
             {
@@ -68,6 +85,9 @@ class ThesaurusController extends AbstractController
     /**
      * @Route("/search",name="thesaurus_search_tag",options={"expose"=true})
      * @Method("GET")
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Doctrine\Common\Annotations\AnnotationException
      */
     public function search(Request $request)
     {
