@@ -9,7 +9,7 @@ import Status from "./Components/Status";
 
 const StatusHandler = new Status();
 const ScrollTool = new Scroller();
-const Thes = new IndividualThesaurus('thesaurus_search_tag',$('#gesture'),new Paginator(6,$('.js-pagination-controls')));
+const Thes = new IndividualThesaurus('search_profile_gesture',$('#gesture'),new Paginator(6,$('.js-pagination-controls')));
 
 let previousValue = [];
 
