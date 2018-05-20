@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://www.gestuelle-sesame.be/$1 [R,L]
+
+AuthUserFile /home/gestuellra/www/.htpasswd
+AuthName "Accès Restreint"
+AuthType Basic
+Require valid-user
