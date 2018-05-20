@@ -1,6 +1,7 @@
-Order deny,allow
-Deny from all
-Allow from 127.0.0.1
+# AuthUserFile "/home/gestuellra/www/.htpasswd"
+# AuthName "Accès Restreint" 
+# AuthType Basic
+# Require valid-user
 
 <IfModule mod_rewrite.c>
     Options -MultiViews
