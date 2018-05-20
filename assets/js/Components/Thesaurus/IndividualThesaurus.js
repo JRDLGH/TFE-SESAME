@@ -15,8 +15,7 @@ class IndividualThesaurus extends Thesaurus{
     constructor(source,$container,Paginator = null)
     {
         super(source,$container,Paginator);
-        StatusHandler.messages.not_found = "Ce geste n'existe pas.";
-        this.message.not_learned = "Ce geste n'a pas encore été appris";
+        StatusHandler.messages.not_found = "Ce geste n'a pas encore été appris ou n'existe pas.";
         console.log(StatusHandler.messages);
     }
 
