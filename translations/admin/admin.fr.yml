@@ -25,6 +25,11 @@ admin:
       description:
         min: 'La description doit être d''au moins x caractères.'
         max: 'La description ne peut pas être plus longue que 255 caractères.'
+      cover:
+        wrongType: 'Ce format est invalide. Veuillez fournir une image au format JPG, JPEG.'
+        sizeNotDetected: 'La taille de l''image n''a pas pu être détectée.'
+        shortWidth: 'La largeur de l''image est insuffisante.'
+        shortHeight: 'La hauteur de l''image est insuffisante.'
 
   gesture:
     name: 'Nom'
