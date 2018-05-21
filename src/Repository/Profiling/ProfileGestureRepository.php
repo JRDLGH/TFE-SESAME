@@ -19,7 +19,6 @@ class ProfileGestureRepository extends ServiceEntityRepository
         parent::__construct($registry, ProfileGesture::class);
     }
 
-
     public function findGesturesByProfileId($profileId)
     {
         return $this->createQueryBuilder('pg')
@@ -70,6 +69,21 @@ class ProfileGestureRepository extends ServiceEntityRepository
         }
 
         return $query->execute();
+    }
+
+    public function findByLearningDate($limit,$order,$profileId)
+    {
+        $qb = $this->createQueryBuilder('pg')
+            ->where('pg.id = :profileId')
+            ->orderBy('pg.learningDate DESC')
+            ->getQuery()
+            ->setParameters([
+                'profileId' => $profileId
+            ])
+            ->setMaxResults(10)
+            ->execute();
+
+        return $qb;
     }
 
 
