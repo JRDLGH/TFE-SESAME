@@ -69,12 +69,12 @@ class Gesture
      *          "image/jpeg",
      *          "image/jpg",
      *     },
-     *     mimeTypesMessage="admin.constraints.gesture.image.wrongType",
+     *     mimeTypesMessage="admin.constraints.gesture.cover.wrongType",
      *     minWidth="350",
      *     minHeight="350",
-     *     sizeNotDetectedMessage="admin.constraints.gesture.image.sizeNotDetected",
-     *     minWidthMessage="admin.constraints.gesture.image.shortWidth",
-     *     minHeightMessage="admin.constraints.gesture.image.shortHeight",
+     *     sizeNotDetectedMessage="admin.constraints.gesture.cover.sizeNotDetected",
+     *     minWidthMessage="admin.constraints.gesture.cover.shortWidth",
+     *     minHeightMessage="admin.constraints.gesture.cover.shortHeight",
      * )
      */
     private $cover;
