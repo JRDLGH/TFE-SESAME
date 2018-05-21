@@ -16,7 +16,6 @@ class IndividualThesaurus extends Thesaurus{
     {
         super(source,$container,Paginator);
         StatusHandler.messages.not_found = "Ce geste n'a pas encore été appris ou n'existe pas.";
-        console.log(StatusHandler.messages);
     }
 
     /**
@@ -85,7 +84,6 @@ class IndividualThesaurus extends Thesaurus{
                 if(key !== 'status'){
                     for(let matchType in data[key]){
                         data[key][matchType].forEach((pg) => {
-                            console.log(pg['gesture']);
                             if(matchType === 'byName')
                             {
                                 byName.push(pg['gesture']);
@@ -101,8 +99,6 @@ class IndividualThesaurus extends Thesaurus{
             if(AHelper.isArray(byName)) data['matched']['byName'] = byName;
             if(AHelper.isArray(byTag)) data['matched']['byTag'] = byTag;
 
-
-            console.log(data);
             return data;
         }
         return null;
