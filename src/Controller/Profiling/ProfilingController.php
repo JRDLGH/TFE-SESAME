@@ -67,12 +67,28 @@ class ProfilingController extends Controller
     }
 
     /**
+     * @Route("/search/last",name="search_last_learned_gestures",methods={"GET"},options={"expose"=true})
+     */
+    public function getLastLearnedGesture(Request $request)
+    {
+//        $pId = $request->query->getInt('pid');
+//        $pId = $request->query->getInt('pid');
+
+        $lasts = $this->getDoctrine()->getManager()->getRepository(ProfileGesture::class)->findByLearningDate(8);
+
+        dump($lasts);
+        die();
+
+        return new JsonResponse($lasts);
+    }
+
+    /**
      * @Route("/search/gesture",name="search_profile_gesture",methods={"GET"},options={"expose"=true})
      */
     public function searchProfileGesture(Request $request)
     {
         //If request from AJAX
-//        if($request->isXMLHttpRequest()){
+        if($request->isXMLHttpRequest()){
 
             $tag = $request->get('tag');
             $profileId = $request->query->getInt('profile');
@@ -134,7 +150,7 @@ class ProfilingController extends Controller
             }
             $response['status'] = $status;
             return new JsonResponse($response,Response::HTTP_OK);
-//        }
+        }
         return new JsonResponse('Error: This request is not valid.',Response::HTTP_BAD_REQUEST);
     }
 
