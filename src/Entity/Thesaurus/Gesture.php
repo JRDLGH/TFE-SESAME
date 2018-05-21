@@ -64,6 +64,18 @@ class Gesture
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"list","show"})
+     * @Assert\Image(
+     *     mimeTypes={
+     *          "image/jpeg",
+     *          "image/jpg",
+     *     },
+     *     mimeTypesMessage="admin.constraints.gesture.image.wrongType",
+     *     minWidth="350",
+     *     minHeight="350",
+     *     sizeNotDetectedMessage="admin.constraints.gesture.image.sizeNotDetected",
+     *     minWidthMessage="admin.constraints.gesture.image.shortWidth",
+     *     minHeightMessage="admin.constraints.gesture.image.shortHeight",
+     * )
      */
     private $cover;
 
