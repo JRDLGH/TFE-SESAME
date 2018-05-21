@@ -71,19 +71,24 @@ class ProfileGestureRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
-    public function findByLearningDate($limit,$order,$profileId)
+    public function findByLearningDate($profileId, $limit = 10,$order = "DESC")
     {
         $qb = $this->createQueryBuilder('pg')
-            ->where('pg.id = :profileId')
-            ->orderBy('pg.learningDate DESC')
-            ->getQuery()
+            ->where('pg.profile = :profileId');
+
+        if($order === 'DESC' || $order === 'ASC')
+        {
+            $qb->orderBy('pg.learningDate', $order);
+        }
+
+
+        return $qb->getQuery()
             ->setParameters([
                 'profileId' => $profileId
             ])
-            ->setMaxResults(10)
+            ->setMaxResults($limit)
             ->execute();
 
-        return $qb;
     }
 
 
