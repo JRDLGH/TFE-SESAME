@@ -356,6 +356,9 @@
     "symfony/yaml": {
         "version": "v3.4.6"
     },
+    "tinify/tinify": {
+        "version": "1.5.2"
+    },
     "twig/extensions": {
         "version": "1.0",
         "recipe": {
