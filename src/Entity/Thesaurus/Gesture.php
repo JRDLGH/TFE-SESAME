@@ -73,7 +73,7 @@ class Gesture
     /**
      * @Vich\UploadableField(mapping="gesture_cover", fileNameProperty="cover")
      *
-     * * @Assert\Image(
+     * @Assert\Image(
      *     maxSize="1M",
      *     maxSizeMessage="admin.constraints.gesture.cover.too_heavy",
      *     mimeTypes={
