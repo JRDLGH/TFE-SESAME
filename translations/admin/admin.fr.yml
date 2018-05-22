@@ -30,6 +30,7 @@ admin:
         sizeNotDetected: 'La taille de l''image n''a pas pu être détectée.'
         shortWidth: 'La largeur de l''image est insuffisante.'
         shortHeight: 'La hauteur de l''image est insuffisante.'
+        too_heavy: 'L''image ne doit pas dépasser 1Mo.'
 
   gesture:
     name: 'Nom'
