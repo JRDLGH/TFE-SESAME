@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 /**
@@ -18,6 +20,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *     fields={"name"},
  *     message="admin.constraints.gesture.name.unique",
  * )
+ * @Vich\Uploadable
  */
 class Gesture
 {
@@ -64,7 +67,15 @@ class Gesture
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"list","show"})
-     * @Assert\Image(
+     */
+    private $cover;
+
+    /**
+     * @Vich\UploadableField(mapping="gesture_cover", fileNameProperty="cover")
+     *
+     * * @Assert\Image(
+     *     maxSize="1M",
+     *     maxSizeMessage="admin.constraints.gesture.cover.too_heavy",
      *     mimeTypes={
      *          "image/jpeg",
      *          "image/jpg",
@@ -76,8 +87,11 @@ class Gesture
      *     minWidthMessage="admin.constraints.gesture.cover.shortWidth",
      *     minHeightMessage="admin.constraints.gesture.cover.shortHeight",
      * )
+     *
+     * @var File
+     *
      */
-    private $cover;
+    private $coverFile;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -111,6 +125,12 @@ class Gesture
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $publicationDate;
+
+    /**
+     * @ORM\Column(type="datetime",nullable=true)
+     *
+     */
+    private $updatedAt;
 
     public function __construct()
     {
@@ -283,6 +303,26 @@ class Gesture
     {
         dump($this->getName());
         return $this->getName();
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getCoverFile(): ?File
+    {
+        return $this->coverFile;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $coverFile
+     */
+    public function setCoverFile(?File $coverFile = null): void
+    {
+        $this->coverFile = $coverFile;
+
+        if (null !== $coverFile) {
+            $this->updatedAt = new \DateTime("now",new \DateTimeZone("Europe/Brussels"));
+        }
     }
 
 }
