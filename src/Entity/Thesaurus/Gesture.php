@@ -59,10 +59,46 @@ class Gesture
     private $profileVideo;
 
     /**
+     * @Vich\UploadableField(mapping="gesture_profileVideo",fileNameProperty="profileVideo")
+     *
+     * @Assert\File(
+     *     maxSize="1M",
+     *     maxSizeMessage="admin.constraints.gesture.video.too_heavy",
+     *     mimeTypes={
+     *          "video/mp4"
+     *     },
+     *     mimeTypesMessage="admin.constraints.gesture.video.type",
+     *     disallowEmptyMessage="admin.constraints.gesture.video.empty",
+     *     notFoundMessage="admin.constraints.gesture.video.not_found",
+     *     notReadableMessage="admin.constraints.gesture.video.not_readable",
+     *     uploadErrorMessage="admin.constraints.gesture.video.error"
+     * )
+     */
+    private $profileVideoFile;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"show"})
      */
     private $video;
+
+    /**
+     * @Vich\UploadableField(mapping="gesture_video", fileNameProperty="video")
+     *
+     * @Assert\File(
+     *     maxSize="1M",
+     *     maxSizeMessage="admin.constraints.gesture.video.too_heavy",
+     *     mimeTypes={
+     *          "video/mp4"
+     *     },
+     *     mimeTypesMessage="admin.constraints.gesture.video.type",
+     *     disallowEmptyMessage="admin.constraints.gesture.video.empty",
+     *     notFoundMessage="admin.constraints.gesture.video.not_found",
+     *     notReadableMessage="admin.constraints.gesture.video.not_readable",
+     *     uploadErrorMessage="admin.constraints.gesture.video.error"
+     * )
+     */
+    private $videoFile;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -80,7 +116,7 @@ class Gesture
      *          "image/jpeg",
      *          "image/jpg",
      *     },
-     *     mimeTypesMessage="admin.constraints.gesture.cover.wrongType",
+     *     mimeTypesMessage="admin.constraints.gesture.cover.type",
      *     minWidth="350",
      *     minHeight="350",
      *     sizeNotDetectedMessage="admin.constraints.gesture.cover.sizeNotDetected",
@@ -321,6 +357,46 @@ class Gesture
         $this->coverFile = $coverFile;
 
         if (null !== $coverFile) {
+            $this->updatedAt = new \DateTime("now",new \DateTimeZone("Europe/Brussels"));
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProfileVideoFile()
+    {
+        return $this->profileVideoFile;
+    }
+
+    /**
+     * @param mixed $profileVideoFile
+     */
+    public function setProfileVideoFile($profileVideoFile)
+    {
+        $this->profileVideoFile = $profileVideoFile;
+
+        if (null !== $profileVideoFile) {
+            $this->updatedAt = new \DateTime("now",new \DateTimeZone("Europe/Brussels"));
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVideoFile()
+    {
+        return $this->videoFile;
+    }
+
+    /**
+     * @param mixed $videoFile
+     */
+    public function setVideoFile($videoFile)
+    {
+        $this->videoFile = $videoFile;
+
+        if (null !== $videoFile) {
             $this->updatedAt = new \DateTime("now",new \DateTimeZone("Europe/Brussels"));
         }
     }
