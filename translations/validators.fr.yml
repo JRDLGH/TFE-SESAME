@@ -17,3 +17,11 @@ admin:
         shortWidth: 'La largeur de l''image est insuffisante.'
         shortHeight: 'La hauteur de l''image est insuffisante.'
         too_heavy: 'L''image ne doit pas dépasser 1Mo.'
+
+      video:
+        type: 'Ce format de vidéo n''est pas accepté. Veuillez fournir une vidéo au format MP4.'
+        too_heavy: 'La vidéo ne doit pas dépasser 1Mo.'
+        empty: 'La vidéo est vide.'
+        not_found: 'La vidéo n''a pas pu être trouvé.'
+        not_readable: 'Cette vidéo est illisible.'
+        error: 'La vidéo n''a pas pu être téléchargée.'
