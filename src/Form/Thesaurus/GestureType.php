@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class GestureType extends AbstractType
@@ -19,8 +20,16 @@ class GestureType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('profileVideo')
-            ->add('video')
+            ->add('profileVideoFile', VichFileType::class,[
+                    'required' => false,
+                    'allow_delete' => true,
+                    'download_uri' => false,
+                ])
+            ->add('videoFile', VichFileType::class,[
+                    'required' => false,
+                    'allow_delete' => true,
+                    'download_uri' => false,
+                ])
             ->add('coverFile', VichImageType::class, [
                 'required' => false,
                 'allow_delete' => true,
