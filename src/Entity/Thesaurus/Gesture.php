@@ -3,6 +3,7 @@
 namespace App\Entity\Thesaurus;
 
 use App\Entity\Thesaurus\Gesture\Tag;
+use App\Validator\PublishableGesture;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -21,6 +22,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *     message="admin.constraints.gesture.name.unique",
  * )
  * @Vich\Uploadable
+ * @PublishableGesture()
  */
 class Gesture
 {
