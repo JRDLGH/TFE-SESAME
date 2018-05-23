@@ -93,7 +93,6 @@ class Thesaurus{
      * @return {string}, the html details
      */
     static formatHTML(gesture){
-        console.log(gesture);
         let cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
         let video = gesture.video;
         let profileVideo = gesture.profileVideo;
