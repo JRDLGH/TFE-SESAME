@@ -94,7 +94,6 @@ class Thesaurus{
      */
     static formatHTML(gesture){
         let cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
-        cover = "/build/static/thesaurus/gestures/" + cover;
         let video = gesture.name;
         let video_path = "/build/static/thesaurus/gestures/videos/" + video + ".mp4";
         let title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
@@ -137,7 +136,6 @@ class Thesaurus{
      */
     static listHTML(gesture) {
         let cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
-        cover = "/build/static/thesaurus/gestures/" + cover;
         let title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
         return "<article class=\"gesture js-gesture\" data-id=\""+ gesture.id +"\">" +
             "<div class=\"gesture-content\">" +
