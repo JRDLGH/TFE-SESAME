@@ -53,6 +53,7 @@ class ThesaurusController extends AbstractController
             if($id)
             {
                 $encoder = new JsonEncoder();
+                $fileHelper = new FileHelper();
                 //Extract group view from gesture class
                 $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
                 //GetSetMethodNormalizer is faster that ObjectNormalizer
@@ -63,6 +64,8 @@ class ThesaurusController extends AbstractController
                 $serializer = new Serializer(array($normalizer),array($encoder));
                 //Request database
                 $gestureIdMatched = $this->getDoctrine()->getRepository(Gesture::class)->findPublishedById($id);
+                $fileHelper->setGestureVideoPath($gestureIdMatched);
+                $fileHelper->setGestureProfileVideoPath($gestureIdMatched);
                 //Serialize
                 $matched = $serializer->serialize($gestureIdMatched,'json',array('groups' => array('show')));
                 if(!empty($matched)){
