@@ -65,6 +65,10 @@ class ProfileGestureHelperTest extends TestCase
             ->method('find')
             ->willReturn($profileGesture);
 
+        $profileGestureRepository->expects($this->any())
+            ->method('findBy')
+            ->willReturn($profileGesture);
+
         $em = $this->createMock(ObjectManager::class);
 
         $em->expects($this->any())
