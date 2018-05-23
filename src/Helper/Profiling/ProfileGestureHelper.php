@@ -17,8 +17,7 @@ class ProfileGestureHelper{
     }
 
     /**
-     * Verify if a gesture can be learned by someone by verifying first that the gesture is existing, published and then
-     * by verifying if the gesture is not already learned by the profile.
+     * Verify if a gesture is not already learned by a profile.
      *
      * @param Gesture $gesture, the learned gesture to verify
      * @param Profile $profile, the profile of the person who learned the gesture
@@ -33,6 +32,7 @@ class ProfileGestureHelper{
                 'profile'=>$profile->getId(),
                 'gesture'=>$gesture->getId()
             ]);
+
             if(empty($learnedGestures))
             {
                 return false;
