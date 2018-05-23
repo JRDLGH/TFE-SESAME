@@ -452,6 +452,7 @@ class Thesaurus{
      */
     setGestures(data){
         if(data){
+            this.paginator.reset();
             this.gestures = data;
         }
     }

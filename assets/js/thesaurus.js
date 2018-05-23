@@ -72,8 +72,8 @@ $(document).ready(function(){
         Thes.containerDisplay('list');
         Thesaurus.getDetailsContainer().removeClass('opened');
         Thes.getContainer().removeClass('closed');
+        Thes.getContainer().removeClass('closed');
         if(Thes.paginator.nbPages > 0){
-            //Possible problem here
             Thes.paginator.showPaginationButtons();
         }
         return false;
