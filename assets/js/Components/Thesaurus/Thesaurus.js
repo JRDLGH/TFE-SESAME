@@ -93,9 +93,10 @@ class Thesaurus{
      * @return {string}, the html details
      */
     static formatHTML(gesture){
+        console.log(gesture);
         let cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
-        let video = gesture.name;
-        let video_path = "/build/static/thesaurus/gestures/videos/" + video + ".mp4";
+        let video = gesture.video;
+        let profileVideo = gesture.profileVideo;
         let title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
 
         return "<h2 class=\"gesture-details-header-title\">Détails</h2>" +
@@ -113,14 +114,14 @@ class Thesaurus{
             "       <div class=\"gesture-video\">" +
             "           <h4 class=\"gesture-video-title\">De profil</h4>" +
             "            <video class=\"js-gesture-video\" controls controlsList=\"nodownload\">" +
-            "                   <source src=\""+video_path+"\" type=\"video/mp4\" />\n" +
+            "                   <source src=\""+profileVideo+"\" type=\"video/mp4\" />\n" +
             "                   Please update your browser." +
             "               </video>" +
             "       </div>" +
             "       <div class=\"gesture-video\">" +
             "           <h4 class=\"gesture-video-title\">De face</h4>" +
             "           <video class=\"js-gesture-video\" controls controlsList=\"nodownload\">" +
-            "               <source src=\""+video_path+"\" type=\"video/mp4\" />\n" +
+            "               <source src=\""+video+"\" type=\"video/mp4\" />\n" +
             "               Please update your browser." +
             "           </video>" +
             "       </div>" +
