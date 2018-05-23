@@ -61,6 +61,28 @@ class FileHelper
 
     }
 
+    public function setGestureVideoPath(Array $gestures)
+    {
+        foreach ($gestures as $gesture){
+            $video = $this->getFilePath($gesture->getVideoFile());
+            if($video)
+            {
+                $gesture->setVideo($video);
+            }
+        }
+    }
+
+    public function setGestureProfileVideoPath(Array $gestures)
+    {
+        foreach ($gestures as $gesture){
+            $profileVideo = $this->getFilePath($gesture->getProfileVideoFile());
+            if($profileVideo)
+            {
+                $gesture->setProfileVideo($profileVideo);
+            }
+        }
+    }
+
     /**
      * @param Gesture[] $gestures
      */
