@@ -1,6 +1,7 @@
 admin:
   constraints:
     gesture:
+      not_publishable: 'Le geste que vous tentez de publier doit au moins comporter une vidéo ou image.'
       name:
         unique: 'Ce geste existe déjà.'
         min: 'Le nom du geste doit faire au moins 2 caractères.'
