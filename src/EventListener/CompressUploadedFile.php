@@ -25,8 +25,10 @@ class CompressUploadedFile
     public function onPreUpload(Event $event)
     {
         $entity = $event->getObject();
-
-        $this->compressImage($entity->getCoverFile());
+        if($entity->getCoverFile())
+        {
+            $this->compressImage($entity->getCoverFile());
+        }
     }
 
     /**
