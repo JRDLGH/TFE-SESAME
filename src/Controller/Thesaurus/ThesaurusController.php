@@ -2,6 +2,7 @@
 
 namespace App\Controller\Thesaurus;
 
+use App\Helper\File\FileHelper;
 use App\Helper\Thesaurus\ThesaurusHelper;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\Routing\Annotation\Route;
@@ -106,15 +107,25 @@ class ThesaurusController extends AbstractController
                 return $object->getId();
             });
 
+            $fileHelper = new FileHelper();
+
+
             $serializer = new Serializer(array($normalizer), array($encoder));
 
             // GET ALL GESTURES THAT MATCH TAG BEGINING BY $tag AND GESTURE NAME IS NOT BEGINNING BY $tag
             $gesturesTagMatched = $this->getDoctrine()->getRepository(Gesture::class)->findByTagNameExcludeNameBeginBy($tag);
+
+            $fileHelper->setGesturesCoverPath($gesturesTagMatched);
+
             $json = $serializer->serialize($gesturesTagMatched, 'json',array('groups' => array('list')));
             $gesturesTagMatched = json_decode($json);
 
+
             //GET ALL GESTURES WHERE NAME BEGIN BY $tag
             $gesturesNameMatched = $this->getDoctrine()->getRepository(Gesture::class)->findByNameBeginBy($tag);
+
+            $fileHelper->setGesturesCoverPath($gesturesNameMatched);
+
             $json = $serializer->serialize($gesturesNameMatched, 'json',array('groups' => array('list')));
             $gesturesNameMatched = json_decode($json);
 
