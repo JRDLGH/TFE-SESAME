@@ -116,7 +116,9 @@ section{
                         font-size: 1.8rem;
                     }
                     #gesture-videos{
-                        @include make-row();              
+                        @include make-row();
+                        margin-left:0;
+                        width: 100%;
                         .gesture-video{
                             .gesture-video-title{
                                 color:darken($body,75%);

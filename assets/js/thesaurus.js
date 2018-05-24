@@ -197,44 +197,49 @@ function matchNames(pattern,nameMatched){
  * @return {string}, the html details
  */
 function formatHTML(gesture){
-    var cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
-    cover = "/build/static/thesaurus/gestures/" + cover;
-    var video = gesture.name;
-    var video_path = "/build/static/thesaurus/gestures/videos/" + video + ".mp4";
     var title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
+
+    var profileVideo = '';
     var video = '';
-    var profileVideo= '';
+
+    if(gesture.video != '' && gesture.video != null && gesture.video != undefined){
+        console.log(gesture.video);
+        video = createVideo("De face",gesture.video);
+    }
+    if(gesture.profileVideo != '' && gesture.profileVideo != null && gesture.profileVideo != undefined){
+        console.log(gesture.profileVideo);
+        profileVideo = createVideo("De profil",gesture.profileVideo);
+    }
+
+    console.log(video,profileVideo);
+    var description = gesture.description ? gesture.description : 'Aucune description disponible';
 
     var html = "<h2 class=\"gesture-details-header-title\">Détails</h2>" +
         "<article class=\"gesture-details-content\">\n" +
-        "    <img src=\"" + cover +"\" alt=\"gesture-cover\" class=\"cover\">\n" +
         "    <div class=\"content\">\n" +
         "        <h3 class=\"title\">"+ title +"</h3>\n" +
         "        <p class=\"description\">\n" +
-        "            " + gesture.description + "\n" +
+        "            " + description + "\n" +
         "        </p>\n" +
         "    </div>\n" +
-        "    <hr class=\"separator\">" +
         "   <h3 class=\"gesture-details-video-title\">Vidéos</h3>" +
         "   <div id=\"gesture-videos\">" +
-        "       <div class=\"gesture-video\">" +
-        "           <h4 class=\"gesture-video-title\">De profil</h4>" +
-        "            <video class=\"js-gesture-video\" controls controlsList=\"nodownload\">" +
-        "                   <source src=\""+video_path+"\" type=\"video/mp4\" />\n" +
-        "                   Please update your browser." +
-        "               </video>" +
-        "       </div>" +
-        "       <div class=\"gesture-video\">" +
-        "           <h4 class=\"gesture-video-title\">De face</h4>" +
-        "           <video class=\"js-gesture-video\" controls controlsList=\"nodownload\">" +
-        "               <source src=\""+video_path+"\" type=\"video/mp4\" />\n" +
-        "               Please update your browser." +
-        "           </video>" +
-        "       </div>" +
+        profileVideo +
+        video +
         "</div>" +
         backToSearchButton() +
         "</article>";
    return html;
+}
+
+function createVideo(title,src){
+    return "<div class=\"gesture-video\">" +
+        "           <h4 class=\"gesture-video-title\">" + title + "</h4>" +
+        "            <video class=\"js-gesture-video\" controls controlsList=\"nodownload\" preload='metadata'>" +
+        "                   <source id=\"source1\" class=\"js-video-source\" src=\""+src+"\" type=\"video/mp4\" />\n" +
+        "                   Votre navigateur n'est pas à jour. Veuillez le mettre à jour s'il vous plait." +
+        "               </video>" +
+        "       </div>";
 }
 
 /**
@@ -246,6 +251,9 @@ function listHTML(gesture) {
     var cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
     cover = "/build/static/thesaurus/gestures/" + cover;
     var title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
+    var videoButton = '';
+    videoButton = getVideoButton(gesture.hasVideos,gesture.description)
+
     var html = 
     "<article class=\"gesture js-gesture\" data-id=\""+ gesture.id +"\">" +
         "<div class=\"gesture-content\">" +
@@ -253,12 +261,24 @@ function listHTML(gesture) {
             "<div class=\"content\">" +
                 "<h3 class=\"title\">"+ title +"</h3>" +
             "</div>" +
-            "<button class=\"btn btn-secondary js-gesture-show\">" +
-                "<span>En savoir plus</span>" +
-            "</button>" +
+        videoButton +
         "</div>" +
     "</article>";
     return html;
+}
+
+function getVideoButton(hasVideos,description){
+    var c = 'js-gesture-show';
+    var text= 'Voir les vidéos';
+    if(!hasVideos && (description == '' || description == null)){
+        c = 'disabled';
+        text = 'Aucune vidéo.';
+    }else if(!hasVideos && (description != null || description != '')){
+        text = 'Voir la description';
+    }
+    return "<button class=\"btn btn-secondary "+ c +"\">" +
+        "<span>"+ text +"</span>" +
+        "</button>";
 }
 
 /**
@@ -282,6 +302,7 @@ function display(data,type){
                 containerDisplay('details');
                 getDetailsContainer().html(content);
                 hidePaginationButtons();
+                console.log($('.js-video-source'));
 
             break;
             default: //list
@@ -607,6 +628,7 @@ function askGestures(value){
                 }
             }).done(function(data){
                 //MATCH HTTP_OK -- 200
+                console.log(data);
                 setGestures(data);
                 orderByPertinence(data,currentValue);
             });

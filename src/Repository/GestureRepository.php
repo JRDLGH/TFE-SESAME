@@ -40,7 +40,7 @@ class GestureRepository extends ServiceEntityRepository
         $query= $this->getEntityManager()->createQuery($dql);
         $query->setParameters([
             'id' => $id
-        ]);
+        ])->setMaxResults(1);
 
         return $query->execute();
     }
