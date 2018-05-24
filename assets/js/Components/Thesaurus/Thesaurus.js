@@ -120,7 +120,7 @@ class Thesaurus{
             profileVideo +
             video +
             "</div>" +
-            backToSearchButton() +
+            this.backToSearchButton() +
             "</article>";
 
     }
