@@ -1,0 +1,34 @@
+{% extends 'admin/admin.html.twig' %}
+{% trans_default_domain 'admin' %}
+
+
+{% block title %}{{ 'admin.gestures.list'|trans }}{% endblock %}
+
+{% block container %}
+    <h1>{{ 'admin.gestures.list'|trans }}</h1>
+
+
+    {{ include('thesaurus/gesture/details.html.twig') }}
+
+    <form action="#" class="form-container search-form">
+        <div class="form-group">
+            <label for="search_gesture">{{ 'admin.gestures.search'|trans }}</label>
+            <div class="search-input row input-group">
+                <input type="text" name="search_gesture" id="search" class="form-control col-11">
+                <a class="input-logo search-action" id="sizing-addon1 col-1"><i class="fa fa-search fa"></i>Rechercher</a>
+            </div>
+        </div>
+    </form>
+
+    <div class="pagination-content">
+        {{ include('thesaurus/gesture/list_pagination.html.twig') }}
+    </div>
+
+    <a class="action-link" href="{{ path('thesaurus_gesture_new') }}">
+        <i class="fa fa-plus action-icon"></i>
+        <span class="action-name">
+            {{ 'admin.control.create'|trans }}
+        </span>
+    </a>
+{% endblock %}
+

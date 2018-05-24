@@ -1,0 +1,5 @@
+status:
+  gesture:
+    error: 'An error occured, please retry. If that''s not the first time, please contact the administrator.'
+    found: '%x% gesture(s) found for %tag%'
+    not_found: 'No gesture matched your request.'

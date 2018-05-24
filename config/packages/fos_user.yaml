@@ -1,0 +1,21 @@
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: App\Entity\User
+    from_email:
+        address: ipes.lagache@gmail.com
+        sender_name: SESAME
+    registration:
+        form:
+            type: App\Form\RegistrationFormType
+        confirmation:
+            enabled: true #To modify if not needed, default to false
+            from_email: 
+                address: ipes.lagache@gmail.com
+                sender_name: test
+    resetting:
+        email:
+            from_email:
+                address: ipes.lagache@gmail.com
+                sender_name: test
+

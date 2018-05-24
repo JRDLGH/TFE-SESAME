@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Accueil{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700" rel="stylesheet">
+    <link href="{{ asset('build/layout.css') }}" rel="stylesheet"> {% block stylesheets %}{% endblock %}
+</head>
+
+<body>
+    <header class="fluid-container
+    {% block headerClass %}
+    {% endblock headerClass %}
+        ">
+        {% block navbar %}
+            <nav class="navbar navbar-expand-lg d-flex justify-content-between" role="nav">
+            <div class="nav-brand navbar-brand">
+                {% block navbrand %}
+                <a href="{{ path('home') }}" class="navbar-brand">
+                    <img class="nav-brand-logo" src="{{ asset('build/static/Dolby-Vision-brand-logo.png') }}" alt="nav-brand-logo">
+                </a>
+                {% endblock navbrand %}
+            </div>
+                <div class="nav-menu">
+                    <div class="menu-icon">
+                        <span></span>
+                    </div>
+                    <ul
+                            {% block navClass %}
+                            class="navbar-nav nav-links nav-fill"
+                            {% endblock navClass %}
+
+                    >
+                    {# nav-links #}
+                        {% block navlinks %}
+                        <li class="nav-item">
+                            <a class="nav-item nav-link" href="{{ path('app_home') }}">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-item nav-link" href="#">À propos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-item nav-link" href="{{ path('thesaurus_index') }}">Dictionnaire</a>
+                        </li>
+                        {% block actionLinks %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item">
+                                <a class="nav-item nav-link" href="{{ path('admin') }}">Administration</a>
+                            </li>
+                            {% endif %}
+
+                        {% endblock actionLinks %}
+                        {% block connectionState %}
+                            {% if is_granted('ROLE_USER') %}
+                            <li class="nav-item user-bar dropdown">
+                                <a class="text-center user-link dropdown-toggle" role="button"
+                                   id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                   aria-expanded="false"
+                                   href="#">
+                                    <i class="fa fa-user-circle fa user-icon"></i>
+                                    <span class="user-name">{{ app.user.username|capitalize }}</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                                    <span class="user-name">{{ app.user.username|capitalize }}</span>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fa fa-user"></i>Mon compte
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fa fa-id-badge"></i>Profils
+                                    </a>
+                                    <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">
+                                        <i class="fa fa-sign-out"></i>Se déconnecter
+                                    </a>
+                                </div>
+                            </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-item nav-link text-center" href="{{ path('fos_user_security_login') }}">Se connecter</a>
+                            </li>
+                            {% endif %}
+                        {% endblock connectionState %}
+
+
+                        {% endblock %}
+
+                    </ul>
+                </div>
+            </nav>
+        {% endblock navbar %}
+    </header>
+    <main role="main">
+        <div class="full-container" id="content">
+            {% block banner %}
+            <div class="banner">
+                <h1 class="content-title center">
+                    {% block banner_title %}LA MÉTHODE GESTUELLE SÉSAME{% endblock %}
+                </h1>
+            </div>
+            {% endblock %}
+        </div>
+        {% block main_content %}
+        <div class="fluid-container">
+            {% block container %}
+            <div class="container">
+                {% block content %}{% endblock %}
+            </div>
+            {% endblock container %}
+        </div>
+        {% endblock main_content %}
+    </main>
+
+    <footer>
+        <p>
+            Copyright <i class="fa fa-copyright"></i> {{ 'now'|date("Y") }} JRDNLGH
+        </p>
+    </footer>
+
+    {# Cache boosting #}
+    <script src="{{ asset('build/manifest.js') }}"></script>
+    <script src="{{ asset('build/layout.js') }}"></script>
+    {% block javascripts %}
+    {% endblock %}
+</body>
+
+</html>

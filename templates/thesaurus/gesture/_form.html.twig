@@ -1,0 +1,16 @@
+{% trans_default_domain 'admin' %}
+
+{{ form_start(form) }}
+    {#{{ form_widget(form) }}#}
+    {{ form_row(form.name, {'label': 'admin.gesture.name'|trans}) }}
+    {{ form_row(form.profileVideo, {'label': 'admin.gesture.profileVideo'|trans}) }}
+    {{ form_row(form.video, {'label': 'admin.gesture.video'|trans}) }}
+    {{ form_row(form.cover, {'label': 'admin.gesture.cover'|trans}) }}
+    {{ form_row(form.description, {'label': 'admin.gesture.description'|trans}) }}
+    {{ form_row(form.isPublished, {'label': 'admin.gesture.isPublished'|trans}) }}
+    {{ form_row(form.tags, {'label': 'admin.gesture.tags'|trans}) }}
+    <button class="btn btn-primary">
+        <i class="fa fa-save"></i>
+        {{ button_label|default('admin.control.save'|trans)|capitalize }}
+    </button>
+{{ form_end(form) }}

@@ -1,0 +1,51 @@
+//BANNER
+.banner{
+    @include flex();
+    align-items: center;
+    background-image: url($banner-img-sm);
+    height: $banner-height-sm;
+    background-position: center;
+    
+    @include media-breakpoint-between(md,lg){
+        background-image: url($banner-img-md);
+        height: $banner-height-md;
+    }
+    @include media-breakpoint-up(lg){
+        //high resolution image
+        background-image: url($banner-img-lg);
+        height: $banner-height-lg;
+    }
+    @include media-breakpoint-up(xl){
+        //high resolution image
+        background-image: url($banner-img-lg); //xl?
+        height: $banner-height-xl;
+    }
+    
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: $banner-opacity; 
+
+    width: 100%;
+
+    margin-bottom:.5rem;
+
+    h1{
+        background-color: transparent;
+        border:0;
+        border-radius:0;
+        font-size:2rem;
+        margin: 0;
+        padding: .2rem 1rem;
+
+        width: 100%;
+        
+        text-align: center;
+        color: $banner-title-color;
+        font-weight: $banner-title-weight;
+        letter-spacing: $banner-title-letter-spacing;
+
+    }
+}
+
+//END
