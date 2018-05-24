@@ -1,0 +1,29 @@
+{% extends 'admin/admin.html.twig' %}
+{% import 'macros/actions.html.twig' as actions %}
+{% trans_default_domain 'admin' %}
+
+{% block title %}{{ 'admin.gestures.edit'|trans }}{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/admin.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>{{ 'admin.gestures.edit'|trans }}</h1>
+
+        {{ include('admin/thesaurus/gesture/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+
+        {{ include('admin/thesaurus/gesture/_delete_form.html.twig') }}
+
+        <div class="help-links">
+
+            {{ actions.action( 'admin.control.back_to_list'|trans, path('admin_gesture_index'),'fa fa-undo action-icon') }}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/admin.js') }}"></script>
+{% endblock %}

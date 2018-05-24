@@ -3,8 +3,12 @@
 <h1>{{ 'layout.register'|trans }}</h1>
 
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register')}) }}
-    {{ form_widget(form) }}
-
+    {#{{ form_widget(form) }}#}
+    {{ form_row(form.firstname) }}
+    {{ form_row(form.lastname) }}
+    {{ form_row(form.username) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.plainPassword) }}
     <div class="row justify-content-between align-items-center">
         <div class="form-buttons col-md-12 col-lg-6 order-1">
             <input type="submit" id="_submit" name="_submit" value="{{ 'registration.submit'|trans }}" class="btn btn-primary btn-submit"/>

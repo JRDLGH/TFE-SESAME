@@ -29,14 +29,21 @@
 
 {%  block navlinks %}
     <li class="">
-        <a class="admin-link" href="#">{{ 'admin.space.links.profiles'|trans }}</a>
+        <a class="admin-link" href="#">{{ 'admin.space.links.news'|trans }}</a>
+    </li>
+
+    <li class="">
+        <a class="admin-link" href="{{ path('admin_gesture_index') }}">{{ 'admin.space.links.gesture'|trans }}</a>
     </li>
     <li class="">
-        <a class="admin-link" href="{{ path('thesaurus_gesture_index') }}">{{ 'admin.space.links.gesture'|trans }}</a>
+        <a class="admin-link" href="#">{{ 'admin.space.links.doc'|trans }}</a>
     </li>
     <li class="">
         <a class="admin-link" href="{{ path('home') }}">{{ 'admin.space.links.back_to_site'|trans }}</a>
     </li>
+    {% block connectionState %}
+        {{ parent() }}
+    {% endblock connectionState %}
 
 {% endblock %}
 

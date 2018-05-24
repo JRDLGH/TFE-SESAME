@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Disabled{% endblock %}
+
+{% block content %}
+    <h1>Disabled</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ disabled.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ disabled.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Birthday</th>
+                <td>{{ disabled.birthday ? disabled.birthday|date('Y-m-d') : '' }}</td>
+            </tr>
+        {# Classe #}
+        {# école #}
+        </tbody>
+    </table>
+
+    <a href="{{ path('management_disabled_index') }}">back to list</a>
+
+    <a href="{{ path('management_disabled_edit', {'id': disabled.id}) }}">edit</a>
+
+    {{ include('management/profiling/disabled/_delete_form.html.twig') }}
+{% endblock %}

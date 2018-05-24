@@ -1,0 +1,14 @@
+thesaurus:
+  search:
+    title: 'Rechercher un geste Sésame'
+    info: ''
+    input:
+      placeholder: 'Rechercher un geste ici...'
+      label: 'Rechercher un geste'
+
+  main:
+    info: 'Vous trouverez ici tous les gestes possible sésame.'
+  profile:
+    info: 'Dans ce lexique personnalisé, seul les gestes
+     appris par votre enfant seront affiché.
+          Plusieurs manière différentes existes biensûr.'

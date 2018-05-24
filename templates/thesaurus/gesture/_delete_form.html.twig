@@ -1,7 +1,0 @@
-{% trans_default_domain 'admin' %}
-
-<form method="post" class="js-delete-gesture" action="{{ path('thesaurus_gesture_delete', {'id': gesture.id}) }}">
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ gesture.id) }}">
-    <button class="btn btn-danger"><i class="fa fa-trash icon"></i>{{ 'admin.control.delete'|trans|capitalize }}</button>
-</form>

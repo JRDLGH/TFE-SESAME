@@ -110,6 +110,7 @@ h3{
 
 a {
     text-decoration: none;
+    text-underline: none;
     color:$black;
     &:visited{
         text-decoration: none;
@@ -162,6 +163,16 @@ li {
             color: $black;
         }
     }
+}
+
+div.separator{
+    @include make-col-ready();
+    @include make-col(2);
+    @include media-breakpoint-up(md){
+        @include make-col-ready();
+        @include make-col(8);
+    }
+
 }
 
 .search-input{

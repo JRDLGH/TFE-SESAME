@@ -1,7 +1,7 @@
 import swal from 'sweetalert';
 import './Components/filter';
 
-import 'typeahead.js/dist/typeahead.jquery.min';
+import "typeahead.js";
 import Bloodhound from 'bloodhound-js';
 import 'bootstrap-tagsinput';
 
@@ -13,20 +13,36 @@ import 'bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css';
 import '../scss/structure/admin/tags.scss';
 import '../scss/structure/admin.scss';
 
+var data = ["apple", "banana", "cherry", "peach"];
+
 
 
 $(document).ready(function(){
-    var $input = $('input[data-role="tagsinput"]');
+    var $input = $('input[data-toggle="tagsinput"]');
 
     var tags = [];
     $.get('/admin/thesaurus/gesture/tags',function(data){
         tags=data;
     });
     var source = new Bloodhound({
-        prefetch: '/admin/thesaurus/gesture/tags',
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('keyword'),
+        // local: ["avoir","rendre"],
+        // prefetch: {
+        //     url: '/admin/thesaurus/gesture/tags',
+        // },
+        prefetch: {
+            url: '/admin/thesaurus/gesture/tags',
+            filter: function (response) {
+                var tags = [];
+                response.forEach(function(tag){
+                    tags.push(tag.keyword);
+                });
+                return tags;
+            }
+        },
+        datumTokenizer: Bloodhound.tokenizers.whitespace,
         queryTokenizer: Bloodhound.tokenizers.whitespace,
     });
+    source.initialize();
     if ($input.length) {
         console.log('ok');
         $input.tagsinput({
@@ -34,24 +50,29 @@ $(document).ready(function(){
             focusClass: 'focus',
             typeaheadjs: [
                 {
-                    hint: true,
                     highlight: true,
-                    minLength: 1
+                    minLength: 2
                 },
                 {
-                    source: ['value1','value2']
-                }
+
+                    // name: 'keyword',
+                    //
+                    // display: 'keyword',
+                    // value: 'keyword',
+                    source: source.ttAdapter()
+                },
             ]
         });
     }
-    $(document).on('keyup','.bootstrap-tagsinput input',typeah);
 
     $(document).on('submit','.js-delete-gesture',confirmDelete);
 });
 
-function typeah(elem){
-    console.log(elem);
-}
+// function getTags(){
+//     $.ajax({
+//         url:'/admin/thesaurus/gesture/tags';
+//     });
+// }
 
 function confirmDelete(){
     swal({

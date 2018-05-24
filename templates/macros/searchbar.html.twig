@@ -1,0 +1,15 @@
+{% macro searchbar(label,inputName) %}
+
+    <form class="search-form js-gesture-choice">
+        <label for="{{ inputName|default('search') }}">{{ label }}</label>
+
+        <div class="search-input input-group">
+                        <span class="input-logo" id="sizing-addon1 col-1">
+                            <i class="fa fa-search fa"></i>
+                        </span>
+            <input type="text" name="{{ inputName|default('search') }}" class="form-control search-input">
+
+        </div>
+    </form>
+
+{% endmacro %}

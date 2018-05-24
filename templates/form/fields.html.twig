@@ -1,35 +1,20 @@
 
 {# Form theme based on vendor/symfony/twig-bridge/Resources/views/Form #}
-{% use "form_div_layout.html.twig" %}
+{#{% extends "../../vendor/symfony/twig-bridge/Resources/views/Form/bootstrap_4_layout.html.twig" %}#}
 
+{% extends "bootstrap_4_layout.html.twig" %}
 {# FORM CUSTOMIZATION #}
 
-{# ERRORS #}
+{# IMAGES #}
 
-{%- block form_errors -%}
-    {%- if errors|length > 0 -%}
-    <ul class="alert">
-        {%- for error in errors -%}
-            <li>{{ error.message }}</li>
-        {%- endfor -%}
-    </ul>
-    {%- endif -%}
-{%- endblock form_errors -%}
+{%- block image_row -%}
+    <div class="name_row">
+        {{ form_label(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
 
-{% block form_start -%}
-    {% set attr = attr|merge({class: (attr.class|default('') ~ ' full form-container')|trim}) %}
-    {{- parent() -}}
-{%- endblock form_start %}
-
-{% block attributes -%}
-    {%- for attrname, attrvalue in attr -%}
-        {{- " " -}}
-        {%- if attrname in ['placeholder', 'title'] -%}
-            {{- attrname }}="{{ translation_domain is same as(false) ? attrvalue : attrvalue|trans({}, translation_domain) }}"
-        {%- elseif attrvalue is same as(true) -%}
-            {{- attrname }}="{{ attrname }}"
-        {%- elseif attrvalue is not same as(false) -%}
-            {{- attrname }}="{{ attrvalue }}"
+        {%- if form.vars.value.image is not null -%}
+            <img src="{{ asset('thesaurus/gestures/images/' ~ form.vars.value.cover) }}" alt="{{ form.vars.value.cover }}">
         {%- endif -%}
-    {%- endfor -%}
-{%- endblock attributes -%}
+    </div>
+{%- endblock -%}

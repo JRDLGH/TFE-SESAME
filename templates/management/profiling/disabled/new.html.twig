@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Disabled{% endblock %}
+
+{% block content %}
+    <h1>Create new Disabled</h1>
+
+    {{ include('management/profiling/disabled/_form.html.twig') }}
+
+    <a href="{{ path('management_disabled_index') }}">back to list</a>
+{% endblock %}

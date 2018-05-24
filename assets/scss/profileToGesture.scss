@@ -1,0 +1,28 @@
+@import "shared/variables";
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "mixins/mixins";
+@import 'structure/card';
+@import "structure/search";
+
+
+section{
+  margin-top:1.5rem;
+  margin-bottom:1.5rem;
+}
+
+
+.profiling-gesture-choice,.profiling-profile-choice{
+  min-height:18vh;
+}
+.profiling-chosen-gesture{
+
+  @include make-container();
+
+}
+
+.chosen-content{
+
+  @include make-row();
+
+}
+
