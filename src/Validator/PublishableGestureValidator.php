@@ -14,7 +14,9 @@ class PublishableGestureValidator extends ConstraintValidator
         if($gesture->getIsPublished())
         {
 
-            if(!$gesture->getCoverFile() && !$gesture->getProfileVideoFile() && !$gesture->getVideoFile())
+            if( !($gesture->getCoverFile() || $gesture->getCover())
+                && !($gesture->getProfileVideoFile() || $gesture->getProfileVideo())
+                && !($gesture->getVideoFile() || $gesture->getVideo()) )
             {
                 $this->context->buildViolation($constraint->message)
                     ->atPath('isPublished')
