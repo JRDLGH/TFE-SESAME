@@ -464,7 +464,7 @@ class Thesaurus{
             //Nothing entered
             this.getContainer().html('');
             StatusHandler.clear();
-            clear();
+            this.clear();
         }
     }
 
