@@ -50,6 +50,20 @@ class Paginator{
         return this.$container;
     }
 
+    static hidePaginationButtons(){
+        let $container = $('.js-pagination-controls');
+        if(!$container.attr('style','display:none;')){
+            this.$container.hide();
+        }
+    }
+
+    static showPaginationButtons(){
+        let $container = $('.js-pagination-controls');
+        if($container.attr('style','display:none;')){
+            this.$container.show();
+        }
+    }
+
     next(){
         if(this.currentPg < this.nbPages-1){
             //you can go to next page
