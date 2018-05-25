@@ -122,7 +122,7 @@ class ThesaurusController extends AbstractController
             $gesturesTagMatched = $this->getDoctrine()->getRepository(Gesture::class)->findByTagNameExcludeNameBeginBy($tag);
 
             foreach($gesturesTagMatched as $gesture){
-                if(empty($gesture->getVideo()) && empty($gesture->getProfileVideo())){
+                if( empty($fileHelper->getFilePath($gesture->getVideoFile())) && empty($fileHelper->getFilePath($gesture->getVideoFile())) ){
                     $gesture->setHasVideos(false);
                 }else{
                     $gesture->setHasVideos(true);
@@ -140,7 +140,7 @@ class ThesaurusController extends AbstractController
             $gesturesNameMatched = $this->getDoctrine()->getRepository(Gesture::class)->findByNameBeginBy($tag);
 
             foreach($gesturesNameMatched as $gesture){
-                if(empty($gesture->getVideo()) && empty($gesture->getProfileVideo())){
+                if( empty($fileHelper->getFilePath($gesture->getVideoFile())) && empty($fileHelper->getFilePath($gesture->getVideoFile())) ){
                     $gesture->setHasVideos(false);
                 }else{
                     $gesture->setHasVideos(true);
