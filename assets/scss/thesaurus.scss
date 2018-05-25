@@ -223,14 +223,17 @@ section{
 
                                 }
                             }
-                            &:hover{
-                                span{
-                                    left: 0;
-                                    &::after{
-                                        left:110%;
-                                        opacity: 1;
+                            &:not(.disabled){
+                                &:hover{
+                                    span{
+                                        left: 0;
+                                        &::after{
+                                            left:110%;
+                                            opacity: 1;
+                                        }
                                     }
                                 }
+
                             }
                         }
                         &:hover{
