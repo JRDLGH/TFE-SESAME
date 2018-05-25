@@ -10,7 +10,6 @@ import Scroller from "../Scroller";
 
 Routing.setRoutingData(routes);
 
-// const Pagination = new Paginator(6,$('.js-pagination-controls'));
 const StatusHandler = new Status();
 const AHelper = new ArrayHelper();
 const ScrollTool = new Scroller();
@@ -54,16 +53,14 @@ class Thesaurus{
      * @param value
      */
     orderByPertinence(data,value){
-        let matched = [];
-        let filteredNameMatched = [];
         let nameMatched = data.matched.byName;
         let tagMatched = data.matched.byTag;
 
-        filteredNameMatched = Thesaurus.matchNames(value,nameMatched);
+        let filteredNameMatched = Thesaurus.matchNames(value,nameMatched);
 
         tagMatched = Thesaurus.matchTags(value,tagMatched,nameMatched,filteredNameMatched);
 
-        matched = filteredNameMatched.concat(tagMatched);
+        let matched = filteredNameMatched.concat(tagMatched);
         this.display(matched);
     }
 
@@ -98,10 +95,10 @@ class Thesaurus{
         let profileVideo = '';
         let video = '';
 
-        if(gesture.video != '' && gesture.video != null && gesture.video != undefined){
+        if(gesture.video !== '' && gesture.video != null && gesture.video !== undefined){
             video = this.createVideo("De face", gesture.video);
         }
-        if(gesture.profileVideo != '' && gesture.profileVideo != null && gesture.profileVideo != undefined){
+        if(gesture.profileVideo !== '' && gesture.profileVideo !== null && gesture.profileVideo !== undefined){
             profileVideo = this.createVideo("De profil", gesture.profileVideo);
         }
 
@@ -136,12 +133,12 @@ class Thesaurus{
     }
 
     static getVideoButton(hasVideos,description){
-        var c = 'js-gesture-show';
-        var text= 'Voir les vidéos';
-        if(!hasVideos && (description == '' || description == null)){
+        let c = 'js-gesture-show';
+        let text= 'Voir les vidéos';
+        if(!hasVideos && (description === '' || description == null)){
             c = 'disabled';
             text = 'Aucune vidéo.';
-        }else if(!hasVideos && (description != null || description != '')){
+        }else if(!hasVideos && (description != null || description !== '')){
             text = 'Voir la description';
         }
         return "<button class=\"btn btn-secondary "+ c +"\">" +
@@ -155,21 +152,23 @@ class Thesaurus{
      * @return {string}
      */
     static listHTML(gesture) {
-        let cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
+        let cover = gesture.cover;
         let title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
 
-        let videoButton = '';
-        videoButton = this.getVideoButton(gesture.hasVideos,gesture.description);
+        let videoButton = this.getVideoButton(gesture.hasVideos,gesture.description);
 
         return "<article class=\"gesture js-gesture\" data-id=\""+ gesture.id +"\">" +
-            "<div class=\"gesture-content\">" +
-            "<img src=\""+ cover +"\" " + "alt=\"gesture-cover\" class=\"cover\">" +
-            "<div class=\"content\">" +
-            "<h3 class=\"title\">"+ title +"</h3>" +
-            "</div>" +
-            videoButton +
-            "</div>" +
-            "</article>";
+                "<div class=\"gesture-content\">" +
+                    "<div class='cover-container'>" +
+                        "<img src=\""+ cover +"\" " + "alt=\"gesture-cover\" class=\"cover\">" +
+                    "</div>" +
+
+                    "<div class=\"content\">" +
+                        "<h3 class=\"title\">"+ title +"</h3>" +
+                    "</div>" +
+                    videoButton +
+                "</div>" +
+        "</article>";
     }
 
     containsNewGestures(data)
