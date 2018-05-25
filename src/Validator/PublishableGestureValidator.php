@@ -18,6 +18,7 @@ class PublishableGestureValidator extends ConstraintValidator
                 && !($gesture->getProfileVideoFile() || $gesture->getProfileVideo())
                 && !($gesture->getVideoFile() || $gesture->getVideo()) )
             {
+
                 $this->context->buildViolation($constraint->message)
                     ->atPath('isPublished')
                     ->addViolation();
