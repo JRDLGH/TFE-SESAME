@@ -69,6 +69,9 @@ class FileHelper
             {
                 $gesture->setVideo($video);
             }
+            else{
+                $gesture->setVideo(null);
+            }
         }
     }
 
@@ -79,6 +82,8 @@ class FileHelper
             if($profileVideo)
             {
                 $gesture->setProfileVideo($profileVideo);
+            }else{
+                $gesture->setProfileVideo(null);
             }
         }
     }
