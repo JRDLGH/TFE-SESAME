@@ -4,9 +4,9 @@ import ArrayHelper from "../ArrayHelper";
 
 const routes = require( '../Routing/fos_js_routes.json');
 import Routing from '../../../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
-import Paginator from "../Paginator";
 import Status from "../Status";
 import Scroller from "../Scroller";
+import Paginator from "../Paginator";
 
 Routing.setRoutingData(routes);
 
@@ -216,8 +216,19 @@ class Thesaurus{
         }else{
             //Not found
             StatusHandler.set('not_found');
+            Thesaurus.resetSearch();
             this.getContainer().html('');
         }
+    }
+
+    static resetSearch(){
+        if(this.paginator !== undefined){
+            this.paginator.reset();
+            this.paginator.hidePaginationButtons();
+        }else{
+            Paginator.hidePaginationButtons();
+        }
+
     }
 
     isContainerEmpty($container = this.getContainer()) {
@@ -423,17 +434,17 @@ class Thesaurus{
         //REGEX -- ALLOW ONLY LETTERS
         if(Thesaurus.isValid(value))
         {
-            let keywords = Thesaurus.splitIntoTags(value);
+            let pattern = value;
 
-            //contains one word
-            if(keywords.length === 1)
+            //contains one word or more
+            if(pattern.length >= 1)
             {
                 this.clear();
                 this.getContainer().html('');
                 StatusHandler.set('waiting');
 
                 $.ajax({
-                    url: Routing.generate(this.source, {tag: keywords[0]}),
+                    url: Routing.generate(this.source, {tag: pattern}),
                     type: 'GET',
                     statusCode: {
                         404: function(data){
@@ -485,6 +496,7 @@ class Thesaurus{
      */
     static isValid(value){
         let isValid= false;
+
         if(/\w/.test(value) && !/[0-9]/.test(value))
         {
             isValid = true;
@@ -493,6 +505,7 @@ class Thesaurus{
         }else{
             StatusHandler.clear();
         }
+
         return isValid;
     }
 
