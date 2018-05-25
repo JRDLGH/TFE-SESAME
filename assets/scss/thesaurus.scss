@@ -14,7 +14,6 @@ section{
         width: 100%;
         form{
             margin-top:1%;
-            //search
         }
         .gestures-container{
 
@@ -23,21 +22,6 @@ section{
             height: 100%;
             @include make-container();
             position: relative;
-
-            //.status{
-            //    @include make-row();
-            //    padding: .2rem;
-            //    color: $black;
-            //    color: rgba($color: $black, $alpha: 0.5);
-            //    text-align: center;
-            //    i{
-            //        margin: auto;
-            //    }
-            //    .status-message{
-            //        width: 100%;
-            //    }
-            //}
-            
 
             .gesture-details{
                 position: relative;
@@ -48,8 +32,7 @@ section{
 
                 z-index: 5;
                 opacity: 0;
-                // transition: opacity 2s ease-in-out, display 0s;
-                
+
                 .gesture-details-header-title{
                     background-color: transparent;
                     border-left: 0.5rem solid $secondary;
@@ -67,8 +50,6 @@ section{
                         }
                                                     
 
-                        // max-width: 400px;
-                        // max-height: 400px;
                     }
                     .content{
                         @include make-col-ready();
@@ -176,21 +157,27 @@ section{
                         @include box-shadow(0px 0px 5px $shadow-body);
 
                         transition: color $short-duration ease-in-out,background-color $medium-duration, border $medium-duration;
-
-                        .cover{
-
-                            height: 300px;
-                            width: auto;
-                            // max-width: 300px;
-                            // max-height: 300px;
-                            // min-height: 300px;
-
+                        .cover-container{
                             @include make-col-ready();
                             @include make-col(12);
 
-                            padding: 0;
+                            padding:0;
+                            height:300px;
 
+                            background-color: white;
+                            text-align: center;
+
+                            .cover{
+
+                                padding:0;
+                                max-height: 300px;
+                                width: auto;
+                                max-width: 100%;
+                                flex:0;
+
+                            }
                         }
+
                         .content{
 
                             height: 100%;
