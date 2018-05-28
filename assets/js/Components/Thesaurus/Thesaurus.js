@@ -115,8 +115,8 @@ class Thesaurus{
             "    </div>\n" +
             "   <h3 class=\"gesture-details-video-title\">Vidéos</h3>" +
             "   <div id=\"gesture-videos\">" +
-            profileVideo +
             video +
+            profileVideo +
             "</div>" +
             this.backToSearchButton() +
             "</article>";
