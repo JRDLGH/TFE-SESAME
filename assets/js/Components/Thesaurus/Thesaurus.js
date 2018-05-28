@@ -7,6 +7,7 @@ import Routing from '../../../../vendor/friendsofsymfony/jsrouting-bundle/Resour
 import Status from "../Status";
 import Scroller from "../Scroller";
 import Paginator from "../Paginator";
+import ASCIIFolder from "fold-to-ascii";
 
 Routing.setRoutingData(routes);
 
@@ -405,10 +406,19 @@ class Thesaurus{
         //startsWith is case sensitive!
         if(name){
             name = name.toLowerCase();
+            let ASCIIName = ASCIIFolder.fold(name,null);
 
             return data.filter(function(gesture){
                 if(gesture['name'].toLowerCase().startsWith(name)){
                     return gesture;
+                }
+                else{
+                    //ASCII CONVERSION
+                    let ASCIIGName = ASCIIFolder.fold(gesture['name'].toLowerCase(),null);
+
+                    if(ASCIIGName.startsWith(ASCIIName)){
+                        return gesture;
+                    }
                 }
             });
         }
