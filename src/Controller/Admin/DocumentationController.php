@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class DocumentationController extends Controller
 {
     /**
-     * @Route("/admin/documentation", name="admin_documentation")
+     * @Route("/admin/docs", name="admin_documentation")
      */
     public function index()
     {
