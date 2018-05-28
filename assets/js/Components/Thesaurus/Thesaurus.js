@@ -344,6 +344,10 @@ class Thesaurus{
         return result;
     }
 
+    static convertToASCII(value){
+        return ASCIIFolder.fold(value);
+    }
+
     /**
      * Delete duplicates.
      * This code has been taken from:
@@ -373,11 +377,14 @@ class Thesaurus{
                     let keywords = AHelper.mapValues(gesture.tags);
                     let keep = true;
                     for(let i =0; i < tags.length ; i++){
+                        let ASCIITag = ASCIIFolder.fold(tags[i]);
                         //if last tag
                         if(i === tags.length-1 && i >= 0){
                             //look if it begin or match the tag!
                             for(let j = 0; j < keywords.length; j++){
-                                if(!keywords[j].startsWith(tags[i])){
+                                let ASCIIKeyword = ASCIIFolder.fold(keywords[j]);
+
+                                if(!keywords[j].startsWith(tags[i]) && !ASCIIKeyword.startsWith(ASCIITag)){
                                     keep = false;
                                 }else{
                                     keep = true;
@@ -387,8 +394,11 @@ class Thesaurus{
                             break;
                         }else{
                             if(keywords.indexOf(tags[i]) === -1){
-                                keep = false;
-                                break;
+                                let ASCIIKeywords = Thesaurus.convertTagsToASCII(keywords);
+                                if(ASCIIKeywords.indexOf(ASCIITag) === -1){
+                                    keep = false;
+                                    break;
+                                }
                             }
                         }
                     }
@@ -400,6 +410,17 @@ class Thesaurus{
         }
         return matched;
 
+    }
+
+    static convertTagsToASCII(tags){
+        if(AHelper.isArray(tags)){
+            let ASCIITags = [];
+            tags.forEach((tag) => {
+                    ASCIITags.push(this.convertToASCII(tag));
+                }
+            );
+            return ASCIITags;
+        }
     }
 
     static getGesturesByName(name,data){
@@ -432,6 +453,7 @@ class Thesaurus{
         let nospace_regex = /\s\s+/g;
         tags = tags.replace(nospace_regex,' ');
         tags = tags.split(/\s/);
+
         return tags;
     }
 
