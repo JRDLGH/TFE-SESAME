@@ -64,17 +64,22 @@ $(document).ready(function(){
      */
 
     $('.js-previous-page').click(function(){
-        Thes.display(Thes.paginator.previous(),false);
-        ScrollTool.scrollTo(Thes.getContainer(),0,'',true);
-        Thes.paginator.showPaginationButtons();
+        if(!Paginator.isDisabled($(this))){
+            let previousPageContent = Thes.paginator.previous();
+            Thes.display(previousPageContent,false);
+            ScrollTool.scrollTo(Thes.getContainer(),0,'',true);
+            Thes.paginator.showPaginationButtons();
+        }
         return false;
     });
 
     $('.js-next-page').click(function(){
-        let nextPageContent = Thes.paginator.next();
-        Thes.display(nextPageContent,false,'');
-        ScrollTool.scrollTo(Thes.getContainer(),0,'',true);
-        Thes.paginator.showPaginationButtons();
+        if(!Paginator.isDisabled($(this))){
+            let nextPageContent = Thes.paginator.next();
+            Thes.display(nextPageContent,false,'');
+            ScrollTool.scrollTo(Thes.getContainer(),0,'',true);
+            Thes.paginator.showPaginationButtons();
+        }
         return false;
     });
 

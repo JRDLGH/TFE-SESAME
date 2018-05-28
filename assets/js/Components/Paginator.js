@@ -65,39 +65,43 @@ class Paginator{
     }
 
     next(){
-        if(this.currentPg < this.nbPages-1){
-            //you can go to next page
-            this.currentPg += 1;
-            let data = this.pageMap[this.currentPg];
-            this.showPaginationButtons();
-            // scrollToContainer();
-            if(this.currentPg === this.nbPages -1){
-                this.getNextButton().addClass("disabled");
-                this.enableButton('previous');
-            }else{
-                this.enableButton('next');
-                this.enableButton('previous');
+        if(!Paginator.isDisabled(this.getNextButton())){
+            if(this.currentPg < this.nbPages-1){
+                //you can go to next page
+                this.currentPg += 1;
+                let data = this.pageMap[this.currentPg];
+                this.showPaginationButtons();
+                // scrollToContainer();
+                if(this.currentPg === this.nbPages -1){
+                    this.getNextButton().addClass("disabled");
+                    this.enableButton('previous');
+                }else{
+                    this.enableButton('next');
+                    this.enableButton('previous');
+                }
+                return data;
             }
-            return data;
         }
     }
 
     previous()
     {
-        if(this.currentPg >= 1 && this.nbPages >= this.currentPg){
-            //you can go to previous page
-            this.currentPg -= 1;
-            let data = this.pageMap[this.currentPg];
-            this.showPaginationButtons();
-            // this.scrollToContainer();
-            if(this.currentPg === 0){
-                this.getPreviousButton().addClass("disabled");
-                this.enableButton('next');
-            }else{
-                this.enableButton('next');
-                this.enableButton('previous');
+        if(!Paginator.isDisabled(this.getPreviousButton())) {
+            if (this.currentPg >= 1 && this.nbPages >= this.currentPg) {
+                //you can go to previous page
+                this.currentPg -= 1;
+                let data = this.pageMap[this.currentPg];
+                this.showPaginationButtons();
+                // this.scrollToContainer();
+                if (this.currentPg === 0) {
+                    this.getPreviousButton().addClass("disabled");
+                    this.enableButton('next');
+                } else {
+                    this.enableButton('next');
+                    this.enableButton('previous');
+                }
+                return data;
             }
-            return data;
         }
     }
 
@@ -130,9 +134,9 @@ class Paginator{
         return this.$container.children('.controls').children('.js-previous-page');
     }
 
-    static isDisabled(elem)
+    static isDisabled($elem)
     {
-        return elem.hasClass('disabled');
+        return $elem.hasClass('disabled');
     }
 
     /**
