@@ -2272,9 +2272,9 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.1"
     readable-stream "^2.0.4"
 
-fold-to-ascii@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/fold-to-ascii/-/fold-to-ascii-4.0.0.tgz#5d3c1959896df7273c21b57f89e7e07260f4c608"
+fold-to-ascii@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/fold-to-ascii/-/fold-to-ascii-2.0.2.tgz#59e3fa095c9dd5a12dce9ceaf70049fdfe07662c"
 
 font-awesome@^4.7.0:
   version "4.7.0"
