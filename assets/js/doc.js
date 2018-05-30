@@ -26,13 +26,20 @@ $(document).ready(function(){
 
     $('.display').click(function(){
         let $target = $('.sidebar');
-        console.log('hey');
         if($target.hasClass("show")){
             $target.removeClass("show");
             $('.show-doc-nav').removeClass("is-opened");
             $(this).removeClass('active-sidebar');
 
         }
+    });
+
+    $('a[href^="#"]').click(function () {
+        let target = $(this)[0].hash;
+        if(target){
+            navigateTo($(target));
+        }
+        return false;
     });
 
     $(window).resize(function(){
@@ -42,6 +49,12 @@ $(document).ready(function(){
     showForComputer();
 
 });
+
+function navigateTo($target){
+    $('html,body').animate({
+        scrollTop: $target.offset().top - 60
+    },1000);
+}
 
 
 function showForComputer(){
