@@ -180,4 +180,41 @@
     margin-left:300px;
     padding:1rem;
   }
+  article{
+    h1{
+      border:none;
+    }
+
+    .content{
+      width:100%;
+      text-align: justify;
+      p{
+        font-size: 1rem !important;
+      }
+
+      a{
+        color:$sidebar-hover-color;
+      }
+    }
+
+    ul,li{
+      list-style: circle;
+      list-style-type: circle;
+    }
+
+    ul{
+      margin:0rem 2rem;
+      li{
+        padding:.5rem 0;
+      }
+    }
+
+    article{
+      padding-left:2rem;
+      h1{
+
+      }
+    }
+  }
+
 }
