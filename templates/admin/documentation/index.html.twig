@@ -4,7 +4,9 @@
 
 {% block title %}{{ 'documentation.title'|trans }}{% endblock %}
 
-{% block content %}
+{% block main_content %}
+    <div class="display"></div>
+
     {{ include('admin/documentation/structure/sidebar.html.twig') }}
 
     {{ include('admin/documentation/structure/content.html.twig') }}
@@ -15,5 +17,6 @@
 {% endblock javascripts %}
 
 {% block stylesheets %}
+    {{ parent() }}
     <link rel="stylesheet" href="{{ asset('build/doc.css') }}">
 {% endblock stylesheets %}
