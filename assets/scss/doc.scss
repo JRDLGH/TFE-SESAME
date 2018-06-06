@@ -43,8 +43,12 @@
     z-index: 2;
     visibility: visible;
     transform: translate3d(0,0,0);
-    transition: all $long-duration;
     max-width:45px;
+    @include box-shadow(1px 2px 6px rgba($sidebar-shadow,0.15));
+
+    @include media-breakpoint-down(md){
+      transition: all $long-duration;
+    }
 
     .fa{
       cursor: pointer;
@@ -76,6 +80,14 @@
     position:fixed;
     box-shadow:none;
     transition: transform $medium-duration ease-out, visibility $short-duration;
+
+    @include media-breakpoint-up(md){
+      @include box-shadow(1px 2px 6px $sidebar-shadow);
+      visibility: visible;
+      position:fixed;
+      transform: translate3d(0px,0px,0px);
+      z-index:3;
+    }
 
     .main-list{
 
