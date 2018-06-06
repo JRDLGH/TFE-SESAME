@@ -37,6 +37,9 @@ $(document).ready(function(){
         if($(this).hasClass('dropdown-toggle')){
             return true;
         }
+        if($(this).hasClass("expandable-link")){
+            return false;
+        }
 
         let target = $(this)[0].hash;
         if(target){
@@ -57,6 +60,11 @@ function navigateTo($target){
     $('html,body').animate({
         scrollTop: $target.offset().top - 60
     },1000);
+    if(!isComputerScreen()){
+            hide();
+            $('.show-doc-nav').removeClass("is-opened");
+            $('.display').removeClass('active-sidebar');
+        }
 }
 
 
