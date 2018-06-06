@@ -1,7 +1,7 @@
-{% macro docLink(class,link,linkName,classlink,icon) %}
+{% macro docLink(class,section,linkName,classlink,icon) %}
 
     <li class="{{ class }}">
-        <a href="{{ link }}" class="{{ classlink|default(class~'-link') }}">
+        <a href="#" data-section="{{ section }}" class="{{ classlink|default(class~'-link') }}">
             {{ linkName }}
         </a>
         {% if icon is not null %}

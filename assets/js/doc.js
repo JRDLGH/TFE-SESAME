@@ -1,6 +1,12 @@
 import "../scss/doc.scss";
 import theme from './Components/theme';
 import $ from "jquery";
+const routes = require( './Components/Routing/fos_js_routes.json');
+import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
+
+Routing.setRoutingData(routes);
+
+let currentSection = 'begin';
 
 $(document).ready(function(){
     $('.expandable-link').click(function(){
@@ -52,6 +58,10 @@ $(document).ready(function(){
         showForComputer();
     });
 
+    $('.chapter-link').click(function () {
+        getDocSection(this.dataset.section);
+    });
+
     showForComputer();
 
 });
@@ -67,6 +77,18 @@ function navigateTo($target){
         }
 }
 
+function getDocSection(section) {
+    if(section){
+        if(isDifferent(section,currentSection)){
+            currentSection = section;
+            let route = Routing.generate('admin_documentation_get') + "/"+section;
+            $.get(route,function (data) {
+                let $target = $('.doc-content');
+                $target.html(data);
+            });
+        }
+    }
+}
 
 function showForComputer(){
     if(isComputerScreen()){
@@ -74,6 +96,11 @@ function showForComputer(){
     }else{
         hide();
     }
+}
+
+function isDifferent(elem,elem2)
+{
+    return elem !== elem2;
 }
 
 function isComputerScreen(){
