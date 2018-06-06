@@ -75,18 +75,18 @@
     padding:1.2rem;
     height: 100%;
 
-    visibility: hidden;
-    transform: translate3d(-100%,0px,0px);
+    @include box-shadow(1px 2px 6px $sidebar-shadow);
+    visibility: visible;
     position:fixed;
-    box-shadow:none;
-    transition: transform $medium-duration ease-out, visibility $short-duration;
+    transform: translate3d(0px,0px,0px);
+    z-index:3;
 
-    @include media-breakpoint-up(md){
-      @include box-shadow(1px 2px 6px $sidebar-shadow);
-      visibility: visible;
+    @include media-breakpoint-down(md){
+      visibility: hidden;
+      transform: translate3d(-100%,0px,0px);
       position:fixed;
-      transform: translate3d(0px,0px,0px);
-      z-index:3;
+      box-shadow:none;
+      transition: transform $medium-duration ease-out, visibility $short-duration;
     }
 
     .main-list{

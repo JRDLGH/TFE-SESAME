@@ -4,6 +4,10 @@ MENU
 
 @import '../shared/variables';
 
+header nav .nav-menu .nav-links{
+  background-color: $admin-header-bg-color;
+}
+
 .admin-header{
 
   background-color: $admin-header-bg-color;
@@ -12,6 +16,8 @@ MENU
 
     display: table;
     height: 100%;
+    width:100%;
+    text-align: center;
 
     .admin-link{
 
@@ -24,7 +30,7 @@ MENU
       &:hover{
 
         color:$admin-header-hover-link-color;
-        background-color:rgba(white,0.05);
+        background-color:lighten($admin-header-bg-color,5%);
 
       }
 
