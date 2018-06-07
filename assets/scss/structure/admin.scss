@@ -57,3 +57,29 @@ header nav .nav-menu .nav-links{
   height: auto;
   max-height: 25px;
 }
+
+.change-file{
+
+  .menu{
+
+    width:auto;
+
+    span{
+
+      cursor:pointer;
+
+      i{
+        margin: 0 .5rem;
+      }
+
+    }
+
+  }
+
+  .input{
+
+    display: none;
+
+  }
+
+}
