@@ -13,10 +13,6 @@ import 'bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css';
 import '../scss/structure/admin/tags.scss';
 import '../scss/structure/admin.scss';
 
-var data = ["apple", "banana", "cherry", "peach"];
-
-
-
 $(document).ready(function(){
     var $input = $('input[data-toggle="tagsinput"]');
 
@@ -24,11 +20,8 @@ $(document).ready(function(){
     $.get('/admin/thesaurus/gesture/tags',function(data){
         tags=data;
     });
-    var source = new Bloodhound({
-        // local: ["avoir","rendre"],
-        // prefetch: {
-        //     url: '/admin/thesaurus/gesture/tags',
-        // },
+
+    let source = new Bloodhound({
         prefetch: {
             url: '/admin/thesaurus/gesture/tags',
             filter: function (response) {
@@ -42,7 +35,9 @@ $(document).ready(function(){
         datumTokenizer: Bloodhound.tokenizers.whitespace,
         queryTokenizer: Bloodhound.tokenizers.whitespace,
     });
+
     source.initialize();
+
     if ($input.length) {
         console.log('ok');
         $input.tagsinput({
@@ -54,11 +49,6 @@ $(document).ready(function(){
                     minLength: 2
                 },
                 {
-
-                    // name: 'keyword',
-                    //
-                    // display: 'keyword',
-                    // value: 'keyword',
                     source: source.ttAdapter()
                 },
             ]
@@ -67,12 +57,6 @@ $(document).ready(function(){
 
     $(document).on('submit','.js-delete-gesture',confirmDelete);
 });
-
-// function getTags(){
-//     $.ajax({
-//         url:'/admin/thesaurus/gesture/tags';
-//     });
-// }
 
 function confirmDelete(){
     swal({
