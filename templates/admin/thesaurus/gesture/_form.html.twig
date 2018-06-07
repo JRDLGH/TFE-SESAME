@@ -12,8 +12,18 @@
             <video controls width="300">
                 <source src="{{ asset('thesaurus/gestures/videos/' ~ form.vars.value.profileVideoFile.filename) }}" type="video/mp4" />
             </video>
+            <section class="change-file">
+                <div class="menu">
+                    <span><i class="fa fa-edit"></i>Modifier la vidéo de profil actuelle</span>
+                </div>
+                <div class="input">
+                    {{ form_widget(form.profileVideoFile) }}
+                </div>
+            </section>
+        {% else %}
+            {{ form_widget(form.profileVideoFile) }}
         {% endif %}
-        {{ form_widget(form.profileVideoFile) }}
+
 
     </div>
     {#{{ form_row(form.videoFile, {'label': 'admin.gesture.video'|trans}) }}#}
@@ -25,8 +35,18 @@
             <video controls width="300">
                 <source src="{{ asset('thesaurus/gestures/videos/' ~ form.vars.value.videoFile.filename) }}" type="video/mp4" />
             </video>
+            <section class="change-file">
+                <div class="menu">
+                    <span><i class="fa fa-edit"></i>Modifier la vidéo de face actuelle</span>
+                </div>
+                <div class="input">
+                    {{ form_widget(form.videoFile) }}
+                </div>
+            </section>
+        {% else %}
+            {{ form_widget(form.videoFile) }}
         {% endif %}
-        {{ form_widget(form.videoFile) }}
+
 
     </div>
 
@@ -37,6 +57,16 @@
 
         {% if form.vars.value.coverFile is not null %}
             <img src="{{ asset('thesaurus/gestures/images/' ~ form.vars.value.coverFile.filename) }}" width="300" alt="image">
+            <section class="change-file">
+                <div class="menu">
+                    <span><i class="fa fa-edit"></i>Modifier l'image actuelle</span>
+                </div>
+                <div class="input">
+                    {{ form_widget(form.coverFile) }}
+                </div>
+            </section>
+        {% else %}
+            {{ form_widget(form.coverFile) }}
         {% endif %}
         {{ form_widget(form.coverFile) }}
 
