@@ -56,3 +56,5 @@ admin:
     delete: 'Supprimer'
     show: 'Voir'
     save: 'Enregistrer'
+
+form.label.delete: Supprimer le fichier ?
