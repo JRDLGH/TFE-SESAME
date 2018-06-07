@@ -1,0 +1,12 @@
+{% macro docLink(class,section,linkName,classlink,icon) %}
+
+    <li class="{{ class }}">
+        <a href="#" data-section="{{ section }}" class="{{ classlink|default(class~'-link') }}">
+            {{ linkName }}
+        </a>
+        {% if icon is not null %}
+            <i class="fa fa-angle-down"></i>
+        {% endif %}
+    </li>
+
+{% endmacro %}

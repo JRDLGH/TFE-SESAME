@@ -1,0 +1,234 @@
+/**
+  DOCUMENTATION STYLESHEET
+ */
+@import "shared/variables";
+@import "mixins/mixins";
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins/breakpoints";
+@import "../../node_modules/bootstrap/scss/mixins/grid-framework";
+@import "../../node_modules/bootstrap/scss/mixins/grid";
+
+
+.display{
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  visibility: hidden;
+  transition: all $extra-short-duration;
+
+  &.active-sidebar{
+    @include media-breakpoint-down(md){
+      background-color: rgba(darken($body,90%),0.6);
+      visibility: visible;
+    }
+
+
+  }
+}
+
+
+.sidebar-container{
+
+  .show-doc-nav{
+
+    background-color: whitesmoke;
+    padding: .5rem;
+    position:fixed;
+    height:100%;
+    z-index: 2;
+    visibility: visible;
+    transform: translate3d(0,0,0);
+    max-width:45px;
+    @include box-shadow(1px 2px 6px rgba($sidebar-shadow,0.15));
+
+    @include media-breakpoint-down(md){
+      transition: all $long-duration;
+    }
+
+    .fa{
+      cursor: pointer;
+      font-size:25px;
+      &:hover{
+        color:$sidebar-hover-color;
+      }
+    }
+
+    &.is-opened{
+
+      visibility: hidden;
+      transform: translate3d(-100%,0,0);
+
+
+    }
+
+  }
+
+  .sidebar {
+
+    background-color: $sidebar-bg-color;
+    width:300px;
+    padding:1.2rem;
+    height: 100%;
+
+    @include box-shadow(1px 2px 6px $sidebar-shadow);
+    visibility: visible;
+    position:fixed;
+    transform: translate3d(0px,0px,0px);
+    z-index:3;
+
+    @include media-breakpoint-down(md){
+      visibility: hidden;
+      transform: translate3d(-100%,0px,0px);
+      position:fixed;
+      box-shadow:none;
+      transition: transform $medium-duration ease-out, visibility $short-duration;
+    }
+
+    .main-list{
+
+      li{
+        width:100%;
+        padding: .2rem .2rem;
+        &:hover{
+          background-color: darken($sidebar-bg-color,5%);
+          a{
+            color:$sidebar-hover-color;
+          }
+        }
+      }
+
+      a{
+        &:hover{
+          color:$sidebar-hover-color;
+          width:100%;
+        }
+      }
+
+      .chapter{
+
+        color:$sidebar-color;
+
+      }
+      .sub-list{
+        display: none;
+        padding-left:.5rem;
+
+        li{
+          padding: .2rem .2rem;
+          &:hover{
+            background-color: darken($sidebar-bg-color,5%);
+            a{
+              color:$sidebar-hover-color;
+            }
+          }
+        }
+
+        .sub-list{
+          display: none;
+          padding-left: inherit;
+          padding-top: inherit;
+        }
+      }
+
+      .expandable{
+        width:100%;
+        display:inline-block;
+
+        a{
+          display: inherit;
+          width: 90%;
+
+          color:inherit;
+        }
+
+        i{
+          width:8%;
+
+          color:$sidebar-color;
+          font-size: 18px;
+
+          transform: scaleY(1);
+          transition: transform $extra-short-duration ease-in;
+        }
+
+
+
+        &.is-opened{
+
+          i{
+            transform: scaleY(-1);
+          }
+
+        }
+      }
+
+    }
+
+    &.show {
+
+      @include box-shadow(1px 2px 6px $sidebar-shadow);
+      visibility: visible;
+      position:fixed;
+      transform: translate3d(0px,0px,0px);
+      z-index:3;
+
+    }
+
+  }
+
+}
+
+.doc-content{
+  @include make-col(12);
+
+  margin-left:45px;
+  padding:.5rem;
+  @include media-breakpoint-up(lg){
+    margin-left:300px;
+    padding:1rem;
+  }
+  article{
+    h1{
+      border:none;
+      text-transform: uppercase;
+    }
+
+    .content{
+      width:100%;
+      text-align: justify;
+      p{
+        font-size: 1rem !important;
+        margin:0;
+      }
+
+      a{
+        color:$sidebar-hover-color;
+      }
+    }
+
+    ul,li{
+      list-style: circle;
+      list-style-type: circle;
+    }
+
+    ul{
+      margin:0rem 2rem;
+      li{
+        padding:.5rem 0;
+      }
+    }
+
+    article{
+      padding-left:2rem;
+      h1{
+
+      }
+    }
+  }
+
+}

@@ -1,0 +1,48 @@
+documentation:
+
+  title: 'Documentation'
+
+  getting_started:
+    title: 'Pour commencer'
+
+  gesture:
+    title: 'Gestions des gestes'
+
+    list:
+      title: 'Liste des gestes'
+
+    create:
+      title: 'Ajouter, créer un geste'
+
+    modify:
+      title: 'Modifier un geste'
+
+    publish_unpublish:
+      title: 'Publier, dépublier un geste'
+
+      publish:
+        title: 'Publier un geste'
+
+      unpublish:
+        title: 'Dépublier un geste'
+
+    preview:
+      title: 'Pré-visualisation d’un geste'
+
+    reference:
+      title: 'Référencer un geste'
+
+      thesaurus_operation:
+        title: 'Fonctionnement du dictionnaire'
+
+      advices:
+        title: 'Conseils pour un bon référencement'
+
+    research:
+      title: 'Rechercher un geste'
+
+    delete:
+      title: 'Supprimer un geste'
+
+  news:
+    title: 'Gestion des news'

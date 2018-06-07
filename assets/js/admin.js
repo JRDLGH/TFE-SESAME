@@ -1,5 +1,6 @@
 import swal from 'sweetalert';
 import './Components/filter';
+import theme from './Components/theme';
 
 import "typeahead.js";
 import Bloodhound from 'bloodhound-js';
@@ -20,11 +21,8 @@ $(document).ready(function(){
     $.get('/admin/thesaurus/gesture/tags',function(data){
         tags=data;
     });
+
     let source = new Bloodhound({
-        // local: ["avoir","rendre"],
-        // prefetch: {
-        //     url: '/admin/thesaurus/gesture/tags',
-        // },
         prefetch: {
             url: '/admin/thesaurus/gesture/tags',
             filter: function (response) {
@@ -40,6 +38,7 @@ $(document).ready(function(){
     });
 
     source.initialize();
+
     if ($input.length) {
         console.log('ok');
         $input.tagsinput({
@@ -51,11 +50,6 @@ $(document).ready(function(){
                     minLength: 2
                 },
                 {
-
-                    // name: 'keyword',
-                    //
-                    // display: 'keyword',
-                    // value: 'keyword',
                     source: source.ttAdapter()
                 },
             ]
@@ -65,11 +59,6 @@ $(document).ready(function(){
     $(document).on('submit','.js-delete-gesture',confirmDelete);
 });
 
-// function getTags(){
-//     $.ajax({
-//         url:'/admin/thesaurus/gesture/tags';
-//     });
-// }
 
 function confirmDelete(){
     swal({

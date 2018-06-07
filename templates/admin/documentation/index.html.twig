@@ -1,0 +1,23 @@
+{% extends 'admin/admin.html.twig' %}
+{% trans_default_domain 'documentation' %}
+
+
+{% block title %}{{ 'documentation.title'|trans }}{% endblock %}
+
+{% block main_content %}
+    <div class="display"></div>
+
+    {{ include('admin/documentation/structure/sidebar.html.twig') }}
+
+    {{ include('admin/documentation/structure/content/begin.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/doc.js') }}"></script>
+{% endblock javascripts %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/doc.css') }}">
+{% endblock stylesheets %}

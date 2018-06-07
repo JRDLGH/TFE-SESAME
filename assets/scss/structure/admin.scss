@@ -3,6 +3,15 @@ MENU
  */
 
 @import '../shared/variables';
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins/breakpoints";
+@import "../../../node_modules/bootstrap/scss/mixins/grid-framework";
+@import "../../../node_modules/bootstrap/scss/mixins/grid";
+
+header nav .nav-menu .nav-links{
+  background-color: $admin-header-bg-color;
+}
 
 .admin-header{
 
@@ -12,6 +21,8 @@ MENU
 
     display: table;
     height: 100%;
+    width:100%;
+    text-align: center;
 
     .admin-link{
 
@@ -24,7 +35,7 @@ MENU
       &:hover{
 
         color:$admin-header-hover-link-color;
-        background-color:rgba(white,0.05);
+        background-color:lighten($admin-header-bg-color,5%);
 
       }
 

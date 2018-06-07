@@ -1,0 +1,85 @@
+{% trans_default_domain 'documentation' %}
+{% import "admin/documentation/macro/macros.html.twig" as doc %}
+
+
+<div class="sidebar-container">
+    <div class="show-doc-nav">
+        <i class="fa fa-th-list"></i>
+    </div>
+    <div class="sidebar left-vertical doc-sidebar">
+        <ul class="main-list show">
+            {{ doc.docLink("chapter expandable","begin",'documentation.getting_started.title'|trans,"chapter-link expandable-link",null) }}
+            {{ doc.docLink("chapter expandable","gestures",'documentation.gesture.title'|trans,"chapter-link expandable-link",true) }}
+            <ul class="sub-list">
+                <li class="section">
+                    <a href="#list" class="section-list">
+                        {{ 'documentation.gesture.list.title'|trans }}
+                    </a>
+                </li>
+                <li class="section">
+                    <a href="#add" class="section-list">
+                        {{ 'documentation.gesture.create.title'|trans }}
+                    </a>
+                </li>
+                <li class="section">
+                    <a href="#modify" class="section-list">
+                        {{ 'documentation.gesture.modify.title'|trans }}
+                    </a>
+                </li>
+                <li class="section expandable">
+                    <a href="#publish_unpublish" class="section-list expandable-link">
+                        {{ 'documentation.gesture.publish_unpublish.title'|trans }}
+                    </a>
+                    <i class="fa fa-angle-down"></i>
+                </li>
+                <ul class="sub-list">
+                    <li class="sub-section">
+                        <a href="#publish" class="sub-section-link">
+                            {{ 'documentation.gesture.publish_unpublish.publish.title'|trans }}
+                        </a>
+                    </li>
+                    <li class="sub-section">
+                        <a href="#unpublish" class="sub-section-link">
+                            {{ 'documentation.gesture.publish_unpublish.unpublish.title'|trans }}
+                        </a>
+                    </li>
+                </ul>
+                <li class="section">
+                    <a href="#preview" class="section-link">
+                        {{ 'documentation.gesture.preview.title'|trans }}
+                    </a>
+                </li>
+                <li class="section expandable">
+                    <a href="#reference" class="section-link expandable-link">
+                        {{ 'documentation.gesture.reference.title'|trans }}
+                    </a>
+                    <i class="fa fa-angle-down"></i>
+                </li>
+                <ul class="sub-list">
+                    <li class="sub-section">
+                        <a href="#thesaurus_operation" class="sub-section-link">
+                            {{ 'documentation.gesture.reference.thesaurus_operation.title'|trans }}
+                        </a>
+                    </li>
+                    <li class="sub-section">
+                        <a href="#advices" class="sub-section-link">
+                            {{ 'documentation.gesture.reference.advices.title'|trans }}
+                        </a>
+                    </li>
+                </ul>
+                <li class="section">
+                    <a href="#research" class="section-link">
+                        {{ 'documentation.gesture.research.title'|trans }}
+                    </a>
+                </li>
+                <li class="section">
+                    <a href="#delete" class="section-link">
+                        {{ 'documentation.gesture.delete.title'|trans }}
+                    </a>
+                </li>
+            </ul>
+            {{ doc.docLink("chapter expandable","#",'documentation.news.title'|trans,"chapter-link expandable-link",true) }}
+        </ul>
+    </div>
+
+</div>

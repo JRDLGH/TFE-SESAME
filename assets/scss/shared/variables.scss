@@ -145,6 +145,13 @@ $admin-header-hover-link-color:$body;
 $user-bar-color:lighten($link-color,15%);
 $user-bar-bg-color:transparent;
 
+/**
+  DOCUMENTATION
+ */
+$sidebar-bg-color: darken($body,2%);
+$sidebar-color: #292929;
+$sidebar-hover-color:$main;
+$sidebar-shadow: rgba(darken($shadow-body,80%),0.25);
 
 //$dropdown-link-hover-bg:;
 

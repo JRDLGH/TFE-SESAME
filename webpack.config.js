@@ -19,6 +19,7 @@ Encore
     .addEntry('profile', './assets/js/profile.js')
     .addEntry('gesturesToProfiles', './assets/js/gesturesToProfiles.js')
     .addEntry('searchProfile', './assets/js/searchProfile.js')
+    .addEntry('doc','./assets/js/doc.js')
 
     // allow to load jQuery once in order to don't load for each files that require this module
     .createSharedEntry('layout','./assets/js/layout.js')
