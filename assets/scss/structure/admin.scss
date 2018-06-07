@@ -52,3 +52,8 @@ header nav .nav-menu .nav-links{
 .content-container{
   padding: 1.5rem 1rem;
 }
+
+.krajee-default .file-caption-info, .krajee-default .file-size-info{
+  height: auto;
+  max-height: 25px;
+}
