@@ -1,7 +1,11 @@
 /* THESAURUS STYLE PAGE */
 @import "shared/variables";
 
-@import "node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins/breakpoints";
+@import "../../node_modules/bootstrap/scss/mixins/grid-framework";
+@import "../../node_modules/bootstrap/scss/mixins/grid";
 
 @import "mixins/mixins.scss";
 @import "structure/forms.scss";

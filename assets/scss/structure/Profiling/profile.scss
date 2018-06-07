@@ -1,7 +1,11 @@
 @import "../../shared/variables";
-@import "node_modules/bootstrap/scss/bootstrap";
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins/breakpoints";
+@import "../../../../node_modules/bootstrap/scss/mixins/grid-framework";
+@import "../../../../node_modules/bootstrap/scss/mixins/grid";
 
-//TODO remove when bootstrap added globally
+
 a{
   text-decoration: none;
   color:$link-color;
