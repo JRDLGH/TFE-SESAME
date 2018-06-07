@@ -1,3 +1,5 @@
+import theme from "./theme";
+
 const routes = require( './Routing/fos_js_routes.json');
 import Routing from '../../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
 
@@ -25,8 +27,38 @@ $(document).ready(function () {
             this.href = Routing.generate('admin_gesture_index', {filter: getInputValue()});
             navigate(this);
     });
+
+    responsivePagination();
+
+    $(window).resize(function () {
+        responsivePagination();
+    });
+
 });
 
+function responsivePagination() {
+    let $prev = $('.pagination').children('li:first').children('a,span');
+    let $next = $('.pagination').children('li:last').children('a,span');
+    if($(window).width() >= theme.breakpoints.lg){
+
+        if( !($prev.html() === "«&nbsp;Précédent") ){
+            $prev.html("«&nbsp;Précédent");
+        }
+
+        if( !($next.html() === "Suivant&nbsp;»") ){
+            $next.html("Suivant&nbsp;»");
+        }
+
+    }else{
+        if( !($prev.html() === "«") ){
+            $prev.html("«");
+        }
+
+        if( !($next.html() === "»") ){
+            $next.html("»");
+        }
+    }
+}
 
 function navigate(page){
     if(page){
@@ -35,6 +67,7 @@ function navigate(page){
             type: 'GET'
         }).done(function (data) {
             getContainer().html(data);
+            responsivePagination();
         });
     }
 }

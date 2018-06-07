@@ -56,40 +56,9 @@ $(document).ready(function(){
         });
     }
 
-    responsivePagination();
-
-    $('.pagination').change(responsivePagination());
-
-    $(window).resize(function () {
-        responsivePagination();
-    });
-
     $(document).on('submit','.js-delete-gesture',confirmDelete);
 });
 
-function responsivePagination() {
-    let $prev = $('.pagination').children('li:first').children('a,span');
-    let $next = $('.pagination').children('li:last').children('a,span');
-    if($(window).width() >= theme.breakpoints.lg){
-
-        if( !($prev.html() === "«&nbsp;Précédent") ){
-            $prev.html("«&nbsp;Précédent");
-        }
-
-        if( !($next.html() === "Suivant&nbsp;»") ){
-            $next.html("Suivant&nbsp;»");
-        }
-
-    }else{
-        if( !($prev.html() === "«") ){
-            $prev.html("«");
-        }
-
-        if( !($next.html() === "»") ){
-            $next.html("»");
-        }
-    }
-}
 
 function confirmDelete(){
     swal({
