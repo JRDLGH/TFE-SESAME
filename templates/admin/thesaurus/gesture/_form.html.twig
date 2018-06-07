@@ -1,0 +1,52 @@
+{% trans_default_domain 'admin' %}
+
+
+{{ form_start(form) }}
+    {#{{ form_widget(form) }}#}
+    {{ form_row(form.name, {'label': 'admin.gesture.name'|trans}) }}
+    {#{{ form_row(form.profileVideoFile, {'label': 'admin.gesture.profileVideo'|trans}) }}#}
+    <div class="name_row">
+        {{ form_label(form.profileVideoFile, 'admin.gesture.profileVideo'|trans) }}
+
+        {% if form.vars.value.profileVideoFile is not null %}
+            <video controls width="300">
+                <source src="{{ asset('thesaurus/gestures/videos/' ~ form.vars.value.profileVideoFile.filename) }}" type="video/mp4" />
+            </video>
+        {% endif %}
+        {{ form_widget(form.profileVideoFile) }}
+
+    </div>
+    {#{{ form_row(form.videoFile, {'label': 'admin.gesture.video'|trans}) }}#}
+
+    <div class="name_row">
+        {{ form_label(form.videoFile, 'admin.gesture.video'|trans) }}
+
+        {% if form.vars.value.videoFile is not null %}
+            <video controls width="300">
+                <source src="{{ asset('thesaurus/gestures/videos/' ~ form.vars.value.videoFile.filename) }}" type="video/mp4" />
+            </video>
+        {% endif %}
+        {{ form_widget(form.videoFile) }}
+
+    </div>
+
+    {#{{ image_row(form.coverFile, {'label': 'admin.gesture.cover'|trans}) }}#}
+    <div class="name_row">
+        {{ form_label(form.coverFile, 'admin.gesture.cover'|trans) }}
+        {#{{ form_errors(form.coverFile) }}#}
+
+        {% if form.vars.value.coverFile is not null %}
+            <img src="{{ asset('thesaurus/gestures/images/' ~ form.vars.value.coverFile.filename) }}" width="300" alt="image">
+        {% endif %}
+        {{ form_widget(form.coverFile) }}
+
+    </div>
+
+    {{ form_row(form.description, {'label': 'admin.gesture.description'|trans}) }}
+    {{ form_row(form.isPublished, {'label': 'admin.gesture.isPublished'|trans}) }}
+    {{ form_row(form.tags, {'label': 'admin.gesture.tags'|trans}) }}
+    <button class="btn btn-primary">
+        <i class="fa fa-save"></i>
+        {{ button_label|default('admin.control.save'|trans)|capitalize }}
+    </button>
+{{ form_end(form) }}

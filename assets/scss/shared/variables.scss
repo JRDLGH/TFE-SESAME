@@ -28,6 +28,12 @@ $green-hover:rgb(172, 231, 94);
 $yellow:#f9dda3;
 $heavy-yellow:rgb(255, 208, 0);
 
+/* IMPORTANT COLORS */
+$main: $blue;
+$light-main:  lighten($main, 10%);
+$darker-body: darken($body,1%);
+$shadow-body: darken($darker-body,10%);
+
 /* DISPLAYS PARAMS */
 $warning:       $yellow;
 $danger:        $red;
@@ -79,6 +85,21 @@ $banner-height-xl:30vh;
 /* THESAURUS */
 $search-button-color:darken($body,10%);
 
+/**
+  PROFILES
+ */
+
+$profile-header-bg-color:darken($body,10%);
+$profile-header-color:darken($profile-header-bg-color,60%);
+
+$profile-request-color:darken($body,45%);
+$profile-pending-request-color:darken($profile-request-color,10%);
+$profile-logo-pending-request-color:darken($body,60%);
+
+$profile-news-bg-color:darken($body,1%);
+$profile-section-title-color:darken($body,55%);
+
+
 /* ANIMATIONS */
 $extra-short-duration:0.3s;
 $short-duration:0.5s;
@@ -90,11 +111,6 @@ $footer-bg-color:#dddddd;
 $footer-p-color: darken($body,80%);
 $footer-shadow: darken($body,45%);
 
-/* IMPORTANT COLORS */
-$main: $blue;
-$light-main:  lighten($main, 10%);
-$darker-body: darken($body,1%);
-$shadow-body: darken($darker-body,10%);
 
 /* FORMS */
 $input-border-color: darken($body,15%);

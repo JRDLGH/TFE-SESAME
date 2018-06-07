@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+{% import 'macros/searchbar.html.twig' as s %}
+
+
+{% block content %}
+
+    <h2>Compléter les profils</h2>
+
+    <div class="error-container">
+
+    </div>
+
+    <section class="profile-gesture">
+
+        <section class="profiling-gesture-choice">
+            <form class="search-form js-gesture-choice">
+                {{ s.searchbar('Quelle(s) geste(s) voulez-vous ajouter?') }}
+            </form>
+
+            <div id="gesture-search-result" class="search-result">
+                {#<h6>Résultat de la recherche</h6>#}
+                <div class="status">
+                    Aucun résultat.
+                </div>
+                <div class="search-content">
+
+                </div>
+            </div>
+
+        </section>
+
+        <hr>
+
+        <section class="profiling-chosen-gesture">
+            <h5>Geste(s) ajouté(s)</h5>
+            <div class="chosen-content">
+                Aucun geste sélectionné.
+            </div>
+        </section>
+
+    </section>
+
+    <hr>
+
+    <section class="profiling-profile">
+
+        <section class="profiling-profile-choice">
+
+            <form class="search-form js-profile-choice">
+                {{ s.searchbar('Qui a appris ce(s) geste(s)?') }}
+
+                <label for="search-profile">Qui a appris ce(s) geste(s)?</label>
+
+                {#<div class="search-input input-group">#}
+                    {#<span class="input-logo" name="search-profile" id="sizing-addon1 col-1">#}
+                        {#<i class="fa fa-search fa"></i>#}
+                    {#</span>#}
+                    {#<input type="text" class="form-control search-input">#}
+
+                {#</div>#}
+            </form>
+
+            <div id="profile-search-result" class="search-result">
+                <div class="status">
+                    Aucun résultat.
+                </div>
+                <div class="search-content">
+
+                </div>
+            </div>
+
+        </section>
+
+        <hr>
+
+        <section class="profiling-chosen-profile">
+            <h5>Profil(s) concerné(s)</h5>
+            <div class="chosen-content">
+                {% if true %}
+                    Aucun profil sélectionné.
+                {% endif %}
+            </div>
+        </section>
+
+    </section>
+
+    <hr>
+
+    <section class="controls">
+        <form id="gesture-profile-form" action="{{ path('management_profile_gesture') }}" method="POST">
+            <button type="submit" class="btn btn-primary">Éxecuter</button>
+            <div class="help-links">
+                <a href="{{ path('management_profile_index') }}">
+                    <i class="fa fa-undo action-icon"></i>
+                    <span>
+                {{ 'Annuler'|capitalize }}
+                </span>
+                </a>
+            </div>
+        </form>
+    </section>
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/gesturesToProfiles.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/gesturesToProfiles.js') }}"></script>
+{% endblock %}

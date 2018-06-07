@@ -1,0 +1,29 @@
+/**
+  STATUS DIV MUST BE INSIDE A CONTAINER
+ */
+
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins/grid-framework";
+@import "../../../node_modules/bootstrap/scss/mixins/grid";
+
+.status{
+
+  @include make-row();
+  padding: .2rem;
+  color: $black;
+  color: rgba($color: $black, $alpha: 0.5);
+  text-align: center;
+
+  i{
+
+    margin: auto;
+  }
+
+  .status-message{
+
+    width: 100%;
+
+  }
+
+}

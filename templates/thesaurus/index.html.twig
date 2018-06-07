@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
-{% import 'thesaurus/gesture/gesture.html.twig' as thes %}
+{% trans_default_domain 'thesaurus' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}{{ 'thesaurus.search.title'|trans }}{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('build/thesaurus.css') }}">
@@ -10,20 +10,19 @@
 {% block content %}
     <section id="thesaurus">
             <div>
-                <h1>Rechercher un geste sésame</h1>
+                <h1>{{ 'thesaurus.search.title'|trans }}</h1>
                 <p class="content-text">
-                    Si vous recherchez un geste, alors vous êtes tombez au bon endroit!
+                    {{ 'thesaurus.search.info'|trans }}
                 </p>
                 <form action="#" class="form-container">
                     <div class="form-group">
-                        <label for="search_gesture">Rechercher un geste ici</label>
+                        <label for="search_gesture">{{ 'thesaurus.search.input.label'|trans }}</label>
                         <div class="search-input row input-group">
                             <span class="input-logo" id="sizing-addon1 col-1"><i class="fa fa-search fa"></i></span>
-                            <input type="text" name="search_gesture" id="search" class="form-control col-11" placeholder="Rechercher un geste ici...">
+                            <input type="text" name="search_gesture" id="search" class="form-control col-11" placeholder="{{ 'thesaurus.search.input.placeholder'|trans }}">
                         </div>
                     </div>
                 </form>
-                {# {{ dump(gesture) }} #}
                 <div class="gestures-container">
                     <div class="status">
                         <i></i>
@@ -33,9 +32,6 @@
 
                     </div>
                     <div id="gesture">
-                        {# {% for gesture in gestures %}
-                        {{ thes.gesture(gesture.name, gesture.cover ,gesture.description) }}
-                        {% endfor %} #}
                     </div>
                     <div class='pagination-controls js-pagination-controls' style="display:none;">
                         <div class="controls">

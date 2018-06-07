@@ -22,7 +22,7 @@ $(document).ready(function () {
     });
     $('.search-action').on('click',function(evt){
         evt.preventDefault();
-            this.href = Routing.generate('thesaurus_gesture_index', {filter: getInputValue()});
+            this.href = Routing.generate('admin_gesture_index', {filter: getInputValue()});
             navigate(this);
     });
 });

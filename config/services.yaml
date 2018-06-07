@@ -42,3 +42,13 @@ services:
       arguments: ['@doctrine.orm.entity_manager']
       tags:
         - { name: form.type }
+
+    App\EventListener\RemovedFileListener:
+      arguments: ['@doctrine.orm.entity_manager']
+      tags:
+          - { name: kernel.event_listener, event: vich_uploader.post_remove, method: onPostRemove }
+
+    App\EventListener\CompressUploadedFile:
+      autowire: true
+      tags:
+        - { name: kernel.event_listener, event: vich_uploader.pre_upload, method: onPreUpload }

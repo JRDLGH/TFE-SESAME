@@ -1,0 +1,26 @@
+{% trans_default_domain 'admin' %}
+
+{% for gesture in gestures %}
+    <tr>
+        <td class="td-lead">{{ gesture.name|capitalize }}</td>
+        <td>{{ gesture.profileVideo ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
+        <td>{{ gesture.video ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
+        <td>{{ gesture.cover ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
+        <td>{{ gesture.description ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
+        <td>{{ gesture.publicationDate ? gesture.publicationDate|date('d/m/Y') : 'admin.control.no'|trans }}</td>
+        <td class="actions">
+            <a class="action-link" title="{{ 'admin.control.show'|trans|capitalize }}" href="{{ path('admin_gesture_show', {'id': gesture.id}) }}">
+                <i class="fa fa-eye action-icon"></i>
+                <span class="action-name">{{ 'admin.control.show'|trans|capitalize }}</span>
+            </a>
+            <a class="action-link" title="{{ 'admin.control.modify'|trans|capitalize }}" href="{{ path('admin_gesture_edit', {'id': gesture.id}) }}">
+                <i class="fa fa-edit action-icon"></i>
+                <span class="action-name">{{ 'admin.control.modify'|trans|capitalize }}</span>
+            </a>
+        </td>
+    </tr>
+{% else %}
+    <tr>
+        <td colspan="10">Aucun geste trouvé...</td>
+    </tr>
+{% endfor %}

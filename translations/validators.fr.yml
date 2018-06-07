@@ -1,11 +1,29 @@
 admin:
   constraints:
     gesture:
+      not_publishable: 'Le geste que vous tentez de publier doit au moins comporter une vidéo ou image.'
       name:
         unique: 'Ce geste existe déjà.'
         min: 'Le nom du geste doit faire au moins 2 caractères.'
         max: 'Le nom du geste doit faire au maximum 50 caractères.'
         type: 'Le nom du geste doit être une chaîne de caractères.'
+
       description:
         min: 'La description doit être d''au moins x caractères.'
         max: 'La description ne peut pas être plus longue que 255 caractères.'
+
+      cover:
+        type: 'Ce format est invalide. Veuillez fournir une image au format JPG, JPEG.'
+        sizeNotDetected: 'La taille de l''image n''a pas pu être détectée.'
+        shortWidth: 'La largeur de l''image est insuffisante.'
+        shortHeight: 'La hauteur de l''image est insuffisante.'
+        too_heavy: 'L''image ne doit pas dépasser 1Mo.'
+
+      video:
+        type: 'Ce format de vidéo n''est pas accepté. Veuillez fournir une vidéo au format MP4.'
+        too_heavy: 'La vidéo ne doit pas dépasser 1Mo.'
+        empty: 'La vidéo est vide.'
+        not_found: 'La vidéo n''a pas pu être trouvé.'
+        not_readable: 'Cette vidéo est illisible.'
+        error: 'La vidéo n''a pas pu être téléchargée.'
+        equalTo: 'La même vidéo ne peut pas être utilisée pour les représentations de face et de profil.'

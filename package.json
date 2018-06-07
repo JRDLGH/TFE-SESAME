@@ -3,12 +3,14 @@
     "@symfony/webpack-encore": "^0.19.0",
     "bloodhound-js": "^1.2.2",
     "bootstrap": "^4.1.0",
+    "bootstrap-3-typeahead": "bassjobsen/Bootstrap-3-Typeahead",
     "bootstrap-tagsinput": "^0.7.1",
     "copy-webpack-plugin": "^4.5.1",
     "exports-loader": "^0.7.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "jquery-ui": "^1.12.1",
+    "jquery.typewatch": "^3.0.0",
     "node-sass": "^4.8.3",
     "node-sass-utils": "^1.1.2",
     "popper.js": "^1.14.3",
@@ -24,6 +26,7 @@
     "prod": "encore production"
   },
   "dependencies": {
-    "bootstrap-tokenfield": "^0.12.0"
+    "bootstrap-tokenfield": "^0.12.0",
+    "fold-to-ascii": "2.0.2"
   }
 }

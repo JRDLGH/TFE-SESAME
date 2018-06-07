@@ -4,6 +4,43 @@ FORM --
 
 
 form {
+    .form-control {
+        &:required{
+            border-left: .25rem solid $required-input-border-color;
+            border-bottom-left-radius: .5rem;
+            border-top-left-radius: .5rem;
+        }
+
+        border: 1px solid $input-border-color;
+        border-radius: 3px;
+        outline-color: none;
+        transition: border 0.3s;
+
+        &:focus {
+
+            outline-color: transparent;
+            box-shadow: none;
+            border:0;
+            border: 1px solid $light-main;
+
+            &::placeholder {
+
+                color: transparent;
+
+            }
+
+        }
+        &::placeholder {
+
+            color: transparent;
+
+            @include media-breakpoint-down(md){
+                color:$input-border-color;
+            }
+
+        }
+
+    }
 
     padding: 0.5%;
     margin: 1rem 0;
@@ -45,43 +82,6 @@ form {
                     display: inline;
                 }
             }
-        }
-        .form-control {
-            &:required{
-                border-left: .25rem solid $required-input-border-color;
-                border-bottom-left-radius: .5rem;
-                border-top-left-radius: .5rem;
-            }
-
-            border: 1px solid $input-border-color;
-            border-radius: 3px;
-            outline-color: none;
-            transition: border 0.3s;
-
-            &:focus {
-
-                outline-color: transparent;
-                box-shadow: none;
-                border:0;
-                border: 1px solid $light-main;
-
-                &::placeholder {
-
-                    color: transparent;
-
-                }
-
-            }
-            &::placeholder {
-
-                color: transparent;
-
-                @include media-breakpoint-down(md){
-                    color:$input-border-color;
-                }
-
-            }
-            
         }
     }
 

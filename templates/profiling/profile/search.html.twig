@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% import 'macros/searchbar.html.twig' as s %}
+
+{% block content %}
+    <h1>Rechercher un profil</h1>
+
+    <form>
+        {{ s.searchbar('Rechercher un profil par le nom et/ou prénom d\'une personne') }}
+    </form>
+
+    <div class="search-result">
+        <div class="status">
+            <i></i>
+            <span class="status-message"></span>
+        </div>
+        <div class="search-content">
+
+        </div>
+    </div>
+
+    <div class='pagination-controls js-pagination-controls' style="display:none;">
+        <div class="controls">
+            <button class='btn btn-primary disabled js-previous-page'><i class="fa fa-angle-left prev-icon"></i>Précédent</button>
+            <div class="separator"></div>
+            <button class='btn btn-primary js-next-page'>Suivant<i class="fa fa-angle-right next-icon"></i></button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/searchProfile.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/searchProfile.js') }}"></script>
+{% endblock %}
