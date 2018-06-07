@@ -9,7 +9,10 @@
 
     {{ include('admin/documentation/structure/sidebar.html.twig') }}
 
-    {{ include('admin/documentation/structure/content/begin.html.twig') }}
+    <div class="doc-content">
+        {{ include('admin/documentation/structure/content/begin.html.twig') }}
+    </div>
+
 {% endblock %}
 
 {% block javascripts %}

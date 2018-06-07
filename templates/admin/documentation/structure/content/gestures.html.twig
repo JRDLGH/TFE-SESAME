@@ -1,331 +1,327 @@
-<div class="doc-content">
+<section>
 
-    <section>
+    <article>
+        <h1 class="title">
+            Gestions des gestes
+        </h1>
+        <div class="content">
+            <p>
+                La gestion des gestes se divise en plusieurs parties distinctes.
+            </p>
 
-        <article>
-            <h1 class="title">
-                Gestions des gestes
-            </h1>
-            <div class="content">
-                <p>
-                    La gestion des gestes se divise en plusieurs parties distinctes.
-                </p>
+            <p>
+                Avant de commencer ce guide, il est préférable que vous soyez sur un ordinateur (l’affichage des tableaux sur smartphone
+                étant moins agréable). Puis, dirigez-vous sur la
+                <a href="{{ path("admin_gesture_index") }}">page de gestion des gestes</a>.
+            </p>
+        </div>
+    </article>
 
-                <p>
-                    Avant de commencer ce guide, il est préférable que vous soyez sur un ordinateur (l’affichage des tableaux sur smartphone
-                    étant moins agréable). Puis, dirigez-vous sur la
-                    <a href="{{ path("admin_gesture_index") }}">page de gestion des gestes</a>.
-                </p>
-            </div>
-        </article>
+    <article id="list">
+        <h1 class="title">
+            Liste des gestes
+        </h1>
+        <div class="content">
+            <p>
+                Lorsque vous êtes sur la page de gestion des gestes, un tableau est affiché. Ce dernier liste les gestes, tout en détaillant
+                des champs importants. Un tri est d’ailleurs possible sur ces champs, pour plus d’informations, référez
+                vous à la
+                <a href="#research">section suivante</a>.
+            </p>
 
-        <article id="list">
-            <h1 class="title">
-                Liste des gestes
-            </h1>
-            <div class="content">
-                <p>
-                    Lorsque vous êtes sur la page de gestion des gestes, un tableau est affiché. Ce dernier liste les gestes, tout en détaillant
-                    des champs importants. Un tri est d’ailleurs possible sur ces champs, pour plus d’informations, référez
-                    vous à la
-                    <a href="#research">section suivante</a>.
-                </p>
+            <p>
+                Voici la liste des champs disponible pour un geste dans le tableau:
+            </p>
 
-                <p>
-                    Voici la liste des champs disponible pour un geste dans le tableau:
-                </p>
+            <ul>
+                <li>
+                    Nom
+                </li>
+                <li>
+                    Vidéo de profil: est égal à oui si une vidéo de profil est disponible pour le geste, sinon, est à non.
+                </li>
+                <li>
+                    Vidéo: est égal à oui si une vidéo (de face) est disponible pour le geste, sinon, est à non.
+                </li>
+                <li>
+                    Image: indique si une image est disponible pour le geste (oui) et inversement (non).
+                </li>
+                <li>
+                    Description: indique la présence d’une description (oui) ou son absence (non).
+                </li>
+                <li>
+                    Date de publication: indique la date de publication du geste. Si le geste n’est pas publié, il sera indiqué “non publié”
+                    pour ce champs.
+                </li>
+                <li>
+                    Actions: ce champs n’est pas propre au geste mais permet de réaliser des actions sur celui-ci.
+                </li>
+            </ul>
+        </div>
+    </article>
 
-                <ul>
-                    <li>
-                        Nom
-                    </li>
-                    <li>
-                        Vidéo de profil: est égal à oui si une vidéo de profil est disponible pour le geste, sinon, est à non.
-                    </li>
-                    <li>
-                        Vidéo: est égal à oui si une vidéo (de face) est disponible pour le geste, sinon, est à non.
-                    </li>
-                    <li>
-                        Image: indique si une image est disponible pour le geste (oui) et inversement (non).
-                    </li>
-                    <li>
-                        Description: indique la présence d’une description (oui) ou son absence (non).
-                    </li>
-                    <li>
-                        Date de publication: indique la date de publication du geste. Si le geste n’est pas publié, il sera indiqué “non publié”
-                        pour ce champs.
-                    </li>
-                    <li>
-                        Actions: ce champs n’est pas propre au geste mais permet de réaliser des actions sur celui-ci.
-                    </li>
-                </ul>
-            </div>
-        </article>
+    <article id="add">
+        <h1 class="title">
+            Ajouter, créer un geste
+        </h1>
+        <div class="content">
+            <p>
+                Sur la page de gestions des gestes, cliquez sur le bouton “Créer un nouveau geste” situé en bas de la page.
+            </p>
 
-        <article id="add">
-            <h1 class="title">
-                Ajouter, créer un geste
-            </h1>
-            <div class="content">
-                <p>
-                    Sur la page de gestions des gestes, cliquez sur le bouton “Créer un nouveau geste” situé en bas de la page.
-                </p>
+            <p>
+                Après avoir cliqué sur ce dernier, une nouvelle page s’affiche avec un formulaire. Plusieurs contraintes sont nécessaires
+                à l’ajout d’un geste, selon son état de publication (publié ou non).
+            </p>
 
-                <p>
-                    Après avoir cliqué sur ce dernier, une nouvelle page s’affiche avec un formulaire. Plusieurs contraintes sont nécessaires
-                    à l’ajout d’un geste, selon son état de publication (publié ou non).
-                </p>
+            <p>
+                Une seule information est indispensable à la création d’un nouveau geste, son nom.
+                <b>Le nom d’un geste est d’une importance capitale
+                </b>, il doit être clair, précis et représenter pleinement le geste. Ce nom est d’ailleurs utilisé dans
+                sa recherche et une section est consacrée au
+                <a href="#reference">référencement des gestes</a>, incluant entre autre le choix de son nom.
+            </p>
 
-                <p>
-                    Une seule information est indispensable à la création d’un nouveau geste, son nom.
-                    <b>Le nom d’un geste est d’une importance capitale
-                    </b>, il doit être clair, précis et représenter pleinement le geste. Ce nom est d’ailleurs utilisé dans
-                    sa recherche et une section est consacrée au
-                    <a href="#reference">référencement des gestes</a>, incluant entre autre le choix de son nom.
-                </p>
+            <p>
+                Les autres champs ne sont pas obligatoires mais si vous souhaitez publier ce geste, il est préférable de consulter la section
+                “publier, dépublier un geste” car un geste publié doit respecter des contraintes supplémentaires.
+            </p>
 
-                <p>
-                    Les autres champs ne sont pas obligatoires mais si vous souhaitez publier ce geste, il est préférable de consulter la section
-                    “publier, dépublier un geste” car un geste publié doit respecter des contraintes supplémentaires.
-                </p>
+            <p>
+                Enfin, après avoir remplis les divers champs nécessaires à la création du geste, vous pouvez enfin le créer en cliquant sur
+                le bouton adéquat en bas de page.
+            </p>
 
-                <p>
-                    Enfin, après avoir remplis les divers champs nécessaires à la création du geste, vous pouvez enfin le créer en cliquant sur
-                    le bouton adéquat en bas de page.
-                </p>
+        </div>
+    </article>
 
-            </div>
-        </article>
+    <article id="modify">
+        <h1 class="title">
+            Modifier un geste
+        </h1>
+        <div class="content">
+            <p>
+                Lorsque vous êtes sur la page de gestions des gestes, vous pouvez voir une liste de gestes. Cette liste de gestes peut être
+                triée sur plusieurs paramètres, il est même possible de rechercher un geste par son nom mais tout ceci
+                est expliqué dans un
+                <a href="#research">chapitre dédié</a>.
+            </p>
 
-        <article id="modify">
-            <h1 class="title">
-                Modifier un geste
-            </h1>
-            <div class="content">
-                <p>
-                    Lorsque vous êtes sur la page de gestions des gestes, vous pouvez voir une liste de gestes. Cette liste de gestes peut être
-                    triée sur plusieurs paramètres, il est même possible de rechercher un geste par son nom mais tout ceci
-                    est expliqué dans un
-                    <a href="#research">chapitre dédié</a>.
-                </p>
+            <p>
+                Modifier un geste reste quelque chose de relativement classique mais n’oubliez pas que si vous voulez
+                <b>publier un geste</b>, certaines contraintes sont d’application.
+            </p>
+        </div>
+    </article>
 
-                <p>
-                    Modifier un geste reste quelque chose de relativement classique mais n’oubliez pas que si vous voulez
-                    <b>publier un geste</b>, certaines contraintes sont d’application.
-                </p>
-            </div>
-        </article>
+    <article id="publish_unpublish">
+        <h1 class="title">
+            Publier, dépublier un geste
+        </h1>
+        <div class="content">
+            <p>
+                Lorsque vous modifiez ou créez un geste, il vous est proposé de choisir si le geste doit être publié ou non.
+            </p>
+            <article id="publish">
+                <h1 class="title">
+                    Publier un geste
+                </h1>
+                <div class="content">
+                    <p>
+                        Pour une publication, plusieurs contraintes s’imposent:
+                    </p>
+                    <ul>
+                        <li>
+                            Le geste d’avoir un nom correct et unique
+                        </li>
+                        <li>
+                            Le geste doit
+                            <b>au moins</b> avoir une photo ou une vidéo le représentant.
+                        </li>
+                    </ul>
 
-        <article id="publish_unpublish">
-            <h1 class="title">
-                Publier, dépublier un geste
-            </h1>
-            <div class="content">
-                <p>
-                    Lorsque vous modifiez ou créez un geste, il vous est proposé de choisir si le geste doit être publié ou non.
-                </p>
-                <article id="publish">
-                    <h1 class="title">
-                        Publier un geste
-                    </h1>
-                    <div class="content">
-                        <p>
-                            Pour une publication, plusieurs contraintes s’imposent:
-                        </p>
-                        <ul>
-                            <li>
-                                Le geste d’avoir un nom correct et unique
-                            </li>
-                            <li>
-                                Le geste doit
-                                <b>au moins</b> avoir une photo ou une vidéo le représentant.
-                            </li>
-                        </ul>
+                    <p>
+                        Un geste qui n’a pas de vidéos, ni d’images, ne sera pas publié dans le dictionnaire car trop peu d’information sont disponible
+                        pour l’apprendre.
+                    </p>
 
-                        <p>
-                            Un geste qui n’a pas de vidéos, ni d’images, ne sera pas publié dans le dictionnaire car trop peu d’information sont disponible
-                            pour l’apprendre.
-                        </p>
+                    <p>
+                        En cas de non respect d’une de ces contraintes, sa publication sera refusée.
+                    </p>
+                </div>
+            </article>
 
-                        <p>
-                            En cas de non respect d’une de ces contraintes, sa publication sera refusée.
-                        </p>
-                    </div>
-                </article>
+            <article id="unpublish">
+                <h1 class="title">
+                    Dépublier un geste
+                </h1>
+                <div class="content">
+                    <p>
+                        Retirer un geste des gestes publiés est une action qui permet d’éviter de le supprimer et de le perdre définitivement. Cette
+                        action inclut aussi d’éviter qu’il soit publié dans le dictionnaire publique ou individuel.
+                    </p>
 
-                <article id="unpublish">
-                    <h1 class="title">
-                        Dépublier un geste
-                    </h1>
-                    <div class="content">
-                        <p>
-                            Retirer un geste des gestes publiés est une action qui permet d’éviter de le supprimer et de le perdre définitivement. Cette
-                            action inclut aussi d’éviter qu’il soit publié dans le dictionnaire publique ou individuel.
-                        </p>
+                    <p>
+                        Il est conseillé d’opter pour la dé-publication d’un geste lorsque:
+                    </p>
 
-                        <p>
-                            Il est conseillé d’opter pour la dé-publication d’un geste lorsque:
-                        </p>
+                    <ul>
+                        <li>
+                            Vous créez un geste mais manquez de ressources pour qu’il soit publié (photo, vidéos manquante(s),...)
+                        </li>
+                        <li>
+                            Vous voulez ajouter/modifier le geste mais pas le publier dans l’immédiat.
+                        </li>
+                        <li>
+                            Vous souhaitez empêcher que le geste soit utilisé dans le dictionnaire publique et les dictionnaires individualisés.
+                        </li>
+                    </ul>
+                </div>
+            </article>
 
-                        <ul>
-                            <li>
-                                Vous créez un geste mais manquez de ressources pour qu’il soit publié (photo, vidéos manquante(s),...)
-                            </li>
-                            <li>
-                                Vous voulez ajouter/modifier le geste mais pas le publier dans l’immédiat.
-                            </li>
-                            <li>
-                                Vous souhaitez empêcher que le geste soit utilisé dans le dictionnaire publique et les dictionnaires individualisés.
-                            </li>
-                        </ul>
-                    </div>
-                </article>
+        </div>
+    </article>
 
-            </div>
-        </article>
+    <article id="preview">
+        <h1 class="title">
+            Pré-visualisation d’un geste
+        </h1>
+        <div class="content">
+            <p>
+                Il est possible d’avoir un aperçu de l’affichage d’un geste. Pour ce faire, cliquez sur l’action “voir” d’un geste.
+            </p>
+        </div>
+    </article>
 
-        <article id="preview">
-            <h1 class="title">
-                Pré-visualisation d’un geste
-            </h1>
-            <div class="content">
-                <p>
-                    Il est possible d’avoir un aperçu de l’affichage d’un geste. Pour ce faire, cliquez sur l’action “voir” d’un geste.
-                </p>
-            </div>
-        </article>
+    <article id="reference">
+        <h1 class="title">
+            Référencer un geste
+        </h1>
+        <div class="content">
+            <p>
+                Si vous désirez publier un geste, il est important de bien le référencer. Pour ce faire, vous devez réfléchir à un nom clair,
+                précis pour le geste et éventuellement lui faire correspondre des mots-clés. Il est fortement recommandé
+                de bien lire la partie qui suit car celle-ci explique la façon dont le dictionnaire fonctionne.
+            </p>
 
-        <article id="reference">
-            <h1 class="title">
-                Référencer un geste
-            </h1>
-            <div class="content">
-                <p>
-                    Si vous désirez publier un geste, il est important de bien le référencer. Pour ce faire, vous devez réfléchir à un nom clair,
-                    précis pour le geste et éventuellement lui faire correspondre des mots-clés. Il est fortement recommandé
-                    de bien lire la partie qui suit car celle-ci explique la façon dont le dictionnaire fonctionne.
-                </p>
+            <article id="thesaurus_operation">
+                <h1 class="title">
+                    Fonctionnement du dictionnaire
+                </h1>
+                <div class="content">
+                    <i>
+                        Remarque: le fonctionnement du dictionnaire représente tant bien celui du dictionnaire publique que celui du dictionnaire
+                        individualisé présent sur chaque profil.
+                    </i>
+                    <p>
+                        Son fonctionnement est basé sur un exemple, détaillant le cas de recherche d’un geste.
+                    </p>
 
-                <article id="thesaurus_operation">
-                    <h1 class="title">
-                        Fonctionnement du dictionnaire
-                    </h1>
-                    <div class="content">
-                        <i>
-                            Remarque: le fonctionnement du dictionnaire représente tant bien celui du dictionnaire publique que celui du dictionnaire
-                            individualisé présent sur chaque profil.
-                        </i>
-                        <p>
-                            Son fonctionnement est basé sur un exemple, détaillant le cas de recherche d’un geste.
-                        </p>
+                    <p>
+                        Le nom d’un geste est prioritaire, c’est-à-dire que si vous tapez le début du nom d’un geste ou son nom exact, il sera mis
+                        en évidence et apparaîtra dans les premiers résultats. C’est pour cette raison que le nom doit
+                        être précis, clair et pertinent.
+                    </p>
 
-                        <p>
-                            Le nom d’un geste est prioritaire, c’est-à-dire que si vous tapez le début du nom d’un geste ou son nom exact, il sera mis
-                            en évidence et apparaîtra dans les premiers résultats. C’est pour cette raison que le nom doit
-                            être précis, clair et pertinent.
-                        </p>
+                    <p>
+                        Ensuite, si le dictionnaire ne trouve pas de correspondance avec le nom recherché, il essaiera d’en trouver parmis les “mots-clés”
+                        que vous avez indiqué pour vos gestes.
+                    </p>
 
-                        <p>
-                            Ensuite, si le dictionnaire ne trouve pas de correspondance avec le nom recherché, il essaiera d’en trouver parmis les “mots-clés”
-                            que vous avez indiqué pour vos gestes.
-                        </p>
+                    <p>
+                        Le dictionnaire recherche le ou les “mots-clés” entré(s) dans le champs de recherche, c’est-à-dire que si vous tapez “chien
+                        chat”, le dictionnaire recherchera les gestes qui sont référencés par les mots clés chien et
+                        chat.
+                    </p>
+                </div>
+            </article>
 
-                        <p>
-                            Le dictionnaire recherche le ou les “mots-clés” entré(s) dans le champs de recherche, c’est-à-dire que si vous tapez “chien
-                            chat”, le dictionnaire recherchera les gestes qui sont référencés par les mots clés chien et
-                            chat.
-                        </p>
-                    </div>
-                </article>
+            <article id="advices">
+                <h1 class="title">
+                    Conseils pour un bon référencement
+                </h1>
+                <div class="content">
+                    <p>
+                        Avant tout, pour bien référencer, il faut se mettre dans la tête de la personne qui va chercher le geste.
+                    </p>
 
-                <article id="advices">
-                    <h1 class="title">
-                        Conseils pour un bon référencement
-                    </h1>
-                    <div class="content">
-                        <p>
-                            Avant tout, pour bien référencer, il faut se mettre dans la tête de la personne qui va chercher le geste.
-                        </p>
+                    <p>
+                        Le nom de geste doit de préférence être court et correspondre ou résumer le sens du geste.
+                    </p>
 
-                        <p>
-                            Le nom de geste doit de préférence être court et correspondre ou résumer le sens du geste.
-                        </p>
+                    <p>
+                        En ce qui concerne le référencement en tant que tel, une bonne pratique est de mettre des mots-clés synonyme du geste, s’il
+                        s’agit d’un simple mot.
+                    </p>
 
-                        <p>
-                            En ce qui concerne le référencement en tant que tel, une bonne pratique est de mettre des mots-clés synonyme du geste, s’il
-                            s’agit d’un simple mot.
-                        </p>
+                    <p>
+                        S’il s’agit d’une phrase ou d’une expression plus complexe, il est préférable de référencer cette dernière par des mots-clés
+                        que l’utilisateur pourrait utiliser. Une alternative est de décomposer la phrase en mots et de
+                        les référencer en tant que mots-clés.
+                    </p>
+                </div>
+            </article>
 
-                        <p>
-                            S’il s’agit d’une phrase ou d’une expression plus complexe, il est préférable de référencer cette dernière par des mots-clés
-                            que l’utilisateur pourrait utiliser. Une alternative est de décomposer la phrase en mots et de
-                            les référencer en tant que mots-clés.
-                        </p>
-                    </div>
-                </article>
+        </div>
+    </article>
 
-            </div>
-        </article>
+    <article id="research">
+        <h1 class="title">
+            Rechercher un geste
+        </h1>
+        <div class="content">
+            <p>
+                Il vous est possible de rechercher un geste lorsque vous êtes sur la page de gestion des gestes. Soit grâce à un champ de
+                recherche permettant de rechercher un geste par son nom, soit grâce à des filtres sur les champs.
+            </p>
 
-        <article id="research">
-            <h1 class="title">
-                Rechercher un geste
-            </h1>
-            <div class="content">
-                <p>
-                    Il vous est possible de rechercher un geste lorsque vous êtes sur la page de gestion des gestes. Soit grâce à un champ de
-                    recherche permettant de rechercher un geste par son nom, soit grâce à des filtres sur les champs.
-                </p>
+            <ul>
+                <li>
+                    Nom: recherche par nom (ordre alphabétique)
 
-                <ul>
-                    <li>
-                        Nom: recherche par nom (ordre alphabétique)
+                </li>
 
-                    </li>
+                <li>
+                    Vidéo de profil: rechercher les gestes qui possèdent une vidéo de profil ou non.
 
-                    <li>
-                        Vidéo de profil: rechercher les gestes qui possèdent une vidéo de profil ou non.
+                </li>
 
-                    </li>
+                <li>
+                    Vidéo: rechercher les gestes qui ont une vidéo ou non.
+                </li>
 
-                    <li>
-                        Vidéo: rechercher les gestes qui ont une vidéo ou non.
-                    </li>
+                <li>
+                    Image rechercher les gestes ayant une image ou non.
+                </li>
 
-                    <li>
-                        Image rechercher les gestes ayant une image ou non.
-                    </li>
+                <li>
+                    Description: rechercher les gestes ayant une description ou non.
+                </li>
 
-                    <li>
-                        Description: rechercher les gestes ayant une description ou non.
-                    </li>
+                <li>
+                    Date de publication: rechercher les gestes récemment publiés ou ceux qui n’ont pas été publiés.
+                </li>
 
-                    <li>
-                        Date de publication: rechercher les gestes récemment publiés ou ceux qui n’ont pas été publiés.
-                    </li>
+            </ul>
+        </div>
+    </article>
 
-                </ul>
-            </div>
-        </article>
+    <article id="delete">
+        <h1 class="title">
+            Supprimer un geste
+        </h1>
+        <div class="content">
+            <p>
+                Cette action est irréversible et est à considérer avant d’effectuer. Lorsque vous supprimer un geste celui-ci n’est plus
+                récupérable.
+            </p>
 
-        <article id="delete">
-            <h1 class="title">
-                Supprimer un geste
-            </h1>
-            <div class="content">
-                <p>
-                    Cette action est irréversible et est à considérer avant d’effectuer. Lorsque vous supprimer un geste celui-ci n’est plus
-                    récupérable.
-                </p>
+            <p>
+                Pour supprimer un geste, cliquez sur l’action “voir” ou “modifier” d’un geste. Vous y trouverez un bouton “supprimer” sur
+                lequel vous pouvez cliquez. Avant de supprimer un geste, une fenêtre de confirmation s’ouvre et vous
+                demande de confirmer.
+            </p>
+        </div>
+    </article>
 
-                <p>
-                    Pour supprimer un geste, cliquez sur l’action “voir” ou “modifier” d’un geste. Vous y trouverez un bouton “supprimer” sur
-                    lequel vous pouvez cliquez. Avant de supprimer un geste, une fenêtre de confirmation s’ouvre et vous
-                    demande de confirmer.
-                </p>
-            </div>
-        </article>
-
-    </section>
-
-</div>
+</section>
