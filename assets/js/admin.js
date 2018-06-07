@@ -12,6 +12,9 @@ import 'bootstrap-tagsinput/dist/bootstrap-tagsinput.css';
 import 'bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css';
 
 import '../scss/structure/admin/tags.scss';
+import 'bootstrap-fileinput';
+import 'bootstrap-fileinput/css/fileinput.min.css';
+import 'bootstrap-fileinput/themes/fa/theme.min';
 import '../scss/structure/admin.scss';
 
 $(document).ready(function(){
@@ -35,6 +38,11 @@ $(document).ready(function(){
         },
         datumTokenizer: Bloodhound.tokenizers.whitespace,
         queryTokenizer: Bloodhound.tokenizers.whitespace,
+    });
+
+    $('input:file').fileinput({
+        theme: 'fa',
+        showUpload: false
     });
 
     source.initialize();
