@@ -14,9 +14,9 @@ import '../scss/structure/admin/tags.scss';
 import '../scss/structure/admin.scss';
 
 $(document).ready(function(){
-    var $input = $('input[data-toggle="tagsinput"]');
+    let $input = $('input[data-toggle="tagsinput"]');
 
-    var tags = [];
+    let tags = [];
     $.get('/admin/thesaurus/gesture/tags',function(data){
         tags=data;
     });
@@ -25,7 +25,7 @@ $(document).ready(function(){
         prefetch: {
             url: '/admin/thesaurus/gesture/tags',
             filter: function (response) {
-                var tags = [];
+                let tags = [];
                 response.forEach(function(tag){
                     tags.push(tag.keyword);
                 });
