@@ -13,18 +13,14 @@ import 'bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css';
 import '../scss/structure/admin/tags.scss';
 import '../scss/structure/admin.scss';
 
-var data = ["apple", "banana", "cherry", "peach"];
-
-
-
 $(document).ready(function(){
-    var $input = $('input[data-toggle="tagsinput"]');
+    let $input = $('input[data-toggle="tagsinput"]');
 
-    var tags = [];
+    let tags = [];
     $.get('/admin/thesaurus/gesture/tags',function(data){
         tags=data;
     });
-    var source = new Bloodhound({
+    let source = new Bloodhound({
         // local: ["avoir","rendre"],
         // prefetch: {
         //     url: '/admin/thesaurus/gesture/tags',
@@ -32,7 +28,7 @@ $(document).ready(function(){
         prefetch: {
             url: '/admin/thesaurus/gesture/tags',
             filter: function (response) {
-                var tags = [];
+                let tags = [];
                 response.forEach(function(tag){
                     tags.push(tag.keyword);
                 });
@@ -42,6 +38,7 @@ $(document).ready(function(){
         datumTokenizer: Bloodhound.tokenizers.whitespace,
         queryTokenizer: Bloodhound.tokenizers.whitespace,
     });
+
     source.initialize();
     if ($input.length) {
         console.log('ok');

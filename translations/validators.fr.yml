@@ -26,3 +26,4 @@ admin:
         not_found: 'La vidéo n''a pas pu être trouvé.'
         not_readable: 'Cette vidéo est illisible.'
         error: 'La vidéo n''a pas pu être téléchargée.'
+        equalTo: 'La même vidéo ne peut pas être utilisée pour les représentations de face et de profil.'

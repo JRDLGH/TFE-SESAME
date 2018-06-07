@@ -8,16 +8,16 @@ import '../scss/profileToGesture.scss';
 
 Routing.setRoutingData(routes);
 
-var gestures = [];
-var profiles = [];
+let gestures = [];
+let profiles = [];
 
-var selectedGestures = [];
-var selectedProfiles = [];
+let selectedGestures = [];
+let selectedProfiles = [];
 
 $(document).ready(function () {
     //fonction pour form quand submit!!
 
-    var gestureOptions = {
+    let gestureOptions = {
         callback: getGestures,
         wait: 1000,
         highlight: true,
@@ -27,7 +27,7 @@ $(document).ready(function () {
 
     $('.js-gesture-choice .search-input').typeWatch(gestureOptions);
 
-    var profileOptions = {
+    let profileOptions = {
         callback: getProfiles,
         wait: 1000,
         highlight: true,
@@ -64,7 +64,7 @@ $(document).ready(function () {
 });
 
 function displayFormStatus(type,message){
-    var html=
+    let html=
         '<div class="alert alert-'+ type + '">' +
         '<p>'+ message +'</p>' +
         '</div>';
@@ -129,22 +129,21 @@ function displayGestures(data){
 
 
 function formatHTML(data,type){
-    var output = '';
-    var $container;
+    let output = '';
+    let $container;
     if(data){
         switch (type){
             case 'profile':
                 $container = getProfileContainer();
                 data.forEach(function (profile) {
                     output += profileHTML(profile);
-                })
+                });
                 break;
             case 'gesture':
                 data.forEach(function(gesture){
                     output += gestureHTML(gesture);
                 });
                 $container = getGestureContainer();
-                ;
                 break;
         }
         $container.html(output);
@@ -153,7 +152,7 @@ function formatHTML(data,type){
 
 // function profileHTML(){}
 function gestureHTML(gesture){
-    var html = '';
+    let html = '';
     html +=
         '<div class="card-container js-select-gesture" data-id="' + gesture.id + '">' +
             '<div class="card">' +
@@ -169,8 +168,8 @@ function getGestureContainer(){
 }
 
 function select(type,data){
-    var output = '';
-    var $container;
+    let output = '';
+    let $container;
     switch(type){
 
         case 'profile':
@@ -229,10 +228,10 @@ function addToSelectedGestures(gesture){
 
 function removeFromSelectedGestures(gesture){
     if(gesture){
-        var index = selectedGestures.indexOf(gesture);
-        if(index != -1){
+        let index = selectedGestures.indexOf(gesture);
+        if(index !== -1){
             selectedGestures.splice(index,1);
-            if(selectedGestures.length == 0){
+            if(selectedGestures.length === 0){
                 getSelectedGesturesContainer().html('Aucun geste sélectionné.');
             }
         }
@@ -240,9 +239,9 @@ function removeFromSelectedGestures(gesture){
 }
 
 function isInArray(array,id){
-    var result = false;
+    let result = false;
     if(array.length > 0){
-        result = (array.indexOf(id) != -1) ? true:false;
+        result = (array.indexOf(id) !== -1) ? true:false;
     }
     return result;
 }
@@ -250,8 +249,8 @@ function isInArray(array,id){
 /** PROFILES **/
 
 function profileHTML(profile){
-    var age = getAge(profile.birthday);
-    var html = '';
+    let age = getAge(profile.birthday);
+    let html = '';
     html +=
         '<div class="card-container js-select-profile" data-id="' + profile.profile.id + '">' +
         '<div class="card">' +
@@ -263,10 +262,10 @@ function profileHTML(profile){
 }
 
 function getAge(birthday){
-    var currentDate = new Date();
-    var birthDate = new Date(birthday);
-    var age = currentDate.getFullYear() - birthDate.getFullYear();
-    var m = currentDate.getMonth() - birthDate.getMonth();
+    let currentDate = new Date();
+    let birthDate = new Date(birthday);
+    let age = currentDate.getFullYear() - birthDate.getFullYear();
+    let m = currentDate.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && currentDate.getDate() < birthDate.getDate())) {
         age--;
     }
@@ -313,10 +312,10 @@ function addToSelectedProfiles(profile){
 
 function removeFromSelectedProfiles(profile){
     if(profile){
-        var index = selectedProfiles.indexOf(profile);
-        if(index != -1){
+        let index = selectedProfiles.indexOf(profile);
+        if(index !== -1){
             selectedProfiles.splice(index,1);
-            if(selectedProfiles.length == 0){
+            if(selectedProfiles.length === 0){
                 getSelectedProfilesContainer().html('Aucun profil sélectionné.');
             }
         }

@@ -28,7 +28,6 @@ class RemovedFileListener
 
         try{
             $this->manager->persist($file);
-            $this->manager->flush();
         }catch(ORMException $e){
             print($e->getMessage());
         }

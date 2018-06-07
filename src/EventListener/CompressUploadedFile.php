@@ -42,7 +42,7 @@ class CompressUploadedFile
 
         list($width,$height) = getimagesize($image);
 
-        $source = \Tinify\fromFile($image->getLinkTarget());
+        $source = \Tinify\fromFile($image->getRealPath());
 
         if($width > self::IMG_MAX_WIDTH || $height > self::IMG_MAX_HEIGHT)
         {

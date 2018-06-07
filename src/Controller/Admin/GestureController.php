@@ -4,10 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Thesaurus\Gesture;
 use App\Form\Thesaurus\GestureType;
-use App\Repository\GestureRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -124,7 +121,7 @@ class GestureController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('thesaurus_gesture_index');
+        return $this->redirectToRoute('admin_gesture_index');
     }
 
 }

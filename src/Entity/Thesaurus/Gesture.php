@@ -4,6 +4,7 @@ namespace App\Entity\Thesaurus;
 
 use App\Entity\Thesaurus\Gesture\Tag;
 use App\Validator\PublishableGesture;
+use App\Validator\UniqueVideo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -23,6 +24,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * )
  * @Vich\Uploadable
  * @PublishableGesture()
+ * @UniqueVideo()
  */
 class Gesture
 {
@@ -63,6 +65,7 @@ class Gesture
     /**
      * @Vich\UploadableField(mapping="gesture_profileVideo",fileNameProperty="profileVideo")
      *
+     *
      * @Assert\File(
      *     maxSize="1M",
      *     maxSizeMessage="admin.constraints.gesture.video.too_heavy",
@@ -75,6 +78,8 @@ class Gesture
      *     notReadableMessage="admin.constraints.gesture.video.not_readable",
      *     uploadErrorMessage="admin.constraints.gesture.video.error"
      * )
+     *
+     *
      */
     private $profileVideoFile;
 
@@ -99,6 +104,7 @@ class Gesture
      *     notReadableMessage="admin.constraints.gesture.video.not_readable",
      *     uploadErrorMessage="admin.constraints.gesture.video.error"
      * )
+     *
      */
     private $videoFile;
 

@@ -4,13 +4,13 @@ import ArrayHelper from "../ArrayHelper";
 
 const routes = require( '../Routing/fos_js_routes.json');
 import Routing from '../../../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
-import Paginator from "../Paginator";
 import Status from "../Status";
 import Scroller from "../Scroller";
+import Paginator from "../Paginator";
+import ASCIIFolder from "fold-to-ascii";
 
 Routing.setRoutingData(routes);
 
-// const Pagination = new Paginator(6,$('.js-pagination-controls'));
 const StatusHandler = new Status();
 const AHelper = new ArrayHelper();
 const ScrollTool = new Scroller();
@@ -54,16 +54,14 @@ class Thesaurus{
      * @param value
      */
     orderByPertinence(data,value){
-        let matched = [];
-        let filteredNameMatched = [];
         let nameMatched = data.matched.byName;
         let tagMatched = data.matched.byTag;
 
-        filteredNameMatched = Thesaurus.matchNames(value,nameMatched);
+        let filteredNameMatched = Thesaurus.matchNames(value,nameMatched);
 
         tagMatched = Thesaurus.matchTags(value,tagMatched,nameMatched,filteredNameMatched);
 
-        matched = filteredNameMatched.concat(tagMatched);
+        let matched = filteredNameMatched.concat(tagMatched);
         this.display(matched);
     }
 
@@ -98,10 +96,10 @@ class Thesaurus{
         let profileVideo = '';
         let video = '';
 
-        if(gesture.video != '' && gesture.video != null && gesture.video != undefined){
+        if(gesture.video !== '' && gesture.video != null && gesture.video !== undefined){
             video = this.createVideo("De face", gesture.video);
         }
-        if(gesture.profileVideo != '' && gesture.profileVideo != null && gesture.profileVideo != undefined){
+        if(gesture.profileVideo !== '' && gesture.profileVideo !== null && gesture.profileVideo !== undefined){
             profileVideo = this.createVideo("De profil", gesture.profileVideo);
         }
 
@@ -117,8 +115,8 @@ class Thesaurus{
             "    </div>\n" +
             "   <h3 class=\"gesture-details-video-title\">Vidéos</h3>" +
             "   <div id=\"gesture-videos\">" +
-            profileVideo +
             video +
+            profileVideo +
             "</div>" +
             this.backToSearchButton() +
             "</article>";
@@ -136,12 +134,12 @@ class Thesaurus{
     }
 
     static getVideoButton(hasVideos,description){
-        var c = 'js-gesture-show';
-        var text= 'Voir les vidéos';
-        if(!hasVideos && (description == '' || description == null)){
+        let c = 'js-gesture-show';
+        let text= 'Voir les vidéos';
+        if(!hasVideos && (description === '' || description == null)){
             c = 'disabled';
             text = 'Aucune vidéo.';
-        }else if(!hasVideos && (description != null || description != '')){
+        }else if(!hasVideos && (description != null || description !== '')){
             text = 'Voir la description';
         }
         return "<button class=\"btn btn-secondary "+ c +"\">" +
@@ -155,21 +153,23 @@ class Thesaurus{
      * @return {string}
      */
     static listHTML(gesture) {
-        let cover = gesture.cover ? gesture.cover : "default.jpg"; //TODO in backend!!
+        let cover = gesture.cover;
         let title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
 
-        let videoButton = '';
-        videoButton = this.getVideoButton(gesture.hasVideos,gesture.description);
+        let videoButton = this.getVideoButton(gesture.hasVideos,gesture.description);
 
         return "<article class=\"gesture js-gesture\" data-id=\""+ gesture.id +"\">" +
-            "<div class=\"gesture-content\">" +
-            "<img src=\""+ cover +"\" " + "alt=\"gesture-cover\" class=\"cover\">" +
-            "<div class=\"content\">" +
-            "<h3 class=\"title\">"+ title +"</h3>" +
-            "</div>" +
-            videoButton +
-            "</div>" +
-            "</article>";
+                "<div class=\"gesture-content\">" +
+                    "<div class='cover-container'>" +
+                        "<img src=\""+ cover +"\" " + "alt=\"gesture-cover\" class=\"cover\">" +
+                    "</div>" +
+
+                    "<div class=\"content\">" +
+                        "<h3 class=\"title\">"+ title +"</h3>" +
+                    "</div>" +
+                    videoButton +
+                "</div>" +
+        "</article>";
     }
 
     containsNewGestures(data)
@@ -217,8 +217,19 @@ class Thesaurus{
         }else{
             //Not found
             StatusHandler.set('not_found');
+            Thesaurus.resetSearch();
             this.getContainer().html('');
         }
+    }
+
+    static resetSearch(){
+        if(this.paginator !== undefined){
+            this.paginator.reset();
+            this.paginator.hidePaginationButtons();
+        }else{
+            Paginator.hidePaginationButtons();
+        }
+
     }
 
     isContainerEmpty($container = this.getContainer()) {
@@ -333,6 +344,10 @@ class Thesaurus{
         return result;
     }
 
+    static convertToASCII(value){
+        return ASCIIFolder.fold(value);
+    }
+
     /**
      * Delete duplicates.
      * This code has been taken from:
@@ -362,11 +377,14 @@ class Thesaurus{
                     let keywords = AHelper.mapValues(gesture.tags);
                     let keep = true;
                     for(let i =0; i < tags.length ; i++){
+                        let ASCIITag = ASCIIFolder.fold(tags[i]);
                         //if last tag
                         if(i === tags.length-1 && i >= 0){
                             //look if it begin or match the tag!
                             for(let j = 0; j < keywords.length; j++){
-                                if(!keywords[j].startsWith(tags[i])){
+                                let ASCIIKeyword = ASCIIFolder.fold(keywords[j]);
+
+                                if(!keywords[j].startsWith(tags[i]) && !ASCIIKeyword.startsWith(ASCIITag)){
                                     keep = false;
                                 }else{
                                     keep = true;
@@ -376,8 +394,11 @@ class Thesaurus{
                             break;
                         }else{
                             if(keywords.indexOf(tags[i]) === -1){
-                                keep = false;
-                                break;
+                                let ASCIIKeywords = Thesaurus.convertTagsToASCII(keywords);
+                                if(ASCIIKeywords.indexOf(ASCIITag) === -1){
+                                    keep = false;
+                                    break;
+                                }
                             }
                         }
                     }
@@ -391,14 +412,34 @@ class Thesaurus{
 
     }
 
+    static convertTagsToASCII(tags){
+        if(AHelper.isArray(tags)){
+            let ASCIITags = [];
+            tags.forEach((tag) => {
+                    ASCIITags.push(this.convertToASCII(tag));
+                }
+            );
+            return ASCIITags;
+        }
+    }
+
     static getGesturesByName(name,data){
         //startsWith is case sensitive!
         if(name){
             name = name.toLowerCase();
+            let ASCIIName = ASCIIFolder.fold(name,null);
 
             return data.filter(function(gesture){
                 if(gesture['name'].toLowerCase().startsWith(name)){
                     return gesture;
+                }
+                else{
+                    //ASCII CONVERSION
+                    let ASCIIGName = ASCIIFolder.fold(gesture['name'].toLowerCase(),null);
+
+                    if(ASCIIGName.startsWith(ASCIIName)){
+                        return gesture;
+                    }
                 }
             });
         }
@@ -412,6 +453,7 @@ class Thesaurus{
         let nospace_regex = /\s\s+/g;
         tags = tags.replace(nospace_regex,' ');
         tags = tags.split(/\s/);
+
         return tags;
     }
 
@@ -424,17 +466,17 @@ class Thesaurus{
         //REGEX -- ALLOW ONLY LETTERS
         if(Thesaurus.isValid(value))
         {
-            let keywords = Thesaurus.splitIntoTags(value);
+            let pattern = value;
 
-            //contains one word
-            if(keywords.length === 1)
+            //contains one word or more
+            if(pattern.length >= 1)
             {
                 this.clear();
                 this.getContainer().html('');
                 StatusHandler.set('waiting');
 
                 $.ajax({
-                    url: Routing.generate(this.source, {tag: keywords[0]}),
+                    url: Routing.generate(this.source, {tag: pattern}),
                     type: 'GET',
                     statusCode: {
                         404: function(data){
@@ -464,7 +506,7 @@ class Thesaurus{
             //Nothing entered
             this.getContainer().html('');
             StatusHandler.clear();
-            clear();
+            this.clear();
         }
     }
 
@@ -486,6 +528,7 @@ class Thesaurus{
      */
     static isValid(value){
         let isValid= false;
+
         if(/\w/.test(value) && !/[0-9]/.test(value))
         {
             isValid = true;
@@ -494,6 +537,7 @@ class Thesaurus{
         }else{
             StatusHandler.clear();
         }
+
         return isValid;
     }
 
