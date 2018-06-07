@@ -26,6 +26,7 @@
     "prod": "encore production"
   },
   "dependencies": {
+    "bootstrap-fileinput": "^4.4.8",
     "bootstrap-tokenfield": "^0.12.0",
     "fold-to-ascii": "2.0.2"
   }

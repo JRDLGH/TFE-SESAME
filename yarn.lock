@@ -906,6 +906,13 @@ bootstrap-3-typeahead@bassjobsen/Bootstrap-3-Typeahead:
   dependencies:
     uglify-js "^3.3.7"
 
+bootstrap-fileinput@^4.4.8:
+  version "4.4.8"
+  resolved "https://registry.yarnpkg.com/bootstrap-fileinput/-/bootstrap-fileinput-4.4.8.tgz#00e0c2c02cd77e2dae334988fc32cefe8bab7ce0"
+  dependencies:
+    bootstrap ">= 3.0.0"
+    jquery ">= 1.9.0"
+
 bootstrap-tagsinput@^0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/bootstrap-tagsinput/-/bootstrap-tagsinput-0.7.1.tgz#ffe3b06bbe2a106945ef2814568005a94f211937"
@@ -915,6 +922,10 @@ bootstrap-tokenfield@^0.12.0:
   resolved "https://registry.yarnpkg.com/bootstrap-tokenfield/-/bootstrap-tokenfield-0.12.0.tgz#5d763c3d196de71078ac4d49dc2ea169cb870cdf"
   dependencies:
     jquery "^2.1.0"
+
+"bootstrap@>= 3.0.0":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.1.1.tgz#3aec85000fa619085da8d2e4983dfd67cf2114cb"
 
 bootstrap@^4.1.0:
   version "4.1.0"
@@ -3163,7 +3174,7 @@ jquery.typewatch@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/jquery.typewatch/-/jquery.typewatch-3.0.0.tgz#cb4580c3f2c1d46434ec1788d2698d1b87a5dd1d"
 
-jquery@>=1.7, jquery@^3.3.1:
+"jquery@>= 1.9.0", jquery@>=1.7, jquery@^3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
