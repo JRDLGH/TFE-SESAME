@@ -505,7 +505,8 @@ class Thesaurus{
         }else{
             //Nothing entered
             this.getContainer().html('');
-            StatusHandler.clear();
+            // StatusHandler.clear();
+            StatusHandler.set('invalid',"Votre recherche est invalide.");
             this.clear();
         }
     }
