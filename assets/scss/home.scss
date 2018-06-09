@@ -1,0 +1,35 @@
+@import 'shared/variables';
+@import 'mixins/mixins.scss';
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins/breakpoints";
+@import "../../node_modules/bootstrap/scss/mixins/grid-framework";
+@import "../../node_modules/bootstrap/scss/mixins/grid";
+
+@import 'structure/banner';
+
+header{
+  background-color: rgba($nav-color,0.5);
+  nav{
+    .nav-menu{
+      .nav-links{
+        .nav-item{
+          background-color:transparent;
+          &:hover{
+            background-color:transparent;
+          }
+          .nav-link{
+            color: $secondary;
+            &:hover{
+              color:$main;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+body main div#content{
+    padding-top: 0;
+}

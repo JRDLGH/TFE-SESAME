@@ -14,6 +14,7 @@ Encore
 
 
     // will create public/build/thesaurus.js and public/build/thesaurus.css
+    .addEntry('home','./assets/js/home.js')
     .addEntry('thesaurus', './assets/js/thesaurus.js')
     .addEntry('admin', './assets/js/admin.js')
     .addEntry('profile', './assets/js/profile.js')

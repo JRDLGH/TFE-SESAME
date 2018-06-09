@@ -1,6 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ title }} | SESAME {% endblock %}
+{% block stylesheets %}
+    <link rel="">
+{% endblock stylesheets %}
+
+{% block banner %}
+<div class="banner">
+    <h1 class="content-title center">
+        {% block banner_title %}
+        {{ "La méthode gestuelle SESAME,"|upper }}
+        <br>
+        {{ " une porte qui s'ouvre sur la communication..." }}
+        {% endblock %}
+    </h1>
+</div>
+{% endblock %}
 
 {% block content %}
 {% endblock %}

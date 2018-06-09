@@ -8,7 +8,7 @@
 @import "structure/display.scss";
 @import "structure/logbox.scss";
 @import "structure/forms.scss";
-@import "structure/banner.scss";
+//@import "structure/banner.scss";
 @import "structure/user-bar.scss";
 
 @import "structure/admin/table"; //TODO remove
@@ -64,7 +64,6 @@ body {
         div {
     
             &#content {
-                // TO MODIFY?
                 padding-top: $menu_height-small;
 
                 @include media-breakpoint-up(md) {
