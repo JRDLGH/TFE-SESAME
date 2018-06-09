@@ -15,7 +15,6 @@ header{
   nav{
     .nav-menu{
       .nav-links{
-        //background-color:rgba($nav-color,0.7);
         .nav-item{
           background-color:transparent;
           &:hover{
@@ -35,7 +34,6 @@ header{
     background-color:$nav-color;
   }
 }
-
 
 body main div#content{
     padding-top: 0;
