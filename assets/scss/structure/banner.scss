@@ -18,7 +18,7 @@
     @include media-breakpoint-up(xl){
         //high resolution image
         background-image: url($banner-img-lg); //xl?
-        height: $banner-height-xl;
+        height: $banner-height-lg;
     }
     
     background-attachment: fixed;

@@ -84,7 +84,6 @@ $banner-subtitle-letter-spacing: .2rem;
 $banner-height-sm:100vh;
 $banner-height-md:100vh;
 $banner-height-lg:100vh;
-$banner-height-xl:100vh;
 
   /*present*/
 $present-height-sm:35vh;
@@ -93,16 +92,15 @@ $present-height-lg:35vh;
 $present-height-xl:35vh;
 $present-opacity: $banner-opacity;
 //SECTION - METHOD
-$method-gesture-img:'method.jpeg';
-//$method-gesture-img-sm: $img-dir + 'sm-' + $method-gesture-img;
-//$method-gesture-img-md: $img-dir + 'md-' + $method-gesture-img;
-$method-gesture-img-lg: $img-dir + 'lg-' + $method-gesture-img;
+$method-gesture-img:'method.jpg';
+$method-gesture-img-sm: $img-dir + 'sm-' + $method-gesture-img;
+$method-gesture-img-md: $img-dir + 'md-' + $method-gesture-img;
+$method-gesture-img-lg: $img-dir + 'lg-' + 'method.jpeg';
 
 //SECTION - THESAURUS
-$thesaurus-gesture-img:'home-gesture-prevs.jpeg';
-//$thesaurus-gesture-img-sm: $img-dir + 'sm-' + $thesaurus-gesture-img;
-//$thesaurus-gesture-img-md: $img-dir + 'md-' + $thesaurus-gesture-img;
-$thesaurus-gesture-img-lg: $img-dir + 'lg-' + $thesaurus-gesture-img;
+$thesaurus-gesture-img-sm: $img-dir + 'sm-' + 'home-gesture-prevs.jpg';
+$thesaurus-gesture-img-md: $img-dir + 'md-' + 'home-gesture-prevs.jpg';
+$thesaurus-gesture-img-lg: $img-dir + 'lg-' + 'home-gesture-prevs.jpeg';
 
 //SECTION - MORE
 
