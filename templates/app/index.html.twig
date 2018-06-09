@@ -7,13 +7,16 @@
 
 {% block banner %}
 <div class="banner">
-    <h1 class="content-title center">
+
         {% block banner_title %}
-        {{ "La méthode gestuelle SESAME,"|upper }}
-        <br>
-        {{ " une porte qui s'ouvre sur la communication..." }}
+            <h1 class="content-title center">
+                {{ "La méthode gestuelle SESAME"|upper }}
+                <span class="subtitle">
+                    <br>
+                    {{ " une porte qui s'ouvre sur la communication..." }}
+                </span>
+            </h1>
         {% endblock %}
-    </h1>
 </div>
 {% endblock %}
 
