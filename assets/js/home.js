@@ -1,7 +1,9 @@
 import '../scss/home.scss';
 
 $(document).ready(function(){
-        $(window).scroll(function(){
+    $('body').addClass("loaded");
+
+    $(window).scroll(function(){
             let $target = $('header');
             let targetHeight = $target.outerHeight();
             let position = $(document).scrollTop();
@@ -15,5 +17,6 @@ $(document).ready(function(){
                 $target.removeClass("fixed");
             }
         });
+
     }
 );
