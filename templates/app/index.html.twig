@@ -9,13 +9,19 @@
 <div class="banner">
 
         {% block banner_title %}
-            <h1 class="content-title center">
-                {{ "La méthode"|upper}} <br>{{ "gestuelle SESAME"|upper }}
+            <div class="content-title center">
+                <span class="title">
+                    {{ "La méthode gestuelle"|upper}}
+                </span>
+                <br>
+                <span class="title-part">
+                    {{ "SESAME"|upper }}
+                </span>
                 <span class="subtitle">
                     <br>
                     {{ " une porte qui s'ouvre sur la communication..." }}
                 </span>
-            </h1>
+            </div>
         {% endblock %}
 </div>
 {% endblock %}
