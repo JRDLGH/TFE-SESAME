@@ -43,7 +43,14 @@
         text-align: center;
         color: $banner-title-color;
         font-weight: $banner-title-weight;
-        letter-spacing: $banner-title-letter-spacing;
+        @include media-breakpoint-up(lg){
+            letter-spacing: $banner-title-letter-spacing;
+        }
+
+        .subtitle{
+            width:100%;
+            letter-spacing: $banner-subtitle-letter-spacing;
+        }
 
     }
 }
