@@ -92,9 +92,10 @@ main{
         }
         .parallax{
           background-image: url($thesaurus-gesture-img-sm);
+          height: $present-height-sm;
           @include media-breakpoint-up(md){
             background-image: url($thesaurus-gesture-img-md);
-            height: $banner-height-md;
+            height: $present-height-md;
 
           }
           @include media-breakpoint-up(lg) {
@@ -108,9 +109,10 @@ main{
       &#methode-sesame{
         .parallax{
           background-image: url($method-gesture-img-sm);
+          height: $present-height-sm;
           @include media-breakpoint-up(md){
             background-image: url($method-gesture-img-md);
-            height: $banner-height-md;
+            height: $present-height-md;
           }
           @include media-breakpoint-up(lg) {
             //high resolution image
