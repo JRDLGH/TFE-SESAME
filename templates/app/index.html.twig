@@ -26,13 +26,45 @@
 </div>
 {% endblock %}
 
-{% block content %}
-    <section id="present-div">
-        <div>
-            <h2>SESAME est composée de gestes simples et expressifs favorisant la communcation</h2>
+{% block main_content %}
+    <section class="present" id="methode-sesame">
+        <div class="context">
+            <h2>SON BUT? <br>Améliorer la communication de votre enfant.</h2>
+            <p>
+                La méthode gestuelle SESAME est un outil augmentatif et/ou alternatif de communincation. Elle donne la possibilité
+                à des enfants atteints de défiences de mieux communiquer.
+            </p>
+            <p>
+                Si vous désirez plus d'informations sur la méthode, rendez-vous <a href="#">sur cette page</a>.
+            </p>
         </div>
-        <div>
-            {#//IMG#}
+        <div class="parallax">
+        </div>
+    </section>
+    <section class="present" id="thesaurus">
+        <div class="context">
+            <h2>Des gestes simples et expressifs à portés de tous!</h2>
+            <p>
+                Environ 1400 gestes existent avec la méthode gestuelle Sesame, et grâce à notre <a href="{{ path("thesaurus_index") }}">dictionnaire</a>,
+                ils peuvent être recherché en quelques secondes...
+            </p>
+            <p>
+                L'apprentissage et la recherche de gestes deviennent dès lors très simples!
+            </p>
+        </div>
+        <div class="parallax">
+        </div>
+    </section>
+    <section class="present" id="more">
+        <div class="context">
+            <h2>En savoir plus</h2>
+            <p>
+                Si vous souhaitez en savoir plus sur la méthode ou sur ses créateurs, renseignez-vous sur la page suivante ou sur le site
+                de <a href="http://www.laclairiere.be" target="_blank">La Clairière</a>, créatrice de SESAME.
+            </p>
+            <div class="img-container">
+                <img src="{{ asset('build/static/la_clairiere.gif') }}" alt="la clairiere">
+            </div>
         </div>
     </section>
 {% endblock %}
