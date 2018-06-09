@@ -8,6 +8,10 @@
 
 @import 'structure/banner';
 
+body main div#content{
+  padding-top: 0;
+}
+
 header{
   background-color: rgba($nav-color,0.5);
   position: fixed;
@@ -35,6 +39,102 @@ header{
   }
 }
 
-body main div#content{
-    padding-top: 0;
+main{
+  section{
+    &.present {
+      margin: 0;
+      min-height: 50vh;
+      width: 100%;
+
+      .context {
+        padding: 2rem;
+        min-height: 20vh;
+        text-align: center;
+        h2 {
+          font-size: 1.8rem;
+          color: $secondary;
+          align-items: center;
+          align-content: center;
+          text-transform: uppercase;
+        }
+        p {
+          text-align: inherit;
+        }
+
+        a {
+          &:hover {
+            color: $secondary;
+          }
+        }
+
+      }
+
+      .parallax {
+        @include flex();
+        align-items: center;
+        height: $present-height-sm;
+        background-position: center;
+
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: $present-opacity;
+
+        width: 100%;
+
+        overflow: hidden;
+      }
+      &#thesaurus{
+        .context{
+          h2{
+            color: $main;
+          }
+        }
+        .parallax{
+          //@include media-breakpoint-between(md,lg){
+          //  background-image: url($banner-img-md);
+          //  height: $banner-height-md;
+          //}
+          //@include media-breakpoint-up(lg){
+          //  //high resolution image
+          //  background-image: url($banner-img-lg);
+          //  height: $banner-height-lg;
+          //}
+          @include media-breakpoint-up(xl) {
+            //high resolution image
+            background-image: url($thesaurus-gesture-img-lg); //xl?
+            height: $present-height-xl;
+          }
+        }
+      }
+
+      &#methode-sesame{
+        .parallax{
+          //@include media-breakpoint-between(md,lg){
+          //  background-image: url($banner-img-md);
+          //  height: $banner-height-md;
+          //}
+          //@include media-breakpoint-up(lg){
+          //  //high resolution image
+          //  background-image: url($banner-img-lg);
+          //  height: $banner-height-lg;
+          //}
+          @include media-breakpoint-up(xl) {
+            //high resolution image
+            background-image: url($method-gesture-img-lg); //xl?
+            height: $present-height-xl;
+          }
+        }
+      }
+
+      &#more{
+        min-height: 20vh;
+        &.parallax{
+          height:0;
+        }
+      }
+    }
+  }
+
+
 }

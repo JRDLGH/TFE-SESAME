@@ -60,6 +60,7 @@ body {
         p{
             padding: 1%;
             text-align: justify;
+            font-size: 1rem;
         }
     
         div {
@@ -126,6 +127,22 @@ ul,
 li {
     list-style: none;
     list-style-type: none;
+}
+
+a{
+  color:$main;
+}
+
+.color-text{
+    font-size: inherit;
+
+    &.main{
+        color:$main;
+    }
+
+    &.secondary{
+        color:$secondary;
+    }
 }
 
 .help-links{

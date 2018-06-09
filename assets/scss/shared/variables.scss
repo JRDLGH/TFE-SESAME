@@ -19,6 +19,7 @@ $img-dir:'../img/';
 /* THEME COLOR */
 $main:#448fc5;
 $secondary:#e67716;
+$nav-color:#294152;
 $light-blue:rgb(97, 221, 243);
 $light:#e7e7e7;
 $red:rgb(223, 116, 102);
@@ -32,6 +33,7 @@ $heavy-yellow:rgb(255, 208, 0);
 $light-main:  lighten($main, 10%);
 $darker-body: darken($body,1%);
 $shadow-body: darken($darker-body,10%);
+$scrollbar-color:$nav-color;
 
 /* DISPLAYS PARAMS */
 $warning:       $yellow;
@@ -51,7 +53,7 @@ $menu_height-small: 45px;
 $menu_height-large: 58px;
 
 // NAV COLORS
-$nav-color: #294152; // OR #afe0f7
+$nav-color: #294152;
 $nav-color-dark: darken($nav-color,5%);
 
 //BURGER
@@ -65,7 +67,9 @@ $link-hover-color:$main;
 $link-weight:300;
 $link-size:1.1rem;
 
-/* BANNER */
+/* HOME */
+
+  /* BANNER */
 $banner-opacity:0.95;
 $banner-img:'banner.jpg';
 $banner-img-sm: $img-dir + 'sm-' + $banner-img;
@@ -81,6 +85,26 @@ $banner-height-sm:100vh;
 $banner-height-md:100vh;
 $banner-height-lg:100vh;
 $banner-height-xl:100vh;
+
+  /*present*/
+$present-height-sm:35vh;
+$present-height-md:35vh;
+$present-height-lg:35vh;
+$present-height-xl:35vh;
+$present-opacity: $banner-opacity;
+//SECTION - METHOD
+$method-gesture-img:'method.jpeg';
+//$method-gesture-img-sm: $img-dir + 'sm-' + $method-gesture-img;
+//$method-gesture-img-md: $img-dir + 'md-' + $method-gesture-img;
+$method-gesture-img-lg: $img-dir + 'lg-' + $method-gesture-img;
+
+//SECTION - THESAURUS
+$thesaurus-gesture-img:'home-gesture-prevs.jpeg';
+//$thesaurus-gesture-img-sm: $img-dir + 'sm-' + $thesaurus-gesture-img;
+//$thesaurus-gesture-img-md: $img-dir + 'md-' + $thesaurus-gesture-img;
+$thesaurus-gesture-img-lg: $img-dir + 'lg-' + $thesaurus-gesture-img;
+
+//SECTION - MORE
 
 /* THESAURUS */
 $search-button-color:darken($body,10%);
