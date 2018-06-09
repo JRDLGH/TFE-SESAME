@@ -18,7 +18,7 @@ $img-dir:'../img/';
 
 /* THEME COLOR */
 $main:#448fc5;
-$secondary:#e8862f;
+$secondary:#ffa04d;
 $light-blue:rgb(97, 221, 243);
 $light:#e7e7e7;
 $red:rgb(223, 116, 102);
@@ -52,7 +52,7 @@ $menu_height-large: 58px;
 
 // NAV COLORS
 $nav-color: #294152; // OR #afe0f7
-$nav-color-dark: darken($nav-color,20%);
+$nav-color-dark: darken($nav-color,5%);
 
 //BURGER
 $burger-bg-color:transparent;

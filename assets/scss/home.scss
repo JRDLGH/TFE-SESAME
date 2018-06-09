@@ -10,9 +10,12 @@
 
 header{
   background-color: rgba($nav-color,0.5);
+  position: fixed;
+  transition: all $long-duration;
   nav{
     .nav-menu{
       .nav-links{
+        //background-color:rgba($nav-color,0.7);
         .nav-item{
           background-color:transparent;
           &:hover{
@@ -28,7 +31,11 @@ header{
       }
     }
   }
+  &.fixed{
+    background-color:$nav-color;
+  }
 }
+
 
 body main div#content{
     padding-top: 0;
