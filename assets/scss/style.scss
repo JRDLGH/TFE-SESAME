@@ -39,26 +39,42 @@ body {
         }
     
         h1 {
-            font-size:1.8rem;
-            padding: 0.5rem 0.2rem;
-            font-weight: 500;
-            color: darken($body,60%);
-            border-left:.5rem solid rgba($color: $main, $alpha: 0.7);
-            background-color: darken($body, 0.5%);
+            padding-left:$h1-padding-left;
+            font-size: $h1-size;
+            color: $h1-color;
+            border-left:$h1-border;
+            text-transform: uppercase;
+            font-weight:bold;
             text-align: left;
         }
     
         h2{
-            //padding: 0.5rem 0.2rem;
-            //font-weight: 500;
-            //color: darken($body,60%);
-            //border-left:.5rem solid rgba($color: $main, $alpha: 0.7);
-            //background-color: darken($body, 1%);
-            //text-align: left;
+            padding-left:$h2-padding-left;
+            font-size: $h2-size;
+            color: $h2-color;
+            text-align: left;
+        }
+
+        h3{
+            padding-left:$h3-padding-left;
+            font-size: $h3-size;
+            color: $h3-color;
+        }
+
+        h4{
+            padding-left: $h4-padding-left;
+            font-size: $h4-size;
+            color: $h4-color;
+        }
+
+        h5{
+            padding-left: $h5-padding-left;
+            font-size: $h5-size;
+            color: $h5-color;
         }
     
         p{
-            padding: 1%;
+            padding: .5rem;
             text-align: justify;
             font-size: 1rem;
         }
@@ -99,14 +115,7 @@ body {
 
 h1,h2,h3,h4,h5,h6{
     font-weight: 500;
-}
-
-h2{
-    font-size: 2rem;
-}
-
-h3{
-    font-size: 1.2rem;
+    padding: 0.5rem 0.2rem;
 }
 
 a {
@@ -126,11 +135,14 @@ a {
 ul,
 li {
     list-style: none;
-    list-style-type: none;
 }
 
 a{
   color:$main;
+}
+
+.fluid-container{
+    padding:1rem 0;
 }
 
 .color-text{
