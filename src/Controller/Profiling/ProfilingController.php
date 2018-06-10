@@ -6,6 +6,7 @@ use App\Entity\Profiling\Disabled;
 use App\Entity\Profiling\Profile;
 use App\Entity\Profiling\ProfileGesture;
 use App\Entity\Thesaurus\Gesture;
+use App\Helper\File\FileHelper;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -90,7 +91,7 @@ class ProfilingController extends Controller
     public function searchProfileGesture(Request $request)
     {
         //If request from AJAX
-        if($request->isXMLHttpRequest()){
+//        if($request->isXMLHttpRequest()){
 
             $tag = $request->get('tag');
             $profileId = $request->query->getInt('profile');
@@ -110,12 +111,46 @@ class ProfilingController extends Controller
             // GET ALL GESTURES THAT MATCH TAG BEGINING BY $tag AND GESTURE NAME IS NOT BEGINNING BY $tag
             $gesturesTagMatched = $this->getDoctrine()->getRepository(ProfileGesture::class)
                 ->findByProfile($tag,$profileId);
+
+            $fileHelper = new FileHelper();
+
+            if($gesturesTagMatched){
+                foreach($gesturesTagMatched as $gesture){
+                    if( empty($fileHelper->getFilePath($gesture->getVideoFile())) && empty($fileHelper->getFilePath($gesture->getVideoFile())) ){
+                        $gesture->setHasVideos(false);
+                    }else{
+                        $gesture->setHasVideos(true);
+                    }
+                }
+
+                $fileHelper->setGesturesCoverPath($gesturesTagMatched);
+            }
+
             $json = $serializer->serialize($gesturesTagMatched, 'json',array('groups' => array('list')));
             $gesturesTagMatched = json_decode($json);
 
             //GET ALL GESTURES WHERE NAME BEGIN BY $tag
             $gesturesNameMatched = $this->getDoctrine()->getRepository(ProfileGesture::class)
                 ->findByNameBeginBy($tag,$profileId);
+
+            $gestures = [];
+
+            foreach($gesturesNameMatched as $profileGesture){
+                $gesture = $profileGesture->getGesture();
+
+                if( empty($fileHelper->getFilePath($gesture->getVideoFile())) && empty($fileHelper->getFilePath($gesture->getVideoFile())) ){
+                    $gesture->setHasVideos(false);
+                }else{
+                    $gesture->setHasVideos(true);
+                }
+                $gestures[] = $gesture;
+            }
+
+            $fileHelper->setGesturesCoverPath($gestures);
+
+//            dump($gesturesNameMatched);
+//            die();
+
             $json = $serializer->serialize($gesturesNameMatched, 'json',array('groups' => array('list')));
             $gesturesNameMatched = json_decode($json);
 
@@ -152,7 +187,7 @@ class ProfilingController extends Controller
             }
             $response['status'] = $status;
             return new JsonResponse($response,Response::HTTP_OK);
-        }
+//        }
         return new JsonResponse('Error: This request is not valid.',Response::HTTP_BAD_REQUEST);
     }
 
