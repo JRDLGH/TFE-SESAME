@@ -25,13 +25,13 @@ use Symfony\Component\Serializer\Serializer;
  */
 class ProfilingController extends Controller
 {
-    /**
-     * @Route("/", name="profiling_home")
-     */
-    public function index()
-    {
-        return $this->render('profiling/profile/index.html.twig');
-    }
+//    /**
+//     * @Route("/", name="profiling_home")
+//     */
+//    public function index()
+//    {
+//        return $this->render('profiling/profile/index.html.twig');
+//    }
 
     /**
      * @Route("/profile/{id}", name="profile_consult",requirements={"id"="\d+"}, methods={"GET"})
@@ -52,14 +52,16 @@ class ProfilingController extends Controller
      */
     public function getProfileGestures(Request $request){
         //we must check that the person is authorized to consult the profile specified.
-        if($request->query->getInt('id')){
-            $id = $request->query->getInt('id');
+        if($request->isXmlHttpRequest()){
+            if($request->query->getInt('id')){
+                $id = $request->query->getInt('id');
 
-            $profileGestureRepo = $this->getDoctrine()->getRepository(ProfileGesture::class);
-            $gestures = $profileGestureRepo->findGesturesByProfileId($id);
+                $profileGestureRepo = $this->getDoctrine()->getRepository(ProfileGesture::class);
+                $gestures = $profileGestureRepo->findGesturesByProfileId($id);
 
-            if($gestures){
-                return $this->json($gestures,200,[],['groups'=>array('list')]);
+                if($gestures){
+                    return $this->json($gestures,200,[],['groups'=>array('list')]);
+                }
             }
         }
         return new JsonResponse('Invalid request',Response::HTTP_BAD_REQUEST);
