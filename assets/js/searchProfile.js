@@ -39,6 +39,11 @@ $(document).ready(function () {
         return false;
     });
 
+    $(document).on('click','.js-select-profile',function () {
+        let route = Routing.generate('profile_consult') + '/'+this.dataset.id;
+        window.location = route;
+    });
+
 });
 /** PROFILES **/
 
