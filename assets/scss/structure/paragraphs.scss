@@ -7,36 +7,28 @@
 
 p,div{
     font-size: $alert-text-size;
-    &.info{
-        padding: .5rem;
-        background-color: $info;
-        background-color: rgba($info, 0.5);
-        border: 1px solid $info;
-        border-radius: 5px;
-        margin: .5rem .2rem;
-        cursor: default;
-    }
-
-    &.success{
-        padding: .5rem;
-        background-color: $info;
-        background-color: rgba($success, 0.5);
-        border: 1px solid $success;
-        border-radius: 5px;
-        margin: .5rem .2rem;
-        cursor: default;
-    }
-
     &.alert{
         background-color: $red;
         background-color: rgba($red,0.5);
         color: darken($dark,20%);
         border-radius: 5px;
+        cursor: default;
         &.alert-warning{
+            padding: .5rem;
             background-color:$warning;
             background-color:rgba($warning,0.5);
             border-color: $warning;
-            //color: $dark;
+        }
+        &.alert-info{
+            background-color: $info;
+            background-color: rgba($info, 0.5);
+            border: 1px solid $info;
+        }
+
+        &.alert-success{
+            background-color: $success;
+            background-color: rgba($success, 0.5);
+            border: 1px solid $success;
         }
     }
 
