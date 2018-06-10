@@ -13,7 +13,7 @@ $break-large: get('breakpoints.lg');
 /*
  MAIN BACKGROUND COLOR
 */
-$body:#edf3f9;//#f8f9fa;
+$body:#f3f3f3;//#edf3f9;//#f8f9fa;
 $img-dir:'../img/';
 
 /* THEME COLOR */
@@ -37,7 +37,7 @@ $shadow-body: #c3ccd6;
 $scrollbar-color:$nav-color;
 
 /* DISPLAYS PARAMS */
-$warning:       $yellow;
+$warning:       #ffc28e;
 $danger:        $red;
 $info: rgb(160, 219, 255);
 $success:       $green;
@@ -187,7 +187,7 @@ $admin-header-hover-link-color:$body;
   USER BAR
  */
 $user-bar-color:lighten($link-color,15%);
-$user-bar-bg-color:transparent;
+$user-bar-bg-color:$nav-color;
 
 /**
   DOCUMENTATION
