@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 {% trans_default_domain 'thesaurus' %}
+{% import "macros/searchbar.html.twig" as search %}
 
 {% block title %}{{ 'thesaurus.search.title'|trans }}{% endblock %}
 
@@ -11,18 +12,7 @@
     <section id="thesaurus">
             <div>
                 <h1>{{ 'thesaurus.search.title'|trans }}</h1>
-                <p class="content-text">
-                    {{ 'thesaurus.search.info'|trans }}
-                </p>
-                <form action="#" class="form-container">
-                    <div class="form-group">
-                        <label for="search_gesture">{{ 'thesaurus.search.input.label'|trans }}</label>
-                        <div class="search-input row input-group">
-                            <span class="input-logo" id="sizing-addon1 col-1"><i class="fa fa-search fa"></i></span>
-                            <input type="text" name="search_gesture" id="search" class="form-control col-11" placeholder="{{ 'thesaurus.search.input.placeholder'|trans }}">
-                        </div>
-                    </div>
-                </form>
+                {{ search.searchbar('thesaurus.search.input.label'|trans,'search_gesture',"search",true) }}
                 <div class="gestures-container">
                     <div class="status">
                         <i></i>
