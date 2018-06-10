@@ -13,7 +13,7 @@ $break-large: get('breakpoints.lg');
 /*
  MAIN BACKGROUND COLOR
 */
-$body:#f8f9fa;
+$body:#edf3f9;//#f8f9fa;
 $img-dir:'../img/';
 
 /* THEME COLOR */
@@ -43,6 +43,27 @@ $success:       $green;
 $alert:       rgb(255, 199, 195);
 $alert-text-size:0.9rem;
 
+//TITLES
+$h1-size:1.8rem;
+$h1-padding-left:.5rem;
+$h1-color:darken($body,77%);
+$h1-border: .25rem solid rgba($secondary,0.85);
+
+$h2-size:1.6rem;
+$h2-padding-left:.30rem;
+$h2-color:darken($body,65%);
+
+$h3-size:1.4rem;
+$h3-padding-left:.60rem;
+$h3-color:$main;
+
+$h4-size:1.2rem;
+$h4-padding-left:.90rem;
+$h4-color:darken($body,40%);
+
+$h5-size:1.1rem;
+$h5-padding-left:1.2rem;
+$h5-color:darken($body,90%);
 
 //PARAGRAPHS
 $p-size:0.9rem;
@@ -129,9 +150,9 @@ $medium-duration:0.75s;
 $long-duration:1s;
 
 /* FOOTER */
-$footer-bg-color:#dddddd;
-$footer-p-color: darken($body,80%);
-$footer-shadow: darken($body,45%);
+$footer-bg-color:#4c555f;//#dddddd;
+$footer-p-color: lighten($body,2%);
+$footer-shadow: darken($body,80%);
 
 
 /* FORMS */
