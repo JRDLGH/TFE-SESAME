@@ -17,4 +17,14 @@ class AppController extends Controller
             'title' => 'Accueil',
         ]);
     }
+
+    /**
+     * @Route("/about", name="about")
+     */
+    public function about()
+    {
+        return $this->render('app/about.html.twig',[
+            'title' => 'À propos'
+        ]);
+    }
 }
