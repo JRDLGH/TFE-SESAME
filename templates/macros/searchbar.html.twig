@@ -1,4 +1,4 @@
-{% macro searchbar(label,inputName) %}
+{% macro searchbar(label,inputName,id,autofocus) %}
 
     <form class="search-form js-gesture-choice">
         <label for="{{ inputName|default('search') }}">{{ label }}</label>
@@ -7,7 +7,10 @@
                         <span class="input-logo" id="sizing-addon1 col-1">
                             <i class="fa fa-search fa"></i>
                         </span>
-            <input type="text" name="{{ inputName|default('search') }}" class="form-control search-input">
+            <input type="text" name="{{ inputName|default('search') }}" class="form-control search-input" id="{{ id|default("search") }}"
+                   {% if autofocus %}
+                    autofocus
+                    {% endif %}>
 
         </div>
     </form>
