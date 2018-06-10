@@ -21,10 +21,14 @@ let previousValue = [];
 
 $(document).ready(function(){
 
+    $(function() {
+        $("form").submit(function() { return false; });
+    });
+
     const $searchInput = $('#search');
 
     $searchInput.on('click',function(){
-        ScrollTool.scrollTo($(this),0,null,true);
+        ScrollTool.scrollTo(null,0,100,true);
     });
 
     let searchOptions = {
