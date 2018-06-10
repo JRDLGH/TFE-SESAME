@@ -33,17 +33,21 @@ section{
 
                 @include make-container();
                 display: none;
+                padding: 0;
 
                 z-index: 5;
                 opacity: 0;
 
                 .gesture-details-header-title{
-                    background-color: transparent;
-                    border-left: 0.5rem solid $secondary;
+                    background-color: rgba($dark,0.05);
+                    text-transform: none;
+                    font-weight: normal;
+                    border:0;
                 }
                 .gesture-details-content{
 
                     @include make-row();
+                    margin:0;
 
                     img.cover{
                         @include make-col-ready();
@@ -65,29 +69,25 @@ section{
                     }
                     .gesture-details-video-title{
                         width: 100%;
-                        color:darken($main,20%);
-                        font-size: 1.8rem;
                     }
                     #gesture-videos{
                         @include make-row();
                         margin-left:0;
                         width: 100%;
                         .gesture-video{
-                            .gesture-video-title{
-                                color:darken($body,75%);
-                            }
                             @include make-col-ready();
                             @include make-col(12);
                             padding: .5rem 1rem;
-                            // width: 100%;
-                            // max-width: 300px;
 
                             @include media-breakpoint-up(lg){
                                 @include make-col(6);
-                                // padding: 1.5rem;
                             }
                             video{
                                 width: 100%;
+                            }
+
+                            .gesture-video-title{
+                                padding-left: 0;
                             }
                         }
                     }
@@ -194,7 +194,8 @@ section{
 
                                 padding: .5rem;
                                 text-align: center;
-                                border-bottom: .1rem solid $blue;
+                                border-bottom: .1rem solid $main;
+                                color:darken($dark,25%);
 
                             }
 
@@ -205,11 +206,12 @@ section{
 
                             }
                         }
-                        .btn.btn-secondary{
+                        .btn.btn-dark{
 
                             position: relative;
                             width: 100%;
                             margin: .5rem;
+
 
                             span{
 
@@ -243,10 +245,10 @@ section{
                         &:hover{
 
                             background-color: $main;
-                            color: $white;
 
                             .content{
                                 .title{
+                                    color: $white;
                                     border-bottom: .1rem solid $white;
                                 }
 
