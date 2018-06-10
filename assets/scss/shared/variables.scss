@@ -25,8 +25,8 @@ $light-blue:rgb(97, 221, 243);
 $light:#e7e7e7;
 $red:rgb(223, 116, 102);
 $red-hover:rgb(247, 157, 146);
-$green:rgb(143, 206, 61);
-$green-hover:rgb(172, 231, 94);
+$green:#cbffb0;
+$green-hover: #bfffa8;
 $yellow:#f9dda3;
 $heavy-yellow:rgb(255, 208, 0);
 
@@ -42,7 +42,7 @@ $danger:        $red;
 $info: rgb(160, 219, 255);
 $success:       $green;
 $alert:       rgb(255, 199, 195);
-$alert-text-size:0.9rem;
+$alert-text-size:1rem;
 
 //TITLES
 $h1-size:1.8rem;
