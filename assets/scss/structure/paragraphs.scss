@@ -5,12 +5,12 @@
 }
 
 
-p{
+p,div{
     font-size: $alert-text-size;
     &.info{
         padding: .5rem;
         background-color: $info;
-        background-color: rgba($color: $info, $alpha: 0.5);
+        background-color: rgba($info, 0.5);
         border: 1px solid $info;
         border-radius: 5px;
         margin: .5rem .2rem;
@@ -20,7 +20,7 @@ p{
     &.success{
         padding: .5rem;
         background-color: $info;
-        background-color: rgba($color: $success, $alpha: 0.5);
+        background-color: rgba($success, 0.5);
         border: 1px solid $success;
         border-radius: 5px;
         margin: .5rem .2rem;
@@ -29,11 +29,17 @@ p{
 
     &.alert{
         background-color: $red;
-        background-color: rgba($color: $red, $alpha: 0.5);
-        padding: .3rem;
-        margin: .2rem 0px;
-        color: white;
+        background-color: rgba($red,0.5);
+        color: darken($dark,20%);
         border-radius: 5px;
+        &.alert-warning{
+            background-color:$warning;
+            background-color:rgba($warning,0.5);
+            border-color: $warning;
+            //color: $dark;
+        }
     }
+
+
 
 }
