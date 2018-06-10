@@ -133,12 +133,12 @@ $search-button-color:darken($body,10%);
   PROFILES
  */
 
-$profile-header-bg-color:darken($body,10%);
-$profile-header-color:darken($profile-header-bg-color,60%);
+$profile-header-bg-color:darken($main,10%);
+$profile-header-color:white;
 
-$profile-request-color:darken($body,45%);
+$profile-request-color:white;
 $profile-pending-request-color:darken($profile-request-color,10%);
-$profile-logo-pending-request-color:darken($body,60%);
+$profile-logo-pending-request-color:$secondary;
 
 $profile-news-bg-color:darken($body,1%);
 $profile-section-title-color:darken($body,55%);
