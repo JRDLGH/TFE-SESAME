@@ -34,7 +34,7 @@ class ProfilingController extends Controller
 //    }
 
     /**
-     * @Route("/profile/{id}", name="profile_consult",requirements={"id"="\d+"}, methods={"GET"})
+     * @Route("/profile/{id}", name="profile_consult",requirements={"id"="\d+"}, methods={"GET"},options={"expose"=true})
      */
     public function consult($id)
     {
