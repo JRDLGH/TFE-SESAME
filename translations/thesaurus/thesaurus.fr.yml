@@ -1,6 +1,6 @@
 thesaurus:
   search:
-    title: 'Rechercher un geste Sesame'
+    title: 'Dictionnaire'
     info: ''
     input:
       placeholder: 'Rechercher un geste ici...'
