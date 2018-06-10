@@ -41,105 +41,156 @@ header{
 
 main{
   section{
+
     &.presentation {
+
       margin: 0;
       min-height: 50vh;
       width: 100%;
 
       .context {
+
         padding: 2rem;
         min-height: 20vh;
+
         text-align: center;
+
         h2 {
           font-size: 1.8rem;
           color: $secondary;
+          text-transform: uppercase;
+
           align-items: center;
           align-content: center;
-          text-transform: uppercase;
+
         }
+
         p {
+
           text-align: inherit;
+
         }
 
         a {
+
           &:hover {
+
             color: $secondary;
+
           }
+
         }
 
       }
 
       .parallax {
+
         @include flex();
         align-items: center;
-        height: $present-height-sm;
-        background-position: center;
 
+        height: $present-height-sm;
+
+        background-position: center;
         background-attachment: fixed;
         background-repeat: no-repeat;
         background-size: cover;
+
         opacity: $present-opacity;
-
         width: 100%;
-
         overflow: hidden;
+
       }
+
       &#thesaurus{
+
         .context{
+
           h2{
+
             color: $main;
+
           }
+
         }
+
         .parallax{
+
           background-image: url($thesaurus-gesture-img-sm);
+
           height: $present-height-sm;
+
           @include media-breakpoint-up(md){
+
             background-image: url($thesaurus-gesture-img-md);
             height: $present-height-md;
 
+
           }
           @include media-breakpoint-up(lg) {
+
             //high resolution image
             background-image: url($thesaurus-gesture-img-lg);
             height: $present-height-lg;
+
           }
         }
       }
 
       &#methode-sesame{
+
         .parallax{
+
           background-image: url($method-gesture-img-sm);
           height: $present-height-sm;
+
           @include media-breakpoint-up(md){
+
             background-image: url($method-gesture-img-md);
             height: $present-height-md;
+
           }
+
           @include media-breakpoint-up(lg) {
+
             //high resolution image
             background-image: url($method-gesture-img-lg);
             height: $present-height-lg;
+
           }
+
         }
+
       }
 
       &#more{
+
         min-height: 20vh;
+
         &.parallax{
+
           height:0;
+
         }
         .img-container{
+
           img{
+
             filter: grayscale(30%);
             opacity: 0.8;
             transition: all $short-duration ease-in-out;
+
             &:hover{
+
               filter: grayscale(0);
+
             }
           }
         }
-      }
-    }
-  }
 
+      }
+
+    }
+
+  }
 
 }
