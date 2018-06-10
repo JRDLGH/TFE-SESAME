@@ -1,6 +1,5 @@
 import swal from 'sweetalert';
 import './Components/filter';
-import theme from './Components/theme';
 
 import "typeahead.js";
 import Bloodhound from 'bloodhound-js';
