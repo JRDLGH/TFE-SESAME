@@ -49,3 +49,5 @@ admin:
 
   state:
     no_records: 'Aucun résultat trouvé...'
+
+form.label.delete: 'Supprimer le fichier ?'

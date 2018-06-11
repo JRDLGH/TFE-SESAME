@@ -11,6 +11,10 @@ import 'bootstrap-tagsinput/dist/bootstrap-tagsinput.css';
 import 'bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css';
 
 import '../scss/structure/admin/tags.scss';
+import 'bootstrap-fileinput';
+import 'bootstrap-fileinput/css/fileinput.min.css';
+import 'bootstrap-fileinput/themes/fa/theme.min';
+import 'bootstrap-fileinput/js/locales/fr';
 import '../scss/structure/admin.scss';
 
 $(document).ready(function(){
@@ -40,6 +44,47 @@ $(document).ready(function(){
         queryTokenizer: Bloodhound.tokenizers.whitespace,
     });
 
+    let fileOptions = {
+        theme: 'fa',
+        language: 'fr',
+        showUpload: false,
+        maxFileCount: 1,
+        autoReplace: true,
+        allowedFileTypes: ['image'],
+        allowedFileExtensions: ['jpg'],
+        allowedPreviewTypes: ['image'],
+        msgPlaceholder: 'Sélectionner un fichier',
+        dropZoneTitle: "Déposez votre fichier ici",
+        maxFileSize: 1000,
+    };
+
+    fileOptions.allowedFileExtensions = ['mp4'];
+    fileOptions.allowedFileTypes = ['video'];
+    fileOptions.allowedPreviewTypes = ['video'];
+    fileOptions.msgPlaceholder = "Sélectionner une vidéo de profil";
+    fileOptions.dropZoneTitle = "Déposez la vidéo de profil ici...";
+    $('#gesture_profileVideoFile_file').fileinput(
+        fileOptions
+    );
+
+    fileOptions.allowedFileExtensions = ['mp4'];
+    fileOptions.allowedFileTypes = ['video'];
+    fileOptions.allowedPreviewTypes = ['video'];
+    fileOptions.msgPlaceholder = "Sélectionner une vidéo de face";
+    fileOptions.dropZoneTitle = "Déposez la vidéo de face ici...";
+    $('#gesture_videoFile_file').fileinput(
+        fileOptions
+    );
+
+    fileOptions.allowedFileExtensions = ['jpg','jpeg'];
+    fileOptions.allowedFileTypes = ['image'];
+    fileOptions.allowedPreviewTypes = ['image'];
+    fileOptions.msgPlaceholder = "Sélectionner une image";
+    fileOptions.dropZoneTitle = "Déposez l'image ici...";
+    $('#gesture_coverFile_file').fileinput(
+        fileOptions
+    );
+
     source.initialize();
 
     if ($input.length) {
@@ -57,6 +102,11 @@ $(document).ready(function(){
             ]
         });
     }
+
+    $('.menu span').click(function () {
+        let $fileinput = $(this).parent().next();
+        $fileinput.slideToggle();
+    });
 
     $(document).on('submit','.js-delete-gesture',confirmDelete);
 });

@@ -24,17 +24,20 @@ class GestureType extends AbstractType
                     'required' => false,
                     'allow_delete' => true,
                     'download_uri' => false,
+                    'translation_domain' => 'admin'
                 ])
             ->add('videoFile', VichFileType::class,[
                     'required' => false,
                     'allow_delete' => true,
                     'download_uri' => false,
+                    'translation_domain' => 'admin'
                 ])
             ->add('coverFile', VichImageType::class, [
                 'required' => false,
                 'allow_delete' => true,
                 'download_uri' => false,
                 'image_uri' => false,
+                'translation_domain' => 'admin'
             ])
             ->add('description',TextareaType::class, array(
                 'required'=>false
