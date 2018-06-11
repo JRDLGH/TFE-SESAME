@@ -193,7 +193,7 @@ $user-bar-bg-color:$nav-color;
   DOCUMENTATION
  */
 $sidebar-bg-color: darken($body,2%);
-$sidebar-color: #292929;
+$sidebar-color: darken($dark,20%);
 $sidebar-hover-color:$main;
 $sidebar-shadow: rgba(darken($shadow-body,80%),0.25);
 

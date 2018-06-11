@@ -1,0 +1,78 @@
+@import "../../mixins/mixins";
+
+.button-container{
+  @include make-row();
+  text-align: center;
+
+  @include flex();
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  @include media-breakpoint-up(md){
+    flex-direction: row;
+  }
+
+  .right-buttons{
+    @include make-col(12);
+    max-width:100%;
+
+    @include media-breakpoint-up(md){
+      @include make-col(6);
+      @include flex();
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+
+    @include make-col-ready();
+  }
+
+
+  .left-buttons{
+    @include make-col(12);
+    max-width:100%;
+
+    @include media-breakpoint-up(md){
+      @include make-col(6);
+      @include flex();
+      flex-direction: row;
+      justify-content: flex-end;
+    }
+
+    @include make-col-ready();
+  }
+
+  .left-buttons,.right-buttons{
+    a{
+      max-width: 100%;
+    }
+  }
+
+}
+
+.secondary-button{
+
+  width: 100%;
+  text-align: center;
+  margin:.5rem 0;
+
+  a{
+
+    color: darken($dark,20%);
+    font-size: 1rem;
+    padding: .5rem;
+    background-color: rgba($color: $gray-400, $alpha:0.4);
+    border-radius: .5rem;
+
+  }
+
+  @include media-breakpoint-up(md){
+    width: auto;
+    text-align:left;
+
+  }
+
+  &:hover{
+    color: $black;
+  }
+}

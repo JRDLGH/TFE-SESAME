@@ -10,6 +10,25 @@
 @import "../../node_modules/bootstrap/scss/mixins/grid";
 
 
+a{
+  color:$sidebar-color;
+  &:hover{
+    color:$sidebar-hover-color;
+  }
+}
+
+h1{
+  margin:1.5rem 0;
+}
+
+h2{
+  margin:1rem 0;
+}
+
+h3{
+  margin:.5rem 0;
+}
+
 .display{
   position: fixed;
   display: block;
@@ -97,7 +116,7 @@
         &:hover{
           background-color: darken($sidebar-bg-color,5%);
           a{
-            color:$sidebar-hover-color;
+            color:$sidebar-color;
           }
         }
       }
@@ -123,7 +142,7 @@
           &:hover{
             background-color: darken($sidebar-bg-color,5%);
             a{
-              color:$sidebar-hover-color;
+              color:$sidebar-color;
             }
           }
         }
@@ -143,7 +162,7 @@
           display: inherit;
           width: 90%;
 
-          color:inherit;
+          color:$sidebar-color;
         }
 
         i{
