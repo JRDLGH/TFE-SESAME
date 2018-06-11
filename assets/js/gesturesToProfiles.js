@@ -95,7 +95,6 @@ function focusOn($container){
 }
 
 function getGestures(name){
-    console.log("hello");
     if(name){
         setWaiting(getGestureContainer());
         $.ajax({

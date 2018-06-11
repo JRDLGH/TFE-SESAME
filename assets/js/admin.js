@@ -39,7 +39,6 @@ $(document).ready(function(){
     source.initialize();
 
     if ($input.length) {
-        console.log('ok');
         $input.tagsinput({
             trimValue: true,
             focusClass: 'focus',
