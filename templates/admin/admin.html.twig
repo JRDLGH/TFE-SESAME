@@ -17,7 +17,8 @@
 
 {% block navbrand %}
     <a href="{{ path('admin') }}" class="navbar-brand">
-        <img class="nav-brand-logo" src="{{ asset('build/static/Dolby-Vision-brand-logo.png') }}" alt="nav-brand-logo">
+        {#<img class="nav-brand-logo" src="{{ asset('build/static/Dolby-Vision-brand-logo.png') }}" alt="nav-brand-logo">#}
+        {{ 'Administration' }}
     </a>
 {% endblock navbrand %}
 
