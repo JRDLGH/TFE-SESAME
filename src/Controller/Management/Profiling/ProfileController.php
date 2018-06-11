@@ -176,14 +176,6 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="management_profile_show", methods="GET")
-     */
-    public function show(Profile $profile): Response
-    {
-        return $this->render('management/profiling/profile/show.html.twig', ['profile' => $profile]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="management_profile_edit", methods="GET|POST")
      */
     public function edit(Request $request, Profile $profile): Response
