@@ -10,10 +10,10 @@
   .user-link{
     width: 100%;
     display:block;
+    color:$user-bar-color;
     @include media-breakpoint-up(lg){
       display: table-cell;
       vertical-align: middle;
-      color:$user-bar-color;
     }
     .user-name{
       text-align: center;

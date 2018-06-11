@@ -186,7 +186,7 @@ $admin-header-hover-link-color:$body;
 /**
   USER BAR
  */
-$user-bar-color:lighten($link-color,15%);
+$user-bar-color:$link-color;
 $user-bar-bg-color:$nav-color;
 
 /**

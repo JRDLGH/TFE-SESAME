@@ -11,11 +11,12 @@ import 'bootstrap-tagsinput/dist/bootstrap-tagsinput.css';
 import 'bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css';
 
 import '../scss/structure/admin/tags.scss';
+import '../scss/structure/admin.scss';
+
 import 'bootstrap-fileinput';
 import 'bootstrap-fileinput/css/fileinput.min.css';
 import 'bootstrap-fileinput/themes/fa/theme.min';
 import 'bootstrap-fileinput/js/locales/fr';
-import '../scss/structure/admin.scss';
 
 $(document).ready(function(){
     let $input = $('input[data-toggle="tagsinput"]');
