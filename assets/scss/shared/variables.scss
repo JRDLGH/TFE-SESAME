@@ -23,7 +23,7 @@ $dark:#757575;
 $nav-color:#294152;
 $light-blue:rgb(97, 221, 243);
 $light:#e7e7e7;
-$red:#fba79d;
+$red:#ff7373;
 $red-hover:rgb(247, 157, 146);
 $green:#cbffb0;
 $green-hover: #bfffa8;
@@ -31,7 +31,7 @@ $yellow:#f9dda3;
 $heavy-yellow:rgb(255, 208, 0);
 
 /* IMPORTANT COLORS */
-$light-main:  lighten($main, 10%);
+$light-main:  #6bc0f9;
 $darker-body: darken($body,1%);
 $shadow-body: #cecece;//#c3ccd6;
 $scrollbar-color:$nav-color;
@@ -168,12 +168,12 @@ $required-input-border-color:darken($main,10%);
   TABLES
  */
 /* ADMIN-TABLE */
-$table-head-bg-color:#4a4a4a;
+$table-head-bg-color:darken($dark,15%);
 $table-head-color:lighten($body,10%);
 
-$td-lead-color:darken($secondary,25%);
-$action-color:white;
-$actions-hover-color:$main;
+$td-lead-color:black;
+$action-color:$main;
+$actions-hover-color:$light-main;
 
 
 /**
@@ -203,3 +203,9 @@ $theme-colors: (
   "primary": $main,
   "secondary":$secondary,
 );
+
+.pagination{
+  a{
+    color:black;
+  }
+}

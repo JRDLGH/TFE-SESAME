@@ -291,8 +291,8 @@ div.separator{
     .action-name{
     }
     &:hover{
-        background-color: $secondary;
-        color:$main;
+        background-color: $dark;
+        color:$light-main;
     }
     &:visited{
         background-color: transparent;

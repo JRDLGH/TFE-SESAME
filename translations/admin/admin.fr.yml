@@ -15,24 +15,10 @@ admin:
     new: 'Créer un nouveau geste'
     search: 'Rechercher un geste'
 
-#  constraints:
-#    gesture:
-#      name:
-#        unique: 'Ce geste existe déjà.'
-#        min: 'Le nom du geste doit faire au moins 2 caractères.'
-#        max: 'Le nom du geste doit faire au maximum 50 caractères.'
-#        type: 'Le nom du geste doit être une chaîne de caractères.'
-#
-#      description:
-#        min: 'La description doit être d''au moins x caractères.'
-#        max: 'La description ne peut pas être plus longue que 255 caractères.'
-#
-#      cover:
-#        type: 'Ce format est invalide. Veuillez fournir une image au format JPG, JPEG.'
-#        sizeNotDetected: 'La taille de l''image n''a pas pu être détectée.'
-#        shortWidth: 'La largeur de l''image est insuffisante.'
-#        shortHeight: 'La hauteur de l''image est insuffisante.'
-#        too_heavy: 'L''image ne doit pas dépasser 1Mo.'
+  profiles:
+    edit: 'Modifier le profil'
+    new: 'Créer un nouveau profil'
+    list: 'Gestion des profils'
 
   gesture:
     name: 'Nom'
@@ -50,9 +36,16 @@ admin:
     back_to_list: 'Retourner à la liste'
     yes: 'Oui'
     no: 'Non'
-    create: 'Créer un nouveau geste'
+    create: 'Créer %objet%'
     add: 'Ajouter'
     modify: 'Modifier'
     delete: 'Supprimer'
     show: 'Voir'
     save: 'Enregistrer'
+
+  profile:
+    content: 'Contenu'
+    owner: 'Propriétaire'
+
+  state:
+    no_records: 'Aucun résultat trouvé...'

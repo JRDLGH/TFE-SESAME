@@ -19,7 +19,7 @@ $(document).ready(function(){
     $('#search').submit(function () {
         return false;
     });
-    
+
     let tags = [];
     $.get('/admin/thesaurus/gesture/tags',function(data){
         tags=data;

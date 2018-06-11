@@ -27,7 +27,7 @@
     <a class="action-link" href="{{ path('admin_gesture_new') }}">
         <i class="fa fa-plus action-icon"></i>
         <span class="action-name">
-            {{ 'admin.control.create'|trans }}
+            {{ 'admin.control.create'|trans({'%objet%': 'un nouveau geste'}) }}
         </span>
     </a>
 {% endblock %}
