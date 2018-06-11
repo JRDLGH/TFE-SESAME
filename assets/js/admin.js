@@ -1,6 +1,5 @@
 import swal from 'sweetalert';
 import './Components/filter';
-import theme from './Components/theme';
 
 import "typeahead.js";
 import Bloodhound from 'bloodhound-js';
@@ -16,6 +15,10 @@ import '../scss/structure/admin.scss';
 
 $(document).ready(function(){
     let $input = $('input[data-toggle="tagsinput"]');
+
+    $('#search').submit(function () {
+        return false;
+    });
 
     let tags = [];
     $.get('/admin/thesaurus/gesture/tags',function(data){
@@ -40,7 +43,6 @@ $(document).ready(function(){
     source.initialize();
 
     if ($input.length) {
-        console.log('ok');
         $input.tagsinput({
             trimValue: true,
             focusClass: 'focus',

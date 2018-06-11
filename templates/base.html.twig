@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <header class="fluid-container
+    <header class="
     {% block headerClass %}
     {% endblock headerClass %}
         ">
@@ -40,7 +40,7 @@
                             <a class="nav-item nav-link" href="{{ path('app_home') }}">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-item nav-link" href="#">À propos</a>
+                            <a class="nav-item nav-link" href="{{ path("about") }}">À propos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-item nav-link" href="{{ path('thesaurus_index') }}">Dictionnaire</a>
@@ -68,7 +68,7 @@
                                     <a class="dropdown-item" href="{{ path('fos_user_profile_show') }}">
                                         <i class="fa fa-user"></i>Mon compte
                                     </a>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{ path('profiling_search_profile') }}">
                                         <i class="fa fa-id-badge"></i>Profils
                                     </a>
                                     <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">
@@ -78,7 +78,7 @@
                             </li>
                             {% else %}
                             <li class="nav-item">
-                                <a class="nav-item nav-link text-center" href="{{ path('fos_user_security_login') }}">Se connecter</a>
+                                <a class="nav-item nav-link text-center" href="{{ path('fos_user_security_login') }}">Connexion</a>
                             </li>
                             {% endif %}
                         {% endblock connectionState %}
@@ -94,11 +94,6 @@
     <main role="main">
         <div class="full-container" id="content">
             {% block banner %}
-            <div class="banner">
-                <h1 class="content-title center">
-                    {% block banner_title %}LA MÉTHODE GESTUELLE SÉSAME{% endblock %}
-                </h1>
-            </div>
             {% endblock %}
         </div>
         {% block main_content %}

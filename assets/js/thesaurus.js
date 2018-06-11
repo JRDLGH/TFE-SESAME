@@ -21,10 +21,14 @@ let previousValue = [];
 
 $(document).ready(function(){
 
+    $(function() {
+        $("form").submit(function() { return false; });
+    });
+
     const $searchInput = $('#search');
 
     $searchInput.on('click',function(){
-        ScrollTool.scrollTo($(this),0,null,true);
+        ScrollTool.scrollTo(null,0,100,true);
     });
 
     let searchOptions = {
@@ -99,19 +103,19 @@ function search(value){
         StatusHandler.clear();
         Thes.clear();
         Thes.getContainer().html('');
+        previousValue["value"] = '';
+        previousValue["position"] = null;
     }
     else{
-        console.log("whall");
         //By default: trie sur l'ordre de pertinence, les mots commençant par la sélection
         if(Thes.gestures){
-            console.log("y'a des gestes");
             //reset pagination in order to avoid to be stuck inside a page
             if(Thes.containsNewGestures(Thes.gestures)){
                 Thes.paginator.reset();
             }
             Thes.orderByPertinence(Thes.gestures,value);
         }else{
-            StatusHandler.set("not_found","Cette recherche a déjà été effectuée et n'a renvoyé aucun résultat.");
+            StatusHandler.set("not_found","Aucune correspondance n'a été trouvé pour votre recherche.");
         }
     }
 }

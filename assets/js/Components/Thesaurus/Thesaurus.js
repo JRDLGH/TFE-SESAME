@@ -105,15 +105,14 @@ class Thesaurus{
 
         let description = gesture.description ? gesture.description : 'Aucune description disponible';
 
-        return "<h2 class=\"gesture-details-header-title\">Détails</h2>" +
+        return "<h1 class=\"gesture-details-header-title\">''"+ title +"''</h1>" +
             "<article class=\"gesture-details-content\">\n" +
             "    <div class=\"content\">\n" +
-            "        <h3 class=\"title\">"+ title +"</h3>\n" +
             "        <p class=\"description\">\n" +
             "            " + description + "\n" +
             "        </p>\n" +
             "    </div>\n" +
-            "   <h3 class=\"gesture-details-video-title\">Vidéos</h3>" +
+            "   <h2 class=\"gesture-details-video-title\">Vidéos</h2>" +
             "   <div id=\"gesture-videos\">" +
             video +
             profileVideo +
@@ -125,7 +124,7 @@ class Thesaurus{
 
     static createVideo(title,src){
         return "<div class=\"gesture-video\">" +
-            "           <h4 class=\"gesture-video-title\">" + title + "</h4>" +
+            "           <h3 class=\"gesture-video-title\">" + title + "</h3>" +
             "            <video class=\"js-gesture-video\" controls controlsList=\"nodownload\" preload='metadata'>" +
             "                   <source id=\"source1\" class=\"js-video-source\" src=\""+src+"\" type=\"video/mp4\" />\n" +
             "                   Votre navigateur n'est pas à jour. Veuillez le mettre à jour s'il vous plait." +
@@ -142,7 +141,7 @@ class Thesaurus{
         }else if(!hasVideos && (description != null || description !== '')){
             text = 'Voir la description';
         }
-        return "<button class=\"btn btn-secondary "+ c +"\">" +
+        return "<button class=\"btn btn-dark "+ c +"\">" +
             "<span>"+ text +"</span>" +
             "</button>";
     }
@@ -165,7 +164,7 @@ class Thesaurus{
                     "</div>" +
 
                     "<div class=\"content\">" +
-                        "<h3 class=\"title\">"+ title +"</h3>" +
+                        "<h2 class=\"title\">"+ title +"</h2>" +
                     "</div>" +
                     videoButton +
                 "</div>" +

@@ -1,37 +1,40 @@
 {% extends 'base.html.twig' %}
+{% trans_default_domain 'admin' %}
+{% import 'macros/actions.html.twig' as actions %}
 
-{% block title %}Profile index{% endblock %}
+{% block title %}{{ 'admin.profiles.list'|trans }}{% endblock %}
 
 {% block content %}
-    <h1>Profile index</h1>
+    <h1>{{ 'admin.profiles.list'|trans }}</h1>
 
-    <table class="table">
+    <table class="table admin-table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Content</th>
-                <th>Owner</th>
-                <th>actions</th>
+                <th>{{ 'admin.profile.content'|trans }}</th>
+                <th>{{ 'admin.profile.owner'|trans }}</th>
+                <th>{{ 'admin.control.actions'|trans }}</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="table-content">
         {% for profile in profiles %}
             <tr>
-                <td>{{ profile.id }}</td>
-                <td>{{ profile.content }}</td>
-                <td>{{ profile.owner }}</td>
-                <td>
-                    <a href="{{ path('management_profile_show', {'id': profile.id}) }}">show</a>
-                    <a href="{{ path('management_profile_edit', {'id': profile.id}) }}">edit</a>
+                <td>{{ profile.content ? 'admin.control.yes'|trans : 'admin.control.no'|trans }}</td>
+                <td>{{ profile.owner|trans }}</td>
+                <td class="actions">
+                    {{ actions.action('admin.control.show'|trans|capitalize,
+                        path('profile_consult', {'id': profile.id}),'fa fa-eye action-icon')}}
+                    {{ actions.action('admin.control.modify'|trans|capitalize,
+                        path('management_profile_edit', {'id': profile.id}),'fa fa-edit action-icon')}}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">{{ 'admin.state.no_records'|trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('management_profile_new') }}">Create new</a>
+    {{ actions.action('admin.control.create'|trans({'%objet%': 'un nouveau profil'}),path('management_profile_new'),
+        'fa fa-plus action-icon') }}
 {% endblock %}

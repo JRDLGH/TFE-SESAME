@@ -1,18 +1,16 @@
 {% extends 'base.html.twig' %}
 {% trans_default_domain 'profile' %}
 
-{% block title %}Hello!{% endblock %}
+{% block title %}Profil de {{ profile.owner.firstname|capitalize }}{% endblock %}
 
 {% block content %}
 {% if profile %}
     <section class="profile-header">
         <div class="profile-owner">
-            <h3 class="profile-owner-name">
+            <h2 class="profile-owner-name">
                 {{ profile.owner.firstname|capitalize }}
                 {{ profile.owner.lastname|capitalize }}
-            </h3>
-            {{  'now'|date('Y') - profile.owner.birthday|date('Y') }} ans
-
+            </h2>
         </div>
         <div class="profile-requests">
             <a href="#">
@@ -20,12 +18,16 @@
                 <span class="profile-request-pending">0</span>
                 <span class="profile-request-pending-text">demande(s) d'accès à ce profil.</span>
             </a>
+            <a href="{{ path('management_profile_gesture') }}">
+                <i class="fa fa-edit"></i>
+                <span class="profile-request-pending-text">Gérer</span>
+            </a>
         </div>
     </section>
     <section class="profile-container">
         <div class="profile-news">
             <div class="profile-news-title">
-                <h4>Dernières activitées</h4>
+                <h3>Dernières activitées</h3>
             </div>
             {% for learnedGesture in profile.learnedGestures.values %}
                 {{ learnedGesture.gesture.name }}
@@ -33,15 +35,15 @@
         </div>
         <div class="profile-thesaurus">
             <div class="profile-thesaurus-title">
-                <h4>Dictionnaire de profil individualisé</h4>
+                <h3>Dictionnaire de profil individualisé</h3>
                 <section id="thesaurus">
                     <div>
                         <form action="#" class="form-container">
                             <div class="form-group">
-                                <label for="search_gesture">{{ 'thesaurus.search.input.label'|trans }}</label>
+                                <label for="search_gesture">Rechercher un geste appris par {{ profile.owner.firstname|capitalize }}:</label>
                                 <div class="search-input row input-group">
                                     <span class="input-logo" id="sizing-addon1 col-1"><i class="fa fa-search fa"></i></span>
-                                    <input type="text" name="search_gesture" id="search" class="form-control col-11" placeholder="{{ 'thesaurus.search.input.placeholder'|trans }}">
+                                    <input type="text" name="search_gesture" id="search" class="form-control col-11">
                                 </div>
                             </div>
                         </form>

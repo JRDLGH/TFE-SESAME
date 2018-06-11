@@ -15,17 +15,9 @@ let selectedGestures = [];
 let selectedProfiles = [];
 
 $(document).ready(function () {
-    //fonction pour form quand submit!!
-
-    let gestureOptions = {
-        callback: getGestures,
-        wait: 1000,
-        highlight: true,
-        allowSubmit: true,
-        captureLength: 10
-    };
-
-    $('.js-gesture-choice .search-input').typeWatch(gestureOptions);
+    $('.search-form').submit(function () {
+        return false;
+    });
 
     let profileOptions = {
         callback: getProfiles,
@@ -35,7 +27,19 @@ $(document).ready(function () {
         captureLength: 2
     };
 
-    $('.js-profile-choice .search-input').typeWatch(profileOptions);
+    $('input#search-profile').typeWatch(profileOptions);
+
+    let gestureOptions = {
+        callback: getGestures,
+        wait: 1000,
+        highlight: true,
+        allowSubmit: true,
+        captureLength: 2
+    };
+
+    $('input#search-gesture').typeWatch(gestureOptions);
+
+
 
     $('#gesture-profile-form').on('submit',function(t){
         $.post(Routing.generate('management_profile_gesture'),{profiles:selectedProfiles,gestures:selectedGestures})

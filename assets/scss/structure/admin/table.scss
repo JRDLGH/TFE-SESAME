@@ -52,7 +52,7 @@ table{
           }
           background-color:transparent;
           border-radius: 0;
-          color:$secondary;
+          color:$action-color;
           padding: .2rem .25rem;
           @include media-breakpoint-up(lg){
             border-radius:.2rem;

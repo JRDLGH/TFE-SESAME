@@ -1,7 +1,8 @@
 {% macro action(name,path,iconClass) %}
-        <a href="{{ path }}">
+        <a href="{{ path }}" title="{{ name }}"
+                    class="action-link">
             <i class="{{ iconClass }}"></i>
-            <span>
+            <span class="action-name">
                 {{ name|trans|capitalize }}
                 </span>
         </a>

@@ -1,0 +1,197 @@
+@import 'shared/variables';
+@import 'mixins/mixins.scss';
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins/breakpoints";
+@import "../../node_modules/bootstrap/scss/mixins/grid-framework";
+@import "../../node_modules/bootstrap/scss/mixins/grid";
+
+@import 'structure/banner';
+
+body main div#content{
+  padding-top: 0;
+}
+
+header{
+  background-color: rgba($nav-color,0.5);
+  position: fixed;
+  transition: all $long-duration;
+  nav{
+    .nav-menu{
+      .nav-links{
+        .nav-item{
+          background-color:transparent;
+          &:hover{
+            background-color:transparent;
+          }
+          .nav-link{
+            color: $secondary;
+            &:hover{
+              color:$main;
+            }
+          }
+        }
+      }
+    }
+  }
+  &.fixed{
+    background-color:$nav-color;
+  }
+}
+
+main{
+  section{
+
+    &.presentation {
+
+      margin: 0;
+      min-height: 50vh;
+      width: 100%;
+
+      .context {
+
+        padding: 2rem;
+        min-height: 20vh;
+
+        text-align: center;
+
+        h2 {
+          font-size: 1.8rem;
+          color: $secondary;
+          text-transform: uppercase;
+          text-align: center;
+
+          align-items: center;
+          align-content: center;
+
+        }
+
+        p {
+
+          text-align: inherit;
+
+        }
+
+        a {
+
+          &:hover {
+
+            color: $secondary;
+
+          }
+
+        }
+
+      }
+
+      .parallax {
+
+        @include flex();
+        align-items: center;
+
+        height: $present-height-sm;
+
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        opacity: $present-opacity;
+        width: 100%;
+        overflow: hidden;
+
+      }
+
+      &#thesaurus{
+
+        .context{
+
+          h2{
+
+            color: $main;
+
+          }
+
+        }
+
+        .parallax{
+
+          background-image: url($thesaurus-gesture-img-sm);
+
+          height: $present-height-sm;
+
+          @include media-breakpoint-up(md){
+
+            background-image: url($thesaurus-gesture-img-md);
+            height: $present-height-md;
+
+
+          }
+          @include media-breakpoint-up(lg) {
+
+            //high resolution image
+            background-image: url($thesaurus-gesture-img-lg);
+            height: $present-height-lg;
+
+          }
+        }
+      }
+
+      &#methode-sesame{
+
+        .parallax{
+
+          background-image: url($method-gesture-img-sm);
+          height: $present-height-sm;
+
+          @include media-breakpoint-up(md){
+
+            background-image: url($method-gesture-img-md);
+            height: $present-height-md;
+
+          }
+
+          @include media-breakpoint-up(lg) {
+
+            //high resolution image
+            background-image: url($method-gesture-img-lg);
+            height: $present-height-lg;
+
+          }
+
+        }
+
+      }
+
+      &#more{
+
+        min-height: 20vh;
+
+        &.parallax{
+
+          height:0;
+
+        }
+        .img-container{
+
+          img{
+
+            filter: grayscale(30%);
+            opacity: 0.8;
+            transition: all $short-duration ease-in-out;
+
+            &:hover{
+
+              filter: grayscale(0);
+
+            }
+          }
+        }
+
+      }
+
+    }
+
+  }
+
+}

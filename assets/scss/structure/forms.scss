@@ -48,8 +48,6 @@ form {
         .search-action{
             color:$white;
             border-radius: 0;
-            border-top-left-radius:0;
-            border-bottom-left-radius:0;
             border-top-right-radius:3px;
             border-bottom-right-radius:3px;
             cursor:pointer;
@@ -107,6 +105,8 @@ form {
 
         &.btn-submit {
 
+            background-color: $main;
+            margin:.5rem 0;
             color: white;
 
         }

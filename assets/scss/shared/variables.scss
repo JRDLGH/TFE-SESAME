@@ -13,35 +13,58 @@ $break-large: get('breakpoints.lg');
 /*
  MAIN BACKGROUND COLOR
 */
-$body:#f8f9fa;
+$body:#f3f3f3;//#edf3f9;//#f8f9fa;
 $img-dir:'../img/';
 
 /* THEME COLOR */
-$blue:#61c5f3;
-$secondary:#6c757d;
+$main:#448fc5;
+$secondary:#e67716;
+$dark:#757575;
+$nav-color:#294152;
 $light-blue:rgb(97, 221, 243);
 $light:#e7e7e7;
-$red:rgb(223, 116, 102);
+$red:#ff7373;
 $red-hover:rgb(247, 157, 146);
-$green:rgb(143, 206, 61);
-$green-hover:rgb(172, 231, 94);
+$green:#cbffb0;
+$green-hover: #bfffa8;
 $yellow:#f9dda3;
 $heavy-yellow:rgb(255, 208, 0);
 
 /* IMPORTANT COLORS */
-$main: $blue;
-$light-main:  lighten($main, 10%);
+$light-main:  #6bc0f9;
 $darker-body: darken($body,1%);
-$shadow-body: darken($darker-body,10%);
+$shadow-body: #cecece;//#c3ccd6;
+$scrollbar-color:$nav-color;
 
 /* DISPLAYS PARAMS */
-$warning:       $yellow;
+$warning:       #ffc28e;
 $danger:        $red;
 $info: rgb(160, 219, 255);
 $success:       $green;
 $alert:       rgb(255, 199, 195);
-$alert-text-size:0.9rem;
+$alert-text-size:1rem;
 
+//TITLES
+$h1-size:1.8rem;
+$h1-padding-left:.5rem;
+$h1-color:darken($body,77%);
+$h1-border: .25rem solid rgba($secondary,0.85);
+
+$h2-size:1.6rem;
+$h2-padding-left:.30rem;
+$h2-color:darken($body,65%);
+
+$h3-size:1.4rem;
+$h3-padding-left:.60rem;
+$h3-color:$main;
+
+$h4-size:1.2rem;
+$h4-padding-left:.90rem;
+$h4-color:darken($body,40%);
+
+$h5-size:1.1rem;
+$h5-padding-left:1.2rem;
+$h5-color:darken($body,90%);
 
 //PARAGRAPHS
 $p-size:0.9rem;
@@ -52,8 +75,8 @@ $menu_height-small: 45px;
 $menu_height-large: 58px;
 
 // NAV COLORS
-$nav-color: #61c5f3; // OR #afe0f7
-$nav-color-dark: darken($nav-color,20%);
+$nav-color: #294152;
+$nav-color-dark: darken($nav-color,5%);
 
 //BURGER
 $burger-bg-color:transparent;
@@ -61,12 +84,14 @@ $burger-color:#ffffff;
 $burger-size: 40px;
 
 //LINKS
-$link-color: #272727;
-$link-hover-color:white;
+$link-color: $secondary;
+$link-hover-color:$main;
 $link-weight:300;
 $link-size:1.1rem;
 
-/* BANNER */
+/* HOME */
+
+  /* BANNER */
 $banner-opacity:0.95;
 $banner-img:'banner.jpg';
 $banner-img-sm: $img-dir + 'sm-' + $banner-img;
@@ -76,11 +101,30 @@ $banner-img-lg: $img-dir + 'lg-' + $banner-img;
 $banner-title-color:white;
 $banner-title-weight:300;
 $banner-title-letter-spacing:.5rem;
+$banner-subtitle-letter-spacing: .2rem;
 
-$banner-height-sm:22vh;
-$banner-height-md:24vh;
-$banner-height-lg:27vh;
-$banner-height-xl:30vh;
+$banner-height-sm:100vh;
+$banner-height-md:100vh;
+$banner-height-lg:100vh;
+
+  /*present*/
+$present-height-sm:35vh;
+$present-height-md:35vh;
+$present-height-lg:35vh;
+$present-height-xl:35vh;
+$present-opacity: $banner-opacity;
+//SECTION - METHOD
+$method-gesture-img:'method.jpg';
+$method-gesture-img-sm: $img-dir + 'sm-' + $method-gesture-img;
+$method-gesture-img-md: $img-dir + 'md-' + $method-gesture-img;
+$method-gesture-img-lg: $img-dir + 'lg-' + 'method.jpeg';
+
+//SECTION - THESAURUS
+$thesaurus-gesture-img-sm: $img-dir + 'sm-' + 'home-gesture-prevs.jpg';
+$thesaurus-gesture-img-md: $img-dir + 'md-' + 'home-gesture-prevs.jpg';
+$thesaurus-gesture-img-lg: $img-dir + 'lg-' + 'home-gesture-prevs.jpeg';
+
+//SECTION - MORE
 
 /* THESAURUS */
 $search-button-color:darken($body,10%);
@@ -89,12 +133,12 @@ $search-button-color:darken($body,10%);
   PROFILES
  */
 
-$profile-header-bg-color:darken($body,10%);
-$profile-header-color:darken($profile-header-bg-color,60%);
+$profile-header-bg-color:darken($main,10%);
+$profile-header-color:white;
 
-$profile-request-color:darken($body,45%);
+$profile-request-color:white;
 $profile-pending-request-color:darken($profile-request-color,10%);
-$profile-logo-pending-request-color:darken($body,60%);
+$profile-logo-pending-request-color:$secondary;
 
 $profile-news-bg-color:darken($body,1%);
 $profile-section-title-color:darken($body,55%);
@@ -107,9 +151,9 @@ $medium-duration:0.75s;
 $long-duration:1s;
 
 /* FOOTER */
-$footer-bg-color:#dddddd;
-$footer-p-color: darken($body,80%);
-$footer-shadow: darken($body,45%);
+$footer-bg-color:#4c555f;//#dddddd;
+$footer-p-color: lighten($body,2%);
+$footer-shadow: darken($body,80%);
 
 
 /* FORMS */
@@ -124,12 +168,12 @@ $required-input-border-color:darken($main,10%);
   TABLES
  */
 /* ADMIN-TABLE */
-$table-head-bg-color:#4a4a4a;
+$table-head-bg-color:darken($dark,15%);
 $table-head-color:lighten($body,10%);
 
-$td-lead-color:darken($secondary,25%);
-$action-color:white;
-$actions-hover-color:$main;
+$td-lead-color:black;
+$action-color:$main;
+$actions-hover-color:$light-main;
 
 
 /**
@@ -143,13 +187,13 @@ $admin-header-hover-link-color:$body;
   USER BAR
  */
 $user-bar-color:lighten($link-color,15%);
-$user-bar-bg-color:transparent;
+$user-bar-bg-color:$nav-color;
 
 /**
   DOCUMENTATION
  */
 $sidebar-bg-color: darken($body,2%);
-$sidebar-color: #292929;
+$sidebar-color: darken($dark,20%);
 $sidebar-hover-color:$main;
 $sidebar-shadow: rgba(darken($shadow-body,80%),0.25);
 
@@ -159,3 +203,9 @@ $theme-colors: (
   "primary": $main,
   "secondary":$secondary,
 );
+
+.pagination{
+  a{
+    color:black;
+  }
+}

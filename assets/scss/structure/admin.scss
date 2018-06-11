@@ -3,11 +3,14 @@ MENU
  */
 
 @import '../shared/variables';
+
 @import "../../../node_modules/bootstrap/scss/functions";
 @import "../../../node_modules/bootstrap/scss/variables";
 @import "../../../node_modules/bootstrap/scss/mixins/breakpoints";
 @import "../../../node_modules/bootstrap/scss/mixins/grid-framework";
 @import "../../../node_modules/bootstrap/scss/mixins/grid";
+
+@import './admin/buttons.scss';
 
 header nav .nav-menu .nav-links{
   background-color: $admin-header-bg-color;

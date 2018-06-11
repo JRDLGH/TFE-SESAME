@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/about.css') }}">
+{% endblock stylesheets %}
+
+{% block content %}
+    <h1>À propos</h1>
+    <section>
+
+        <article>
+            <h2>La méthode gestuelle SESAME</h2>
+
+            <div class="centered-content">
+                <img src="{{ asset('build/static/about/geste-enfant-1.JPG') }}" alt="geste-enfant" class="left-img bordered-img">
+            </div>
+
+            <p>
+                <span class="color-text secondary">La méthode gestuelle SESAME</span> a été créée en 1990 à <a href="http://laclairiere.be" target="_blank">la Clairière</a>,
+                institution accueillant des enfants, adolescents et adultes présentant une déficience intelectuelle
+                modérée à sévère.
+                La démarche des professionnels a été suscitée par les difficultés spécifiques en expression verbale que
+                rencontraient les bénéficiaires.
+
+            </p>
+
+
+            <p>
+                L'hypothèse principale est que l'utilisation d'un outil gestuel n'entre pas en compétition avec le
+                langage verbal, au contraire, les différents modes d'expression sont complémentaires et facilitent la
+                communication.
+            </p>
+
+            <p>
+                SESAME est un outil augmentatif et/ou alternatif de communication différent de la langue des signes
+                qui elle possède sa syntaxe, sa grammaire, son lexique. Le SESAME est un moyen de communication
+                utilisant le geste comme moyen de compréhension de la langue parlée
+                et comme moyen d'expression. En SESAME, <span class="color-text secondary">le geste est toujours accompagné par la parole</span>.
+            </p>
+
+            <h3>Comment fonctionne et à quoi sert SESAME?</h3>
+
+
+            <p>
+                SESAME est bâti de gestes symboliques (les signes), précis et expressifs. Ces signes qui nous aident à
+                mieux comprendre un mot imparfaitement prononcé, peuvent remplacer un mot que la personne n'a pas la
+                possibilité de prononcer et peuvent aussi favoriser la compréhension
+                des paroles énoncées par l'interlocuteur.
+            </p>
+
+            <img src="{{ asset('build/static/about/maison.jpg') }}" alt="geste-maison-exemple" class="right-img example-gesture">
+
+            <p>
+                SESAME permet de travailler la communication dans son versant réceptif et dans son versant expressif.
+                <span class="color-text secondary">D'autres objectifs</span> ont pu être mis en évidence au travers de la médiation du geste :
+            </p>
+
+            <ul>
+                <li>
+                    Amélioration de la compréhension du langage oral
+                </li>
+
+                <li>
+                    Permettre l'expression de soi
+                </li>
+
+                <li>
+                    Faciliter éventuellement l'apparition du langage oral
+                </li>
+
+                <li>
+                    Permettre le dialogue
+                </li>
+
+            </ul>
+            <br><br>
+            <p>
+                La langue des signes et SESAME sont des communications visuelles et l'iconicité nous aide à intégrer la
+                gestuelle.
+            </p>
+
+            <img src="{{ asset('build/static/about/arbre.jpg') }}" alt="geste-arbre-exemple" class="left-img example-gesture">
+
+            <p>
+                SESAME invite à rencontrer, à vouloir communiquer avec la personne. Ceci exige de la part de chacun des
+                partenaires un effort d’investissement pour apprendre, comprendre, connaître et utiliser le bon signe.
+            </p>
+
+        </article>
+
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock javascripts %}

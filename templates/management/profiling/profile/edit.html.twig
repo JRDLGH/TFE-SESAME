@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
+{% trans_default_domain 'admin' %}
+{% import 'macros/actions.html.twig' as actions %}
 
-{% block title %}Edit Profile{% endblock %}
+{% block title %}{{ 'admin.profiles.edit'|trans }}{% endblock %}
 
 {% block content %}
-    <h1>Edit Profile</h1>
+    <h1>{{ 'admin.profiles.edit'|trans }}</h1>
 
     {{ include('management/profiling/profile/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('management_profile_index') }}">back to list</a>
+    {{ actions.action('admin.control.back_to_list'|trans,path('management_profile_index'),'fa fa-edit action-icon') }}
 
     {{ include('management/profiling/profile/_delete_form.html.twig') }}
 {% endblock %}

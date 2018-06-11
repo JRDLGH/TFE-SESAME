@@ -1,11 +1,12 @@
 //BANNER
 .banner{
     @include flex();
+
     align-items: center;
+
     background-image: url($banner-img-sm);
     height: $banner-height-sm;
-    background-position: center;
-    
+
     @include media-breakpoint-between(md,lg){
         background-image: url($banner-img-md);
         height: $banner-height-md;
@@ -15,36 +16,129 @@
         background-image: url($banner-img-lg);
         height: $banner-height-lg;
     }
-    @include media-breakpoint-up(xl){
-        //high resolution image
-        background-image: url($banner-img-lg); //xl?
-        height: $banner-height-xl;
-    }
-    
+
+    background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
+
     opacity: $banner-opacity; 
 
     width: 100%;
 
     margin-bottom:.5rem;
+    overflow:hidden;
 
-    h1{
+    .content-title{
+
         background-color: transparent;
+
         border:0;
         border-radius:0;
+
         font-size:2rem;
+        text-align: center;
+        color: $banner-title-color;
+        font-weight: $banner-title-weight;
+
         margin: 0;
         padding: .2rem 1rem;
 
         width: 100%;
-        
-        text-align: center;
-        color: $banner-title-color;
-        font-weight: $banner-title-weight;
-        letter-spacing: $banner-title-letter-spacing;
 
+        @include media-breakpoint-up(lg){
+
+            letter-spacing: $banner-title-letter-spacing;
+
+        }
+
+        span{
+
+            display:inline-block;
+
+            &.title{
+                text-shadow: 0 .15rem .4rem black;
+                font-size: inherit;
+                animation: textAppearLeft 1.5s ease-in-out;
+
+            }
+
+            &.title-part{
+                text-shadow: 0 .20rem .5rem black;
+                font-size: 2.3rem;
+                font-weight: bold;
+                animation: textAppearRight 2s ease-in-out;
+
+            }
+
+        }
+
+        .subtitle{
+
+            opacity: 0;
+            width:100%;
+
+            text-shadow: 0 .10rem .20rem black;
+            font-size: 1.3rem;
+            letter-spacing: $banner-subtitle-letter-spacing;
+
+            animation: textAppearTop 2s ease-in-out 2s;
+            animation-fill-mode: forwards;
+
+        }
+
+
+
+    }
+}
+
+body{
+    .loaded{
+        span{
+            &.title{
+                font-size: inherit;
+                animation: textAppearLeft 1.5s ease-in-out;
+            }
+
+            &.title-part{
+                animation: textAppearRight 2s ease-in-out;
+            }
+        }
+        .subtitle{
+            animation: textAppearTop 2s ease-in-out 2s;
+            animation-fill-mode: forwards;
+        }
+    }
+}
+
+@keyframes textAppearLeft {
+    from{
+        transform:translateX(-100%);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes textAppearRight {
+    from{
+        transform:translateX(100%);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes textAppearTop {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
     }
 }
 

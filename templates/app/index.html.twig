@@ -1,6 +1,74 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ title }} | SESAME {% endblock %}
+{% block title %}{{ title }}{% endblock %}
+{% block stylesheets %}
+    <link href="{{ asset('build/home.css') }}" rel="stylesheet">
+{% endblock stylesheets %}
 
-{% block content %}
+{% block banner %}
+<div class="banner">
+
+        {% block banner_title %}
+            <div class="content-title center">
+                <span class="title">
+                    {{ "La méthode gestuelle"|upper}}
+                </span>
+                <br>
+                <span class="title-part">
+                    {{ "SESAME"|upper }}
+                </span>
+                <span class="subtitle">
+                    <br>
+                    {{ " une porte qui s'ouvre sur la communication..." }}
+                </span>
+            </div>
+        {% endblock %}
+</div>
 {% endblock %}
+
+{% block main_content %}
+    <section class="presentation" id="methode-sesame">
+        <div class="context">
+            <h2>SON BUT? <br>Améliorer la communication de votre enfant.</h2>
+            <p>
+                La méthode gestuelle SESAME est un outil augmentatif et/ou alternatif de communincation. Elle donne la possibilité
+                à des enfants atteints de défiences de mieux communiquer.
+            </p>
+            <p>
+                Si vous désirez plus d'informations sur la méthode, rendez-vous <a href="#">sur cette page</a>.
+            </p>
+        </div>
+        <div class="parallax">
+        </div>
+    </section>
+    <section class="presentation" id="thesaurus">
+        <div class="context">
+            <h2>Des gestes simples et expressifs à portée de tous!</h2>
+            <p>
+                Environ 1400 gestes existent avec la méthode gestuelle Sesame, et grâce à notre <a href="{{ path("thesaurus_index") }}">dictionnaire</a>,
+                ils peuvent être recherchés en quelques secondes...
+            </p>
+            <p>
+                L'apprentissage et la recherche de gestes deviennent dès lors très simples!
+            </p>
+        </div>
+        <div class="parallax">
+        </div>
+    </section>
+    <section class="presentation" id="more">
+        <div class="context">
+            <h2>En savoir plus</h2>
+            <p>
+                Si vous souhaitez en savoir plus sur la méthode ou sur ses créateurs, renseignez-vous sur <a href="">cette page</a> ou sur le site
+                de <a href="http://www.laclairiere.be" target="_blank">La Clairière</a>, créatrice de SESAME, pour plus de détails.
+            </p>
+            <div class="img-container">
+                <img src="{{ asset('build/static/la_clairiere.gif') }}" alt="la clairiere">
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/home.js') }}"></script>
+{% endblock javascripts %}

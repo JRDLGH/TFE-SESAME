@@ -9,7 +9,7 @@ import Status from "./Components/Status";
 
 Routing.setRoutingData(routes);
 
-const Pagination = new Paginator(2,$('.js-pagination-controls'));
+const Pagination = new Paginator(6,$('.js-pagination-controls'));
 const StatusHandler = new Status($('.search-result .search-content').parent().find('.status'));
 
 
@@ -39,6 +39,11 @@ $(document).ready(function () {
         return false;
     });
 
+    $(document).on('click','.js-select-profile',function () {
+        let route = Routing.generate('profile_consult') + '/'+this.dataset.id;
+        window.location = route;
+    });
+
 });
 /** PROFILES **/
 
@@ -50,7 +55,11 @@ function profileHTML(profile){
         '<div class="card">' +
         '<i class="fa fa-user card-icon"></i>' +
         '<p class="card-title">' + profile.lastname + ' ' + profile.firstname + ' - ' + age + 'ans' + '</p>' +
-        '<div class="request-access">Demander l\'accès</div>' +
+        '<div class="request-access">' +
+        '   <a href="#" class="btn btn-primary">' +
+            '<i class="fa fa-unlock"></i>' +
+        '</a>' +
+        '</div>' +
         '</div>' +
         '</div>';
     return html;

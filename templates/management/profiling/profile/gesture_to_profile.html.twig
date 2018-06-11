@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <h2>Compléter les profils</h2>
+    <h1>Compléter les profils</h1>
 
     <div class="error-container">
 
@@ -14,13 +14,11 @@
 
         <section class="profiling-gesture-choice">
             <form class="search-form js-gesture-choice">
-                {{ s.searchbar('Quelle(s) geste(s) voulez-vous ajouter?') }}
+                {{ s.searchbar('Quelle(s) geste(s) voulez-vous ajouter?',null,'search-gesture') }}
             </form>
 
             <div id="gesture-search-result" class="search-result">
-                {#<h6>Résultat de la recherche</h6>#}
                 <div class="status">
-                    Aucun résultat.
                 </div>
                 <div class="search-content">
 
@@ -47,22 +45,11 @@
         <section class="profiling-profile-choice">
 
             <form class="search-form js-profile-choice">
-                {{ s.searchbar('Qui a appris ce(s) geste(s)?') }}
-
-                <label for="search-profile">Qui a appris ce(s) geste(s)?</label>
-
-                {#<div class="search-input input-group">#}
-                    {#<span class="input-logo" name="search-profile" id="sizing-addon1 col-1">#}
-                        {#<i class="fa fa-search fa"></i>#}
-                    {#</span>#}
-                    {#<input type="text" class="form-control search-input">#}
-
-                {#</div>#}
+                {{ s.searchbar('Qui a appris ce(s) geste(s)?',null,'search-profile') }}
             </form>
 
             <div id="profile-search-result" class="search-result">
                 <div class="status">
-                    Aucun résultat.
                 </div>
                 <div class="search-content">
 
