@@ -56,11 +56,6 @@
   .dropdown-menu{
     background-color: $user-bar-bg-color;
     color:$secondary;
-    @include media-breakpoint-down(lg){
-      padding:0;
-      margin: 0;
-      border:0;
-    }
 
     @include media-breakpoint-up(lg){
       background-color:$user-bar-bg-color;
@@ -87,8 +82,6 @@
       @include media-breakpoint-down(lg){
         text-align: center;
         transition: all $extra-short-duration;
-        height:6vh;
-        line-height: 6vh;
       }
 
       @include media-breakpoint-up(lg){

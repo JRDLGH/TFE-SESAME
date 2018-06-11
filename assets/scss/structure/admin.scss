@@ -19,7 +19,10 @@ header nav .nav-menu .nav-links{
 .admin-header{
 
   background-color: $admin-header-bg-color;
-
+  .nav-brand{
+    text-align: center;
+    height:auto;
+  }
   li{
 
     display: table;
