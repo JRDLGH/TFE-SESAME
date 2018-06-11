@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Thesaurus\Gesture;
 use App\Form\Thesaurus\GestureType;
+use App\Helper\File\FileHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -87,7 +88,23 @@ class GestureController extends Controller
      */
     public function show(Gesture $gesture): Response
     {
-        return $this->render('admin/thesaurus/gesture/show.html.twig', ['gesture' => $gesture]);
+        $fileHelper = new FileHelper();
+
+        $coverPath = $fileHelper->getFilePath($gesture->getCoverFile());
+        $profileVideoPath = $fileHelper->getFilePath($gesture->getProfileVideoFile());
+        $videoPath = $fileHelper->getFilePath($gesture->getVideoFile());
+
+        $filePaths = [
+            'cover' => $coverPath,
+            'video' => $videoPath,
+            'profileVideo' => $profileVideoPath
+        ];
+
+        return $this->render('admin/thesaurus/gesture/show.html.twig', [
+                'gesture' => $gesture,
+                'path' => $filePaths
+            ]
+        );
     }
 
     /**
