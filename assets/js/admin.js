@@ -16,6 +16,10 @@ import '../scss/structure/admin.scss';
 $(document).ready(function(){
     let $input = $('input[data-toggle="tagsinput"]');
 
+    $('#search').submit(function () {
+        return false;
+    });
+    
     let tags = [];
     $.get('/admin/thesaurus/gesture/tags',function(data){
         tags=data;
