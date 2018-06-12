@@ -106,6 +106,55 @@ table{
           }
         }
       }
+
+    }
+
+  }
+
+  td{
+    &.file{
+      @include flex();
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+
+      div{
+        margin:.5rem 0;
+
+        &.file-name{
+
+          padding:.5rem;
+          padding-top: 0;
+          width:100%;
+
+        }
+
+        &.preview-file{
+
+          width:100%;
+
+          video,img{
+            width:auto;
+            max-width:300px;
+
+            @include media-breakpoint-up(md){
+              max-width: 400px;
+            }
+
+            @include media-breakpoint-up(lg){
+              max-width:500px;
+            }
+
+            @include media-breakpoint-up(xl){
+              max-width:700px;
+            }
+          }
+
+        }
+
+      }
+
     }
   }
+
 }
