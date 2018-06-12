@@ -26,8 +26,6 @@ $(document).ready(function(){
         return false;
     });
 
-    focusError();
-
     let tags = [];
     $.get('/admin/thesaurus/gesture/tags',function(data){
         tags=data;
@@ -113,6 +111,8 @@ $(document).ready(function(){
     });
 
     $(document).on('submit','.js-delete-gesture',confirmDelete);
+
+    focusError();
 });
 
 
@@ -141,10 +141,9 @@ function focusError(){
 
     if(error !== undefined){
         let scroll = new Scroller();
-        let errorPosition = $(error).offset().top;
-        let windowHeight = $(window).height();
-        let position = errorPosition + windowHeight;
 
-        scroll.scrollTo(null,position);
+        scroll.scrollTo($(error).parent());
+        console.log($(error).offset().top);
+
     }
 }
