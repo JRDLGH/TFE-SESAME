@@ -4,6 +4,7 @@ import './Components/filter';
 import "typeahead.js";
 import Bloodhound from 'bloodhound-js';
 import 'bootstrap-tagsinput';
+import Scroller from './Components/Scroller';
 
 import 'bootstrap-tagsinput/dist/bootstrap-tagsinput';
 
@@ -24,6 +25,8 @@ $(document).ready(function(){
     $('#search').submit(function () {
         return false;
     });
+
+    focusError();
 
     let tags = [];
     $.get('/admin/thesaurus/gesture/tags',function(data){
@@ -131,4 +134,17 @@ function confirmDelete(){
             }
         });
     return false;
+}
+
+function focusError(){
+    let error = $('.invalid-feedback')[0];
+
+    if(error !== undefined){
+        let scroll = new Scroller();
+        let errorPosition = $(error).offset().top;
+        let windowHeight = $(window).height();
+        let position = errorPosition + windowHeight;
+
+        scroll.scrollTo(null,position);
+    }
 }
