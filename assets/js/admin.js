@@ -116,9 +116,7 @@ $(document).ready(function(){
 function confirmDelete(){
     swal({
         title: "Êtes-vous sûr?",
-        text: "Une fois supprimé, ce geste ne sera plus récupérable. " +
-        "Si vous souhaitez simplement qu'il ne s'affiche plus dans le dictionnaire, " +
-        "veuillez décocher la case \"publié\" du geste.",
+        text: "Une fois supprimé, ce geste ne sera plus récupérable. ",
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -127,6 +125,7 @@ function confirmDelete(){
             if (willDelete) {
                 swal("Le geste a été supprimé.", {
                     icon: "success",
+                    buttons:false,
                 });
                 this.submit();
             }
