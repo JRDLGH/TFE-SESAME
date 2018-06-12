@@ -29,11 +29,11 @@
             </tr>
             <tr>
                 <th>{{ 'admin.gesture.profileVideo'|trans }}</th>
-                <td>{% if path.profileVideo %}
+                <td class="file">{% if path.profileVideo %}
                     <div class="file-name">
                         {{ gesture.profileVideo }}
                     </div>
-                    <div class="file-preview">
+                    <div class="preview-file">
                         <video controls>
                             <source src="{{ path.profileVideo }}" type="video/mp4">
                         </video>
@@ -43,12 +43,12 @@
             </tr>
             <tr>
                 <th>{{ 'admin.gesture.video'|trans }}</th>
-                <td>
+                <td class="file">
                 {% if path.video %}
                     <div class="file-name">
                         {{ gesture.video }}
                     </div>
-                    <div class="file-preview">
+                    <div class="preview-file">
                         <video controls>
                             <source src="{{ path.video }}" type="video/mp4">
                         </video>
@@ -58,12 +58,12 @@
             </tr>
             <tr>
                 <th>{{ 'admin.gesture.cover'|trans }}</th>
-                <td>
+                <td class="file">
                 {% if path.cover %}
                     <div class="file-name">
                         {{ gesture.cover }}
                     </div>
-                    <div class="file-preview">
+                    <div class="preview-file">
                         <img src="{{ path.cover }}">
                     </div>
                 {% endif %}
