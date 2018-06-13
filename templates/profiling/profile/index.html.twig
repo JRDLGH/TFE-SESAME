@@ -29,9 +29,12 @@
             <div class="profile-news-title">
                 <h3>Dernières activitées</h3>
             </div>
-            {% for learnedGesture in profile.learnedGestures.values %}
-                {{ learnedGesture.gesture.name }}
-            {% endfor %}
+            <ul>
+                {% for learnedGesture in profile.learnedGestures.values %}
+                    <li>{{ learnedGesture.learningDate|date('d/m/Y') }} - {{ learnedGesture.gesture.name }}</li>
+                {% endfor %}
+            </ul>
+
         </div>
         <div class="profile-thesaurus">
             <div class="profile-thesaurus-title">
