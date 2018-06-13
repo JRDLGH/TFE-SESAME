@@ -12,10 +12,11 @@ const StatusHandler = new Status();
 const AHelper = new ArrayHelper();
 
 class IndividualThesaurus extends Thesaurus{
-    constructor(source,$container,Paginator = null)
+    constructor(source,$container,profile,Paginator = null)
     {
         super(source,$container,Paginator);
         StatusHandler.messages.not_found = "Ce geste n'a pas encore été appris ou n'existe pas.";
+        this.profile = profile;
     }
 
     /**
@@ -37,7 +38,7 @@ class IndividualThesaurus extends Thesaurus{
                 StatusHandler.set('waiting');
 
                 $.ajax({
-                    url: Routing.generate(this.source, {tag: keywords[0], profile: 8}),
+                    url: Routing.generate(this.source, {tag: keywords[0], profile: this.profile}),
                     type: 'GET',
                     statusCode: {
                         404: function(data){

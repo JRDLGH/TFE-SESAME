@@ -9,10 +9,9 @@ import Status from "./Components/Status";
 
 const StatusHandler = new Status();
 const ScrollTool = new Scroller();
-const Thes = new IndividualThesaurus('search_profile_gesture',$('#gesture'),new Paginator(6,$('.js-pagination-controls')));
+const Thes = new IndividualThesaurus('search_profile_gesture',$('#gesture'),getProfile(),new Paginator(6,$('.js-pagination-controls')));
 
 let previousValue = [];
-
 
 $(document).ready(function(){
 
@@ -21,6 +20,8 @@ $(document).ready(function(){
     $searchInput.on('click',function(){
         ScrollTool.scrollTo($(this),0,null,true);
     });
+
+
 
     /**
      * RESEARCH
@@ -96,3 +97,8 @@ $(document).ready(function(){
     });
 
 });
+
+function getProfile(){
+    let url = document.location.href.split('/');
+    return url[url.length-1];
+}
