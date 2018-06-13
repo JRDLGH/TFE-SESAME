@@ -17,6 +17,12 @@
         height: $banner-height-lg;
     }
 
+    @include media-breakpoint-up(xl){
+        //high resolution image
+        background-image: url($banner-img-xl);
+        height: $banner-height-xl;
+    }
+
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
