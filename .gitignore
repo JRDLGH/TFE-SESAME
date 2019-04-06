@@ -15,6 +15,7 @@
 
 ### WEBPACK
 /public/build/*
+/public/thesaurus
 ###> symfony/phpunit-bridge ###
 .phpunit
 /phpunit.xml
