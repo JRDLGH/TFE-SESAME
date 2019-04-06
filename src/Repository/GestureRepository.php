@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Thesaurus\Gesture;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 /**
  * @method Gesture|null find($id, $lockMode = null, $lockVersion = null)
@@ -45,17 +47,44 @@ class GestureRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
-    public function findByTagNameExcludeNameBeginBy($tag){
+    /**
+     * Find gesture that match all given tags.
+     * @tags a String containing tags, separated by a space
+     */
+    public function findByTagNameExcludeNameBeginBy($tags){
 
-        $dql = "SELECT g
-                  FROM App\Entity\Thesaurus\Gesture g 
-                    JOIN g.tags as t
-                WHERE t.keyword like :tag AND g.name not like :tag AND g.isPublished = 1
-                GROUP BY g.id";
+        $tagsArray  = explode(' ',$tags);
+        $nbTags     = count($tagsArray);
+        $lastTag    = '';
 
-        $query = $this->getEntityManager()->createQuery($dql);
+        if($nbTags > 1){
+            $lastTag = array_pop($tagsArray) . '%';
+            $tagList = implode(',',$tagsArray);
+        }else{
+            $tagList = $tags;
+        }
+
+        /**
+         * Search different values on same column
+         * @see https://stackoverflow.com/questions/28595648/select-rows-that-have-two-different-values-in-same-column
+         */
+        $sql = "select g.id, g.name, g.profile_video, g.video, g.cover, g.description, g.creation_date, g.is_published, g.publication_date, g.updated_at
+                from gesture as g,
+                gesture_tag as gt,
+                    (select id from tag where keyword IN (:list) OR keyword like :last) as search 
+                where gt.tag_id = search.id
+                and g.id = gesture_id
+                group by gesture_id
+                having count(tag_id) = :nb";
+
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata('App\Entity\Thesaurus\Gesture', 'g');
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
         $query->setParameters([
-            'tag' => $tag.'%'
+            'list'  => $tagList,
+            'last'  => $lastTag,
+            'nb'    => $nbTags
         ]);
 
         return $query->execute();
