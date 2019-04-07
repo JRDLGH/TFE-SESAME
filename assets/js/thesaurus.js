@@ -90,7 +90,7 @@ $(document).ready(function(){
 });
 
 function search(value){
-    value = value.toLowerCase();
+    value = value.toLowerCase().trim().replace(/\s\s+/g,' ');
     let valuePosition = value.indexOf(previousValue['value']);
 
     Thes.currentlySearched = value;
