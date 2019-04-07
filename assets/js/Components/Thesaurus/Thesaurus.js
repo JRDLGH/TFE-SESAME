@@ -153,7 +153,7 @@ class Thesaurus{
      */
     static listHTML(gesture) {
         let cover = gesture.cover;
-        let title = gesture.name.charAt(0).toUpperCase() + gesture.name.slice(1);
+        let title = gesture.name.toUpperCase();
 
         let videoButton = this.getVideoButton(gesture.hasVideos,gesture.description);
 
